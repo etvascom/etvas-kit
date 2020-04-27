@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "gruntfuggly.todo-tree",
+    "mgmcdermott.vscode-language-babel",
+    "naumovs.color-highlight",
+    "wix.vscode-import-cost"
+  ]
+}
