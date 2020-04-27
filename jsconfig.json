@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "module": "es6",
+    "target": "es2015"
+  },
+  "exclude": ["build", "node_modules"]
+}

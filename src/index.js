@@ -1,9 +1,3 @@
-import React, {Component} from 'react'
-
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
-    </div>
-  }
-}
+export { default as Initial } from './Initial'
+export { Button } from './Button'
+export { Typography } from './Typography'

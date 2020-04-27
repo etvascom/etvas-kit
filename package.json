@@ -1,7 +1,7 @@
 {
   "name": "ui",
   "version": "1.0.0",
-  "description": "ui React component",
+  "description": "ETVAS UI Library",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -15,24 +15,60 @@
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
+    "format": "prettier-eslint \"$PWD/src/**/*.{js,jsx}\" --write",
+    "lint:js": "eslint 'src/**/*.{js,jsx}'",
+    "lint:style": "stylelint 'src/**/*.{css,jsx}'",
+    "lint": "npm run lint:js & npm run lint:css",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.x",
+    "styled-components": "^5.1.0"
+  },
+  "dependencies": {
+    "@ivoryio/kogaio": "^0.7.92"
   },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
     "nwb": "0.24.x",
+    "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.0",
+    "stylelint": "^13.3.3",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0"
   },
-  "author": "",
-  "homepage": "",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npm run lint:js --fix"
+    ],
+    "*.{jsx,css}": [
+      "npm run lint:style --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "author": "Mihai Ro",
+  "homepage": "https://github.com/etvascom/ui",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/etvascom/ui",
   "keywords": [
+    "etvas",
+    "etvas ui",
     "react-component"
   ]
 }
