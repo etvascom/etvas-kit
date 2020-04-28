@@ -6,7 +6,7 @@ const Button = ({ onClick, title, ...props }) => (
   <KogaioButton onClick={onClick} title={title} {...props} />
 )
 
-const buttonVariants = ['primary', 'outline', 'outline-alt', 'multi']
+const buttonVariants = ['primary', 'outline', 'outline-alt', 'link']
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,

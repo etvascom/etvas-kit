@@ -19,7 +19,7 @@ const labelStyle = {
 const labelStyleAlt = {
   'font-family': FONTS.primary,
   'font-size': FONT_SIZES[0],
-  'font-weight': `${FONT_WEIGHTS.normal}`,
+  'font-weight': `${FONT_WEIGHTS.bold}`,
   ...TEXT_STYLES.capitalize
 }
 

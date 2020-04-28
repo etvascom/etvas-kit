@@ -39,7 +39,8 @@ export const FONTS = {
 }
 export const FONT_WEIGHTS = {
   ...fontWeights,
-  normal: '600',
+  lighter: '300',
+  bold: '600',
   black: '900'
 }
 export const FONT_SIZES = [...fontSizes]
