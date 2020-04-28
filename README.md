@@ -1,10 +1,10 @@
-# ETVAS UI
+# ETVAS UI Kit
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Describe ETVAS UI here.
+Describe ETVAS UI Kit here.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
