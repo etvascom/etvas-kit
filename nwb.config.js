@@ -5,7 +5,10 @@ module.exports = {
     umd: false
   },
   webpack: {
-    config(config) {
+    html: {
+      template: 'demo/index.html'
+    },
+    config (config) {
       config.module.rules[0].test = /\.jsx?$/
       config.resolve = {
         extensions: ['.js', '.jsx', '.json', '.css']
