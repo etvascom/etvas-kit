@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button as KogaioButton } from '@ivoryio/kogaio'
 
-const Button = ({ onClick, title, ...props }) => {
-  return <KogaioButton onClick={onClick} title={title} {...props} />
-}
+const Button = ({ onClick, title, ...props }) => (
+  <KogaioButton onClick={onClick} title={title} {...props} />
+)
 
 const buttonVariants = ['primary', 'outline', 'outline-alt', 'multi']
 Button.propTypes = {

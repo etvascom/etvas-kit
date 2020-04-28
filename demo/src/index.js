@@ -1,22 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 import { ThemeProvider } from 'styled-components'
-import { Flex } from '@ivoryio/kogaio'
+import { Flex, Space } from '@ivoryio/kogaio'
 import { buildTheme } from '@ivoryio/kogaio/utils'
 
-import { Button, Initial, Typography } from '../../src'
+import { Typography } from '../../src'
+import Buttons from './examples/Buttons'
+import { etvasTheme } from '../../src/assets'
 
-const Playground = () => {
-  return (
-    <ThemeProvider theme={buildTheme({})}>
-      <Flex flexDirection='column'>
-        <Typography as='h1'>ETVAS Playground</Typography>
-        <Initial />
-        <Typography as='h4'>Title</Typography>
-        <Button onClick={() => alert('Hello!')} title='Click me' />
-      </Flex>
-    </ThemeProvider>
-  )
-}
+const Playground = () => (
+  <ThemeProvider theme={buildTheme(etvasTheme)}>
+    <Flex flexDirection='column'>
+      <Typography as='h1'>ETVAS Playground</Typography>
+      <Typography fontWeight='bold'>Buttons</Typography>
+      <Space mt={3}>
+        <Buttons />
+      </Space>
+    </Flex>
+  </ThemeProvider>
+)
 
 render(<Playground />, document.querySelector('#demo'))
