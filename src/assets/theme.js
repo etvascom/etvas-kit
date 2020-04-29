@@ -8,6 +8,7 @@ import {
   LETTER_SPACINGS,
   LINE_HEIGHTS,
   RADII,
+  ROOT_STYLE,
   SHADOWS,
   TEXT_STYLES
 } from './core'
@@ -27,5 +28,6 @@ export default {
   radii: RADII,
   shadows: SHADOWS,
   textStyles: TEXT_STYLES,
-  typography: TYPOGRAPHY_VARIANTS
+  typography: TYPOGRAPHY_VARIANTS,
+  root: ROOT_STYLE
 }

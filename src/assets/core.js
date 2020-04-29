@@ -1,4 +1,5 @@
 import { buildTheme } from '@ivoryio/kogaio/utils'
+import { css } from 'styled-components'
 const kogaioTheme = buildTheme({})
 
 const {
@@ -19,18 +20,19 @@ export const BREAKPOINTS = {
   ...breakpoints
 }
 export const COLORS = {
-  accent: '#EF6319',
-  brand: '#015294',
-  brandFade: '#B3CBDF',
-  accentFade: '#FAD0BA',
-  text: '#000000',
-  lighterText: '#35373B',
+  accent: 'var(--accent-color)',
+  brand: 'var(--brand-color)',
+  brandFade: 'var(--brandFade-color)',
+  accentFade: 'var(--accentFade-color)',
+  text: 'var(--text-color)',
+  lighterText: 'var(--lighter-text-color)',
   disabled: '#BABABC',
   outline: '#A0AAB2',
   background: '#FBFDFF',
   white: '#FFFFFF'
 }
 
+// #region font
 export const FONTS = {
   primary:
     'Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif',
@@ -51,16 +53,29 @@ export const LINE_HEIGHTS = {
   ...lineHeights,
   buttonLabel: '14px'
 }
-export const RADII = {
-  ...radii
-}
-export const SHADOWS = {
-  ...shadows
-}
 export const TEXT_STYLES = {
   ...textStyles,
   capitalize: {
     ...textStyles.caps,
     'text-transform': 'capitalize'
   }
+}
+// #endregion
+
+export const ROOT_STYLE = css`
+  :root {
+    --accent-color: #ef6319;
+    --brand-color: #015294;
+    --brandFade-color: #b3cbdf;
+    --accentFade-color: #fad0ba;
+    --text-color: #000000;
+    --lighter-text-color: #35373b;
+  }
+`
+
+export const RADII = {
+  ...radii
+}
+export const SHADOWS = {
+  ...shadows
 }
