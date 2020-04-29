@@ -1,27 +1,15 @@
-import {
-  BORDERS,
-  COLORS,
-  FONTS,
-  FONT_WEIGHTS,
-  FONT_SIZES,
-  LINE_HEIGHTS,
-  RADII,
-  TEXT_STYLES
-} from '../assets/core'
+import { BORDERS, COLORS, FONTS, FONT_WEIGHTS, RADII } from '../assets/core'
 
-const labelStyle = {
-  'font-family': FONTS.complementary,
-  'font-size': FONT_SIZES[0],
-  'font-weight': `${FONT_WEIGHTS.black}`,
-  'line-height': LINE_HEIGHTS.buttonLabel,
-  ...TEXT_STYLES.caps
-}
+import typography from '../Typography/variants'
+
+// #region button labels
+const labelStyle = typography['label-button']
 const labelStyleAlt = {
+  ...labelStyle,
   'font-family': FONTS.primary,
-  'font-size': FONT_SIZES[0],
-  'font-weight': `${FONT_WEIGHTS.bold}`,
-  ...TEXT_STYLES.capitalize
+  'font-weight': `${FONT_WEIGHTS.bold}`
 }
+// #endregion
 
 export default {
   primary: {
@@ -30,7 +18,7 @@ export default {
       color: COLORS.white
     },
     'background-color': COLORS.accent,
-    color: '#ffffff',
+    color: COLORS.white,
     'border-radius': `${RADII[8]}px`,
     ':focus, :hover': { 'background-color': COLORS.accent, opacity: 0.75 },
     ':disabled': {
