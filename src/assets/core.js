@@ -20,12 +20,12 @@ export const BREAKPOINTS = {
   ...breakpoints
 }
 export const COLORS = {
-  accent: 'var(--accent-color)',
-  brand: 'var(--brand-color)',
-  brandFade: 'var(--brandFade-color)',
-  accentFade: 'var(--accentFade-color)',
-  text: 'var(--text-color)',
-  lighterText: 'var(--lighter-text-color)',
+  accent: 'var(--accent-color, #ef6319)',
+  brand: 'var(--brand-color, #015294)',
+  brandFade: 'var(--brandFade-color, #b3cbdf)',
+  accentFade: 'var(--accentFade-color, #fad0ba)',
+  text: 'var(--text-color, #000000)',
+  lighterText: 'var(--lighter-text-color, #35373b)',
   disabled: '#BABABC',
   outline: '#A0AAB2',
   background: '#FBFDFF',
