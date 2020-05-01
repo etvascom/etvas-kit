@@ -1,56 +1,56 @@
 import { FONTS, FONT_SIZES, FONT_WEIGHTS, COLORS } from '../assets/core'
 
 export default {
-  'title-largest': {
+  titleLargest: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': `${FONT_WEIGHTS.lighter}`,
     'font-size': FONT_SIZES[5],
     'line-height': '46px'
   },
-  'title-large': {
+  titleLarge: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': `${FONT_WEIGHTS.lighter}`,
     'font-size': FONT_SIZES[4],
     'line-height': '30px'
   },
-  'label-large': {
+  labelLarge: {
     color: COLORS.text,
     'font-family': FONTS.complementary,
     'font-weight': `${FONT_WEIGHTS.lighter}`,
     'font-size': FONT_SIZES[4],
     'line-height': '30px'
   },
-  'title-small': {
+  titleSmall: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': `${FONT_WEIGHTS.lighter}`,
     'font-size': FONT_SIZES[3],
     'line-height': '30px'
   },
-  'text-large': {
+  textLarge: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': `${FONT_WEIGHTS.lighter}`,
     'font-size': FONT_SIZES[2],
     'line-height': '42px'
   },
-  'label-small-bold': {
+  labelSmallBold: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': `${FONT_WEIGHTS.bold}`,
     'font-size': FONT_SIZES[1],
     'line-height': '19px'
   },
-  'label-small': {
+  labelSmall: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': 'normal',
     'font-size': FONT_SIZES[1],
     'line-height': '19px'
   },
-  'label-button': {
+  labelButton: {
     color: COLORS.text,
     'font-family': FONTS.complementary,
     'font-weight': `${FONT_WEIGHTS.black}`,
@@ -58,7 +58,7 @@ export default {
     'line-height': '14px',
     'text-transform': 'uppercase'
   },
-  'text-small': {
+  textSmall: {
     color: COLORS.text,
     'font-family': FONTS.primary,
     'font-weight': 'normal',

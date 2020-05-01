@@ -14,10 +14,10 @@ const Playground = () => (
     <Flex flexDirection='column'>
       <Typography as='h1'>ETVAS Playground</Typography>
       <Space mt={3}>
-        <Typography variant='title-large'>Buttons</Typography>
+        <Typography variant='titleLarge'>Buttons</Typography>
         <ButtonExamples />
         <hr />
-        <Typography variant='title-large'>Typography</Typography>
+        <Typography variant='titleLarge'>Typography</Typography>
         <TypographyExamples />
       </Space>
     </Flex>

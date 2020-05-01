@@ -5,31 +5,31 @@ import { Typography } from '../../../src/Typography'
 const TypographyExamples = props => (
   <Flex flexDirection='column'>
     <Space mt={2}>
-      <Typography variant='title-largest'>
+      <Typography variant='titleLargest'>
         The five boxing wizards jump quickly. Title Largest
       </Typography>
-      <Typography variant='title-large'>
+      <Typography variant='titleLarge'>
         Sympathizing would fix Quaker objectives. Title Large
       </Typography>
-      <Typography variant='label-large'>
+      <Typography variant='labelLarge'>
         Many-wived Jack laughs at probes of sex quiz. Label Large
       </Typography>
-      <Typography variant='title-small'>
+      <Typography variant='titleSmall'>
         Turgid saxophones blew over Mick&apos;s jazzy quaff. Title Small
       </Typography>
-      <Typography variant='text-large'>
+      <Typography variant='textLarge'>
         Playing jazz vibe chords quickly excites my wife. Text Large
       </Typography>
-      <Typography variant='label-small-bold'>
+      <Typography variant='labelSmallBold'>
         A large fawn jumped quickly over white zinc boxes. Label Small Bold
       </Typography>
-      <Typography variant='label-small'>
+      <Typography variant='labelSmall'>
         Exquisite farm wench gives body jolt to prize stinker. Label Small
       </Typography>
-      <Typography variant='label-button'>
+      <Typography variant='labelButton'>
         Jack amazed a few girls by dropping the antique onyx vase! Label Button
       </Typography>
-      <Typography variant='text-small'>
+      <Typography variant='textSmall'>
         The quick brown fox jumps over a lazy dog. Text Small
       </Typography>
     </Space>

@@ -43,14 +43,14 @@ const Buttons = props => (
         <Button
           onClick={() => alert('Hello from outline alt button!')}
           title='Outline alt'
-          variant='outline-alt'
+          variant='outlineAlt'
         />
         <Space mt={2}>
           <Button
             disabled
             onClick={() => {}}
             title='Outline alt disabled'
-            variant='outline-alt'
+            variant='outlineAlt'
           />
         </Space>
       </Flex>

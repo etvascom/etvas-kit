@@ -3,7 +3,7 @@ import { BORDERS, COLORS, FONTS, FONT_WEIGHTS, RADII } from '../assets/core'
 import typography from '../Typography/variants'
 
 // #region button labels
-const labelStyle = typography['label-button']
+const labelStyle = typography.labelButton
 const labelStyleAlt = {
   ...labelStyle,
   'font-family': FONTS.primary,
@@ -63,7 +63,7 @@ export default {
       transform: 'scale(1)'
     }
   },
-  'outline-alt': {
+  outlineAlt: {
     label: {
       ...labelStyleAlt,
       color: COLORS.text
