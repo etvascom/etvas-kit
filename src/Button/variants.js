@@ -41,11 +41,12 @@ export default {
       color: COLORS.text
     },
     'background-color': 'transparent',
-    'border-color': COLORS.accent,
+    border: `${BORDERS[1]} ${COLORS.accent}`,
     'border-radius': `${RADII[8]}px`,
+    color: COLORS.text,
     ':focus, :hover': {
       'background-color': 'transparent',
-      'border-color': COLORS.accent,
+      border: `${BORDERS[1]} ${COLORS.accent}`,
       opacity: 0.75
     },
     ':disabled': {
@@ -72,7 +73,7 @@ export default {
     'border-radius': `${RADII[8]}px`,
     ':focus, :hover': {
       'background-color': 'transparent',
-      'border-color': COLORS.text,
+      border: `${BORDERS[1]} ${COLORS.text}`,
       opacity: 0.75
     },
     ':disabled': {

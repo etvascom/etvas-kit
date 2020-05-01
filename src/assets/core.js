@@ -20,12 +20,12 @@ export const BREAKPOINTS = {
   ...breakpoints
 }
 export const COLORS = {
-  accent: 'var(--accent-color, #ef6319)',
-  brand: 'var(--brand-color, #015294)',
-  brandFade: 'var(--brandFade-color, #b3cbdf)',
-  accentFade: 'var(--accentFade-color, #fad0ba)',
-  text: 'var(--text-color, #000000)',
-  lighterText: 'var(--lighter-text-color, #35373b)',
+  accent: 'var(--etvas-accent-color, #ef6319)',
+  brand: 'var(--etvas-brand-color, #015294)',
+  brandFade: 'var(--etvas-brandFade-color, #b3cbdf)',
+  accentFade: 'var(--etvas-accentFade-color, #fad0ba)',
+  text: 'var(--etvas-text-color, #000000)',
+  lighterText: 'var(--etvas-lighterText-color, #35373b)',
   disabled: '#BABABC',
   outline: '#A0AAB2',
   background: '#FBFDFF',
@@ -64,12 +64,12 @@ export const TEXT_STYLES = {
 
 export const ROOT_STYLE = css`
   :root {
-    --accent-color: #ef6319;
-    --brand-color: #015294;
-    --brandFade-color: #b3cbdf;
-    --accentFade-color: #fad0ba;
-    --text-color: #000000;
-    --lighter-text-color: #35373b;
+    --etvas-accent-color: #ef6319;
+    --etvas-brand-color: #015294;
+    --etvas-brandFade-color: #b3cbdf;
+    --etvas-accentFade-color: #fad0ba;
+    --etvas-text-color: #000000;
+    --etvas-lighterText-color: #35373b;
   }
 `
 
