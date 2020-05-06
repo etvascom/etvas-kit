@@ -36,6 +36,11 @@ export default {
     'font-size': FONT_SIZES[2],
     'line-height': '42px'
   },
+  inputLabel: {
+    'font-family': FONTS.primary,
+    'font-size': FONT_SIZES[1],
+    'line-height': '19px'
+  },
   labelSmallBold: {
     color: COLORS.text,
     'font-family': FONTS.primary,

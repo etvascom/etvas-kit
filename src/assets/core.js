@@ -11,6 +11,7 @@ const {
   lineHeights,
   radii,
   shadows,
+  space,
   textStyles
 } = kogaioTheme
 
@@ -26,6 +27,7 @@ export const COLORS = {
   accentFade: 'var(--etvas-accentFade-color, #fad0ba)',
   text: 'var(--etvas-text-color, #000000)',
   lighterText: 'var(--etvas-lighterText-color, #35373b)',
+  error: '#FF0000',
   disabled: '#BABABC',
   outline: '#A0AAB2',
   background: '#FBFDFF',
@@ -79,3 +81,4 @@ export const RADII = {
 export const SHADOWS = {
   ...shadows
 }
+export const SPACE = [...space]

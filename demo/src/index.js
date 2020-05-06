@@ -7,6 +7,7 @@ import { buildTheme, Typography } from '../../src'
 import { GlobalStyle } from './GlobalStyle'
 import ButtonExamples from './examples/Buttons'
 import TypographyExamples from './examples/Typography'
+import InputExamples from './examples/Inputs'
 
 const Playground = () => (
   <ThemeProvider theme={buildTheme({})}>
@@ -19,6 +20,9 @@ const Playground = () => (
         <hr />
         <Typography variant='titleLarge'>Typography</Typography>
         <TypographyExamples />
+        <hr />
+        <Typography variant='titleLarge'>Inputs</Typography>
+        <InputExamples />
       </Space>
     </Flex>
   </ThemeProvider>
