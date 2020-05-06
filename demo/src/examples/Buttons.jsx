@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Space } from '@ivoryio/kogaio'
 import { Button } from '../../../src'
 
-const Buttons = props => (
+const ButtonExamples = props => (
   <Flex {...props}>
     <Space mr={3}>
       <Flex flexDirection='column'>
@@ -75,4 +75,4 @@ const Buttons = props => (
   </Flex>
 )
 
-export default Buttons
+export default ButtonExamples

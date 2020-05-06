@@ -26,7 +26,7 @@ export default {
       cursor: 'not-allowed',
       label: {
         ...labelStyle,
-        color: COLORS.error
+        color: COLORS.white
       },
       transform: 'scale(1)',
       ':hover': {

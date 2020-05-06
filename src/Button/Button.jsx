@@ -6,7 +6,6 @@ const Button = ({ onClick, title, ...props }) => (
   <KogaioButton onClick={onClick} title={title} {...props} />
 )
 
-const buttonVariants = ['primary', 'outline', 'outline-alt', 'link']
 Button.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.shape({
@@ -17,8 +16,8 @@ Button.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string,
   variant: PropTypes.oneOfType([
-    PropTypes.oneOf(buttonVariants),
-    PropTypes.objectOf(PropTypes.oneOf(buttonVariants))
+    PropTypes.string,
+    PropTypes.objectOf(PropTypes.string)
   ])
 }
 
