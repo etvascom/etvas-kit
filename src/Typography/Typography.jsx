@@ -25,4 +25,5 @@ Typography.defaultProps = {
   as: 'div'
 }
 
+Typography.displayName = 'Typography'
 export default Typography

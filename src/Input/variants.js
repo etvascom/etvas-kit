@@ -19,7 +19,7 @@ const DEFAULT_STYLE = {
     cursor: 'not-allowed'
   },
   ':focus, :hover': {
-    'border-color': COLORS.accent
+    border: `${BORDERS[1]} ${COLORS.accent}`
   }
 }
 
@@ -39,7 +39,10 @@ export default {
   error: {
     ...DEFAULT_STYLE,
     border: `${BORDERS[1]} ${COLORS.error}`,
-    color: COLORS.error
+    color: COLORS.error,
+    ':focus, :hover': {
+      border: `${BORDERS[1]} ${COLORS.accent}`
+    }
   },
   valid: {
     ...DEFAULT_STYLE,

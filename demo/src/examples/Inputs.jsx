@@ -3,7 +3,7 @@ import { Flex } from '@ivoryio/kogaio'
 import { Input } from '../../../src/Input'
 
 const InputExamples = props => (
-  <Flex flexDirection='column' minWidth={240} width={1 / 3} {...props}>
+  <Flex flexDirection='column' minWidth={240} {...props}>
     <Input
       id='input-default'
       label='Default'

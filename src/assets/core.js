@@ -79,6 +79,7 @@ export const RADII = {
   ...radii
 }
 export const SHADOWS = {
-  ...shadows
+  ...shadows,
+  etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)'
 }
 export const SPACE = [...space]

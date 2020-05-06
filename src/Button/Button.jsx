@@ -21,4 +21,5 @@ Button.propTypes = {
   ])
 }
 
+Button.displayName = 'Button'
 export default Button

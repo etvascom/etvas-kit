@@ -13,6 +13,7 @@ import {
   TEXT_STYLES
 } from './core'
 import { BUTTON_VARIANTS } from '../Button'
+import { CARD_VARIANTS } from '../Card'
 import { INPUT_VARIANTS } from '../Input'
 import { TYPOGRAPHY_VARIANTS } from '../Typography'
 
@@ -20,6 +21,7 @@ export default {
   borders: BORDERS,
   breakpoints: BREAKPOINTS,
   buttons: BUTTON_VARIANTS,
+  cards: CARD_VARIANTS,
   colors: COLORS,
   fontSizes: FONT_SIZES,
   fontWeights: FONT_WEIGHTS,
