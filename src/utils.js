@@ -3,6 +3,8 @@ import { buildTheme as kogaioBuildTheme } from '@ivoryio/kogaio/utils'
 
 import { etvasTheme } from './assets'
 
+export { etvasTheme }
+
 export const buildTheme = customTheme => {
   const initTheme = mergeDeep(etvasTheme, customTheme)
   const updatedTheme = kogaioBuildTheme(initTheme)
