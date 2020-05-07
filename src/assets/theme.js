@@ -14,6 +14,7 @@ import {
 } from './core'
 import { BUTTON_VARIANTS } from '../Button'
 import { CARD_VARIANTS } from '../Card'
+import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
 import { TYPOGRAPHY_VARIANTS } from '../Typography'
 
@@ -23,6 +24,7 @@ export default {
   buttons: BUTTON_VARIANTS,
   cards: CARD_VARIANTS,
   colors: COLORS,
+  dropdowns: DROPDOWN_VARIANTS,
   fontSizes: FONT_SIZES,
   fontWeights: FONT_WEIGHTS,
   fonts: FONTS,

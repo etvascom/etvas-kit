@@ -7,13 +7,15 @@ import { buildTheme, Typography } from '../../src'
 import { GlobalStyle } from './GlobalStyle'
 import {
   ButtonExamples,
+  DropdownExamples,
   InputExamples,
   TypographyExamples,
   CardExamples
 } from './examples'
 
+const dummyTheme = {}
 const Playground = () => (
-  <ThemeProvider theme={buildTheme({})}>
+  <ThemeProvider theme={buildTheme(dummyTheme)}>
     <GlobalStyle />
     <Flex flexDirection='column'>
       <Typography as='h1'>ETVAS Playground</Typography>
@@ -22,20 +24,32 @@ const Playground = () => (
           <Box width={1 / 2}>
             <Typography variant='titleLarge'>Buttons</Typography>
             <ButtonExamples />
+            <Space mt={6}>
+              <Typography variant='titleLarge'>Typography</Typography>
+            </Space>
+            <TypographyExamples />
           </Box>
           <Space ml={6}>
             <Box maxWidth={400} width={1 / 2}>
               <Typography variant='titleLarge'>Inputs</Typography>
               <InputExamples />
+              <Space mt={6}>
+                <Box>
+                  <Typography variant='titleLarge'>Dropdowns</Typography>
+                  <Space mt={4}>
+                    <DropdownExamples />
+                  </Space>
+                </Box>
+              </Space>
             </Box>
           </Space>
         </Flex>
-        <hr />
-        <Typography variant='titleLarge'>Typography</Typography>
-        <TypographyExamples />
-        <hr />
-        <Typography variant='titleLarge'>Cards</Typography>
-        <CardExamples />
+        <Space mt={6}>
+          <Box>
+            <Typography variant='titleLarge'>Cards</Typography>
+            <CardExamples />
+          </Box>
+        </Space>
       </Space>
     </Flex>
   </ThemeProvider>
