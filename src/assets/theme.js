@@ -10,6 +10,7 @@ import {
   RADII,
   ROOT_STYLE,
   SHADOWS,
+  SPACE,
   TEXT_STYLES
 } from './core'
 import { BUTTON_VARIANTS } from '../Button'
@@ -31,6 +32,7 @@ export default {
   lineHeights: LINE_HEIGHTS,
   radii: RADII,
   shadows: SHADOWS,
+  space: SPACE,
   textStyles: TEXT_STYLES,
   typography: TYPOGRAPHY_VARIANTS,
   root: ROOT_STYLE
