@@ -1,29 +1,20 @@
-import {
-  COLORS,
-  RADII,
-  SPACE,
-  BORDERS,
-  FONTS,
-  FONT_SIZES
-} from '../assets/core'
+import { COLORS, RADII, SPACE, BORDERS } from '../assets/core'
+
+import { TYPOGRAPHY_VARIANTS } from '../Typography'
 
 export default {
   footer: {
     'border-radius': RADII[3],
-    border: `${BORDERS[1]} var(--etvas-lighterText-color)`,
-    'background-color': 'var(--etvas-lighterText-color)',
+    border: `${BORDERS[1]} ${COLORS.lighterText}`,
+    'background-color': COLORS.lighterText,
     padding: `${SPACE[2]}px ${SPACE[3]}px`,
     '.tooltip-text': {
-      padding: SPACE[0],
-      color: COLORS.white,
-      'font-family': FONTS.primary,
-      'font-weight': 'normal',
-      'font-size': FONT_SIZES[0],
-      'line-height': '20px'
+      ...TYPOGRAPHY_VARIANTS.textSmall,
+      color: COLORS.white
     },
     '&::after': {
-      'border-color': 'var(--etvas-lighterText-color)',
-      'background-color': 'var(--etvas-lighterText-color)'
+      'border-color': COLORS.lighterText,
+      'background-color': COLORS.lighterText
     }
   }
 }
