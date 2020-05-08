@@ -4,14 +4,13 @@ import { InterCom } from './InterCom'
 import isEqual from 'lodash/isEqual'
 
 const varMapping = {
-  brand: 'brand-color',
-  accent: 'accent-color',
-  brandFade: 'brand-fade-color',
-  accentFade: 'accent-fade-color',
-  text: 'text-color',
-  lighterText: 'lighter-text-color',
+  brandColor: 'brand-color',
+  accentColor: 'accent-color',
+  textColor: 'text-color',
+  lighterTextColor: 'lighter-text-color',
   logo: 'logo-url',
-  logoSmall: 'logo-small-url'
+  logoSmall: 'logo-small-url',
+  brandImage: 'brand-image-url'
 }
 
 export class BrandingService extends EventEmitter {
@@ -61,25 +60,27 @@ export class BrandingService extends EventEmitter {
   write(key, value) {
     const root = document.documentElement
     key = varMapping[key]
-    root.style.setProperty(`--${this.prefix}-${key}`, value)
+    if (key) {
+      root.style.setProperty(`--${this.prefix}-${key}`, value)
+    }
   }
 
   read(key) {
     const root = document.documentElement
     key = varMapping[key]
-    return root.style.getPropertyValue(`--${this.prefix}-${key}`)
+    if (key) {
+      return root.style.getPropertyValue(`--${this.prefix}-${key}`)
+    }
   }
 }
 
 export const brandingService = new BrandingService({
   prefix: 'etvas',
   defaults: {
-    brand: '#015294',
-    brandFade: '#b3cbdf',
-    accent: '#ef6319',
-    accentFade: '#fad0ba',
-    text: '#000000',
-    lighterText: '#35373b'
+    brandColor: '#015294',
+    accentColor: '#ef6319',
+    textColor: '#000000',
+    lighterTextColor: '#35373b'
   },
   intercom: new InterCom()
 })

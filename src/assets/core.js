@@ -24,8 +24,8 @@ export const BREAKPOINTS = {
 export const COLORS = {
   accent: 'var(--etvas-accent-color, #ef6319)',
   brand: 'var(--etvas-brand-color, #015294)',
-  brandFade: 'var(--etvas-brand-fade-color, #b3cbdf)',
-  accentFade: 'var(--etvas-accent-fade-color, #fad0ba)',
+  brandFade: 'rgba(var(--etvas-brand-color), .3)',
+  accentFade: 'rgba(var(--etvas-accent-color), .3)',
   text: 'var(--etvas-text-color, #000000)',
   lighterText: 'var(--etvas-lighter-text-color, #35373b)',
   error: '#FF0000',

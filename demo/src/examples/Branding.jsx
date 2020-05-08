@@ -23,25 +23,25 @@ export const BrandingExample = () => {
         <Typography variant='titleLarge'>Customize</Typography>
         <Input
           label='Brand color'
-          onChange={handleColorChange('brand')}
-          value={cssVars.brand}
+          onChange={handleColorChange('brandColor')}
+          value={cssVars.brandColor}
         />
 
         <Input
           label='Accent color'
-          onChange={handleColorChange('accent')}
-          value={cssVars.accent}
+          onChange={handleColorChange('accentColor')}
+          value={cssVars.accentColor}
         />
 
         <Input
           label='Text color'
-          onChange={handleColorChange('text')}
-          value={cssVars.text}
+          onChange={handleColorChange('textColor')}
+          value={cssVars.textColor}
         />
         <Input
           label='Lighter text color'
-          onChange={handleColorChange('lighterText')}
-          value={cssVars.lighterText}
+          onChange={handleColorChange('lighterTextColor')}
+          value={cssVars.lighterTextColor}
         />
       </Box>
       <Box width={3 / 4}>
