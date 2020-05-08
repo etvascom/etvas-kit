@@ -1,14 +1,26 @@
-import React, { useEffect, createContext } from 'react'
+import React, { useState, useMemo, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
 import { BrandingService, brandingService } from './BrandingService'
 
 export const BrandingContext = createContext()
 
 export const BrandingProvider = ({ brandingService, children }) => {
-  useEffect(() => brandingService.init(), [brandingService])
+  const [cssVars, setCssVars] = useState(brandingService.cssVars)
+
+  useEffect(() => {
+    const handler = () => setCssVars(brandingService.cssVars)
+    brandingService.on('change', handler)
+    brandingService.init()
+    return () => brandingService.removeListener('change', handler)
+  }, [setCssVars, brandingService])
+
+  const ctx = useMemo(() => ({ cssVars, brandingService }), [
+    cssVars,
+    brandingService
+  ])
 
   return (
-    <BrandingContext.Provider value={{ brandingService }}>
+    <BrandingContext.Provider value={{ ctx }}>
       {children}
     </BrandingContext.Provider>
   )
