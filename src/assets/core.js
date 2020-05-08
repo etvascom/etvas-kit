@@ -20,13 +20,14 @@ export const BORDERS = [...borders]
 export const BREAKPOINTS = {
   ...breakpoints
 }
+
 export const COLORS = {
   accent: 'var(--etvas-accent-color, #ef6319)',
   brand: 'var(--etvas-brand-color, #015294)',
-  brandFade: 'var(--etvas-brandFade-color, #b3cbdf)',
-  accentFade: 'var(--etvas-accentFade-color, #fad0ba)',
+  brandFade: 'var(--etvas-brand-fade-color, #b3cbdf)',
+  accentFade: 'var(--etvas-accent-fade-color, #fad0ba)',
   text: 'var(--etvas-text-color, #000000)',
-  lighterText: 'var(--etvas-lighterText-color, #35373b)',
+  lighterText: 'var(--etvas-lighter-text-color, #35373b)',
   error: '#FF0000',
   disabled: '#BABABC',
   outline: '#A0AAB2',
@@ -64,16 +65,7 @@ export const TEXT_STYLES = {
 }
 // #endregion
 
-export const ROOT_STYLE = css`
-  :root {
-    --etvas-accent-color: #ef6319;
-    --etvas-brand-color: #015294;
-    --etvas-brandFade-color: #b3cbdf;
-    --etvas-accentFade-color: #fad0ba;
-    --etvas-text-color: #000000;
-    --etvas-lighterText-color: #35373b;
-  }
-`
+export const ROOT_STYLE = css``
 
 export const RADII = {
   ...radii

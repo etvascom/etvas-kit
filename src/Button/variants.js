@@ -17,7 +17,7 @@ export default {
       ...labelStyle,
       color: COLORS.white
     },
-    'background-color': COLORS.accent,
+    backgroundColor: COLORS.accent,
     color: COLORS.white,
     'border-radius': `${RADII[8]}px`,
     ':focus, :hover': { 'background-color': COLORS.accent, opacity: 0.75 },

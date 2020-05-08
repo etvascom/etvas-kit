@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   type: 'react-component',
   npm: {
@@ -8,10 +10,14 @@ module.exports = {
     html: {
       template: 'demo/index.html'
     },
-    config (config) {
+    config(config) {
       config.module.rules[0].test = /\.jsx?$/
       config.resolve = {
-        extensions: ['.js', '.jsx', '.json', '.css']
+        extensions: ['.js', '.jsx', '.json', '.css'],
+
+        alias: {
+          src: path.resolve('./src')
+        }
       }
       return config
     }

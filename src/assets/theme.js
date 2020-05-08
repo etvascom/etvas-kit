@@ -37,5 +37,6 @@ export default {
   space: SPACE,
   textStyles: TEXT_STYLES,
   typography: TYPOGRAPHY_VARIANTS,
-  root: ROOT_STYLE
+  root: ROOT_STYLE,
+  Typography: TYPOGRAPHY_VARIANTS.default
 }
