@@ -18,6 +18,7 @@ import { CARD_VARIANTS } from '../Card'
 import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
 import { TYPOGRAPHY_VARIANTS } from '../Typography'
+import { TOOLTIP_VARIANTS } from '../Tooltip'
 
 export default {
   borders: BORDERS,
@@ -37,5 +38,6 @@ export default {
   space: SPACE,
   textStyles: TEXT_STYLES,
   typography: TYPOGRAPHY_VARIANTS,
+  tooltips: TOOLTIP_VARIANTS,
   root: ROOT_STYLE
 }

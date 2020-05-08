@@ -10,7 +10,8 @@ import {
   DropdownExamples,
   InputExamples,
   TypographyExamples,
-  CardExamples
+  CardExamples,
+  TooltipExamples
 } from './examples'
 
 const dummyTheme = {}
@@ -50,6 +51,12 @@ const Playground = () => (
             <CardExamples />
           </Box>
         </Space>
+      </Space>
+      <Space mt={6}>
+        <Typography variant='titleLarge'>Tooltips</Typography>
+        <TooltipExamples>
+          This is an informational tooltip. It`s purpose is to inform.
+        </TooltipExamples>
       </Space>
     </Flex>
   </ThemeProvider>
