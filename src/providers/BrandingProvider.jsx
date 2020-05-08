@@ -20,9 +20,7 @@ export const BrandingProvider = ({ brandingService, children }) => {
   ])
 
   return (
-    <BrandingContext.Provider value={{ ctx }}>
-      {children}
-    </BrandingContext.Provider>
+    <BrandingContext.Provider value={ctx}>{children}</BrandingContext.Provider>
   )
 }
 
