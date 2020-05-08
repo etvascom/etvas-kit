@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex } from '@ivoryio/kogaio'
-import { Input } from '../../../src/Input'
+import { Input } from '../../../src'
 
 const InputExamples = props => (
   <Flex flexDirection='column' minWidth={240} {...props}>

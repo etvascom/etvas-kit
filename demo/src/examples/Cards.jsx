@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Space, Typography } from '@ivoryio/kogaio'
-import { Card } from '../../../src/Card'
+import { Card } from '../../../src'
 
 const CardExamples = props => (
   <Flex {...props}>
@@ -12,7 +12,7 @@ const CardExamples = props => (
       variant='content'
       width={1 / 3}>
       <Typography textAlign='center' variant='labelLarge'>
-        Card #1{' '}
+        Card #1
         <Typography variant='labelSmallBold'>variant: content</Typography>
       </Typography>
     </Card>
@@ -25,7 +25,7 @@ const CardExamples = props => (
         variant='popup'
         width={1 / 3}>
         <Typography textAlign='center' variant='labelLarge'>
-          Card #2{' '}
+          Card #2
           <Typography variant='labelSmallBold'>variant: popup</Typography>
         </Typography>
       </Card>
