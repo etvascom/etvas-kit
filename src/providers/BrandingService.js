@@ -1,6 +1,7 @@
 import EventEmitter from 'events'
 import { mergeDeep } from '@ivoryio/kogaio/assets/helpers'
 import { InterCom } from './InterCom'
+import isEqual from 'lodash/isEqual'
 
 const varMapping = {
   brand: 'brand-color',
@@ -33,8 +34,13 @@ export class BrandingService extends EventEmitter {
   }
 
   updateCssVars(updates) {
-    this.cssVars = mergeDeep({}, this.cssVars, updates)
+    const newVars = mergeDeep({}, this.cssVars, updates)
 
+    if (isEqual(newVars, this.cssVars)) {
+      return
+    }
+
+    this.cssVars = newVars
     this.emit('change')
 
     if (!this.intercom.isChild()) {

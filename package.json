@@ -28,7 +28,8 @@
     "styled-components": "^5.1.0"
   },
   "dependencies": {
-    "@ivoryio/kogaio": "^0.7.93"
+    "@ivoryio/kogaio": "^0.7.93",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
