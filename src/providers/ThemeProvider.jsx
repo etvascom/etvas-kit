@@ -5,6 +5,10 @@ import { mergeDeep, etvasTheme } from 'src/utils'
 
 export const ThemeProvider = ({ children, theme }) => {
   const mergedTheme = useMemo(() => mergeDeep({}, etvasTheme, theme), [theme])
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line
+    console.info('Current theme:', mergedTheme)
+  }
 
   return <LibThemeProvider theme={mergedTheme}>{children}</LibThemeProvider>
 }

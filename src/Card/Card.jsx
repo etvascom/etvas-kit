@@ -1,17 +1,42 @@
-import React from 'react'
+import styled from 'styled-components'
+import propTypes from '@styled-system/prop-types'
+import css from '@styled-system/css'
+import {
+  border,
+  compose,
+  shadow,
+  flexbox,
+  layout,
+  position,
+  space,
+  variant
+} from 'styled-system'
 import PropTypes from 'prop-types'
-import { Card as KogaioCard } from '@ivoryio/kogaio'
+import variants from './Card.variants'
+import styles from './Card.styles'
+import { mergeDeep } from '../utils'
 
-const Card = ({ children, ...props }) => (
-  <KogaioCard {...props}>{children}</KogaioCard>
+export const Card = styled.div(
+  css(styles),
+  compose(border, shadow, flexbox, layout, position, space),
+  ({ theme }) =>
+    variant({
+      variants: mergeDeep({}, variants, theme.cards)
+    })
 )
 
 Card.propTypes = {
+  ...propTypes.border,
+  ...propTypes.flexbox,
+  ...propTypes.layout,
+  ...propTypes.shadow,
+  ...propTypes.position,
+  ...propTypes.space,
+  ...propTypes.variant,
   children: PropTypes.node
 }
-Card.defaultProps = {
-  children: null
-}
 
+Card.defaultProps = {}
 Card.displayName = 'Card'
-export default Card
+
+/** @component */

@@ -95,6 +95,7 @@ export default {
       ...labelStyle,
       color: COLORS.accent
     },
+    background: 'none',
     'min-width': 'fit-content',
     ':focus, :hover': {
       opacity: 0.75

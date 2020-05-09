@@ -1,5 +1,4 @@
 import { buildTheme } from '@ivoryio/kogaio/utils'
-import { css } from 'styled-components'
 const kogaioTheme = buildTheme({})
 
 const {
@@ -64,8 +63,6 @@ export const TEXT_STYLES = {
   }
 }
 // #endregion
-
-export const ROOT_STYLE = css``
 
 export const RADII = {
   ...radii
