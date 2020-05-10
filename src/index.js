@@ -19,6 +19,7 @@ export * from './Card'
 export * from './Dropdown'
 export * from './Input'
 export * from './Typography'
+export * from './Grid'
 
 export * from '@ivoryio/kogaio'
 export { styled }
