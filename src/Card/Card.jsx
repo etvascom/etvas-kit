@@ -1,42 +1,22 @@
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
-import {
-  border,
-  compose,
-  shadow,
-  flexbox,
-  layout,
-  position,
-  space,
-  variant
-} from 'styled-system'
-import PropTypes from 'prop-types'
+import { variant } from 'styled-system'
+import { Box } from '@ivoryio/kogaio'
+
 import variants from './Card.variants'
 import styles from './Card.styles'
 import { mergeDeep } from '../utils'
 
-export const Card = styled.div(
-  css(styles),
-  compose(border, shadow, flexbox, layout, position, space),
-  ({ theme }) =>
-    variant({
-      variants: mergeDeep({}, variants, theme.cards)
-    })
+export const Card = styled(Box)(css(styles), ({ theme }) =>
+  variant({
+    variants: mergeDeep({}, variants, theme.cards)
+  })
 )
 
 Card.propTypes = {
-  ...propTypes.border,
-  ...propTypes.flexbox,
-  ...propTypes.layout,
-  ...propTypes.shadow,
-  ...propTypes.position,
-  ...propTypes.space,
-  ...propTypes.variant,
-  children: PropTypes.node
+  ...Box.propTypes,
+  ...propTypes.variant
 }
 
-Card.defaultProps = {}
 Card.displayName = 'Card'
-
-/** @component */
