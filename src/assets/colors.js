@@ -8,6 +8,10 @@ export default {
   error: '#FF0000',
   disabled: '#BABABC',
   outline: '#A0AAB2',
+  lighterOutline: '#D4DEE8',
   background: '#FBFDFF',
+  widgetBackground: '#F7FAFC',
+  modalStroke: '#D4DEE8',
+  dropShadow: 'rgba(19, 51, 77, .3)',
   white: '#FFFFFF'
 }
