@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider as LibThemeProvider } from 'styled-components'
-import { mergeDeep, etvasTheme } from 'src/utils'
+import { mergeDeep, etvasTheme } from '../utils'
 
 export const ThemeProvider = ({ children, theme }) => {
   const mergedTheme = useMemo(() => mergeDeep({}, etvasTheme, theme), [theme])

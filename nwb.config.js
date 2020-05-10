@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   type: 'react-component',
   npm: {
@@ -10,9 +8,6 @@ module.exports = {
     html: {
       template: 'demo/index.html'
     },
-    aliases: {
-      src: path.resolve('src')
-    },
     config(config) {
       config.module.rules[0].test = /\.jsx?$/
       config.resolve = {
@@ -21,18 +16,5 @@ module.exports = {
       }
       return config
     }
-  },
-  babel: {
-    plugins: [
-      [
-        'module-resolver',
-        {
-          root: ['.'],
-          alias: {
-            src: './src'
-          }
-        }
-      ]
-    ]
   }
 }

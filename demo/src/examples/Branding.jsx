@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { brandingService, Flex, Button, Input, Typography, Box } from 'src'
+import {
+  brandingService,
+  Flex,
+  Button,
+  Input,
+  Typography,
+  Box
+} from '../../../src'
 
 export const BrandingExample = () => {
   const [showIframe, setShowIframe] = useState(false)
