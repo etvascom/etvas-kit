@@ -13,6 +13,7 @@ import { typography } from '../Typography'
 import colors from './colors'
 import fonts from './fonts'
 import shadows from './shadows'
+import breakpoints from './breakpoints'
 
 const theme = buildTheme({
   dropdowns: DROPDOWN_VARIANTS,
@@ -21,9 +22,9 @@ const theme = buildTheme({
   letterSpacings: LETTER_SPACINGS,
   lineHeights: LINE_HEIGHTS,
   textStyles: TEXT_STYLES,
-  breakpoints: ['30em', '48em', '80em'],
+  breakpoints,
 
-  // basics
+  // basic*s
   fonts,
   colors,
   shadows,
