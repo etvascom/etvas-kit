@@ -7,6 +7,11 @@ export default {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  '> *': {
+    color: 'white',
+    whiteSpace: 'pre-line',
+    textAlign: 'center'
+  },
   '::after': {
     position: 'absolute',
     content: '""',
