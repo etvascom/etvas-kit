@@ -1,36 +1,62 @@
 import React from 'react'
-import { Flex, Space, Typography } from '@ivoryio/kogaio'
-import { Card } from '../../../src'
+import { Grid, Card, CardWithImage, Typography } from '../../../src'
 
-const CardExamples = props => (
-  <Flex {...props}>
-    <Card
-      alignItems='center'
-      display='flex'
-      height='240px'
-      justifyContent='center'
-      variant='content'
-      width={1 / 3}>
-      <Typography textAlign='center' variant='labelLarge'>
-        Card #1
-        <Typography variant='labelSmallBold'>variant: content</Typography>
-      </Typography>
-    </Card>
-    <Space ml={6}>
+const height = '280px'
+
+const CardExamples = () => (
+  <Grid cols='3'>
+    <Grid.Item>
       <Card
         alignItems='center'
         display='flex'
-        height='240px'
+        justifyContent='center'
+        variant='content'
+        height={height}
+        width='100%'>
+        <Typography textAlign='center' variant='labelLarge'>
+          Card #1
+          <Typography variant='labelSmallBold'>variant: content</Typography>
+        </Typography>
+      </Card>
+    </Grid.Item>
+    <Grid.Item span={2}>
+      <Card
+        alignItems='center'
+        display='flex'
         justifyContent='center'
         variant='popup'
-        width={1 / 3}>
+        height={height}
+        width='100%'>
         <Typography textAlign='center' variant='labelLarge'>
           Card #2
           <Typography variant='labelSmallBold'>variant: popup</Typography>
         </Typography>
       </Card>
-    </Space>
-  </Flex>
+    </Grid.Item>
+    <Grid.Item>
+      <CardWithImage
+        imageUrl='https://picsum.photos/250/120'
+        width='100%'
+        height={height}>
+        <Typography textAlign='center' variant='labelLarge'>
+          CardWithImage
+        </Typography>
+        <Typography variant='labelSmallBold'>variant: popup</Typography>
+      </CardWithImage>
+    </Grid.Item>
+    <Grid.Item>
+      <CardWithImage
+        imageUrl='https://picsum.photos/250/120'
+        vertical
+        width='100%'
+        height={height}>
+        <Typography textAlign='center' variant='labelLarge'>
+          CardWithImage
+        </Typography>
+        <Typography variant='labelSmallBold'>variant: popup</Typography>
+      </CardWithImage>
+    </Grid.Item>
+  </Grid>
 )
 
 export default CardExamples

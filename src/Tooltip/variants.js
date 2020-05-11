@@ -1,6 +1,6 @@
 import { COLORS, RADII, SPACE, BORDERS } from '../assets/core'
 
-import { TYPOGRAPHY_VARIANTS } from '../Typography'
+import { typography } from '../Typography'
 
 export default {
   footer: {
@@ -9,7 +9,7 @@ export default {
     'background-color': COLORS.lighterText,
     padding: `${SPACE[2]}px ${SPACE[3]}px`,
     '.tooltip-text': {
-      ...TYPOGRAPHY_VARIANTS.textSmall,
+      ...typography.textSmall,
       color: COLORS.white
     },
     '&::after': {

@@ -8,9 +8,10 @@ module.exports = {
     html: {
       template: 'demo/index.html'
     },
-    config (config) {
+    config(config) {
       config.module.rules[0].test = /\.jsx?$/
       config.resolve = {
+        ...config.resolve,
         extensions: ['.js', '.jsx', '.json', '.css']
       }
       return config

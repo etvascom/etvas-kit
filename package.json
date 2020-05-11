@@ -1,6 +1,6 @@
 {
   "name": "@etvas/etvaskit",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,6 +12,9 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
+    "prebuild:link": "mv node_modules_ node_modules",
+    "build:link": "npm run build -- --no-demo",
+    "postbuild:link": "mv node_modules node_modules_",
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
@@ -28,7 +31,9 @@
     "styled-components": "^5.1.0"
   },
   "dependencies": {
-    "@ivoryio/kogaio": "^0.7.93"
+    "@ivoryio/kogaio": "^0.7.93",
+    "@styled-system/theme-get": "^5.1.2",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
