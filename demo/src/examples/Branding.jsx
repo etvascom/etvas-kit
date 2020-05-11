@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import {
-  brandingService,
   Flex,
+  BrandingContext,
   Button,
   Input,
   Typography,
@@ -10,6 +10,7 @@ import {
 
 export const BrandingExample = () => {
   const [showIframe, setShowIframe] = useState(false)
+  const { brandingService } = useContext(BrandingContext)
   const [cssVars, setCssVars] = useState(brandingService.cssVars)
 
   const handleColorChange = cssVar => ev => {
@@ -22,7 +23,11 @@ export const BrandingExample = () => {
     const handler = vars => setCssVars(brandingService.cssVars)
     brandingService.on('change', handler)
     return () => brandingService.removeListener('change', handler)
-  }, [setCssVars])
+  }, [setCssVars, brandingService])
+
+  if (!cssVars) {
+    return null
+  }
 
   return (
     <Flex>

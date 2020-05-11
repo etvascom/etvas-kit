@@ -1,7 +1,8 @@
 import EventEmitter from 'events'
 import { mergeDeep } from '@ivoryio/kogaio/assets/helpers'
-import { InterCom } from './InterCom'
 import isEqual from 'lodash/isEqual'
+import { InterCom } from './InterCom'
+import { hexToRgb } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',
@@ -19,7 +20,7 @@ export class BrandingService extends EventEmitter {
   // as instances of the same class will be running on both sides
   constructor({ intercom, defaults, prefix = 'etvas' }) {
     super()
-    this.cssVars = defaults
+    this.defaults = defaults
     this.prefix = prefix
     this.intercom = intercom
     this.intercom.onRequest('cssVars', this.sendCssVars)
@@ -29,6 +30,10 @@ export class BrandingService extends EventEmitter {
   init() {
     if (this.intercom.isChild()) {
       this.intercom.request('cssVars')
+    }
+
+    if (this.defaults && !this.cssVars) {
+      this.updateCssVars(this.defaults)
     }
   }
 
@@ -60,7 +65,11 @@ export class BrandingService extends EventEmitter {
   write(key, value) {
     const root = document.documentElement
     key = varMapping[key]
+
     if (key) {
+      if (key.substr(-5) === 'color') {
+        value = hexToRgb(value).join(',')
+      }
       root.style.setProperty(`--${this.prefix}-${key}`, value)
     }
   }

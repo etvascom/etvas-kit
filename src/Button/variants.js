@@ -1,11 +1,13 @@
-import { BORDERS, COLORS, FONTS, FONT_WEIGHTS, RADII } from '../assets/core'
+import { BORDERS, FONTS, FONT_WEIGHTS, RADII } from '../assets/core'
 
+import colors from '../assets/colors'
 import typography from '../Typography/variants'
 
 // #region button labels
 const labelStyle = typography.labelButton
 const labelStyleAlt = {
   ...labelStyle,
+  color: 'inherit',
   'font-family': FONTS.primary,
   'font-weight': `${FONT_WEIGHTS.bold}`
 }
@@ -33,83 +35,68 @@ const linkStyles = color => ({
 
 export default {
   primary: {
-    label: {
-      ...labelStyle,
-      color: COLORS.white
+    label: labelStyle,
+    backgroundColor: colors.accent,
+    color: colors.white,
+    borderRadius: `${RADII[8]}px`,
+    ':focus, :hover': {
+      backgroundColor: colors.accent,
+      opacity: 0.75
     },
-    backgroundColor: COLORS.accent,
-    color: COLORS.white,
-    'border-radius': `${RADII[8]}px`,
-    ':focus, :hover': { 'background-color': COLORS.accent, opacity: 0.75 },
     ':disabled': {
-      'background-color': COLORS.accentFade,
+      opacity: 1,
+      backgroundColor: colors.accentFade,
       cursor: 'not-allowed',
-      label: {
-        ...labelStyle,
-        color: COLORS.white
-      },
+      color: colors.white,
       transform: 'scale(1)',
       ':hover': {
-        'background-color': COLORS.accentFade,
-        opacity: 1
+        backgroundColor: colors.accentFade
       }
     }
   },
   outline: {
-    label: {
-      ...labelStyle,
-      color: COLORS.text
-    },
-    'background-color': 'transparent',
-    border: `${BORDERS[1]} ${COLORS.accent}`,
-    'border-radius': `${RADII[8]}px`,
-    color: COLORS.text,
+    label: labelStyle,
+    color: colors.text,
+    backgroundColor: 'transparent',
+    border: `${BORDERS[1]} ${colors.accent}`,
+    borderRadius: `${RADII[8]}px`,
     ':focus, :hover': {
-      'background-color': 'transparent',
-      border: `${BORDERS[1]} ${COLORS.accent}`,
+      backgroundColor: 'transparent',
+      border: `${BORDERS[1]} ${colors.accent}`,
       opacity: 0.75
     },
     ':disabled': {
-      border: `${BORDERS[1]} ${COLORS.accent}`,
-      'background-color': 'transparent',
+      opacity: 1,
+      border: `${BORDERS[1]} ${colors.accentFade}`,
+      backgroundColor: 'transparent',
       cursor: 'not-allowed',
-      label: {
-        ...labelStyle,
-        color: COLORS.disabled
-      },
+      color: colors.disabled,
+      transform: 'scale(1)',
       ':hover': {
-        opacity: 1
-      },
-      transform: 'scale(1)'
+        border: `${BORDERS[1]} ${colors.accentFade}`
+      }
     }
   },
   outlineAlt: {
-    label: {
-      ...labelStyleAlt,
-      color: COLORS.text
-    },
-    'background-color': 'transparent',
-    border: `${BORDERS[1]} ${COLORS.text}`,
-    'border-radius': `${RADII[8]}px`,
+    label: labelStyleAlt,
+    color: colors.text,
+    backgroundColor: 'transparent',
+    border: `${BORDERS[1]} ${colors.text}`,
+    borderRadius: `${RADII[8]}px`,
     ':focus, :hover': {
-      'background-color': 'transparent',
-      border: `${BORDERS[1]} ${COLORS.text}`,
+      backgroundColor: 'transparent',
+      border: `${BORDERS[1]} ${colors.text}`,
       opacity: 0.75
     },
     ':disabled': {
-      border: `${BORDERS[1]} ${COLORS.disabled}`,
-      'background-color': 'transparent',
+      opacity: 1,
+      border: `${BORDERS[1]} ${colors.disabled}`,
+      backgroundColor: 'transparent',
       cursor: 'not-allowed',
-      label: {
-        ...labelStyleAlt,
-        color: COLORS.disabled
-      },
-      ':hover': {
-        opacity: 1
-      },
+      color: colors.disabled,
       transform: 'scale(1)'
     }
   },
-  link: linkStyles(COLORS.accent),
-  linkSecondary: linkStyles(COLORS.lighterText)
+  link: linkStyles(colors.accent),
+  linkSecondary: linkStyles(colors.lighterText)
 }
