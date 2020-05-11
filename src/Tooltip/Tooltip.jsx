@@ -1,32 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 
-import { Tooltip as KogaioTooltip } from '@ivoryio/kogaio'
+import { Box } from '@ivoryio/kogaio'
+import styles from './Tooltip.style'
 
-const Tooltip = ({ children, ...props }) => (
-  <KogaioTooltip {...props}>{children}</KogaioTooltip>
-)
+const Tooltip = styled(Box)(css(styles))
 
 Tooltip.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  variant: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.objectOf(PropTypes.string)
-  ]),
-  arrow: PropTypes.shape({
-    alignment: PropTypes.string,
-    direction: PropTypes.string
-  }),
-  visible: PropTypes.bool,
-  width: PropTypes.shape({
-    sm: PropTypes.number,
-    md: PropTypes.number,
-    lg: PropTypes.number
-  })
-}
-
-Tooltip.defaultProps = {
-  visible: true
+  ...Box.propTypes,
+  ...propTypes.variant
 }
 
 Tooltip.displayName = 'Tooltip'

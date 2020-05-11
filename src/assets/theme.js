@@ -9,7 +9,6 @@ import { buttons } from '../Button'
 import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
 import { typography } from '../Typography'
-import { tooltip } from '../Tooltip'
 
 import colors from './colors'
 import fonts from './fonts'
@@ -32,7 +31,6 @@ const theme = buildTheme({
   // variants
   buttons,
   typography,
-  tooltips: tooltip,
 
   // Components
   Typography: typography.default
