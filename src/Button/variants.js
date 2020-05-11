@@ -11,6 +11,26 @@ const labelStyleAlt = {
 }
 // #endregion
 
+const linkStyles = color => ({
+  label: {
+    ...labelStyle,
+    padding: 0,
+    color: color
+  },
+  background: 'none',
+  minWidth: 'max-content',
+  height: 'auto',
+  padding: 0,
+  minHeight: 'max-content',
+  ':focus, :hover': {
+    opacity: 0.75
+  },
+  ':disabled': {
+    cursor: 'not-allowed',
+    opacity: '.3'
+  }
+})
+
 export default {
   primary: {
     label: {
@@ -90,29 +110,6 @@ export default {
       transform: 'scale(1)'
     }
   },
-  link: {
-    label: {
-      ...labelStyle,
-      padding: 0,
-      color: COLORS.accent
-    },
-    background: 'none',
-    'min-width': 'max-content',
-    height: 'auto',
-    padding: 0,
-    minHeight: 'max-content',
-    ':focus, :hover': {
-      opacity: 0.75
-    },
-    ':disabled': {
-      cursor: 'not-allowed',
-      label: {
-        ...labelStyle,
-        color: COLORS.accentFade
-      },
-      ':hover': {
-        opacity: 1
-      }
-    }
-  }
+  link: linkStyles(COLORS.accent),
+  linkSecondary: linkStyles(COLORS.lighterText)
 }

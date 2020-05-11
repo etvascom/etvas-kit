@@ -1,77 +1,53 @@
 import React from 'react'
-import { Flex, Space } from '@ivoryio/kogaio'
+import { Flex, Box } from '@ivoryio/kogaio'
 import { Button } from '../../../src'
 
 const ButtonExamples = props => (
   <Flex {...props}>
-    <Space mr={3}>
+    <Box mr={3}>
       <Flex flexDirection='column'>
-        <Button
-          onClick={() => alert('Hello from primary button!')}
-          title='Primary'
-          variant='primary'
-        />
-        <Space mt={2}>
-          <Button
-            disabled
-            onClick={() => {}}
-            title='Primary disabled'
-            variant='primary'
-          />
-        </Space>
+        <Button title='Primary' variant='primary' />
+        <Box mt={2}>
+          <Button disabled title='Primary disabled' variant='primary' />
+        </Box>
       </Flex>
-    </Space>
-    <Space mx={3}>
+    </Box>
+    <Box mx={3}>
       <Flex flexDirection='column'>
-        <Button
-          onClick={() => alert('Hello from outline button!')}
-          title='Outline'
-          variant='outline'
-        />
-        <Space mt={2}>
-          <Button
-            disabled
-            onClick={() => {}}
-            title='Outline disabled'
-            variant='outline'
-          />
-        </Space>
+        <Button title='Outline' variant='outline' />
+        <Box mt={2}>
+          <Button disabled title='Outline disabled' variant='outline' />
+        </Box>
       </Flex>
-    </Space>
-    <Space mx={3}>
+    </Box>
+    <Box mx={3}>
       <Flex flexDirection='column'>
-        <Button
-          onClick={() => alert('Hello from outline alt button!')}
-          title='Outline alt'
-          variant='outlineAlt'
-        />
-        <Space mt={2}>
-          <Button
-            disabled
-            onClick={() => {}}
-            title='Outline alt disabled'
-            variant='outlineAlt'
-          />
-        </Space>
+        <Button title='Outline alt' variant='outlineAlt' />
+        <Box mt={2}>
+          <Button disabled title='Outline alt disabled' variant='outlineAlt' />
+        </Box>
       </Flex>
-    </Space>
-    <Space mx={3}>
+    </Box>
+    <Box mx={3}>
       <Flex flexDirection='column'>
+        <Button title='Link' variant='link' />
         <Button
-          onClick={() => alert('Hello from link button!')}
-          title='Link'
+          disabled
+          onClick={() => {}}
+          title='Link disabled'
           variant='link'
         />
-        <Space mt={2}>
+
+        <Box mt={2}>
+          <Button title='Link secondary' variant='linkSecondary' />
           <Button
+            title='Link secondary disabled'
+            variant='linkSecondary'
             disabled
-            onClick={() => {}}
-            title='Link disabled'
-            variant='link'
           />
-        </Space>
+        </Box>
       </Flex>
-    </Space>
+    </Box>
   </Flex>
 )
 

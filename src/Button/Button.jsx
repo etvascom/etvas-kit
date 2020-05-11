@@ -12,8 +12,8 @@ Button.propTypes = {
     name: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }),
-  onClick: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  title: PropTypes.node,
   type: PropTypes.string,
   variant: PropTypes.oneOfType([
     PropTypes.string,
