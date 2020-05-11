@@ -20,7 +20,6 @@ export * from './Dropdown'
 export * from './Input'
 export * from './Typography'
 export * from './Grid'
-export * from './Tooltip'
 
 export * from '@ivoryio/kogaio'
 
