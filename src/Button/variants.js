@@ -93,10 +93,14 @@ export default {
   link: {
     label: {
       ...labelStyle,
+      padding: 0,
       color: COLORS.accent
     },
     background: 'none',
-    'min-width': 'fit-content',
+    'min-width': 'max-content',
+    height: 'auto',
+    padding: 0,
+    minHeight: 'max-content',
     ':focus, :hover': {
       opacity: 0.75
     },

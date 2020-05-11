@@ -25,5 +25,9 @@ html {
   box-sizing: border-box;
 }
 
+a { 
+  text-decoration: none;
+}
+
 ${themed('root')}
 `
