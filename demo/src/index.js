@@ -62,9 +62,7 @@ const Playground = () => (
         <Space mt={6}>
           <Box>
             <Typography variant='titleLarge'>Tooltips</Typography>
-            <TooltipExamples>
-              This is an informational tooltip. It`s purpose is to inform.
-            </TooltipExamples>
+            <TooltipExamples />
           </Box>
         </Space>
       </Flex>
