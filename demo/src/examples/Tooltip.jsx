@@ -5,11 +5,7 @@ import { Tooltip } from '../../../src'
 
 const TooltipExamples = props => (
   <Flex>
-    <Tooltip
-      arrow={{ alignment: 'center', direction: 'bottom' }}
-      variant='footer'
-      {...props}
-    />
+    <Tooltip {...props} />
   </Flex>
 )
 
