@@ -5,9 +5,9 @@ import { Tooltip, Typography } from '../../../src'
 
 const text = `This is an informational tooltip. It\`s purpose is to inform.\n This is an informational tooltip.`
 
-const TooltipExamples = props => (
+const TooltipExamples = () => (
   <Flex>
-    <Tooltip {...props}>
+    <Tooltip>
       <Typography variant='smallText'>{text}</Typography>
     </Tooltip>
   </Flex>
