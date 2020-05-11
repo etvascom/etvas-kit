@@ -21,8 +21,6 @@ export * from './Input'
 export * from './Typography'
 export * from './Grid'
 
-export * from '@ivoryio/kogaio'
-
 export { Button } from './Button'
 export { buildTheme, etvasTheme } from './utils'
 export { Card } from './Card'
@@ -31,3 +29,5 @@ export { Input } from './Input'
 export { Typography } from './Typography'
 export { Tooltip } from './Tooltip'
 export { styled }
+
+export * from '@ivoryio/kogaio'
