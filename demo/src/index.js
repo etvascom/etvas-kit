@@ -14,6 +14,7 @@ import {
   InputExamples,
   TypographyExamples,
   CardExamples,
+  TooltipExamples,
   BrandingExample
 } from './examples'
 
@@ -57,6 +58,12 @@ const Playground = () => (
               <CardExamples />
             </Box>
           </Space>
+        </Space>
+        <Space mt={6}>
+          <Box>
+            <Typography variant='titleLarge'>Tooltips</Typography>
+            <TooltipExamples />
+          </Box>
         </Space>
       </Flex>
     </BrandingProvider>
