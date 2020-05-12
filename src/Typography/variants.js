@@ -1,8 +1,9 @@
-import { FONTS, FONT_SIZES, FONT_WEIGHTS, COLORS } from '../assets/core'
+import { FONTS, FONT_SIZES, FONT_WEIGHTS } from '../assets/core'
+import colors from '../assets/colors'
 
 export default {
   default: {
-    color: COLORS.text,
+    color: colors.text,
     'font-family': FONTS.primary,
     'font-weight': 'normal',
     'font-size': FONT_SIZES[0],
