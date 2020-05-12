@@ -5,7 +5,7 @@ export const themed = libThemeGet
 
 export const themeGet = (...args) => {
   console.warn(`
-    themeGet() is deprecated. Please use import and use themed().
+    themeGet() is deprecated. Please import and use themed().
   `)
 
   return themed(...args)
