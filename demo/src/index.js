@@ -15,7 +15,8 @@ import {
   TypographyExamples,
   CardExamples,
   TooltipExamples,
-  BrandingExample
+  BrandingExample,
+  TableExample
 } from './examples'
 
 const Playground = () => (
@@ -66,6 +67,12 @@ const Playground = () => (
           </Box>
         </Space>
       </Flex>
+      <Space mt={6}>
+        <Box>
+          <Typography variant='titleLarge'>Table</Typography>
+          <TableExample />
+        </Box>
+      </Space>
     </BrandingProvider>
   </ThemeProvider>
 )
