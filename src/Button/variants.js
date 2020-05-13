@@ -39,7 +39,11 @@ export default {
     backgroundColor: colors.accent,
     color: colors.white,
     borderRadius: `${RADII[8]}px`,
-    ':focus, :hover': {
+    ':focus': {
+      backgroundColor: colors.accent,
+      opacity: 0.75
+    },
+    ':hover': {
       backgroundColor: colors.accent,
       opacity: 0.75
     },
@@ -60,7 +64,12 @@ export default {
     backgroundColor: 'transparent',
     border: `${BORDERS[1]} ${colors.accent}`,
     borderRadius: `${RADII[8]}px`,
-    ':focus, :hover': {
+    ':focus': {
+      backgroundColor: 'transparent',
+      border: `${BORDERS[1]} ${colors.accent}`,
+      opacity: 0.75
+    },
+    ':hover': {
       backgroundColor: 'transparent',
       border: `${BORDERS[1]} ${colors.accent}`,
       opacity: 0.75
@@ -83,7 +92,12 @@ export default {
     backgroundColor: 'transparent',
     border: `${BORDERS[1]} ${colors.text}`,
     borderRadius: `${RADII[8]}px`,
-    ':focus, :hover': {
+    ':focus': {
+      backgroundColor: 'transparent',
+      border: `${BORDERS[1]} ${colors.text}`,
+      opacity: 0.75
+    },
+    ':hover': {
       backgroundColor: 'transparent',
       border: `${BORDERS[1]} ${colors.text}`,
       opacity: 0.75
