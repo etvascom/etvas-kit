@@ -6,16 +6,11 @@ import PropTypes from 'prop-types'
 import css from '@styled-system/css'
 
 import { Box } from '@ivoryio/kogaio'
+import style from './Table.style'
 
 export const TableContext = React.createContext({})
 
-const StyledTable = styled(Box)(
-  css({
-    display: 'grid',
-    gridAutoFlow: 'row'
-  }),
-  grid
-)
+const StyledTable = styled(Box)(css(style), grid)
 
 export const Table = ({ children, gridTemplate, ...props }) => (
   <TableContext.Provider value={gridTemplate}>
