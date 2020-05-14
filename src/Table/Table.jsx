@@ -1,16 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
-import css from '@styled-system/css'
+import { grid } from 'styled-system'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
+import css from '@styled-system/css'
 
-import styles from './Table.style'
 import { Box } from '@ivoryio/kogaio'
 
 export const TableContext = React.createContext({})
 
-const StyledTable = styled(Box)(css(styles), ({ gridRowGap }) => ({
-  gridRowGap
-}))
+const StyledTable = styled(Box)(
+  css({
+    display: 'grid',
+    gridAutoFlow: 'row'
+  }),
+  grid
+)
 
 export const Table = ({ children, gridTemplate, ...props }) => (
   <TableContext.Provider value={gridTemplate}>
@@ -19,10 +24,10 @@ export const Table = ({ children, gridTemplate, ...props }) => (
 )
 
 Table.propTypes = {
+  ...propTypes.grid,
   ...Box.propTypes,
   gridTemplate: PropTypes.string.isRequired,
-  children: PropTypes.node,
-  gridRowGap: PropTypes.string
+  children: PropTypes.node
 }
 
 Table.displayName = 'Table'
