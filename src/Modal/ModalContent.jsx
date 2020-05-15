@@ -21,4 +21,4 @@ ModalContent.propTypes = {
   children: PropTypes.node
 }
 
-ModalContent.displayName = 'Modal'
+ModalContent.displayName = 'ModalContent'
