@@ -1,77 +1,78 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import propTypes from '@styled-system/prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-import { color, flexbox } from 'styled-system'
+import { color } from 'styled-system'
 
 import style from './Modal.style'
+import { ModalContent } from './ModalContent'
 
 import { Box } from '@ivoryio/kogaio'
 
-const ModalStyle = styled(Box)(
+const StyledModal = styled(Box)(
   css(style.wrapper),
   color,
-  flexbox,
-  color,
-  ({ animated }) => `
-    @keyframes modal{
+  ({ animated }) =>
+    animated &&
+    `@keyframes modal {
         from { opacity: 0; }
         to { opacity: 100%; }
     }
-    
-    ${animated &&
-      ` animation-fill-mode: forwards;
-        animation-name: modal;
-        animation-duration:0.5s; `}
-`
+    animation-fill-mode: forwards;
+    animation-name: modal;
+    animation-duration:0.5s;`
 )
 
 const disableScroll = () => (document.body.style.overflow = 'hidden')
-const enamleScroll = () => (document.body.style.overflow = 'auto')
+const enableScroll = () => (document.body.style.overflow = 'auto')
 
-export const Modal = ({
+const Modal = ({
   backDrop,
   onBackDropClick,
   onEscape,
   animated,
   children,
-  elType,
   ...props
 }) => {
   const modalRef = useRef()
 
-  const modalClickHandler = event => {
-    if (event.target === modalRef.current) {
-      onBackDropClick()
-    }
-  }
+  const modalClickHandler = useCallback(
+    event => {
+      if (event.target === modalRef.current) {
+        onBackDropClick && onBackDropClick()
+      }
+    },
+    [onBackDropClick]
+  )
+  const callback = useCallback(
+    event => {
+      if (event.keyCode === 27) {
+        onEscape && onEscape()
+      }
+    },
+    [onEscape]
+  )
 
-  const callback = event => {
-    if (event.keyCode === 27) {
-      onEscape()
-    }
-  }
   useLayoutEffect(() => {
     disableScroll()
     window.addEventListener('keyup', callback, false)
 
     return () => {
-      enamleScroll()
+      enableScroll()
       window.removeEventListener('keyup', callback, false)
     }
   })
 
   return (
-    <ModalStyle
+    <StyledModal
       ref={modalRef}
       {...props}
-      elType={elType}
       bg={backDrop}
       animated={animated}
       onClick={modalClickHandler}>
       {children}
-    </ModalStyle>
+    </StyledModal>
   )
 }
 
@@ -82,8 +83,10 @@ Modal.propTypes = {
   onBackDropClick: PropTypes.func,
   onEscape: PropTypes.func,
   animated: PropTypes.bool,
-  children: PropTypes.node,
-  elType: PropTypes.string
+  children: PropTypes.node
 }
 
+Modal.Content = ModalContent
 Modal.displayName = 'Modal'
+
+export default Modal

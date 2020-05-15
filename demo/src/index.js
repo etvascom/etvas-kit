@@ -74,7 +74,12 @@ const Playground = () => (
           <TableExample />
         </Box>
       </Space>
-      <ModalExample />
+      <Space mt={6}>
+        <Typography variant='titleLarge'>Modal</Typography>
+        <Box my={4}>
+          <ModalExample />
+        </Box>
+      </Space>
     </BrandingProvider>
   </ThemeProvider>
 )

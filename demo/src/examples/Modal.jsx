@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Modal, Button } from '../../../src'
 
 const ModalExample = () => {
@@ -8,7 +9,7 @@ const ModalExample = () => {
 
   return (
     <>
-      <Button title='Open' variant='primary' onClick={toggleState} />
+      <Button title='Open Modal' variant='primary' onClick={toggleState} />
       {visible && (
         <Modal
           onBackDropClick={() => {}}
@@ -17,7 +18,13 @@ const ModalExample = () => {
           backDrop='royalblue'
           alignItems='center'
           justifyContent='center'>
-          <Button title='Close' variant='primary' onClick={toggleState} />
+          <Modal.Content p={8} bg='yellowgreen'>
+            <Button
+              title='Close Modal'
+              variant='primary'
+              onClick={toggleState}
+            />
+          </Modal.Content>
         </Modal>
       )}
     </>
