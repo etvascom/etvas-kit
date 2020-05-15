@@ -16,7 +16,8 @@ import {
   CardExamples,
   TooltipExamples,
   BrandingExample,
-  TableExample
+  TableExample,
+  ModalExample
 } from './examples'
 
 const Playground = () => (
@@ -73,6 +74,7 @@ const Playground = () => (
           <TableExample />
         </Box>
       </Space>
+      <ModalExample />
     </BrandingProvider>
   </ThemeProvider>
 )

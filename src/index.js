@@ -11,6 +11,7 @@ export * from './Typography'
 export * from './Tooltip'
 export * from './Grid'
 export * from './Table'
+export * from './Modal'
 
 export { styled }
 
