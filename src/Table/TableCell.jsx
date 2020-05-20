@@ -1,45 +1,33 @@
-import React, { useContext } from 'react'
 import styled from 'styled-components'
-import css from '@styled-system/css'
-import PropTypes from 'prop-types'
-import { color, border, grid } from 'styled-system'
+import { space, color } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
+import PropTypes from 'prop-types'
 
-import { Box } from '@ivoryio/kogaio'
-import styles from './TableCell.style'
-import { TableContext } from './Table'
-
-const HeaderCellStyle = styled(Box)(css(styles.header), color, border, grid)
-
-const BodyCellStyle = styled(Box)(css(styles.body), color, border, grid)
-
-export const HeaderCell = ({ children, ...props }) => {
-  const gridTemplateColumns = useContext(TableContext)
-  return (
-    <HeaderCellStyle {...props} gridTemplateColumns={gridTemplateColumns}>
-      {children}
-    </HeaderCellStyle>
-  )
-}
-
-export const BodyCell = ({ children, ...props }) => {
-  const gridTemplateColumns = useContext(TableContext)
-  return (
-    <BodyCellStyle {...props} gridTemplateColumns={gridTemplateColumns}>
-      {children}
-    </BodyCellStyle>
-  )
-}
+export const HeaderCell = styled.th(space)
+export const BodyCell = styled.td(space)
+export const TableRow = styled.tr(
+  color,
+  ({ borderRadius }) => `
+      & > td:first-child, th:first-child {
+        border-top-left-radius: ${borderRadius}px;
+        border-bottom-left-radius: ${borderRadius}px;
+      }
+      & > td:last-child, th:last-child {
+        border-top-right-radius: ${borderRadius}px;
+        border-bottom-right-radius: ${borderRadius}px;
+      }
+`
+)
 
 HeaderCell.propTypes = {
-  ...propTypes.color,
-  ...propTypes.border,
-  ...propTypes.grid,
-  children: PropTypes.node
+  ...propTypes.space
 }
 
 BodyCell.propTypes = {
+  ...propTypes.space
+}
+
+TableRow.propTypes = {
   ...propTypes.color,
-  ...propTypes.border,
-  children: PropTypes.node
+  borderRadius: PropTypes.number
 }

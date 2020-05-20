@@ -1,4 +1,5 @@
 export default {
-  display: 'grid',
-  gridAutoFlow: 'row'
+  borderSpacing: '0 8px',
+  width: '100%',
+  borderCollapse: 'separate'
 }
