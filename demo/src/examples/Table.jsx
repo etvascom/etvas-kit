@@ -1,12 +1,12 @@
 import React from 'react'
 import { Table, Typography } from '../../../src'
 
-const { TableRow, HeaderCell, BodyCell, TableBody, TableHeader } = Table
+const { Row, HeaderCell, BodyCell, Body, Header } = Table
 
 const TableExample = () => (
-  <Table textAlign='center' borderSpacing='0 16px'>
-    <TableHeader>
-      <TableRow>
+  <Table textAlign='center'>
+    <Header>
+      <Row>
         <HeaderCell>
           <Typography variant='textSmall'>The</Typography>
         </HeaderCell>
@@ -20,10 +20,10 @@ const TableExample = () => (
           <Typography variant='textSmall'>The</Typography>
         </HeaderCell>
         <HeaderCell></HeaderCell>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      <TableRow>
+      </Row>
+    </Header>
+    <Body>
+      <Row>
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
@@ -41,8 +41,8 @@ const TableExample = () => (
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
-      </TableRow>
-      <TableRow>
+      </Row>
+      <Row>
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
@@ -61,8 +61,8 @@ const TableExample = () => (
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
-      </TableRow>
-      <TableRow bg='blue'>
+      </Row>
+      <Row bg='blue'>
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
@@ -81,8 +81,8 @@ const TableExample = () => (
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
-      </TableRow>
-      <TableRow borderRadius={20} bg='red'>
+      </Row>
+      <Row borderRadius={20} bg='red'>
         <BodyCell py={10}>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
@@ -101,8 +101,8 @@ const TableExample = () => (
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
-      </TableRow>
-    </TableBody>
+      </Row>
+    </Body>
   </Table>
 )
 

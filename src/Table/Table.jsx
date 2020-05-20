@@ -1,25 +1,19 @@
 import styled from 'styled-components'
-
+import css from '@styled-system/css'
 import { typography } from 'styled-system'
 
 import { BodyCell, TableRow, HeaderCell } from './TableCell'
+import style from './Table.style'
 
-const Table = styled.table(
-  typography,
-  ({ borderSpacing }) => `
-  border-spacing : ${borderSpacing};
-  width: 100%;
-  border-collapse: separate;
-`
-)
+const Table = styled.table(typography, css(style))
 
 const TableBody = styled.tbody``
 const TableHeader = styled.thead``
 
 Table.HeaderCell = HeaderCell
 Table.BodyCell = BodyCell
-Table.TableRow = TableRow
-Table.TableBody = TableBody
-Table.TableHeader = TableHeader
+Table.Row = TableRow
+Table.Body = TableBody
+Table.Header = TableHeader
 
 export default Table
