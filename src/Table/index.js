@@ -1,2 +1,1 @@
-export * from './Table'
-export * from './TableCell'
+export { default as Table } from './Table'
