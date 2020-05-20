@@ -1,28 +1,19 @@
-import React from 'react'
 import styled from 'styled-components'
-import { grid } from 'styled-system'
-import propTypes from '@styled-system/prop-types'
-import PropTypes from 'prop-types'
 import css from '@styled-system/css'
+import { typography } from 'styled-system'
 
-import { Box } from '@ivoryio/kogaio'
+import { BodyCell, TableRow, HeaderCell } from './TableCell'
 import style from './Table.style'
 
-export const TableContext = React.createContext({})
+const Table = styled.table(typography, css(style))
 
-const StyledTable = styled(Box)(css(style), grid)
+const TableBody = styled.tbody``
+const TableHeader = styled.thead``
 
-export const Table = ({ children, gridTemplate, ...props }) => (
-  <TableContext.Provider value={gridTemplate}>
-    <StyledTable {...props}>{children}</StyledTable>
-  </TableContext.Provider>
-)
+Table.HeaderCell = HeaderCell
+Table.BodyCell = BodyCell
+Table.Row = TableRow
+Table.Body = TableBody
+Table.Header = TableHeader
 
-Table.propTypes = {
-  ...propTypes.grid,
-  ...Box.propTypes,
-  gridTemplate: PropTypes.string.isRequired,
-  children: PropTypes.node
-}
-
-Table.displayName = 'Table'
+export default Table
