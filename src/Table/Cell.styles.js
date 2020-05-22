@@ -9,7 +9,7 @@ export default {
     color: 'outline'
   },
   body: {
-    ...typography.default,
+    ...typography.labelSmall,
     textAlign: 'left',
     padding: 3,
     backgroundColor: 'widgetBackground',
@@ -27,6 +27,7 @@ export default {
     color: 'outline'
   },
   mobile: {
+    ...typography.labelSmall,
     display: 'block'
   },
   shared: {}

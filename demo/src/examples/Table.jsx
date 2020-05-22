@@ -1,10 +1,10 @@
 import React from 'react'
-import { Table, Box, Flex, Icon, Button } from '../../../src'
+import { Card, Table, Box, Flex, Icon, Button } from '../../../src'
 
 const { Row, Cell, Body, Header } = Table
 
 const TheTable = () => (
-  <Table textAlign='center' breakpoint={300}>
+  <Table textAlign='center' breakpoint={400}>
     <Header>
       <Row>
         <Cell>One</Cell>
@@ -47,13 +47,17 @@ const TheTable = () => (
 )
 
 export const TableExample = () => (
-  <Flex width='100%' justifyContent='stretch' p={8}>
+  <Flex width='100%' justifyContent='stretch' p={4}>
     <Box style={{ flexGrow: 1 }} mr={8}>
-      <TheTable />
+      <Card p={4}>
+        <TheTable />
+      </Card>
     </Box>
 
-    <Box width='250px'>
-      <TheTable />
+    <Box width='350px'>
+      <Card p={4}>
+        <TheTable />
+      </Card>
     </Box>
   </Flex>
 )
