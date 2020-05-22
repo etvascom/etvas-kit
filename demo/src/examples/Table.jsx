@@ -6,9 +6,11 @@ const { Row, HeaderCell, BodyCell, Body, Header } = Table
 const TableExample = () => (
   <Table textAlign='center'>
     <Header>
-      <Row>
+      <Row bg='white'>
         <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
+          <Typography variant='labelButton' color='tableText'>
+            The
+          </Typography>
         </HeaderCell>
         <HeaderCell>
           <Typography variant='textSmall'>The</Typography>
@@ -19,6 +21,7 @@ const TableExample = () => (
         <HeaderCell>
           <Typography variant='textSmall'>The</Typography>
         </HeaderCell>
+        <HeaderCell></HeaderCell>
         <HeaderCell></HeaderCell>
       </Row>
     </Header>
@@ -41,6 +44,7 @@ const TableExample = () => (
         <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
+        <BodyCell></BodyCell>
       </Row>
       <Row>
         <BodyCell>
@@ -82,8 +86,8 @@ const TableExample = () => (
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
       </Row>
-      <Row borderRadius={20} bg='red'>
-        <BodyCell py={10}>
+      <Row bg='red'>
+        <BodyCell>
           <Typography variant='textSmall'>The quick brown f</Typography>
         </BodyCell>
         <BodyCell>

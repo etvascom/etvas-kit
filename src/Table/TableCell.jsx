@@ -1,23 +1,20 @@
+import React from 'react'
+
 import styled from 'styled-components'
-import { space, color } from 'styled-system'
+import { space, color, border } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
+import css from '@styled-system/css'
 
-export const HeaderCell = styled.th(space)
-export const BodyCell = styled.td(space)
-export const TableRow = styled.tr(
-  color,
-  ({ borderRadius }) => `
-      & > td:first-child, th:first-child {
-        border-top-left-radius: ${borderRadius}px;
-        border-bottom-left-radius: ${borderRadius}px;
-      }
-      & > td:last-child, th:last-child {
-        border-top-right-radius: ${borderRadius}px;
-        border-bottom-right-radius: ${borderRadius}px;
-      }
-`
-)
+import style from './TableCell.style'
+
+export const HeaderCellStyle = styled.th(space)
+export const BodyCellStyle = styled.td(space)
+
+export const HeaderCell = props => <HeaderCellStyle px={2} py={3} {...props} />
+export const BodyCell = props => <BodyCellStyle px={2} py={3} {...props} />
+
+export const TableRow = styled.tr(css(style), border, color)
 
 HeaderCell.propTypes = {
   ...propTypes.space
@@ -28,6 +25,7 @@ BodyCell.propTypes = {
 }
 
 TableRow.propTypes = {
+  ...propTypes.border,
   ...propTypes.color,
   borderRadius: PropTypes.number
 }

@@ -4,10 +4,11 @@ export default {
     left: '0',
     width: '100vw',
     height: '100vh',
-    position: 'fixed'
+    position: 'fixed',
+    zIndex: 100
   },
   content: {
-    position: 'absolute',
+    position: 'relative',
     width: 'fit-content',
     height: 'fit-content',
     top: '50%',

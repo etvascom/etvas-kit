@@ -18,7 +18,11 @@ const ModalExample = () => {
           backDrop='royalblue'
           alignItems='center'
           justifyContent='center'>
-          <Modal.Content p={8} bg='yellowgreen'>
+          <Modal.Content
+            isCloseButton
+            onClick={toggleState}
+            p={20}
+            bg='yellowgreen'>
             <Button
               title='Close Modal'
               variant='primary'
