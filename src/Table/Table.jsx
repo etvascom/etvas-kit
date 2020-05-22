@@ -1,19 +1,64 @@
+import React, { useMemo, useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-import { typography } from 'styled-system'
+import useResizeObserver from 'use-resize-observer'
 
-import { BodyCell, TableRow, HeaderCell } from './TableCell'
-import style from './Table.style'
+import styles from './Table.styles'
+import { TableContext } from './base'
+import { Cell } from './Cell'
+import { Row } from './Row'
+import { Body } from './Body'
+import { Header } from './Header'
 
-const Table = styled.table(typography, css(style))
+export const Table = ({ mode, breakpoint, ...props }) => {
+  const [cells, setCells] = useState([])
+  const { ref, width = 1 } = useResizeObserver()
 
-const TableBody = styled.tbody``
-const TableHeader = styled.thead``
+  const actualMode = useMemo(() => {
+    if (mode) {
+      return mode
+    }
 
-Table.HeaderCell = HeaderCell
-Table.BodyCell = BodyCell
-Table.Row = TableRow
-Table.Body = TableBody
-Table.Header = TableHeader
+    if (breakpoint) {
+      return width < breakpoint ? 'mobile' : 'web'
+    }
 
-export default Table
+    return 'web'
+  }, [mode, width, breakpoint])
+
+  const ctx = useMemo(
+    () => ({
+      cells,
+      mode: actualMode,
+      setHeaderCell: (idx, content) => {
+        if (!cells || cells[idx] !== content) {
+          const newCells = [...cells]
+          newCells[idx] = content
+          setCells(newCells)
+        }
+      }
+    }),
+    [cells, setCells, actualMode]
+  )
+
+  return (
+    <TableContext.Provider value={ctx}>
+      <StyledTable {...props} ref={ref} mode={actualMode} />
+    </TableContext.Provider>
+  )
+}
+
+Table.propTypes = {
+  breakpoint: PropTypes.number,
+  mode: PropTypes.oneOf(['web', 'mobile'])
+}
+
+const StyledTable = styled.table(css(styles.default), ({ mode }) =>
+  css(styles[mode])
+)
+
+Table.Cell = Cell
+Table.Row = Row
+Table.Body = Body
+Table.Header = Header

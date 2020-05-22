@@ -1,109 +1,59 @@
 import React from 'react'
-import { Table, Typography } from '../../../src'
+import { Table, Box, Flex, Icon, Button } from '../../../src'
 
-const { Row, HeaderCell, BodyCell, Body, Header } = Table
+const { Row, Cell, Body, Header } = Table
 
-const TableExample = () => (
-  <Table textAlign='center'>
+const TheTable = () => (
+  <Table textAlign='center' breakpoint={300}>
     <Header>
       <Row>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell></HeaderCell>
+        <Cell>One</Cell>
+        <Cell>Two</Cell>
+        <Cell>
+          <Flex alignItems='center'>
+            <Icon name='bug_report' /> Bugs
+          </Flex>
+        </Cell>
+        <Cell></Cell>
       </Row>
     </Header>
     <Body>
       <Row>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>
-            The quick browsaa greger grgerfn f
-          </Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
+        <Cell leader>
+          <Flex alignItems='center' justifyContent='flex-start'>
+            <Icon name='devices' mr={2} /> The quick brown fox
+          </Flex>
+        </Cell>
+        <Cell>Jumps over the lazy dog.</Cell>
+        <Cell>123</Cell>
+        <Cell>
+          <Button variant='link'>Action</Button>
+        </Cell>
       </Row>
       <Row>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-      </Row>
-      <Row bg='blue'>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-      </Row>
-      <Row borderRadius={20} bg='red'>
-        <BodyCell py={10}>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
+        <Cell leader>
+          <Flex alignItems='center' justifyContent='flex-start'>
+            <Icon name='devices' mr={2} /> Pack my box with
+          </Flex>
+        </Cell>
+        <Cell>five dozen liquor jugs</Cell>
+        <Cell>None</Cell>
+        <Cell>
+          <Button variant='link'>Action</Button>
+        </Cell>
       </Row>
     </Body>
   </Table>
 )
 
-export default TableExample
+export const TableExample = () => (
+  <Flex width='100%' justifyContent='stretch' p={8}>
+    <Box style={{ flexGrow: 1 }} mr={8}>
+      <TheTable />
+    </Box>
+
+    <Box width='250px'>
+      <TheTable />
+    </Box>
+  </Flex>
+)

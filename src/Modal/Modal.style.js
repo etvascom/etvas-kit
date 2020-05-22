@@ -4,15 +4,12 @@ export default {
     left: '0',
     width: '100vw',
     height: '100vh',
-    position: 'fixed'
+    position: 'fixed',
+    // TODO collect and organize zindex values
+    zIndex: 100
   },
   content: {
-    position: 'absolute',
-    width: 'fit-content',
-    height: 'fit-content',
-    top: '50%',
-    left: '50%',
-    transform: 'translateY(-50%) translateX(-50%)',
+    position: 'relative',
     display: 'flex'
   }
 }
