@@ -1,11 +1,8 @@
 export default {
   card: {
+    display: 'block',
     backgroundColor: 'widgetBackground',
-    borderRadius: '8px',
-    marginBottom: 2,
-    '&:last-child': {
-      marginBottom: 0
-    }
+    borderRadius: '8px'
   },
   content: {
     borderTop: '1px solid',

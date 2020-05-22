@@ -33,7 +33,7 @@ Card.propTypes = {
 
 const StyledContent = styled(Box)(css(styles.content))
 
-const StyledCardWrapper = styled.div(css(styles.card))
+const StyledCardWrapper = styled.td(css(styles.card))
 
 export const CardItem = ({ header, cell }) => {
   return (

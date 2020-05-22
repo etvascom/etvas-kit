@@ -27,8 +27,10 @@ export default {
     color: 'outline'
   },
   mobile: {
-    ...typography.labelSmall,
     display: 'block'
   },
-  shared: {}
+  shared: {
+    ...typography.labelSmall,
+    color: 'text'
+  }
 }

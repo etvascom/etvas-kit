@@ -23,15 +23,20 @@ export const Row = ({ children }) => {
         return
       }
 
-      remainingCells.push({ cell: c, header: cells[idx] })
+      remainingCells.push({
+        cell: cloneElement(c, { type: 'body' }),
+        header: cells[idx]
+      })
     })
 
     return (
-      <Card leader={leader}>
-        {remainingCells.map(({ cell, header }, idx) => (
-          <Card.Item key={idx} header={header} cell={cell} />
-        ))}
-      </Card>
+      <PseudoRow>
+        <Card leader={leader}>
+          {remainingCells.map(({ cell, header }, idx) => (
+            <Card.Item key={idx} header={header} cell={cell} />
+          ))}
+        </Card>
+      </PseudoRow>
     )
   }
 
@@ -43,6 +48,8 @@ export const Row = ({ children }) => {
     </StyledTr>
   )
 }
+
+const PseudoRow = styled.tr(css(styles.pseudoTr))
 
 const StyledTr = styled.tr(({ mode }) => css(styles[mode]))
 

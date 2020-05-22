@@ -6,6 +6,8 @@ export default {
   },
   web: {},
   mobile: {
-    display: 'block'
+    display: 'block',
+    borderCollapse: 'unset',
+    borderSpacing: 'unset'
   }
 }

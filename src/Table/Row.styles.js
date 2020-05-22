@@ -4,5 +4,13 @@ export default {
     flexDirection: 'column'
   },
 
-  web: {}
+  web: {},
+
+  pseudoTr: {
+    display: 'block',
+    marginBottom: 2,
+    '&:last-child': {
+      marginBottom: 0
+    }
+  }
 }

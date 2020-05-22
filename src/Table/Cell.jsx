@@ -14,12 +14,16 @@ export const Cell = ({ idx, type, children, leader }) => {
     }
   }, [idx, children, setHeaderCell, type])
 
+  const Wrapper = type === 'body' && mode === 'mobile' ? StyledDiv : StyledTd
+
   return (
-    <StyledTd type={type} leader={leader} mode={mode}>
+    <Wrapper type={type} leader={leader} mode={mode}>
       {children}
-    </StyledTd>
+    </Wrapper>
   )
 }
+
+const StyledDiv = styled.div(css(styles.shared), css(styles.mobile))
 
 const StyledTd = styled.td(
   css(styles.shared),
