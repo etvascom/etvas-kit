@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useMemo, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
@@ -15,7 +15,7 @@ export const Cell = ({ idx, children, mobileHeader }) => {
     }
   }, [idx, children, setHeaderCell, headerCtx])
 
-  const headerContent = cells && cells[idx]
+  const headerContent = useMemo(() => cells && cells[idx], [cells, idx])
 
   return (
     <StyledTd>

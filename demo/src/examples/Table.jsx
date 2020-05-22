@@ -1,10 +1,10 @@
 import React from 'react'
-import { Table, Typography } from '../../../src'
+import { Table, Typography, Box, Flex } from '../../../src'
 
 const { Row, Cell, Body, Header } = Table
 
-export const TableExample = () => (
-  <Table textAlign='center'>
+const TheTable = () => (
+  <Table textAlign='center' breakpoint={300}>
     <Header>
       <Row>
         <Cell>One</Cell>
@@ -69,4 +69,16 @@ export const TableExample = () => (
       </Row>
     </Body>
   </Table>
+)
+
+export const TableExample = () => (
+  <Flex width='100%' justifyContent='stretch' p={8}>
+    <Box style={{ flexGrow: 1 }} mr={8}>
+      <TheTable />
+    </Box>
+
+    <Box width='250px'>
+      <TheTable />
+    </Box>
+  </Flex>
 )

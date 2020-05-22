@@ -4,12 +4,7 @@
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "files": ["css", "es", "lib", "umd"],
   "scripts": {
     "build": "nwb build-react-component",
     "prebuild:link": "mv node_modules_ node_modules",
@@ -33,7 +28,8 @@
   "dependencies": {
     "@ivoryio/kogaio": "^0.7.93",
     "@styled-system/theme-get": "^5.1.2",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "use-resize-observer": "^6.1.0-alpha.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
@@ -57,18 +53,10 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+  "husky": {},
   "lint-staged": {
-    "*.{js,jsx}": [
-      "npm run lint:js --fix"
-    ],
-    "*.{jsx,css}": [
-      "npm run lint:style --fix"
-    ]
+    "*.{js,jsx}": ["npm run lint:js --fix"],
+    "*.{jsx,css}": ["npm run lint:style --fix"]
   },
   "config": {
     "commitizen": {
@@ -79,9 +67,5 @@
   "homepage": "https://github.com/etvascom/ui",
   "license": "MIT",
   "repository": "https://github.com/etvascom/ui",
-  "keywords": [
-    "etvas",
-    "etvas ui",
-    "react-component"
-  ]
+  "keywords": ["etvas", "etvas ui", "react-component"]
 }
