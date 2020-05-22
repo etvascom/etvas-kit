@@ -1,113 +1,72 @@
 import React from 'react'
 import { Table, Typography } from '../../../src'
 
-const { Row, HeaderCell, BodyCell, Body, Header } = Table
+const { Row, Cell, Body, Header } = Table
 
-const TableExample = () => (
+export const TableExample = () => (
   <Table textAlign='center'>
     <Header>
-      <Row bg='white'>
-        <HeaderCell>
-          <Typography variant='labelButton' color='tableText'>
-            The
-          </Typography>
-        </HeaderCell>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell>
-          <Typography variant='textSmall'>The</Typography>
-        </HeaderCell>
-        <HeaderCell></HeaderCell>
-        <HeaderCell></HeaderCell>
+      <Row>
+        <Cell>One</Cell>
+        <Cell>Two</Cell>
+        <Cell></Cell>
       </Row>
     </Header>
     <Body>
       <Row>
-        <BodyCell>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
+        </Cell>
+        <Cell>
           <Typography variant='textSmall'>
             The quick browsaa greger grgerfn f
           </Typography>
-        </BodyCell>
-        <BodyCell>
+        </Cell>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell></BodyCell>
+        </Cell>
       </Row>
       <Row>
-        <BodyCell>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
+        </Cell>
+        <Cell>
+          <Typography variant='textSmall'>
+            The quick browsaa greger grgerfn f
+          </Typography>
+        </Cell>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
+        </Cell>
       </Row>
-      <Row bg='blue'>
-        <BodyCell>
+
+      <Row>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
+        </Cell>
+        <Cell>
+          <Typography variant='textSmall'>
+            The quick browsaa greger grgerfn f
+          </Typography>
+        </Cell>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
+        </Cell>
       </Row>
-      <Row bg='red'>
-        <BodyCell>
+
+      <Row>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
+        </Cell>
+        <Cell>
+          <Typography variant='textSmall'>
+            The quick browsaa greger grgerfn f
+          </Typography>
+        </Cell>
+        <Cell>
           <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
-        <BodyCell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </BodyCell>
+        </Cell>
       </Row>
     </Body>
   </Table>
 )
-
-export default TableExample
