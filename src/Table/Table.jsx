@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import useResizeObserver from 'use-resize-observer'
-import { typography } from 'styled-system'
 
-import style from './Table.style'
+import styles from './Table.styles'
 import { TableContext } from './base'
 import { Cell } from './Cell'
 import { Row } from './Row'
+import { Body } from './Body'
 import { Header } from './Header'
 
 export const Table = ({ mode, breakpoint, ...props }) => {
@@ -44,7 +44,7 @@ export const Table = ({ mode, breakpoint, ...props }) => {
 
   return (
     <TableContext.Provider value={ctx}>
-      <StyledTable {...props} ref={ref} />
+      <StyledTable {...props} ref={ref} mode={actualMode} />
     </TableContext.Provider>
   )
 }
@@ -54,11 +54,11 @@ Table.propTypes = {
   mode: PropTypes.oneOf(['web', 'mobile'])
 }
 
-const TableBody = styled.tbody``
-
-const StyledTable = styled.table(typography, css(style))
+const StyledTable = styled.table(css(styles.default), ({ mode }) =>
+  css(styles[mode])
+)
 
 Table.Cell = Cell
 Table.Row = Row
-Table.Body = TableBody
+Table.Body = Body
 Table.Header = Header

@@ -2,34 +2,36 @@ import React, { useMemo, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
-import { TableContext, HeaderContext } from './base'
-import style from './Cell.style'
+import { TableContext } from './base'
+import styles from './Cell.styles'
 
-export const Cell = ({ idx, children, mobileHeader }) => {
-  const { cells, setHeaderCell } = useContext(TableContext)
-  const headerCtx = useContext(HeaderContext)
+export const Cell = ({ idx, type, children, leader }) => {
+  const { mode, setHeaderCell } = useContext(TableContext)
 
   useEffect(() => {
-    if (headerCtx) {
+    if (type === 'header') {
       setHeaderCell(idx, children)
     }
-  }, [idx, children, setHeaderCell, headerCtx])
-
-  const headerContent = useMemo(() => cells && cells[idx], [cells, idx])
+  }, [idx, children, setHeaderCell, type])
 
   return (
-    <StyledTd>
-      {headerCtx ? null : headerContent}
+    <StyledTd type={type} leader={leader} mode={mode}>
       {children}
     </StyledTd>
   )
 }
 
-const StyledTd = styled.td(css(style))
+const StyledTd = styled.td(
+  css(styles.shared),
+  ({ type }) => css(styles[type]),
+  ({ mode }) => css(styles[mode]),
+  ({ leader }) => (leader ? css(styles.leader) : {})
+)
 
 Cell.propTypes = {
-  mobileHeader: PropTypes.bool,
+  leader: PropTypes.bool,
   idx: PropTypes.number,
+  type: PropTypes.oneOf(['header', 'body']),
   children: PropTypes.node
 }
 

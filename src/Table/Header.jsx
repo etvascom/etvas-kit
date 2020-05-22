@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { border, color } from 'styled-system'
 import css from '@styled-system/css'
 
-import style from './Table.style'
-import { HeaderContext } from './base'
-
-export const TableRow = styled.tr(css(style), border, color)
+import styles from './Header.styles'
+import { HeaderContext, TableContext } from './base'
 
 export const Header = props => {
+  const { mode } = useContext(TableContext)
   const ctx = {}
 
   return (
     <HeaderContext.Provider value={ctx}>
-      <thead {...props} />
+      <StyledThead {...props} mode={mode} />
     </HeaderContext.Provider>
   )
 }
+
+const StyledThead = styled.thead(({ mode }) => css(styles[mode]))

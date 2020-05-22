@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Typography, Box, Flex } from '../../../src'
+import { Table, Box, Flex, Icon, Button } from '../../../src'
 
 const { Row, Cell, Body, Header } = Table
 
@@ -9,62 +9,37 @@ const TheTable = () => (
       <Row>
         <Cell>One</Cell>
         <Cell>Two</Cell>
+        <Cell>
+          <Flex alignItems='center'>
+            <Icon name='bug_report' /> Bugs
+          </Flex>
+        </Cell>
         <Cell></Cell>
       </Row>
     </Header>
     <Body>
       <Row>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
+        <Cell leader>
+          <Flex alignItems='center' justifyContent='flex-start'>
+            <Icon name='devices' mr={2} /> The quick brown fox
+          </Flex>
         </Cell>
+        <Cell>Jumps over the lazy dog.</Cell>
+        <Cell>123</Cell>
         <Cell>
-          <Typography variant='textSmall'>
-            The quick browsaa greger grgerfn f
-          </Typography>
-        </Cell>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
+          <Button variant='link'>Action</Button>
         </Cell>
       </Row>
       <Row>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
+        <Cell leader>
+          <Flex alignItems='center' justifyContent='flex-start'>
+            <Icon name='devices' mr={2} /> Pack my box with
+          </Flex>
         </Cell>
+        <Cell>five dozen liquor jugs</Cell>
+        <Cell>None</Cell>
         <Cell>
-          <Typography variant='textSmall'>
-            The quick browsaa greger grgerfn f
-          </Typography>
-        </Cell>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </Cell>
-      </Row>
-
-      <Row>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </Cell>
-        <Cell>
-          <Typography variant='textSmall'>
-            The quick browsaa greger grgerfn f
-          </Typography>
-        </Cell>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </Cell>
-      </Row>
-
-      <Row>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
-        </Cell>
-        <Cell>
-          <Typography variant='textSmall'>
-            The quick browsaa greger grgerfn f
-          </Typography>
-        </Cell>
-        <Cell>
-          <Typography variant='textSmall'>The quick brown f</Typography>
+          <Button variant='link'>Action</Button>
         </Cell>
       </Row>
     </Body>
