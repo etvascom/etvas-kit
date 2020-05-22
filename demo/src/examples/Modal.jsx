@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Modal, Button } from '../../../src'
 
 const ModalExample = () => {
-  const [visible, setVisible] = React.useState(false)
+  const [visible, setVisible] = useState(false)
 
   const toggleState = () => setVisible(state => !state)
 
@@ -12,17 +12,13 @@ const ModalExample = () => {
       <Button title='Open Modal' variant='primary' onClick={toggleState} />
       {visible && (
         <Modal
-          onBackDropClick={() => {}}
-          onEscape={() => {}}
+          onBackDropClick={toggleState}
+          onEscape={toggleState}
           animated
           backDrop='royalblue'
           alignItems='center'
           justifyContent='center'>
-          <Modal.Content
-            isCloseButton
-            onClick={toggleState}
-            p={20}
-            bg='yellowgreen'>
+          <Modal.Content onClose={toggleState} p={20} bg='yellowgreen'>
             <Button
               title='Close Modal'
               variant='primary'

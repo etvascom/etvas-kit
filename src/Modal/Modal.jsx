@@ -1,18 +1,18 @@
 import React, { useLayoutEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import propTypes from '@styled-system/prop-types'
 import styled from 'styled-components'
+import { flexbox, color } from 'styled-system'
 import css from '@styled-system/css'
-import { color } from 'styled-system'
+import propTypes from '@styled-system/prop-types'
 
+import { Flex } from '@ivoryio/kogaio'
 import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 
-import { Box } from '@ivoryio/kogaio'
-
-const StyledModal = styled(Box)(
+const StyledModal = styled(Flex)(
   css(style.wrapper),
   color,
+  flexbox,
   ({ animated }) =>
     animated &&
     `@keyframes modal {
@@ -27,7 +27,7 @@ const StyledModal = styled(Box)(
 const disableScroll = () => (document.body.style.overflow = 'hidden')
 const enableScroll = () => (document.body.style.overflow = 'auto')
 
-const Modal = ({
+export const Modal = ({
   backDrop,
   onBackDropClick,
   onEscape,
@@ -77,8 +77,8 @@ const Modal = ({
 }
 
 Modal.propTypes = {
-  ...propTypes.flexbox,
   ...propTypes.color,
+  ...propTypes.flexbox,
   backDrop: PropTypes.string,
   onBackDropClick: PropTypes.func,
   onEscape: PropTypes.func,
@@ -86,7 +86,10 @@ Modal.propTypes = {
   children: PropTypes.node
 }
 
+Modal.defaultProps = {
+  alignItems: 'center',
+  justifyContent: 'center'
+}
+
 Modal.Content = ModalContent
 Modal.displayName = 'Modal'
-
-export default Modal

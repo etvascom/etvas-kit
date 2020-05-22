@@ -15,6 +15,5 @@ export default {
   modalStroke: '#D4DEE8',
   skeleton: '#E4EBF0',
   dropShadow: 'rgba(19, 51, 77, .3)',
-  white: '#FFFFFF',
-  tableText: '#A0AAB3'
+  white: '#FFFFFF'
 }
