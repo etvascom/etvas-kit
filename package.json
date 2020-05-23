@@ -4,12 +4,7 @@
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "files": ["css", "es", "lib", "umd"],
   "scripts": {
     "build": "nwb build-react-component",
     "prebuild:link": "mv node_modules_ node_modules",
@@ -26,7 +21,7 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o docs/"
   },
   "peerDependencies": {
     "react": "16.x",
@@ -68,12 +63,8 @@
   },
   "husky": {},
   "lint-staged": {
-    "*.{js,jsx}": [
-      "npm run lint:js --fix"
-    ],
-    "*.{jsx,css}": [
-      "npm run lint:style --fix"
-    ]
+    "*.{js,jsx}": ["npm run lint:js --fix"],
+    "*.{jsx,css}": ["npm run lint:style --fix"]
   },
   "config": {
     "commitizen": {
@@ -84,9 +75,5 @@
   "homepage": "https://github.com/etvascom/ui",
   "license": "MIT",
   "repository": "https://github.com/etvascom/ui",
-  "keywords": [
-    "etvas",
-    "etvas ui",
-    "react-component"
-  ]
+  "keywords": ["etvas", "etvas ui", "react-component"]
 }
