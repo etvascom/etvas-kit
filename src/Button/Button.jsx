@@ -8,6 +8,7 @@ const Button = ({ onClick, title, ...props }) => (
 
 Button.propTypes = {
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
   icon: PropTypes.shape({
     name: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
