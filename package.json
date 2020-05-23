@@ -26,7 +26,7 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs/"
+    "build-storybook": "build-storybook -o build/ --quiet"
   },
   "peerDependencies": {
     "react": "16.x",
@@ -55,7 +55,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
-    "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "nwb": "0.24.x",
     "prettier-eslint": "^9.0.1",
@@ -67,20 +66,6 @@
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0"
-  },
-  "husky": {},
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "npm run lint:js --fix"
-    ],
-    "*.{jsx,css}": [
-      "npm run lint:style --fix"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   },
   "author": "Mihai Ro",
   "homepage": "https://github.com/etvascom/ui",
