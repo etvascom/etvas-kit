@@ -15,7 +15,7 @@ const ModalExample = () => {
           onBackDropClick={toggleState}
           onEscape={toggleState}
           animated
-          backDrop='royalblue'
+          backDrop='whiteShadow'
           alignItems='center'
           justifyContent='center'>
           <Modal.Content onClose={toggleState} p={20} bg='yellowgreen'>
