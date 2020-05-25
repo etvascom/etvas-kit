@@ -38,17 +38,13 @@ const StyledCardWrapper = styled.td(css(styles.card))
 export const CardItem = ({ header, cell }) => (
   <Flex my={4}>
     <Box width={1 / 3}>
-      <OverflowTextStyle variant='labelSmallBold'>{header}</OverflowTextStyle>
+      <Typography truncate variant='labelSmallBold'>
+        {header}
+      </Typography>
     </Box>
     <Box width={2 / 3}>{cell}</Box>
   </Flex>
 )
-
-const OverflowTextStyle = styled(Typography)`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
 
 CardItem.propTypes = {
   header: PropTypes.node,
