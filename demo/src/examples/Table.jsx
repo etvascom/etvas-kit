@@ -8,7 +8,7 @@ const TheTable = () => (
     <Header>
       <Row>
         <Cell>One</Cell>
-        <Cell>Two</Cell>
+        <Cell>Twothreefourfive</Cell>
         <Cell>
           <Flex alignItems='center'>
             <Icon name='bug_report' /> Bugs
