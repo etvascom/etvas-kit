@@ -3,28 +3,42 @@ import PropTypes from 'prop-types'
 import { Flex } from '@ivoryio/kogaio'
 import RadioButton from './RadioButton'
 
-const RadioButtons = ({ name, value, options, onChange, noWrap, ...props }) => {
+import { Typography } from '../'
+
+const RadioButtons = ({
+  name,
+  label,
+  value,
+  options,
+  onChange,
+  noWrap,
+  ...props
+}) => {
   const _handleOptionChange = option => {
     onChange(option.value)
   }
 
   return (
-    <Flex flexDirection={noWrap ? 'column' : 'row'} {...props}>
-      {options.map(opt => (
-        <RadioButton
-          key={opt.value}
-          value={opt.value}
-          checked={opt.value === value}
-          label={opt.label}
-          disabled={opt.disabled}
-          onChange={() => _handleOptionChange(opt)}
-        />
-      ))}
-    </Flex>
+    <>
+      {label && <Typography variant='inputLabel'>{label}</Typography>}
+      <Flex flexDirection={noWrap ? 'column' : 'row'} {...props}>
+        {options.map(opt => (
+          <RadioButton
+            key={opt.value}
+            value={opt.value}
+            checked={opt.value === value}
+            label={opt.label}
+            disabled={opt.disabled}
+            onChange={() => _handleOptionChange(opt)}
+          />
+        ))}
+      </Flex>
+    </>
   )
 }
 
 RadioButtons.propTypes = {
+  label: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
   name: PropTypes.string,
   value: PropTypes.any,
   options: PropTypes.array,

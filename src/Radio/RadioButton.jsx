@@ -17,7 +17,7 @@ const RadioButton = ({ name, label, value, checked, disabled, onChange }) => (
       onChange={onChange}
     />
     <RoundedBox disabled={disabled}>{checked && <span></span>}</RoundedBox>
-    {label && <Typography variant='label'>{label}</Typography>}
+    {label && <Typography variant='inputLabel'>{label}</Typography>}
   </LabelWrapper>
 )
 

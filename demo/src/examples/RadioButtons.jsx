@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { RadioButtons, Typography } from '../../../src'
-import { Box, Space } from '@ivoryio/kogaio'
+import { RadioButtons, Typography, Input } from '../../../src'
+import { Box, Space, Flex } from '@ivoryio/kogaio'
 
 const RadioButtonsExample = () => {
   const [selectedValue, setSelectedValue] = useState({
-    inline: null,
-    disabledChoice: null,
     disabledChecked: 'two'
   })
 
@@ -91,6 +89,47 @@ const RadioButtonsExample = () => {
           onChange={value => _handleChange('onePerLine', value)}
           options={onePerLine}
         />
+      </Box>
+      <Box>
+        <Typography>In a form</Typography>
+        <Flex>
+          <Box>
+            <RadioButtons
+              label='Please select'
+              name='inlineForm'
+              value={selectedValue.inlineForm}
+              onChange={value => _handleChange('inlineForm', value)}
+              options={choices}
+            />
+          </Box>
+          <Box>
+            <Input
+              id='input-default'
+              label='Default'
+              onChange={() => {}}
+              placeholder='Default Input'
+            />
+          </Box>
+        </Flex>
+        <Flex>
+          <Box>
+            <RadioButtons
+              label='Please select'
+              name='inlineForm2'
+              value={selectedValue.inlineForm2}
+              onChange={value => _handleChange('inlineForm2', value)}
+              options={choices}
+            />
+          </Box>
+          <Box>
+            <Input
+              id='input-default'
+              label='Default'
+              onChange={() => {}}
+              placeholder='Default Input'
+            />
+          </Box>
+        </Flex>
       </Box>
     </Space>
   )
