@@ -1,6 +1,7 @@
 const breakpoints = ['30rem', '48rem', '80rem']
-breakpoints.sm = breakpoints[0]
-breakpoints.md = breakpoints[1]
-breakpoints.lg = breakpoints[2]
+const [sm, md, lg] = breakpoints
+breakpoints.sm = sm
+breakpoints.md = md
+breakpoints.lg = lg
 
 export default breakpoints
