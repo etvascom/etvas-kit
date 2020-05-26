@@ -19,7 +19,8 @@ import {
   TableExample,
   ModalExample,
   RadioButtonsExample,
-  RatingExample
+  RatingExample,
+  NavBackExample
 } from './examples'
 
 const Playground = () => (
@@ -83,15 +84,16 @@ const Playground = () => (
         </Box>
       </Space>
       <Space mt={6}>
-<<<<<<< HEAD
         <Typography variant='titleLarge'>Radio buttons</Typography>
         <RadioButtonsExample />
-=======
         <Typography variant='titleLarge'>Rating</Typography>
         <Flex my={4}>
           <RatingExample />
         </Flex>
->>>>>>> 9fd55bd... Add the rating component to etvaskit
+        <Typography variant='titleLarge'>Modal</Typography>
+        <Box my={4}>
+          <NavBackExample />
+        </Box>
       </Space>
     </BrandingProvider>
   </ThemeProvider>
