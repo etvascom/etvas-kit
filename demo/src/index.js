@@ -17,7 +17,8 @@ import {
   TooltipExamples,
   BrandingExample,
   TableExample,
-  ModalExample
+  ModalExample,
+  RadioButtonsExample
 } from './examples'
 
 const Playground = () => (
@@ -29,7 +30,7 @@ const Playground = () => (
           ETVAS Playground
         </Typography>
         <BrandingExample />
-        <Space mt={3}>
+        <Space mt={6}>
           <Flex width={1}>
             <Box width={1 / 2}>
               <Typography variant='titleLarge'>Buttons</Typography>
@@ -79,6 +80,10 @@ const Playground = () => (
         <Box my={4}>
           <ModalExample />
         </Box>
+      </Space>
+      <Space mt={6}>
+        <Typography variant='titleLarge'>Radio buttons</Typography>
+        <RadioButtonsExample />
       </Space>
     </BrandingProvider>
   </ThemeProvider>
