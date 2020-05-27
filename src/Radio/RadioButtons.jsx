@@ -42,7 +42,7 @@ const RadioButtons = ({
 }
 
 RadioButtons.propTypes = {
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  label: PropTypes.any,
   name: PropTypes.string,
   value: PropTypes.any,
   options: PropTypes.array,

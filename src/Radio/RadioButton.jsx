@@ -30,7 +30,7 @@ const RoundedBox = styled.div`
 
 RadioButton.propTypes = {
   name: PropTypes.string,
-  label: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
+  label: PropTypes.any,
   value: PropTypes.any,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
