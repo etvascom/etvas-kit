@@ -20,7 +20,8 @@ import {
   ModalExample,
   RadioButtonsExample,
   RatingExample,
-  NavBackExample
+  NavBackExample,
+  CheckboxExample
 } from './examples'
 
 const Playground = () => (
@@ -93,6 +94,10 @@ const Playground = () => (
         <Typography variant='titleLarge'>Modal</Typography>
         <Box my={4}>
           <NavBackExample />
+        </Box>
+        <Typography variant='titleLarge'>Checkbox</Typography>
+        <Box my={4}>
+          <CheckboxExample />
         </Box>
       </Space>
     </BrandingProvider>
