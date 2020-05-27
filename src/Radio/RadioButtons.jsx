@@ -20,7 +20,11 @@ const RadioButtons = ({
 
   return (
     <>
-      {label && <Typography variant='inputLabel'>{label}</Typography>}
+      {label && (
+        <Typography as='label' variant='inputLabel'>
+          {label}
+        </Typography>
+      )}
       <Flex flexDirection={noWrap ? 'column' : 'row'} {...props}>
         {options.map(opt => (
           <RadioButton
@@ -38,7 +42,7 @@ const RadioButtons = ({
 }
 
 RadioButtons.propTypes = {
-  label: PropTypes.oneOf([PropTypes.string, PropTypes.node]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   name: PropTypes.string,
   value: PropTypes.any,
   options: PropTypes.array,
