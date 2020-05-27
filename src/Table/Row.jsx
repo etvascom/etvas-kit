@@ -33,6 +33,7 @@ export const Row = ({ children }) => {
       <PseudoRow>
         <Card leader={leader}>
           {remainingCells.map(({ cell, header }, idx) => (
+            // eslint-disable-next-line react/no-array-index-key
             <Card.Item key={idx} header={header} cell={cell} />
           ))}
         </Card>
