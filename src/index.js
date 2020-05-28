@@ -15,7 +15,7 @@ export * from './Modal'
 export * from './Radio'
 export * from './Rating'
 export * from './NavBack'
+export * from './Icon'
 
 export { styled }
-
 export * from '@ivoryio/kogaio'
