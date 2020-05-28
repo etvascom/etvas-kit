@@ -1,71 +1,73 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-
-// import styled from 'styled-components'
-// import css from '@styled-system/css'
-// import { Icon, Flex, Typography } from '@ivoryio/kogaio'
-
-// import style from './Checkbox.style'
-
-// const Wrapper = styled(Flex)(css(style))
-
-// const Checkbox = ({ checked, onClick, children, error, ...props }) => (
-//   <Wrapper onClick={onClick} {...props}>
-//     {checked ? (
-//       <b>
-//         <Icon name='check' />
-//       </b>
-//     ) : (
-//       <em></em>
-//     )}
-//     <span>
-//       {children}
-//       <Typography mt={2} variant='errorMessage'>
-//         {error}
-//       </Typography>
-//     </span>
-//   </Wrapper>
-// )
-
-// Checkbox.propTypes = {
-//   checked: PropTypes.bool,
-//   onClick: PropTypes.func,
-//   children: PropTypes.node,
-//   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
-// }
-
-// export default Checkbox
-
-// The above approach is from the customer app, but I think we should treat the
-// checkbox as an input because it is an input and give him the accesibility to be used inside
-// a FORM and to avoid of using the React useState to show/hide that icon wrapped inside
-// that represent the status of the checkbox.
-
-import React from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import style from './Checkbox.style'
-import { Flex } from '@ivoryio/kogaio/Responsive'
+import { Box } from '@ivoryio/kogaio'
+import { Icon } from '../Icon'
 
-const CheckboxStyle = styled(Flex)(css(style))
+export const Checkbox = ({
+  label,
+  color,
+  checked,
+  value,
+  name,
+  id,
+  onChange
+}) => {
+  const [isChecked, setIsChecked] = useState(checked)
 
-const Checkbox = ({ children, icon, id }) => (
-  <CheckboxStyle>
-    <input type='checkbox' id={id} />
-    <label htmlFor={id}>
-      {typeof icon === 'string' ? <span>{icon}</span> : icon}
-    </label>
-    <label htmlFor={id}>{children}</label>
-  </CheckboxStyle>
+  const handleChange = useCallback(
+    ev => {
+      setIsChecked(ev.target.checked)
+      const newValue = ev.target.checked ? value : ''
+      onChange && onChange(newValue)
+    },
+    [setIsChecked, onChange, value]
+  )
+
+  useEffect(() => setIsChecked(checked), [checked, setIsChecked])
+
+  return (
+    <StyledLabel htmlFor={id}>
+      <Icon
+        color={color}
+        size='20px'
+        name={isChecked ? 'checkboxChecked' : 'checkboxUnchecked'}
+      />
+      <input
+        type='checkbox'
+        id={id}
+        value={value}
+        name={name}
+        checked={isChecked}
+        style={{ display: 'none' }}
+        onChange={handleChange}
+      />
+      {label && <Box ml={3}>{label}</Box>}
+    </StyledLabel>
+  )
+}
+
+const StyledLabel = styled.label(
+  css({
+    display: 'flex',
+    alignItems: 'center'
+  })
 )
 
 Checkbox.propTypes = {
-  children: PropTypes.node,
+  label: PropTypes.node,
+  color: PropTypes.string,
+  name: PropTypes.string,
   id: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  onChange: PropTypes.func,
+  checked: PropTypes.bool,
+  value: PropTypes.any
 }
 
-export default Checkbox
+Checkbox.defaultProps = {
+  color: 'accent',
+  value: 'on'
+}
