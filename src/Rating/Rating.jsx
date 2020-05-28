@@ -1,42 +1,46 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { Box, Icon } from '@ivoryio/kogaio'
+import { Icon } from '@ivoryio/kogaio'
 
-const MAX_STARS = 5
-
-const Ratings = ({ stars, max, iconSize, ...props }) => {
+export const Rating = ({ rating, max, size, color }) => {
   const icons = useMemo(() => {
     const icons = []
     for (let i = 0; i < max; i++) {
-      i < stars
+      i < rating
         ? icons.push('star')
-        : (i >= stars || !stars) && icons.push('star_outline')
+        : (i >= rating || !rating) && icons.push('star_outline')
     }
     return icons
-  }, [stars, max])
+  }, [rating, max])
 
   return (
-    <Box {...props}>
+    <>
       {icons.map((iconName, idx) => (
         <Icon
           key={`rating-icon-${String(idx)}`}
           name={iconName}
-          fontSize={iconSize}
+          color={color}
+          fontSize={size}
         />
       ))}
-    </Box>
+    </>
   )
 }
 
-Ratings.propTypes = {
-  stars: PropTypes.number,
+Rating.propTypes = {
+  color: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object
+  ]),
+  rating: PropTypes.number,
   max: PropTypes.number,
-  iconSize: PropTypes.string
+  size: PropTypes.string
 }
 
-Ratings.defaultProps = {
-  max: MAX_STARS,
-  iconSize: '1em'
+Rating.defaultProps = {
+  max: 5,
+  rating: 0,
+  size: 'inherit',
+  color: 'accent'
 }
-
-export default Ratings
