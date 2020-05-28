@@ -16,6 +16,7 @@ export * from './Radio'
 export * from './Rating'
 export * from './NavBack'
 export * from './Icon'
+export * from './Checkbox'
 
 export { styled }
 export * from '@ivoryio/kogaio'
