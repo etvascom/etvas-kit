@@ -36,13 +36,13 @@
   "dependencies": {
     "@ivoryio/kogaio": "^0.7.93",
     "@styled-system/theme-get": "^5.1.2",
-    "styled-components": "^5.1.0",
     "hyperid": "^2.0.5",
     "lodash": "^4.17.15",
     "use-resize-observer": "^6.1.0-alpha.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "styled-components": "^5.1.0",
     "@storybook/addon-actions": "^5.3.18",
     "@storybook/addon-docs": "^5.3.18",
     "@storybook/addon-links": "^5.3.18",
