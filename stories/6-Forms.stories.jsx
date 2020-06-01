@@ -7,6 +7,7 @@ import {
   Form,
   CheckboxField,
   RadioField,
+  DropdownField,
   TextField
 } from '../src'
 
@@ -17,8 +18,18 @@ export default {
 const values = {
   gender: 'm',
   foods: ['pizza'],
-  name: ''
+  name: '',
+  movie: undefined
 }
+
+const movieOptions = [
+  { label: 'Comedy', value: 'comedy' },
+  { label: 'Drama', value: 'drama' },
+  { label: 'Horror', value: 'horror' },
+  { label: 'Thriller', value: 'thriller' },
+  { label: 'Crime', value: 'crime' },
+  { label: 'Sci-Fi', value: 'scifi' }
+]
 
 const minLength = l => s => (s.length < l ? `Min length: ${l}` : undefined)
 
@@ -40,6 +51,9 @@ export const SimpleForm = () => {
       <CheckboxField name='foods' label='Pizza' value='pizza' />
       <CheckboxField name='foods' label='Pasta' value='pasta' />
       <CheckboxField name='foods' label='Burgers' value='burgers' />
+
+      <Typography variant='titleSmall'>Movie prefference</Typography>
+      <DropdownField options={movieOptions} name='movie' label='Movie genre' />
 
       <Flex alignItems='center' justifyContent='flex-start'>
         <Button type='submit' variant='primary'>

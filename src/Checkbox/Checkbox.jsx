@@ -57,7 +57,8 @@ const StyledLabel = styled.label(
   css({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    minHeight: '40px'
   })
 )
 
