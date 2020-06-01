@@ -8,6 +8,7 @@ import {
   CheckboxField,
   RadioField,
   DropdownField,
+  ErrorDisplay,
   TextField
 } from '../src'
 
@@ -19,6 +20,7 @@ const values = {
   gender: 'm',
   foods: ['pizza'],
   name: '',
+  password: '',
   movie: undefined
 }
 
@@ -33,14 +35,36 @@ const movieOptions = [
 
 const minLength = l => s => (s.length < l ? `Min length: ${l}` : undefined)
 
+const formValidate = values => {
+  const errors = {}
+
+  const foodErrors = minLength(2)(values.foods)
+
+  if (foodErrors) {
+    errors.foods = foodErrors
+  }
+
+  return errors
+}
+
 export const SimpleForm = () => {
   return (
-    <Form onSubmit={action('submit')} initialValues={values}>
+    <Form
+      onSubmit={action('submit')}
+      initialValues={values}
+      validate={formValidate}>
       <Typography variant='titleSmall'>Basic info</Typography>
       <TextField
         name='name'
         label='Name'
         placeholder='e.g. John'
+        validate={minLength(3)}
+      />
+      <TextField
+        type='password'
+        name='password'
+        label='Password'
+        placeholder='e.g. secret'
         validate={minLength(3)}
       />
       <Typography variant='titleSmall'>Gender</Typography>
@@ -51,6 +75,7 @@ export const SimpleForm = () => {
       <CheckboxField name='foods' label='Pizza' value='pizza' />
       <CheckboxField name='foods' label='Pasta' value='pasta' />
       <CheckboxField name='foods' label='Burgers' value='burgers' />
+      <ErrorDisplay name='foods' type='checkbox' />
 
       <Typography variant='titleSmall'>Movie prefference</Typography>
       <DropdownField options={movieOptions} name='movie' label='Movie genre' />

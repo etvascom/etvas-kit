@@ -6,9 +6,18 @@ import { Typography } from '../Typography'
 
 import styles from './radio.styles'
 
-const RadioButton = ({ name, label, value, checked, disabled, onChange }) => (
+const RadioButton = ({
+  name,
+  id,
+  label,
+  value,
+  checked,
+  disabled,
+  onChange
+}) => (
   <LabelWrapper disabled={disabled}>
     <input
+      id={id}
       type='radio'
       name={name}
       value={value}
@@ -30,6 +39,7 @@ const RoundedBox = styled.div`
 
 RadioButton.propTypes = {
   name: PropTypes.string,
+  id: PropTypes.string,
   label: PropTypes.any,
   value: PropTypes.any,
   checked: PropTypes.bool,
