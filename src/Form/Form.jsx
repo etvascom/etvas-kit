@@ -12,7 +12,11 @@ export const Form = ({ name, children, ...props }) => {
   return (
     <FormContext.Provider value={{ formName: name }}>
       <Formik {...props}>
-        <FormikForm>{children}</FormikForm>
+        {(...args) => (
+          <FormikForm>
+            {typeof children === 'function' ? children(...args) : children}
+          </FormikForm>
+        )}
       </Formik>
     </FormContext.Provider>
   )
