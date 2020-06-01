@@ -12,7 +12,7 @@ const RadioButton = ({ name, label, value, checked, disabled, onChange }) => (
       type='radio'
       name={name}
       value={value}
-      checked={checked}
+      selected={checked}
       disabled={disabled}
       onChange={onChange}
     />

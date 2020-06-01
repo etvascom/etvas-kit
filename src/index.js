@@ -17,6 +17,7 @@ export * from './Rating'
 export * from './NavBack'
 export * from './Icon'
 export * from './Checkbox'
+export * from './Form'
 
 export { styled }
 export * from '@ivoryio/kogaio'

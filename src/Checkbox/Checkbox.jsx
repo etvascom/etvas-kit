@@ -4,8 +4,8 @@ import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Box } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
+import { Typography } from '../Typography'
 
 export const Checkbox = ({
   label,
@@ -16,15 +16,14 @@ export const Checkbox = ({
   id,
   onChange
 }) => {
-  const [isChecked, setIsChecked] = useState(checked)
+  const [isChecked, setIsChecked] = useState(!!checked)
 
   const handleChange = useCallback(
     ev => {
       setIsChecked(ev.target.checked)
-      const newValue = ev.target.checked ? value : ''
-      onChange && onChange(newValue)
+      onChange && onChange(ev)
     },
-    [setIsChecked, onChange, value]
+    [setIsChecked, onChange]
   )
 
   useEffect(() => setIsChecked(checked), [checked, setIsChecked])
@@ -33,7 +32,7 @@ export const Checkbox = ({
     <StyledLabel htmlFor={id}>
       <Icon
         color={color}
-        size='20px'
+        size='24px'
         name={isChecked ? 'checkboxChecked' : 'checkboxUnchecked'}
       />
       <input
@@ -45,7 +44,11 @@ export const Checkbox = ({
         style={{ display: 'none' }}
         onChange={handleChange}
       />
-      {label && <Box ml={3}>{label}</Box>}
+      {label && (
+        <Typography variant='inputLabel' ml={3}>
+          {label}
+        </Typography>
+      )}
     </StyledLabel>
   )
 }
@@ -53,7 +56,8 @@ export const Checkbox = ({
 const StyledLabel = styled.label(
   css({
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   })
 )
 

@@ -4,12 +4,7 @@
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "files": ["css", "es", "lib", "umd"],
   "scripts": {
     "build": "nwb build-react-component",
     "prebuild:link": "mv node_modules_ node_modules",
@@ -30,11 +25,14 @@
   },
   "peerDependencies": {
     "react": "16.x",
+    "formik": "^2.1.4",
     "styled-components": "^5.1.0"
   },
   "dependencies": {
     "@ivoryio/kogaio": "^0.7.93",
     "@styled-system/theme-get": "^5.1.2",
+    "styled-components": "^5.1.0",
+    "hyperid": "^2.0.5",
     "lodash": "^4.17.15",
     "use-resize-observer": "^6.1.0-alpha.3"
   },
@@ -55,13 +53,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "formik": "^2.1.4",
     "lint-staged": "^10.2.2",
     "nwb": "0.24.x",
     "prettier-eslint": "^9.0.1",
     "prettier-eslint-cli": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.1.0",
     "stylelint": "^13.3.3",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
@@ -71,9 +69,5 @@
   "homepage": "https://github.com/etvascom/ui",
   "license": "MIT",
   "repository": "https://github.com/etvascom/ui",
-  "keywords": [
-    "etvas",
-    "etvas ui",
-    "react-component"
-  ]
+  "keywords": ["etvas", "etvas ui", "react-component"]
 }
