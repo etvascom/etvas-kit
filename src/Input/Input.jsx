@@ -33,7 +33,6 @@ export const Input = forwardRef(
       onChange,
       passwordView,
       placeholder,
-      placeholderTextColor,
       readOnly,
       required,
       type,
@@ -94,7 +93,6 @@ export const Input = forwardRef(
             name={name}
             onChange={onChange}
             placeholder={readOnly ? '' : placeholder}
-            placeholderTextColor={placeholderTextColor}
             readOnly={readOnly}
             ref={ref || inputRef}
             required={required}
