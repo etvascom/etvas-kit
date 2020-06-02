@@ -12,20 +12,13 @@ const styles = {
   lineHeight: 'inherit'
 }
 
-export const Link = ({ component, variant, ...props }) => {
-  const Component = useMemo(
-    () =>
-      styled(component)(
-        css({
-          ...styles,
-          ...(variant === 'button' ? typography.labelButton : {})
-        })
-      ),
-    [variant, component]
-  )
+export const Link = ({ component, variant, ...props }) => (
+  <Wrapper {...props} as={component} variant={variant} />
+)
 
-  return <Component {...props} />
-}
+const Wrapper = styled.a(css(styles), ({ variant }) =>
+  variant === 'button' ? css(typography.labelButton) : {}
+)
 
 Link.propTypes = {
   component: PropTypes.elementType,
