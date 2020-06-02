@@ -24,6 +24,6 @@ export const Form = ({ name, children, ...props }) => {
 
 Form.propTypes = {
   ...Formik.propTypes,
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   name: PropTypes.string
 }
