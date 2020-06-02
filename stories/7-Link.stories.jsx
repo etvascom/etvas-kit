@@ -2,13 +2,22 @@ import React from 'react'
 import { Link } from '../src'
 
 export default {
-  title: 'Demo/Link'
+  title: 'Demo/Link',
+  component: Link
 }
 
-const LinkComponent = props => <a {...props} />
+export const TextLink = () => (
+  <Link component='a' href='https://google.com' target='_blank'>
+    Text link
+  </Link>
+)
 
-export const SimpleForm = () => (
-  <Link component={LinkComponent} href='https://google.com' target='_blank'>
-    Google
+export const ButtonLink = () => (
+  <Link
+    component='a'
+    variant='button'
+    href='https://google.com'
+    target='_blank'>
+    Button Link
   </Link>
 )
