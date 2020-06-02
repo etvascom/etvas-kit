@@ -1,39 +1,51 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import { IconButton } from '@ivoryio/kogaio'
+import { Touchable } from '@ivoryio/kogaio'
+import { Icon } from '../Icon'
 
 export const PasswordToggler = ({
   error,
   inputType,
   tabIndex,
-  toggle,
+  onToggle,
   viewOption,
   ...props
-}) => (
-  <IconButton
-    color={error ? 'error' : 'light-gray'}
-    effect='no-feedback'
-    fontSize={3}
-    name={inputType === 'password' ? 'visibilityOff' : 'visibility'}
-    onMouseDown={toggle}
-    onMouseUp={viewOption.includes('peek') ? toggle : null}
-    onTouchStart={toggle}
-    onTouchEnd={viewOption.includes('peek') ? toggle : null}
-    tabIndex={tabIndex}
-    {...props}
-  />
-)
+}) => {
+  const handleDown = useCallback(() => {
+    onToggle && onToggle()
+  }, [onToggle])
+
+  const handleUp = useCallback(() => {
+    if (viewOption.includes('peek')) {
+      handleDown()
+    }
+  }, [onToggle, viewOption, handleDown])
+
+  return (
+    <Touchable
+      effect='no-feedback'
+      // onClick={handleDown}
+      onMouseDown={handleDown}
+      onMouseUp={handleUp}
+      onTouchStart={onToggle}
+      onTouchEnd={handleUp}
+      tabIndex={tabIndex}>
+      <Icon
+        color={error ? 'error' : 'outline'}
+        size={3}
+        name={inputType === 'password' ? 'eye' : 'eyeNo'}
+        {...props}
+      />
+    </Touchable>
+  )
+}
 
 const toggleOptions = ['peek', 'toggle']
 PasswordToggler.propTypes = {
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-    PropTypes.bool
-  ]),
+  error: PropTypes.bool,
   inputType: PropTypes.string,
   tabIndex: PropTypes.string,
-  toggle: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired,
   viewOption: PropTypes.oneOf(toggleOptions)
 }

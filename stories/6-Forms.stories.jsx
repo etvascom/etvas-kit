@@ -47,48 +47,52 @@ const formValidate = values => {
   return errors
 }
 
-export const SimpleForm = () => {
-  return (
-    <Form
-      onSubmit={action('submit')}
-      initialValues={values}
-      validate={formValidate}>
-      <Typography variant='titleSmall'>Basic info</Typography>
-      <TextField
-        name='name'
-        label='Name'
-        placeholder='e.g. John'
-        validate={minLength(3)}
-      />
-      <TextField
-        type='password'
-        name='password'
-        label='Password'
-        placeholder='e.g. secret'
-        validate={minLength(3)}
-      />
-      <Typography variant='titleSmall'>Gender</Typography>
-      <RadioField name='gender' label='Male' value='m' />
-      <RadioField name='gender' label='Female' value='f' />
+export const SimpleForm = () => (
+  <Form
+    onSubmit={action('submit')}
+    initialValues={values}
+    validate={formValidate}>
+    <Typography variant='titleSmall'>Basic info</Typography>
+    <TextField
+      name='name'
+      label='Name'
+      placeholder='e.g. John'
+      validate={minLength(3)}
+    />
+    <TextField
+      type='password'
+      name='password'
+      label='Password'
+      placeholder='e.g. secret'
+      validate={minLength(3)}
+    />
+    <TextField
+      name='disabled'
+      label='Disabled field'
+      placeholder='e.g. John'
+      disabled
+    />
+    <Typography variant='titleSmall'>Gender</Typography>
+    <RadioField name='gender' label='Male' value='m' />
+    <RadioField name='gender' label='Female' value='f' />
 
-      <Typography variant='titleSmall'>Food options</Typography>
-      <CheckboxField name='foods' label='Pizza' value='pizza' />
-      <CheckboxField name='foods' label='Pasta' value='pasta' />
-      <CheckboxField name='foods' label='Burgers' value='burgers' />
-      <ErrorDisplay name='foods' type='checkbox' />
+    <Typography variant='titleSmall'>Food options</Typography>
+    <CheckboxField name='foods' label='Pizza' value='pizza' />
+    <CheckboxField name='foods' label='Pasta' value='pasta' />
+    <CheckboxField name='foods' label='Burgers' value='burgers' />
+    <ErrorDisplay name='foods' type='checkbox' />
 
-      <Typography variant='titleSmall'>Movie prefference</Typography>
-      <DropdownField options={movieOptions} name='movie' label='Movie genre' />
+    <Typography variant='titleSmall'>Movie prefference</Typography>
+    <DropdownField options={movieOptions} name='movie' label='Movie genre' />
 
-      <Flex alignItems='center' justifyContent='flex-start'>
-        <Button type='submit' variant='primary'>
-          Submit
-        </Button>
+    <Flex alignItems='center' justifyContent='flex-start'>
+      <Button type='submit' variant='primary'>
+        Submit
+      </Button>
 
-        <Button type='reset' variant='outline'>
-          Reset
-        </Button>
-      </Flex>
-    </Form>
-  )
-}
+      <Button type='reset' variant='outline'>
+        Reset
+      </Button>
+    </Flex>
+  </Form>
+)

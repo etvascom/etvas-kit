@@ -11,7 +11,7 @@ export const ErrorDisplay = ({ name, type }) => {
     name
   })
 
-  if (!meta.error) {
+  if (!(meta.touched && meta.error)) {
     return null
   }
 

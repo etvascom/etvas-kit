@@ -6,39 +6,22 @@ import React, {
   useState
 } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
-import {
-  border,
-  color,
-  compose,
-  flexbox,
-  layout,
-  position,
-  shadow,
-  typography,
-  variant
-} from 'styled-system'
+import styled from 'styled-components'
+import { variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
-import { themed, themeGet } from '../utils'
+import css from '@styled-system/css'
 import { Icon } from '../Icon'
-import { Typography } from '../Typography'
+import { Typography, typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 
-import { Sublabel } from './Sublabel'
 import { PasswordToggler } from './PasswordToggler'
+import { ErrorMessage } from './ErrorMessage'
 
-const inputStyle = variant({
-  scale: 'inputs',
-  prop: 'variant'
-})
-
-const Input = forwardRef(
+export const Input = forwardRef(
   (
     {
       autoComplete,
       autoFocus,
-      className,
-      containerStyle,
       disabled,
       error,
       icLeft,
@@ -75,39 +58,33 @@ const Input = forwardRef(
 
     const togglePassword = useCallback(
       ev => {
-        ev.preventDefault()
         const elRef = ref || inputRef
         if (document.activeElement !== elRef.current) elRef.current.focus()
-        if (inputType.includes('password')) return setInputType('text')
-        return resetInputType()
+        if (inputType.includes('password')) {
+          setInputType('text')
+        } else {
+          resetInputType()
+        }
+        ev.preventDefault()
       },
-      [inputType, ref, resetInputType]
+      [inputType, ref, inputRef, resetInputType]
     )
 
     return (
-      <InputContainer
-        {...containerStyle}
-        flexDirection='column'
-        hasLabel={label}
-        width={1}
-        {...rest}>
+      <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
-          <InputLabel
+          <Typography
             as='label'
-            className='input-label'
-            color='gunmetal'
-            display='block'
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
             {label} {required ? '*' : ''}
-          </InputLabel>
+          </Typography>
         ) : null}
-        <Row>
-          <InputComponent
+        <Flex alignItems='center' position='relative' width='100%'>
+          <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            className='input'
             disabled={readOnly || disabled}
             error={error}
             hasLabel={label}
@@ -128,8 +105,6 @@ const Input = forwardRef(
           />
           {icLeft ? (
             <Icon
-              className='input-custom-icon'
-              color='pastel-blue'
               fontSize={3}
               left={2}
               name={icLeft}
@@ -138,146 +113,76 @@ const Input = forwardRef(
               tabIndex='-1'
             />
           ) : null}
-          <Flex
-            className='input-right'
-            pointerEvents='none'
-            position='absolute'
-            right={2}>
+          <Flex pointerEvents='auto' position='absolute' right={2}>
             {icRight ? (
               <Space mr={1}>
-                <Icon
-                  className='input-custom-icon'
-                  color='pastel-blue'
-                  fontSize={3}
-                  name={icRight}
-                />
+                <Icon fontSize={3} name={icRight} />
               </Space>
             ) : null}
             {type === 'password' && value ? (
               <PasswordToggler
-                error={error}
+                error={!!error}
                 inputType={inputType}
                 onDrag={resetInputType}
-                pointerEvents='auto'
                 tabIndex='-1'
-                toggle={togglePassword}
+                onToggle={togglePassword}
                 viewOption={passwordView}
               />
             ) : null}
           </Flex>
-        </Row>
-        {[error, valid].some(item => typeof item === 'string') ? (
-          <Space my={1}>
-            <Sublabel
-              className='input-sublabel'
-              content={error || valid}
-              type={error ? 'error' : 'valid'}
-            />
-          </Space>
-        ) : (
-          <Dummy id='input-dummy-space' hide={noBottomSpace} />
-        )}
-      </InputContainer>
+        </Flex>
+        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+      </Flex>
     )
   }
 )
 
-const readOnlyStyle = ({ readOnly }) =>
-  readOnly &&
-  css`
-    background-color: transparent;
-    border: ${themeGet('borders.1')} transparent;
-    box-shadow: none;
-    :focus,
-    :hover {
-      border: ${themeGet('borders.1')} transparent;
+const StyledInput = styled.input(
+  css({
+    ...typography.labelSmall,
+    display: 'block',
+    width: '100%',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'outline',
+    borderRadius: 8,
+    outline: 'none',
+    color: 'text',
+    padding: 3,
+    ':hover, :focus': {
+      borderWidth: 1,
+      borderStyle: 'solid'
     }
-    padding-left: 0;
-  `
-
-const InputContainer = styled(Flex)`
-  ${themed('Input.container')};
-`
-
-const InputLabel = styled(Typography)`
-  ${themed('Input.label')};
-`
-
-const Row = styled(Flex)`
-  align-items: center;
-  position: relative;
-  width: 100%;
-`
-
-const addSpaceAroundInputArea = ({ hasIcLeft, hasIcRight, type }) => css`
-  padding-left: ${hasIcLeft
-    ? themeGet('space.8', 32)
-    : themeGet('space.2', 8)}px;
-  padding-right: ${hasIcRight || type === 'password'
-    ? themeGet('space.8', 32)
-    : 0}px;
-`
-
-const InputComponent = styled.input`
-  ${addSpaceAroundInputArea};
-  border-radius: ${themeGet('radii.1', 1)}px;
-  box-sizing: border-box;
-  color: ${themeGet('colors.gunmetal', '#243143')};
-  font-family: ${themeGet('fonts.primary')};
-  font-size: ${themeGet('fontSizes.1', '0.875rem')};
-  outline: none;
-  width: 100%;
-
-  ::placeholder {
-    color: ${themeGet('colors.pastel-blue')};
-  }
-
-  :focus {
-    ~ .input-right i,
-    ~ .input-custom-icon {
-      color: ${themeGet('colors.gunmetal')};
-    }
-  }
-
-  ${themed('Input')};
-  ${compose(
-    border,
-    color,
-    flexbox,
-    inputStyle,
-    layout,
-    position,
-    shadow,
-    typography
-  )};
-  ${readOnlyStyle};
-`
-
-const Dummy = styled.div`
-  display: ${({ hide }) => (hide ? 'none' : 'block')};
-  height: 20px;
-  opacity: 0;
-  visibility: hidden;
-`
+  }),
+  ({ error }) =>
+    error
+      ? css({
+          color: 'error',
+          borderColor: 'error'
+        })
+      : null,
+  ({ disabled }) =>
+    disabled
+      ? css({
+          opacity: 0.5
+        })
+      : null
+)
 
 Input.propTypes = {
   ...propTypes.inputStyle,
-  ...propTypes.border,
-  ...propTypes.color,
-  ...propTypes.flexbox,
-  ...propTypes.layout,
-  ...propTypes.position,
-  ...propTypes.shadow,
-  ...propTypes.typography,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
-  className: PropTypes.string,
-  containerStyle: PropTypes.object,
   disabled: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
   icLeft: PropTypes.string,
+  icRight: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  label: PropTypes.string,
+  label: PropTypes.node,
   name: PropTypes.string,
   /** dummy space added for consistent spacing with validated inputs.
    *
@@ -289,16 +194,12 @@ Input.propTypes = {
   placeholderTextColor: PropTypes.string,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   valid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.object
-  ]),
-  variant: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.objectOf(PropTypes.string)
   ])
 }
 
@@ -307,7 +208,6 @@ Input.defaultProps = {
   minHeight: 40,
   noBottomSpace: false,
   passwordView: 'peek',
-  placeholder: 'Search',
   readOnly: false,
   type: 'text',
   value: '',
@@ -316,4 +216,3 @@ Input.defaultProps = {
 
 Input.displayName = 'Input'
 /** @component */
-export default Input

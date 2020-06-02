@@ -10,7 +10,9 @@ export const TextField = props => {
   const [field, meta] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
 
-  return <Input {...props} {...field} id={id} error={meta.error} />
+  return (
+    <Input {...props} {...field} id={id} error={meta.touched && meta.error} />
+  )
 }
 
 TextField.propTypes = {
