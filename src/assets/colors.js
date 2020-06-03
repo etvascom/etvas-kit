@@ -17,5 +17,7 @@ export default {
   dropShadow: 'rgba(19, 51, 77, .3)',
   white: '#FFFFFF',
   whiteShadow: 'rgba(255, 255, 255, .75)',
-  dark: '#343434'
+  dark: '#343434',
+  successAction: '#27AE60',
+  successActionFade: '#87E8AF'
 }

@@ -111,6 +111,31 @@ export default {
       transform: 'scale(1)'
     }
   },
+  successAction: {
+    label: labelStyle,
+    backgroundColor: colors.successAction,
+    color: colors.white,
+    borderRadius: `${RADII[8]}px`,
+    ':focus': {
+      backgroundColor: colors.successAction,
+      opacity: 0.75
+    },
+    ':hover': {
+      backgroundColor: colors.successAction,
+      opacity: 0.75
+    },
+    ':disabled': {
+      opacity: 1,
+      backgroundColor: colors.successActionFade,
+      cursor: 'not-allowed',
+      color: colors.white,
+      transform: 'scale(1)',
+      ':hover': {
+        backgroundColor: colors.successActionFade
+      }
+    }
+  },
   link: linkStyles(colors.accent),
-  linkSecondary: linkStyles(colors.lighterText)
+  linkSecondary: linkStyles(colors.lighterText),
+  linkSuccessAction: linkStyles(colors.successAction)
 }
