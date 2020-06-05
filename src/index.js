@@ -19,6 +19,7 @@ export * from './Icon'
 export * from './Checkbox'
 export * from './Form'
 export * from './Link'
+export * from './Skeleton'
 
 export { styled }
 export * from '@ivoryio/kogaio'
