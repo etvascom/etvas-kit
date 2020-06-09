@@ -4,12 +4,7 @@
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
-  ],
+  "files": ["css", "es", "lib", "umd"],
   "scripts": {
     "build": "nwb build-react-component",
     "prebuild:link": "mv node_modules_ node_modules",
@@ -17,7 +12,7 @@
     "postbuild:link": "mv node_modules node_modules_",
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build -- --copy-files",
-    "start": "nwb serve-react-demo",
+    "start": "BROWSER=none nwb serve-react-demo",
     "format": "prettier-eslint \"$PWD/src/**/*.{js,jsx}\" --write",
     "lint:js": "eslint 'src/**/*.{js,jsx}'",
     "lint:style": "stylelint 'src/**/*.{css,jsx}'",
@@ -25,7 +20,7 @@
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "BROWSER=none start-storybook -p 6006",
     "build-storybook": "build-storybook -o build/ --quiet"
   },
   "peerDependencies": {
@@ -74,9 +69,5 @@
   "homepage": "https://github.com/etvascom/ui",
   "license": "MIT",
   "repository": "https://github.com/etvascom/ui",
-  "keywords": [
-    "etvas",
-    "etvas ui",
-    "react-component"
-  ]
+  "keywords": ["etvas", "etvas ui", "react-component"]
 }
