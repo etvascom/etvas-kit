@@ -20,6 +20,7 @@ export * from './Checkbox'
 export * from './Form'
 export * from './Link'
 export * from './Skeleton'
+export * from './ErrorPages'
 
 export { styled }
 export * from '@ivoryio/kogaio'
