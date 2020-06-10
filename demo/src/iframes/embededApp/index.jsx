@@ -1,7 +1,45 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { Flex, Box } from '@ivoryio/kogaio'
+import {
+  EmbededAppReporter,
+  EmbededAppContainer,
+  BlockSkeleton,
+  Touchable,
+  Card,
+  Icon,
+  Typography
+} from '../../../../src'
 
-export const EmbededAppChild = () => <div> EmbededApp</div>
+export const EmbededAppChild = () => {
+  const [height, setHeight] = useState(100)
+  const taller = useCallback(() => setHeight(height + 100))
+  const shorter = useCallback(() => setHeight(height - 100))
+
+  return (
+    <>
+      <EmbededAppReporter />
+      <Card p={4}>
+        <Flex
+          justifyContent='space-between'
+          width='fit-content'
+          mx='auto'
+          p={4}
+          alignItems='center'>
+          <Touchable onClick={taller}>
+            <Icon name='plus' color='brand' />
+          </Touchable>
+          <Typography variant='labelButton' mx={4}>
+            {height} px
+          </Typography>
+          <Touchable onClick={shorter}>
+            <Icon name='minus' color='brand' />
+          </Touchable>
+        </Flex>
+        <BlockSkeleton width='100%' height={`${height}px`} />
+      </Card>
+    </>
+  )
+}
 
 export const EmbededAppParent = () => (
   <Flex>
@@ -9,7 +47,7 @@ export const EmbededAppParent = () => (
       <div>EmbededAppParent</div>
     </Box>
     <Box width={2 / 3}>
-      <iframe src='index.html?demo=embededApp' />
+      <EmbededAppContainer src='index.html?demo=embededApp' />
     </Box>
   </Flex>
 )

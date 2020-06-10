@@ -31,6 +31,14 @@ export class InterCom extends EventEmitter {
     this.on(`request.${action}`, handler)
   }
 
+  offRequest(action, handler) {
+    this.removeListener(`response.${action}`, handler)
+  }
+
+  offRequest(action, handler) {
+    this.removeListener(`request.${action}`, handler)
+  }
+
   sendMessage(event, payload) {
     const message = { namespace: this.namespace, event, payload }
     if (this.isChild()) {
