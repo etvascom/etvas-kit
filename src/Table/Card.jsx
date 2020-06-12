@@ -37,7 +37,7 @@ const StyledCardWrapper = styled.td(css(styles.card))
 
 export const CardItem = ({ header, cell }) => (
   <Flex my={4}>
-    <Box width={1 / 3}>
+    <Box width={1 / 3} pr={1}>
       <Typography truncate variant='labelSmallBold'>
         {header}
       </Typography>

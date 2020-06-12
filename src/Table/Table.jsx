@@ -44,7 +44,9 @@ export const Table = ({ mode, breakpoint, ...props }) => {
 
   return (
     <TableContext.Provider value={ctx}>
-      <StyledTable {...props} ref={ref} mode={actualMode} />
+      <Wrapper ref={ref}>
+        <StyledTable {...props} mode={actualMode} />
+      </Wrapper>
     </TableContext.Provider>
   )
 }
@@ -53,6 +55,8 @@ Table.propTypes = {
   breakpoint: PropTypes.number,
   mode: PropTypes.oneOf(['web', 'mobile'])
 }
+
+const Wrapper = styled.div(css(styles.wrapper))
 
 const StyledTable = styled.table(css(styles.default), ({ mode }) =>
   css(styles[mode])

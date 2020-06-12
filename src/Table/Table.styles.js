@@ -9,5 +9,9 @@ export default {
     display: 'block',
     borderCollapse: 'unset',
     borderSpacing: 'unset'
+  },
+  wrapper: {
+    width: '100%',
+    overflow: 'visible'
   }
 }
