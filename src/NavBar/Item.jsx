@@ -7,11 +7,11 @@ import { Flex } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-export const NavItem = ({ icon, label, isActive, as, onClick }) => {
+export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => {
   const color = isActive ? 'brand' : 'outline'
 
   return (
-    <Container as={as} onClick={onClick} alignItems='center'>
+    <Container as={as} onClick={onClick} alignItems='center' {...props}>
       <Icon name={icon} color={color} size='18px' />
       <Typography
         as='span'
