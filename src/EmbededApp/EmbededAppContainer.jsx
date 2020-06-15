@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
+import css from '@styled-system/css'
 import styled from 'styled-components'
 import { InterCom } from '../providers'
 
-export const EmbededAppContainer = props => {
+export const EmbededAppContainer = ({ defaultHeight, ...props }) => {
   const intercom = useRef(new InterCom('etvas.embededApp'))
   const [size, setSize] = useState({ width: 0, height: 0 })
 
@@ -13,7 +15,7 @@ export const EmbededAppContainer = props => {
     return () => instance.offResponse('size', setSize)
   }, [setSize, intercom])
 
-  let frameHeight = 'auto'
+  let frameHeight = defaultHeight
   let scrolling = 'auto'
 
   if (size.height) {
@@ -24,10 +26,19 @@ export const EmbededAppContainer = props => {
   return <StyledIframe {...props} height={frameHeight} scrolling={scrolling} />
 }
 
-const StyledIframe = styled.iframe({
-  width: '100%',
-  display: 'block',
-  border: 'none'
-})
+const StyledIframe = styled.iframe(({ height }) =>
+  css({
+    width: '100%',
+    display: 'block',
+    border: 'none',
+    height
+  })
+)
 
-EmbededAppContainer.propTypes = {}
+EmbededAppContainer.propTypes = {
+  defaultHeight: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object
+  ])
+}
