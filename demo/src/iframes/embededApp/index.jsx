@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react'
+import styled from 'styled-components'
+import css from '@styled-system/css'
 import { Flex, Box } from '@ivoryio/kogaio'
 import {
   EmbededAppReporter,
@@ -44,12 +46,22 @@ export const EmbededAppChild = () => {
 }
 
 export const EmbededAppParent = () => (
-  <Flex>
-    <Box width={1 / 3}>
-      <div>EmbededAppParent</div>
+  <Flex justifyContent='space-between'>
+    <Box width='35%'>
+      <Typography variant='titleSmall'>EmbededAppParent</Typography>
+      <Typography variant='textSmall'>The box wrapping the iframe:</Typography>
+      <IframeWrapper width='100%' height='100px'></IframeWrapper>
     </Box>
-    <Box width={2 / 3}>
+    <IframeWrapper width='60%'>
       <EmbededAppContainer src='index.html?demo=embededApp' />
-    </Box>
+    </IframeWrapper>
   </Flex>
+)
+
+const IframeWrapper = styled(Box)(
+  css({
+    border: '2px solid',
+    backgroundColor: 'brandFade',
+    color: 'outline'
+  })
 )

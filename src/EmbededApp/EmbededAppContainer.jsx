@@ -25,7 +25,9 @@ export const EmbededAppContainer = props => {
 }
 
 const StyledIframe = styled.iframe({
-  width: '100%'
+  width: '100%',
+  display: 'block',
+  border: 'none'
 })
 
 EmbededAppContainer.propTypes = {}
