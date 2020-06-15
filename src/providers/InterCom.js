@@ -31,7 +31,7 @@ export class InterCom extends EventEmitter {
     this.on(`request.${action}`, handler)
   }
 
-  offRequest(action, handler) {
+  offResponse(action, handler) {
     this.removeListener(`response.${action}`, handler)
   }
 

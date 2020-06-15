@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { InterCom } from '../providers'
 
 export const EmbededAppContainer = props => {
@@ -9,8 +8,9 @@ export const EmbededAppContainer = props => {
 
   useEffect(() => {
     intercom.current.onResponse('size', setSize)
+    const instance = intercom.current
 
-    return () => intercom.offResponse('size', setSize)
+    return () => instance.offResponse('size', setSize)
   }, [setSize, intercom])
 
   let frameHeight = 'auto'

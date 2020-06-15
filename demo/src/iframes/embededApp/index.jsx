@@ -12,12 +12,14 @@ import {
 
 export const EmbededAppChild = () => {
   const [height, setHeight] = useState(100)
-  const taller = useCallback(() => setHeight(height + 100))
-  const shorter = useCallback(() => setHeight(height - 100))
+  const taller = useCallback(() => setHeight(height + 100), [setHeight, height])
+  const shorter = useCallback(() => setHeight(height - 100), [
+    setHeight,
+    height
+  ])
 
   return (
-    <>
-      <EmbededAppReporter />
+    <EmbededAppReporter>
       <Card p={4}>
         <Flex
           justifyContent='space-between'
@@ -37,7 +39,7 @@ export const EmbededAppChild = () => {
         </Flex>
         <BlockSkeleton width='100%' height={`${height}px`} />
       </Card>
-    </>
+    </EmbededAppReporter>
   )
 }
 

@@ -1,22 +1,20 @@
-import { useRef } from 'react'
+import React, { cloneElement, useRef } from 'react'
 import PropTypes from 'prop-types'
 import useResizeObserver from 'use-resize-observer'
 import { InterCom } from '../providers'
 
 export const EmbededAppReporter = ({ children }) => {
-  const windowRef = useRef(document.documentElement)
   const intercom = useRef(new InterCom('etvas.embededApp'))
 
-  useResizeObserver({
-    ref: windowRef,
+  const { ref } = useResizeObserver({
     onResize({ width, height }) {
       intercom.current.response('size', { width, height: height })
     }
   })
 
-  return children || null
+  return <div ref={ref}>{children}</div>
 }
 
 EmbededAppReporter.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node.isRequired
 }
