@@ -16,6 +16,7 @@ export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => {
       <Typography
         as='span'
         variant='labelButton'
+        truncate={1}
         color={color}
         ml={[0, 2]}
         mt={[1, 0]}>

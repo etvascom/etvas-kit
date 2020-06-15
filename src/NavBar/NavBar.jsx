@@ -6,19 +6,30 @@ import css from '@styled-system/css'
 import { Flex } from '@ivoryio/kogaio'
 import { NavItem } from './Item'
 
-export const NavBar = ({ children }) => <Container>{children}</Container>
+export const NavBar = ({ children }) => (
+  <>
+    <Container>{children}</Container>
+    <Placeholder />
+  </>
+)
 
 const Container = styled(Flex)(
   css({
     position: ['fixed', 'static'],
-    bottom: 0,
+    top: 0,
     left: 0,
     right: 0,
     backgroundColor: ['white', 'transparent'],
-    borderTop: ['1px solid', 'none'],
+    borderBottom: ['1px solid', 'none'],
     color: 'outline',
     padding: [3, 0],
     justifyContent: ['space-between', 'flex-start']
+  })
+)
+
+const Placeholder = styled.div(
+  css({
+    height: ['60px', 0]
   })
 )
 
