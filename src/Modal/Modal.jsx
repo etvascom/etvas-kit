@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useCallback } from 'react'
+import React, { useLayoutEffect, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { flexbox, color } from 'styled-system'
@@ -8,6 +8,7 @@ import propTypes from '@styled-system/prop-types'
 import { Flex } from '@ivoryio/kogaio'
 import style from './Modal.style'
 import { ModalContent } from './ModalContent'
+import { InterCom } from '../providers'
 
 const StyledModal = styled(Flex)(
   css(style.wrapper),
@@ -36,6 +37,7 @@ export const Modal = ({
   ...props
 }) => {
   const modalRef = useRef()
+  const intercom = useRef(new InterCom('etvas.modal'))
 
   const modalClickHandler = useCallback(
     event => {
@@ -54,6 +56,20 @@ export const Modal = ({
     [onEscape]
   )
 
+  useEffect(() => {
+    const instance = intercom.current
+
+    if (backDrop) {
+      instance.request('modal', backDrop)
+    }
+
+    return () => {
+      if (backDrop) {
+        instance.request('modal', false)
+      }
+    }
+  }, [backDrop, intercom])
+
   useLayoutEffect(() => {
     disableScroll()
     window.addEventListener('keyup', callback, false)
@@ -62,7 +78,7 @@ export const Modal = ({
       enableScroll()
       window.removeEventListener('keyup', callback, false)
     }
-  })
+  }, [callback])
 
   return (
     <StyledModal
