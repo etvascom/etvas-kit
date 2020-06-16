@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 
 import { GlobalStyle, ThemeProvider, BrandingProvider } from '../../src'
-import { Root, EmbededAppChild } from './iframes'
+import { Root, EmbededAppChild, ModalChild } from './iframes'
 
 const urlParams = new URLSearchParams(window.location.search)
 const demo = urlParams.get('demo') || 'root'
@@ -15,7 +15,8 @@ const NotFound = () => (
 
 const components = {
   root: Root,
-  embededApp: EmbededAppChild
+  embededApp: EmbededAppChild,
+  modals: ModalChild
 }
 
 const Component = components[demo] || NotFound

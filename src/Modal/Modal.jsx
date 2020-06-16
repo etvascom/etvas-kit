@@ -25,8 +25,7 @@ const StyledModal = styled(Flex)(
     animation-duration:0.5s;`
 )
 
-const disableScroll = () => (document.body.style.overflow = 'hidden')
-const enableScroll = () => (document.body.style.overflow = 'auto')
+import { enableScroll, disableScroll } from './utils'
 
 export const Modal = ({
   backDrop,
@@ -47,7 +46,7 @@ export const Modal = ({
     },
     [onBackDropClick]
   )
-  const callback = useCallback(
+  const handleKeyPress = useCallback(
     event => {
       if (event.keyCode === 27) {
         onEscape && onEscape()
@@ -61,24 +60,26 @@ export const Modal = ({
 
     if (backDrop) {
       instance.request('modal', backDrop)
+      instance.onRequest('modal.close', onBackDropClick)
     }
 
     return () => {
       if (backDrop) {
-        instance.request('modal', false)
+        instance.request('modal', null)
+        instance.offRequest('modal.close', onBackDropClick)
       }
     }
-  }, [backDrop, intercom])
+  }, [backDrop, intercom, onBackDropClick])
 
   useLayoutEffect(() => {
     disableScroll()
-    window.addEventListener('keyup', callback, false)
+    window.addEventListener('keyup', handleKeyPress, false)
 
     return () => {
       enableScroll()
-      window.removeEventListener('keyup', callback, false)
+      window.removeEventListener('keyup', handleKeyPress, false)
     }
-  }, [callback])
+  }, [handleKeyPress])
 
   return (
     <StyledModal
