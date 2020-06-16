@@ -23,6 +23,7 @@ export * from './Skeleton'
 export * from './ErrorPages'
 export * from './EmbededApp'
 export * from './IntegrationHeader'
+export * from './Steps'
 
 export { styled }
 export * from '@ivoryio/kogaio'
