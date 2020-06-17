@@ -7,25 +7,19 @@ import { Flex } from '@ivoryio/kogaio'
 import { Typography } from '../Typography'
 
 export const Steps = ({ steps, active, onChange }) => (
-  <Flex flexDirection='column' position='relative'>
-    <Vline />
+  <Flex flexDirection='column'>
     {steps.map((content, i) => (
-      <Item key={i} id={i + 1} isActive={active === i + 1} onClick={onChange}>
+      <Item
+        key={i}
+        id={i + 1}
+        isFirst={i === 0}
+        isLast={i === steps.length - 1}
+        isActive={active === i + 1}
+        onClick={onChange}>
         {content}
       </Item>
     ))}
   </Flex>
-)
-
-const Vline = styled.div(
-  css({
-    width: '1px',
-    position: 'absolute',
-    left: '12px',
-    bottom: '12px',
-    top: '12px',
-    backgroundColor: 'outline'
-  })
 )
 
 Steps.propTypes = {
@@ -34,11 +28,12 @@ Steps.propTypes = {
   onChange: PropTypes.func
 }
 
-const Item = ({ id, isActive, children, onClick }) => {
+const Item = ({ id, isActive, isFirst, isLast, children, onClick }) => {
   const handleClick = useCallback(() => onClick && onClick(id), [onClick, id])
 
   return (
-    <Container alignItems='center' onClick={handleClick}>
+    <ItemContainer alignItems='center' onClick={handleClick}>
+      <Vline isFirst={isFirst} isLast={isLast} />
       <Chip isRounded color={isActive ? 'accent' : 'outline'}>
         <Typography variant='labelButton' color='white'>
           {id}
@@ -50,16 +45,29 @@ const Item = ({ id, isActive, children, onClick }) => {
         color={isActive ? 'accent' : 'lighterText'}>
         {children}
       </Typography>
-    </Container>
+    </ItemContainer>
   )
 }
 
-const Container = styled(Flex)(
+const ItemContainer = styled(Flex)(
   css({
-    marginBottom: 6,
+    position: 'relative',
+    cursor: 'pointer',
+    paddingBottom: 6,
     '&:last-child': {
-      marginBottom: 0
+      paddingBottom: 0
     }
+  })
+)
+
+const Vline = styled.div(({ isFirst, isLast }) =>
+  css({
+    width: '1px',
+    position: 'absolute',
+    left: '12px',
+    bottom: isLast ? '50%' : 0,
+    top: isFirst ? '50%' : 0,
+    backgroundColor: 'outline'
   })
 )
 
@@ -69,6 +77,8 @@ const Chip = styled.div(({ color }) =>
     width: '24px',
     height: '24px',
     display: 'flex',
+    flexShrink: 0,
+    flexGrow: 0,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: color,
@@ -77,8 +87,10 @@ const Chip = styled.div(({ color }) =>
 )
 
 Item.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   isActive: PropTypes.bool,
+  isFirst: PropTypes.bool,
+  isLast: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func
 }

@@ -6,15 +6,9 @@ import { variant } from 'styled-system'
 import { Box, Flex } from '@ivoryio/kogaio'
 import { Card } from './Card'
 
-import variants from './CardWithImage.variants'
 import styles from './CardWithImage.styles'
 
-const CardWrapper = styled(Card)(
-  styles.container,
-  variant({
-    variants
-  })
-)
+const CardWrapper = styled(Card)(styles.container)
 
 const Image = styled.div`
   ${styles.image}
@@ -28,11 +22,12 @@ export const CardWithImage = ({
   imageUrl,
   imageSize,
   vertical,
+  variant,
   children,
   ...props
 }) => {
   const direction = vertical ? 'column' : ['column', 'row-reverse']
-  const contentPadding = [2, 4]
+  const contentPadding = variant === 'hero' ? [4, 8] : [2, 4]
 
   return (
     <CardWrapper vertical={vertical} {...props}>
@@ -42,7 +37,7 @@ export const CardWithImage = ({
         width='100%'
         height='100%'>
         <ContentBox vertical={vertical} ratio={imageSize}>
-          <Image url={imageUrl}> </Image>
+          <Image url={imageUrl} />
         </ContentBox>
         <ContentBox
           vertical={vertical}
@@ -57,12 +52,14 @@ export const CardWithImage = ({
 
 CardWithImage.propTypes = {
   ...Card.propTypes,
+  variant: PropTypes.oneOf(['default', 'hero']),
   imageUrl: PropTypes.string.isRequired,
   imageSize: PropTypes.number,
   vertical: PropTypes.bool
 }
 
 CardWithImage.defaultProps = {
-  imageSize: 1 / 3
+  imageSize: 1 / 3,
+  variant: 'default'
 }
 CardWithImage.displayName = 'CardWithImage'

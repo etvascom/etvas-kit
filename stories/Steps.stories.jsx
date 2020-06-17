@@ -9,5 +9,13 @@ export default {
 }
 
 export const Example = () => (
-  <Steps steps={['Step1', 'Step 2']} onChange={action('change')} active={2} />
+  <Steps
+    steps={[
+      'Step 1 is simple',
+      'Step 2 is',
+      'Step 3 is longer and more complex and more words'
+    ]}
+    onChange={action('change')}
+    active={2}
+  />
 )
