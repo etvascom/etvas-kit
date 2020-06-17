@@ -9,7 +9,15 @@ export default {
 }
 
 export const Variants = () => {
-  const variants = ['primary', 'outline', 'outlineAlt', 'link', 'linkSecondary']
+  const variants = [
+    'primary',
+    'outline',
+    'outlineAlt',
+    'positive',
+    'link',
+    'linkSecondary',
+    'linkPositive'
+  ]
 
   return (
     <Table breakpoint={400}>

@@ -111,6 +111,31 @@ export default {
       transform: 'scale(1)'
     }
   },
+  positive: {
+    label: labelStyle,
+    backgroundColor: colors.positive,
+    color: colors.white,
+    borderRadius: `${RADII[8]}px`,
+    ':focus': {
+      backgroundColor: colors.positive,
+      opacity: 0.75
+    },
+    ':hover': {
+      backgroundColor: colors.positive,
+      opacity: 0.75
+    },
+    ':disabled': {
+      opacity: 1,
+      backgroundColor: colors.positiveFade,
+      cursor: 'not-allowed',
+      color: colors.white,
+      transform: 'scale(1)',
+      ':hover': {
+        backgroundColor: colors.positiveFade
+      }
+    }
+  },
   link: linkStyles(colors.accent),
-  linkSecondary: linkStyles(colors.lighterText)
+  linkSecondary: linkStyles(colors.lighterText),
+  linkPositive: linkStyles(colors.positive)
 }
