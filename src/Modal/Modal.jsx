@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useCallback } from 'react'
+import React, { useLayoutEffect, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { flexbox, color } from 'styled-system'
@@ -8,6 +8,7 @@ import propTypes from '@styled-system/prop-types'
 import { Flex } from '@ivoryio/kogaio'
 import style from './Modal.style'
 import { ModalContent } from './ModalContent'
+import { InterCom } from '../providers'
 
 const StyledModal = styled(Flex)(
   css(style.wrapper),
@@ -24,8 +25,7 @@ const StyledModal = styled(Flex)(
     animation-duration:0.5s;`
 )
 
-const disableScroll = () => (document.body.style.overflow = 'hidden')
-const enableScroll = () => (document.body.style.overflow = 'auto')
+import { enableScroll, disableScroll } from './utils'
 
 export const Modal = ({
   backDrop,
@@ -36,6 +36,7 @@ export const Modal = ({
   ...props
 }) => {
   const modalRef = useRef()
+  const intercom = useRef(new InterCom('etvas.modal'))
 
   const modalClickHandler = useCallback(
     event => {
@@ -45,7 +46,7 @@ export const Modal = ({
     },
     [onBackDropClick]
   )
-  const callback = useCallback(
+  const handleKeyPress = useCallback(
     event => {
       if (event.keyCode === 27) {
         onEscape && onEscape()
@@ -54,15 +55,31 @@ export const Modal = ({
     [onEscape]
   )
 
+  useEffect(() => {
+    const instance = intercom.current
+
+    if (backDrop) {
+      instance.request('modal', backDrop)
+      instance.onRequest('modal.close', onBackDropClick)
+    }
+
+    return () => {
+      if (backDrop) {
+        instance.request('modal', null)
+        instance.offRequest('modal.close', onBackDropClick)
+      }
+    }
+  }, [backDrop, intercom, onBackDropClick])
+
   useLayoutEffect(() => {
     disableScroll()
-    window.addEventListener('keyup', callback, false)
+    window.addEventListener('keyup', handleKeyPress, false)
 
     return () => {
       enableScroll()
-      window.removeEventListener('keyup', callback, false)
+      window.removeEventListener('keyup', handleKeyPress, false)
     }
-  })
+  }, [handleKeyPress])
 
   return (
     <StyledModal

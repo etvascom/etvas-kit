@@ -25,8 +25,9 @@ const StyledI = styled.i(({ color, size }) =>
   css({
     fontFamily: 'EtvasIcons',
     fontStyle: 'unset',
-    fontWeight: 'unset',
+    fontWeight: 'normal',
     fontSize: size,
+    lineHeight: size,
     color
   })
 )
