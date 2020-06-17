@@ -10,6 +10,8 @@ import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 import { InterCom } from '../providers'
 
+import { enableScroll, disableScroll } from './utils'
+
 const StyledModal = styled(Flex)(
   css(style.wrapper),
   color,
@@ -24,8 +26,6 @@ const StyledModal = styled(Flex)(
     animation-name: modal;
     animation-duration:0.5s;`
 )
-
-import { enableScroll, disableScroll } from './utils'
 
 export const Modal = ({
   backDrop,
@@ -105,7 +105,8 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  onBackDropClick: () => {}
 }
 
 Modal.Content = ModalContent
