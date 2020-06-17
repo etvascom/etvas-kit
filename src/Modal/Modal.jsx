@@ -60,13 +60,17 @@ export const Modal = ({
 
     if (backDrop) {
       instance.request('modal', backDrop)
-      instance.onRequest('modal.close', onBackDropClick)
+      if (onBackDropClick) {
+        instance.onRequest('modal.close', onBackDropClick)
+      }
     }
 
     return () => {
       if (backDrop) {
         instance.request('modal', null)
-        instance.offRequest('modal.close', onBackDropClick)
+        if (onBackDropClick) {
+          instance.offRequest('modal.close', onBackDropClick)
+        }
       }
     }
   }, [backDrop, intercom, onBackDropClick])
