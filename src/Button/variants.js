@@ -1,122 +1,67 @@
-import { BORDERS, FONTS, FONT_WEIGHTS, RADII } from '../assets/core'
-
-import colors from '../assets/colors'
-import typography from '../Typography/variants'
-
 const linkStyles = color => ({
+  color,
   background: 'none',
   minWidth: 'max-content',
   height: 'auto',
   padding: 0,
-  minHeight: 'max-content',
-  ':focus, :hover': {
-    opacity: 0.75
-  },
-  ':disabled': {
-    cursor: 'not-allowed',
-    opacity: '.3'
-  }
+  minHeight: 'max-content'
 })
 
 export default {
   primary: {
-    backgroundColor: colors.accent,
-    color: colors.white,
-    borderRadius: `${RADII[8]}px`,
-    ':focus': {
-      backgroundColor: colors.accent,
-      opacity: 0.75
-    },
-    ':hover': {
-      backgroundColor: colors.accent,
-      opacity: 0.75
-    },
-    ':disabled': {
-      opacity: 1,
-      backgroundColor: colors.accentFade,
-      cursor: 'not-allowed',
-      color: colors.white,
-      transform: 'scale(1)',
-      ':hover': {
-        backgroundColor: colors.accentFade
-      }
-    }
+    backgroundColor: 'accent',
+    color: 'white'
   },
   outline: {
-    color: colors.text,
+    color: 'text',
     backgroundColor: 'transparent',
-    border: `${BORDERS[1]} ${colors.accent}`,
-    borderRadius: `${RADII[8]}px`,
-    ':focus': {
-      backgroundColor: 'transparent',
-      border: `${BORDERS[1]} ${colors.accent}`,
-      opacity: 0.75
-    },
-    ':hover': {
-      backgroundColor: 'transparent',
-      border: `${BORDERS[1]} ${colors.accent}`,
-      opacity: 0.75
-    },
-    ':disabled': {
-      opacity: 1,
-      border: `${BORDERS[1]} ${colors.accentFade}`,
-      backgroundColor: 'transparent',
-      cursor: 'not-allowed',
-      color: colors.disabled,
-      transform: 'scale(1)',
-      ':hover': {
-        border: `${BORDERS[1]} ${colors.accentFade}`
-      }
-    }
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'accent'
   },
   outlineAlt: {
-    color: colors.text,
+    color: 'text',
     backgroundColor: 'transparent',
-    border: `${BORDERS[1]} ${colors.text}`,
-    borderRadius: `${RADII[8]}px`,
-    ':focus': {
-      backgroundColor: 'transparent',
-      border: `${BORDERS[1]} ${colors.text}`,
-      opacity: 0.75
-    },
-    ':hover': {
-      backgroundColor: 'transparent',
-      border: `${BORDERS[1]} ${colors.text}`,
-      opacity: 0.75
-    },
-    ':disabled': {
-      opacity: 1,
-      border: `${BORDERS[1]} ${colors.disabled}`,
-      backgroundColor: 'transparent',
-      cursor: 'not-allowed',
-      color: colors.disabled,
-      transform: 'scale(1)'
-    }
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'text'
   },
   positive: {
-    backgroundColor: colors.positive,
-    color: colors.white,
-    borderRadius: `${RADII[8]}px`,
-    ':focus': {
-      backgroundColor: colors.positive,
-      opacity: 0.75
-    },
-    ':hover': {
-      backgroundColor: colors.positive,
-      opacity: 0.75
-    },
-    ':disabled': {
-      opacity: 1,
-      backgroundColor: colors.positiveFade,
-      cursor: 'not-allowed',
-      color: colors.white,
-      transform: 'scale(1)',
-      ':hover': {
-        backgroundColor: colors.positiveFade
-      }
-    }
+    backgroundColor: 'positive',
+    color: 'white'
   },
-  link: linkStyles(colors.accent),
-  linkSecondary: linkStyles(colors.lighterText),
-  linkPositive: linkStyles(colors.positive)
+  link: linkStyles('accent'),
+  linkSecondary: linkStyles('lighterText'),
+  linkPositive: linkStyles('positive')
+}
+
+export const spinnerVariants = {
+  primary: {
+    background: 'accent',
+    primary: 'white'
+  },
+  outline: {
+    background: 'white',
+    primary: 'accent'
+  },
+  outlineAlt: {
+    background: 'white',
+    primary: 'text'
+  },
+  positive: {
+    background: 'positive',
+    primary: 'white'
+  },
+  link: {
+    background: 'white',
+    primary: 'accent'
+  },
+  linkSecondary: {
+    background: 'white',
+    primary: 'text'
+  },
+  linkPositive: {
+    background: 'white',
+    primary: 'positive'
+  }
 }
