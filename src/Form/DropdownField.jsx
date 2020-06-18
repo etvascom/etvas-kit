@@ -6,7 +6,7 @@ import { fieldShape } from './shapes'
 import { Dropdown } from '../Dropdown'
 
 export const DropdownField = ({ options, ...props }) => {
-  const [field, meta, helpers] = useField(props)
+  const [field, , helpers] = useField(props)
 
   const handleChange = useCallback(v => helpers.setValue(v), [helpers])
 
@@ -15,12 +15,19 @@ export const DropdownField = ({ options, ...props }) => {
     [field, options]
   )
 
-  const selectedLabel = selectedOption ? selectedOption.label : undefined
+  const selectedLabel =
+    selectedOption && selectedOption.disabled !== true
+      ? selectedOption.label
+      : undefined
 
   return (
-    <Dropdown onChange={handleChange} label={props.label} value={selectedLabel}>
-      {options.map(({ label, value }) => (
-        <Dropdown.Option key={value} value={value}>
+    <Dropdown
+      onChange={handleChange}
+      label={props.label}
+      value={selectedLabel}
+      {...props}>
+      {options.map(({ id, label, value }) => (
+        <Dropdown.Option key={id || value} value={value}>
           {label}
         </Dropdown.Option>
       ))}
@@ -32,6 +39,7 @@ DropdownField.propTypes = {
   ...fieldShape,
   options: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string,
       label: PropTypes.node,
       value: PropTypes.any
     })
