@@ -3,22 +3,7 @@ import { BORDERS, FONTS, FONT_WEIGHTS, RADII } from '../assets/core'
 import colors from '../assets/colors'
 import typography from '../Typography/variants'
 
-// #region button labels
-const labelStyle = typography.labelButton
-const labelStyleAlt = {
-  ...labelStyle,
-  color: 'inherit',
-  'font-family': FONTS.primary,
-  'font-weight': `${FONT_WEIGHTS.bold}`
-}
-// #endregion
-
 const linkStyles = color => ({
-  label: {
-    ...labelStyle,
-    padding: 0,
-    color: color
-  },
   background: 'none',
   minWidth: 'max-content',
   height: 'auto',
@@ -35,7 +20,6 @@ const linkStyles = color => ({
 
 export default {
   primary: {
-    label: labelStyle,
     backgroundColor: colors.accent,
     color: colors.white,
     borderRadius: `${RADII[8]}px`,
@@ -59,7 +43,6 @@ export default {
     }
   },
   outline: {
-    label: labelStyle,
     color: colors.text,
     backgroundColor: 'transparent',
     border: `${BORDERS[1]} ${colors.accent}`,
@@ -87,7 +70,6 @@ export default {
     }
   },
   outlineAlt: {
-    label: labelStyleAlt,
     color: colors.text,
     backgroundColor: 'transparent',
     border: `${BORDERS[1]} ${colors.text}`,
@@ -112,7 +94,6 @@ export default {
     }
   },
   positive: {
-    label: labelStyle,
     backgroundColor: colors.positive,
     color: colors.white,
     borderRadius: `${RADII[8]}px`,

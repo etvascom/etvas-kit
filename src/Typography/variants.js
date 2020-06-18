@@ -1,72 +1,68 @@
-import { FONTS, FONT_SIZES, FONT_WEIGHTS } from '../assets/core'
-import colors from '../assets/colors'
-
 export default {
   default: {
-    color: colors.text,
-    'font-family': FONTS.primary,
-    'font-weight': 'normal',
-    'font-size': FONT_SIZES[0],
-    'line-height': '20px'
+    fontFamily: 'primary',
+    fontWeight: 'normal',
+    fontSize: 0,
+    lineHeight: '20px'
   },
   titleLargest: {
-    'font-family': FONTS.primary,
-    'font-weight': `${FONT_WEIGHTS.lighter}`,
-    'font-size': FONT_SIZES[5],
-    'line-height': '46px'
+    fontFamily: 'primary',
+    fontWeight: 'lighter',
+    fontSize: [5],
+    lineHeight: '46px'
   },
   titleLarge: {
-    'font-family': FONTS.primary,
-    'font-weight': `${FONT_WEIGHTS.lighter}`,
-    'font-size': FONT_SIZES[4],
-    'line-height': '30px'
+    fontFamily: 'primary',
+    fontWeight: 'lighter',
+    fontSize: 4,
+    lineHeight: '30px'
   },
   labelLarge: {
-    'font-family': FONTS.complementary,
-    'font-weight': `${FONT_WEIGHTS.lighter}`,
-    'font-size': FONT_SIZES[4],
-    'line-height': '30px'
+    fontFamily: 'complementary',
+    fontWeight: 'lighter',
+    fontSize: 4,
+    lineHeight: '30px'
   },
   titleSmall: {
-    'font-family': FONTS.primary,
-    'font-weight': `${FONT_WEIGHTS.lighter}`,
-    'font-size': FONT_SIZES[3],
-    'line-height': '30px'
+    fontFamily: 'primary',
+    fontWeight: 'lighter',
+    fontSize: 3,
+    lineHeight: '30px'
   },
   textLarge: {
-    'font-family': FONTS.primary,
-    'font-weight': `${FONT_WEIGHTS.lighter}`,
-    'font-size': FONT_SIZES[2],
-    'line-height': '42px'
+    fontFamily: 'primary',
+    fontWeight: 'lighter',
+    fontSize: 2,
+    lineHeight: '42px'
   },
   inputLabel: {
-    'font-family': FONTS.primary,
-    'font-size': FONT_SIZES[1],
-    'line-height': '19px'
+    fontFamily: 'primary',
+    fontSize: 1,
+    lineHeight: '19px'
   },
   labelSmallBold: {
-    'font-family': FONTS.primary,
-    'font-weight': `${FONT_WEIGHTS.bold}`,
-    'font-size': FONT_SIZES[1],
-    'line-height': '19px'
+    fontFamily: 'primary',
+    fontWeight: 'bold',
+    fontSize: 1,
+    lineHeight: '19px'
   },
   labelSmall: {
-    'font-family': FONTS.primary,
-    'font-weight': 'normal',
-    'font-size': FONT_SIZES[1],
-    'line-height': '19px'
+    fontFamily: 'primary',
+    fontWeight: 'normal',
+    fontSize: 1,
+    lineHeight: '19px'
   },
   labelButton: {
-    'font-family': FONTS.complementary,
-    'font-weight': `${FONT_WEIGHTS.black}`,
-    'font-size': FONT_SIZES[0],
-    'line-height': '14px',
-    'text-transform': 'uppercase'
+    fontFamily: 'complementary',
+    fontWeight: 'black',
+    fontSize: 0,
+    lineHeight: '14px',
+    textTransform: 'uppercase'
   },
   textSmall: {
-    'font-family': FONTS.primary,
-    'font-weight': 'normal',
-    'font-size': FONT_SIZES[0],
-    'line-height': '20px'
+    fontFamily: 'primary',
+    fontWeight: 'normal',
+    fontSize: 0,
+    lineHeight: '20px'
   }
 }

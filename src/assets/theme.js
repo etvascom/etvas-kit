@@ -1,10 +1,4 @@
 import { buildTheme } from '@ivoryio/kogaio/utils'
-import {
-  FONT_WEIGHTS,
-  LETTER_SPACINGS,
-  LINE_HEIGHTS,
-  TEXT_STYLES
-} from './core'
 import { buttons } from '../Button'
 import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
@@ -17,24 +11,22 @@ import breakpoints from './breakpoints'
 
 const theme = buildTheme({
   dropdowns: DROPDOWN_VARIANTS,
-  fontWeights: FONT_WEIGHTS,
   inputs: INPUT_VARIANTS,
-  letterSpacings: LETTER_SPACINGS,
-  lineHeights: LINE_HEIGHTS,
-  textStyles: TEXT_STYLES,
   breakpoints,
 
   // basic*s
   fonts,
+  fontSizes: ['12px', '14px', '16px', '20px', '24px', '32px'],
+  fontWeights: {
+    ligher: '300',
+    bold: '600',
+    black: '900'
+  },
   colors,
   shadows,
 
   // variants
-  buttons,
-  typography,
-
-  // Components
-  Typography: typography.default
+  buttons
 })
 
 export default theme

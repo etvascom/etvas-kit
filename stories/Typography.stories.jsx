@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Table } from '../src'
+import { Flex, Card, Typography, Table } from '../src'
 
 const { Row, Header, Body, Cell } = Table
 
@@ -13,9 +13,8 @@ export const Variants = () => {
     'textSmall',
     'textLarge',
     'titleLargest',
-    'textLarge',
-    'titleSmall',
     'labelLarge',
+    'titleSmall',
     'labelSmall',
     'labelSmallBold',
     'labelButton'
@@ -44,3 +43,19 @@ export const Variants = () => {
     </Table>
   )
 }
+
+export const Truncated = () => (
+  <Flex>
+    <Card width='250px' height='100px' p={2} m={1}>
+      <Typography variant='textLarge' truncate>
+        Some very long text that gets truncated
+      </Typography>
+    </Card>
+    <Card width='250px' height='100px' p={2} m={1}>
+      <Typography variant='textLarge' truncate={2}>
+        Some very long text that gets truncated to the number of lines that is
+        specified
+      </Typography>
+    </Card>
+  </Flex>
+)
