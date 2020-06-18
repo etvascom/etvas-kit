@@ -1,13 +1,14 @@
 import { buildTheme } from '@ivoryio/kogaio/utils'
-import { buttons } from '../Button'
 import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
-import { typography } from '../Typography'
 
 import colors from './colors'
-import fonts from './fonts'
-import shadows from './shadows'
-import breakpoints from './breakpoints'
+
+const breakpoints = ['30rem', '48rem', '80rem']
+const [sm, md, lg] = breakpoints
+breakpoints.sm = sm
+breakpoints.md = md
+breakpoints.lg = lg
 
 const theme = buildTheme({
   dropdowns: DROPDOWN_VARIANTS,
@@ -15,7 +16,12 @@ const theme = buildTheme({
   breakpoints,
 
   // basic*s
-  fonts,
+  fonts: {
+    primary:
+      'Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif',
+    complementary:
+      'Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif'
+  },
   fontSizes: ['12px', '14px', '16px', '20px', '24px', '32px'],
   fontWeights: {
     ligher: '300',
@@ -23,10 +29,9 @@ const theme = buildTheme({
     black: '900'
   },
   colors,
-  shadows,
-
-  // variants
-  buttons
+  shadows: {
+    etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)'
+  }
 })
 
 export default theme
