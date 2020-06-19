@@ -18,7 +18,9 @@ export const Card = ({ leader, children }) => {
   return (
     <StyledCardWrapper>
       <Flex justifyContent='space-between' p={2} onClick={handleToggle}>
-        {leader || <span />}
+        <Typography variant='labelButton' color='outline'>
+          {leader ? leader.props.children : ''}
+        </Typography>
         <Icon name={isOpen ? 'expand_less' : 'expand_more'} />
       </Flex>
       {isOpen && <StyledContent px={4}>{children}</StyledContent>}
