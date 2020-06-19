@@ -24,6 +24,7 @@ export * from './ErrorPages'
 export * from './EmbededApp'
 export * from './IntegrationHeader'
 export * from './Steps'
+export * from './Chip'
 
 export { styled }
 export * from '@ivoryio/kogaio'
