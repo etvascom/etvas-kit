@@ -60,7 +60,8 @@ const StyledButton = styled.button(
     minWidth: '160px',
     width: 'fit-content',
     label: {
-      cursor: 'pointer'
+      cursor: 'pointer',
+      pointerEvents: 'none'
     },
     ':hover': {
       opacity: 0.75

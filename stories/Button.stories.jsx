@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import { Button, Table } from '../src'
 
 const { Row, Header, Body, Cell } = Table
@@ -35,7 +36,9 @@ export const Variants = () => {
           <Row key={variant}>
             <Cell leader>{variant}</Cell>
             <Cell>
-              <Button variant={variant}>Hello Button</Button>
+              <Button variant={variant} onClick={action(variant)}>
+                Hello Button
+              </Button>
             </Cell>
             <Cell>
               <Button disabled variant={variant}>
