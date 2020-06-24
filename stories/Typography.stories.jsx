@@ -59,3 +59,11 @@ export const Truncated = () => (
     </Card>
   </Flex>
 )
+
+export const ResponsiveVariant = () => (
+  <Card width='350px' p={2} m={1}>
+    <Typography variant={['labelButton', 'textSmall', 'titleLargest']}>
+      Typography that changes variant across device sizes
+    </Typography>
+  </Card>
+)
