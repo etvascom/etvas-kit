@@ -10,6 +10,11 @@ breakpoints.sm = sm
 breakpoints.md = md
 breakpoints.lg = lg
 
+const zIndices = {
+  menu: 5,
+  modal: 10
+}
+
 const theme = buildTheme({
   dropdowns: DROPDOWN_VARIANTS,
   inputs: INPUT_VARIANTS,
@@ -31,7 +36,8 @@ const theme = buildTheme({
   colors,
   shadows: {
     etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)'
-  }
+  },
+  zIndices
 })
 
 export default theme

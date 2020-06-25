@@ -113,11 +113,17 @@ const SidebarWrapper = styled.div(
     variants: {
       web: {
         flexDirection: 'column',
-        width: '240px'
+        width: '240px',
+        borderRightWidth: '1px',
+        borderRightStyle: 'solid',
+        borderRightColor: 'lighterOutline',
+        position: 'static'
       },
       mobile: {
         flexDirection: 'row-reverse',
-        width: '100%'
+        width: '100%',
+        position: 'relative',
+        zIndex: 'menu'
       }
     }
   })
@@ -200,10 +206,12 @@ const ContentWrapper = styled.div(
     variants: {
       web: {
         paddingLeft: 16,
-        paddingRight: 16
+        paddingRight: 16,
+        boxShadow: 'none'
       },
       mobile: {
-        padding: 2
+        padding: 2,
+        boxShadow: 'inset 0 .2rem  .2rem -.2rem rgba(0, 0 ,0, .25)'
       }
     }
   })
