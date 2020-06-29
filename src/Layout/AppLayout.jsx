@@ -45,7 +45,7 @@ const CloseButton = styled(Touchable)(
     position: 'fixed',
     width: '34px',
     height: '34px',
-    left: 'calc(20vw - 17px)',
+    left: 'calc(30vw - 17px)',
     top: '23px'
   })
 )
@@ -191,7 +191,7 @@ const ConditionalMenu = styled.div(({ isOpen }) =>
         top: 0,
         left: 0,
         bottom: 0,
-        width: '40vw',
+        width: '60vw',
         backgroundColor: 'brand'
       }
     }

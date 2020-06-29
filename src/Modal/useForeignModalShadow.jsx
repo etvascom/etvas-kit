@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { InterCom } from '../providers'
-import { enableScroll, disableScroll } from './utils'
 
 const raiseIframe = iframe => {
-  iframe.style.zIndex = 3
+  iframe.style.zIndex = 11
   iframe.style.position = 'relative'
 }
 
@@ -42,12 +41,10 @@ export const useForeignModalShadow = () => {
       // disableScroll()
     } else if (iframe) {
       resetIframe(iframe)
-      // enableScroll()
     }
 
     return () => {
       resetIframe(iframe)
-      // enableScroll()
     }
   }, [backdrop, iframeRef])
 
@@ -68,7 +65,7 @@ const Shadow = styled.div(({ backdrop }) =>
     top: 0,
     bottom: 0,
     right: 0,
-    zIndex: 2,
+    zIndex: 'modal',
     backgroundColor: backdrop
   })
 )

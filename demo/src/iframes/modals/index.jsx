@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
+import css from '@styled-system/css'
 import {
   Button,
   Modal,
+  Box,
   Card,
   Flex,
   Typography,
@@ -35,11 +38,23 @@ export const ModalChild = () => {
 
 export const ModalParent = () => (
   <Flex justifyContent='space-between'>
-    <Typography variant='titleSmall'>Iframe Modal Demo</Typography>
+    <Box>
+      <Typography variant='titleSmall'>Iframe Modal Demo</Typography>
+      <ZindexedElement variant='textLarge'>
+        Element with menu zindex
+      </ZindexedElement>
+    </Box>
     <EmbededAppContainer
       src='index.html?demo=modals'
       defaultHeight='500px'
       useForeignModalShadow
     />
   </Flex>
+)
+
+const ZindexedElement = styled(Typography)(
+  css({
+    position: 'relative',
+    zIndex: 'menu'
+  })
 )

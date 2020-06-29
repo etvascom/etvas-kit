@@ -5,8 +5,7 @@ export default {
     width: '100vw',
     height: '100vh',
     position: 'fixed',
-    // TODO collect and organize zindex values
-    zIndex: 100
+    zIndex: 'modal'
   },
   content: {
     position: 'relative',
