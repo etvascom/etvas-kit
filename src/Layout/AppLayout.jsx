@@ -180,14 +180,10 @@ Menu.displayName = 'Menu'
 const ConditionalMenu = styled.div(({ isOpen }) =>
   variant({
     variants: {
-      web: { display: 'block', width: 'unset', position: 'static', padding: 6 },
+      web: { display: 'block', width: 'unset', position: 'static' },
       mobile: {
         display: isOpen ? 'block' : 'none',
         position: 'fixed',
-        paddingTop: '80px',
-        paddingLeft: 4,
-        paddingRight: 4,
-        paddingBottom: 4,
         top: 0,
         left: 0,
         bottom: 0,

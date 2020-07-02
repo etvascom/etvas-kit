@@ -7,7 +7,7 @@ export default {
 }
 
 const AppLogo = () => <BlockSkeleton width='100%' height='100%' />
-const AppMenu = () => <TextSkeleton lines={4} justify='equal' />
+const AppMenu = () => <TextSkeleton lines={4} justify='equal' p={6} />
 
 export const WebView = () => (
   <AppLayout
