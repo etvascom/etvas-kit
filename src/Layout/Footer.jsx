@@ -11,8 +11,8 @@ const Content = styled.div(
     backgroundImage:
       'url("https://s3.eu-central-1.amazonaws.com/customer.etvas-dev.xyz/footer-image.png")',
     backgroundRepeat: 'repeat-x',
-    backgroundPosition: '0 100px',
-    backgroundSize: 'cover',
+    backgroundPosition: 'bottom left',
+    backgroundSize: 'auto 600px',
     height: '600px',
     width: '100%',
     position: 'relative'
