@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { Touchable } from '@ivoryio/kogaio'
+import { Touchable, Flex } from '@ivoryio/kogaio'
 
+import { Footer } from './Footer'
 import { Icon } from '../Icon'
 
 export const AppLayout = ({
   sidebarContent,
   headerContent,
+  footerContent,
   variant,
   children
 }) => {
@@ -35,7 +37,14 @@ export const AppLayout = ({
           )}
         </Menu>
       </SidebarWrapper>
-      <ContentWrapper variant={variant}>{children}</ContentWrapper>
+      <Flex
+        flexGrow='1'
+        flexDirection='column'
+        justifyContent='space-between'
+        alignItems='stretch'>
+        <ContentWrapper variant={variant}>{children}</ContentWrapper>
+        <Footer>{footerContent}</Footer>
+      </Flex>
     </Container>
   )
 }
@@ -196,7 +205,9 @@ const ConditionalMenu = styled.div(({ isOpen }) =>
 
 const ContentWrapper = styled.div(
   css({
-    flexGrow: 1
+    flexGrow: 0,
+    width: '100%',
+    maxWidth: '1200px'
   }),
   variant({
     variants: {
@@ -218,6 +229,7 @@ ContentWrapper.displayName = 'ContentWrapper'
 AppLayout.propTypes = {
   sidebarContent: PropTypes.node,
   headerContent: PropTypes.node,
+  footerContent: PropTypes.node,
   variant: PropTypes.oneOfType([
     PropTypes.oneOf(['mobile', 'web']),
     PropTypes.arrayOf(PropTypes.oneOf(['mobile', 'web'])),
