@@ -41,7 +41,8 @@ export const AppLayout = ({
         flexGrow='1'
         flexDirection='column'
         justifyContent='space-between'
-        alignItems='stretch'>
+        alignItems='stretch'
+        overflow='auto'>
         <ContentWrapper variant={variant}>{children}</ContentWrapper>
         <Footer>{footerContent}</Footer>
       </Flex>
