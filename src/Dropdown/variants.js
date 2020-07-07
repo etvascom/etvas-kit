@@ -15,6 +15,7 @@ const DEFAULT_DROPDOWN = {
     'border-radius': `${RADII[8]}px ${RADII[8]}px 0 0`
   },
   '.dropdown-item': {
+    flex: '1 0 auto',
     '.dropdown-text': {
       color: colors.text
     },
