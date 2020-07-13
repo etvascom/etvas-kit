@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cloneElement } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
@@ -6,7 +6,20 @@ import css from '@styled-system/css'
 import { Flex } from '@ivoryio/kogaio'
 import { NavItem } from './Item'
 
-export const NavBar = ({ children }) => <Container>{children}</Container>
+export const NavBar = ({ children }) => {
+  if (!children.length) {
+    return null
+  }
+
+  const len = children.length
+  const w = 100 / len + '%'
+
+  return (
+    <Container>
+      {Array.from(children).map(child => cloneElement(child, { maxWidth: w }))}
+    </Container>
+  )
+}
 
 const Container = styled(Flex)(
   css({

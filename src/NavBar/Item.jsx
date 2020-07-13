@@ -14,9 +14,10 @@ export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => {
     <Container as={as} onClick={onClick} alignItems='center' {...props}>
       <Icon name={icon} color={color} size='18px' />
       <Typography
+        width='100%'
         as='span'
         variant='labelButton'
-        truncate={1}
+        truncate
         color={color}
         ml={[0, 2]}
         mt={[1, 0]}>

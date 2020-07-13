@@ -13,11 +13,16 @@ export const SimpleNavBar = () => (
       <NavBar.Item icon='eye' label='Overview' onClick={action('overview')} />
       <NavBar.Item
         icon='alertOctagon'
-        label='Alerts'
+        label='VeryLongItemNameWithoutSpace'
         isActive
         onClick={action('alert')}
       />
       <NavBar.Item icon='rocket' label='Space' onClick={action('space')} />
+      <NavBar.Item
+        icon='cart'
+        label='Shopping Is Fun'
+        onClick={action('cart')}
+      />
     </NavBar>
     <Box p={4}>
       <TextSkeleton lines={2} mb={4} />
