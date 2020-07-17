@@ -6,14 +6,12 @@ import { Icon } from '../Icon'
 import { Tooltip } from '../Tooltip'
 import { Flex } from '@ivoryio/kogaio'
 
-const Content = styled.div(
+const Content = styled.div(({ bgImage }) =>
   css({
-    backgroundImage:
-      'url("https://s3.eu-central-1.amazonaws.com/customer.etvas-dev.xyz/footer-image.png")',
+    backgroundImage: `url(${bgImage})`,
     backgroundRepeat: 'repeat-x',
-    backgroundPosition: 'bottom left',
-    backgroundSize: 'auto 600px',
-    height: '600px',
+    backgroundPosition: 'top center',
+    height: '300px',
     width: '100%',
     position: 'relative'
   })
@@ -29,14 +27,14 @@ const StyledTooltip = styled(Tooltip)(({ visible }) =>
   })
 )
 
-export const Footer = ({ children }) => {
+export const Footer = ({ bgImage, children }) => {
   const [tooltip, setTooltip] = useState(false)
 
   const show = useCallback(() => setTooltip(true), [setTooltip])
   const hide = useCallback(() => setTooltip(false), [setTooltip])
 
   return (
-    <Content>
+    <Content bgImage={bgImage}>
       <Flex
         flexDirection='column'
         alignItems='center'
@@ -59,5 +57,6 @@ export const Footer = ({ children }) => {
 }
 
 Footer.propTypes = {
+  bgImage: PropTypes.string,
   children: PropTypes.node
 }

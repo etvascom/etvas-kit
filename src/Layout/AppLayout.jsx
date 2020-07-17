@@ -11,7 +11,8 @@ import { Icon } from '../Icon'
 export const AppLayout = ({
   sidebarContent,
   headerContent,
-  footerContent,
+  footerTooltip,
+  footerBgImage,
   variant,
   children
 }) => {
@@ -44,7 +45,7 @@ export const AppLayout = ({
         alignItems='stretch'
         overflow='auto'>
         <ContentWrapper variant={variant}>{children}</ContentWrapper>
-        <Footer>{footerContent}</Footer>
+        <Footer bgImage={footerBgImage}>{footerTooltip}</Footer>
       </Flex>
     </Container>
   )
@@ -230,7 +231,8 @@ ContentWrapper.displayName = 'ContentWrapper'
 AppLayout.propTypes = {
   sidebarContent: PropTypes.node,
   headerContent: PropTypes.node,
-  footerContent: PropTypes.node,
+  footerTooltip: PropTypes.node,
+  footerBgImage: PropTypes.string,
   variant: PropTypes.oneOfType([
     PropTypes.oneOf(['mobile', 'web']),
     PropTypes.arrayOf(PropTypes.oneOf(['mobile', 'web'])),
