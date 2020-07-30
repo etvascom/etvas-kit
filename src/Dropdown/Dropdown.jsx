@@ -34,6 +34,7 @@ const Dropdown = ({
   const [search, setSearch] = useState('')
 
   const wrapper = useRef()
+  const searchField = useRef()
 
   useLayoutEffect(() => {
     const clickOutside = event => {
@@ -47,7 +48,36 @@ const Dropdown = ({
     }
   }, [])
 
-  const toggleDropdown = () => (disabled ? false : setCollapsed(!isCollapsed))
+  const isEmpty = useMemo(
+    () => (value ? (multiple ? value.length === 0 : !value) : true),
+    [value, multiple]
+  )
+
+  const hasSearch = useMemo(
+    () => Array.isArray(children) && children.length > 40,
+    [children]
+  )
+
+  const searchText = useMemo(() => search.trim().toLowerCase(), [search])
+  const searchPh = useMemo(
+    () => searchPlaceholder.replace('{len}', children ? children.length : '?'),
+    [searchPlaceholder, children]
+  )
+
+  const toggleDropdown = () => {
+    if (disabled) {
+      return false
+    }
+    const shouldFocusOnSearch = hasSearch && isCollapsed
+    setCollapsed(!isCollapsed)
+    if (shouldFocusOnSearch) {
+      setTimeout(() => {
+        if (searchField.current) {
+          searchField.current.focus()
+        }
+      }, 10)
+    }
+  }
 
   const clicked = () => {
     setSwipe(false)
@@ -73,22 +103,6 @@ const Dropdown = ({
       }, 60)
     }
   }
-
-  const isEmpty = useMemo(
-    () => (value ? (multiple ? value.length === 0 : !value) : true),
-    [value, multiple]
-  )
-
-  const hasSearch = useMemo(
-    () => Array.isArray(children) && children.length > 40,
-    [children]
-  )
-
-  const searchText = useMemo(() => search.trim().toLowerCase(), [search])
-  const searchPh = useMemo(
-    () => searchPlaceholder.replace('{len}', children ? children.length : '?'),
-    [searchPlaceholder, children]
-  )
 
   const setSearchText = event => {
     setSearch(event.target.value)
@@ -136,6 +150,7 @@ const Dropdown = ({
         onTouchEnd={decide}>
         {hasSearch ? (
           <SearchInput
+            ref={searchField}
             placeholder={searchPh}
             type='search'
             onChange={setSearchText}
