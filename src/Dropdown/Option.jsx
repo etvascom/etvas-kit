@@ -27,7 +27,11 @@ const DropdownItem = ({
   )
 
   return (
-    <Option onClick={_handleClick} selected={isSelected} touch={hasTouch}>
+    <Option
+      role='option'
+      onClick={_handleClick}
+      selected={isSelected}
+      touch={hasTouch}>
       {children}
     </Option>
   )

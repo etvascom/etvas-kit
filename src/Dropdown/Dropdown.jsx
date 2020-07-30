@@ -10,8 +10,10 @@ import React, {
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
+import { Flex } from '@ivoryio/kogaio'
 
-import { typography } from '../Typography'
+import { Typography, typography } from '../Typography'
+import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
 
@@ -19,11 +21,15 @@ const Dropdown = ({
   disabled,
   multiple,
   error,
+  label,
   value,
+  id,
+  required,
+  noBottomSpace,
   placeholder,
   valueRender,
-  valueSelected,
-  valueFilter,
+  itemSelected,
+  itemFilter,
   searchPlaceholder,
   onChange,
   children,
@@ -64,6 +70,20 @@ const Dropdown = ({
     [searchPlaceholder, children]
   )
 
+  const cId = useMemo(() => id || `dd-${Math.floor(1000000 * Math.random())}`, [
+    id
+  ])
+
+  const displayValue = useMemo(() => {
+    if (!value) {
+      return ''
+    }
+    if (typeof valueRender === 'string') {
+      return valueRender
+    }
+    return valueRender(value)
+  }, [value, valueRender])
+
   const toggleDropdown = () => {
     if (disabled) {
       return false
@@ -96,8 +116,17 @@ const Dropdown = ({
   }
 
   const onSelectItem = option => {
-    onChange(option)
-    if (!multiple) {
+    if (multiple) {
+      const old = isEmpty ? [] : [...value]
+      const idx = old.indexOf(option)
+      if (idx >= 0) {
+        old.splice(idx, 1)
+      } else {
+        old.push(option)
+      }
+      onChange(old)
+    } else {
+      onChange(option)
       setTimeout(() => {
         setCollapsed(true)
       }, 60)
@@ -117,59 +146,82 @@ const Dropdown = ({
       return Children.toArray(children).slice(0, 30)
     }
     return Children.toArray(children)
-      .filter(child => valueFilter(searchText, child.props.value))
+      .filter(child => itemFilter(searchText, child.props.value))
       .slice(0, 30)
-  }, [hasSearch, searchText, children, valueFilter])
+  }, [hasSearch, searchText, children, itemFilter])
+
+  const isItemSelected = item => (!isEmpty ? itemSelected(value, item) : false)
 
   return (
-    <DropdownWrapper
-      ref={wrapper}
-      disabled={disabled}
-      collapsed={isCollapsed}
-      error={error}
-      {...props}>
-      <StyledIndicator
-        onClick={toggleDropdown}
-        collapsed={isCollapsed}
+    <Flex flexDirection='column' hasLabel={label} width={1} {...props}>
+      {label ? (
+        <Typography
+          as='label'
+          htmlFor={cId}
+          variant='inputLabel'
+          width='fit-content'>
+          {label} {required ? '*' : ''}
+        </Typography>
+      ) : null}
+      <DropdownWrapper
+        role='combobox'
+        aria-disabled={disabled}
+        aria-haspopup={!disabled}
+        aria-expanded={!isCollapsed}
+        ref={wrapper}
         disabled={disabled}
-      />
-      <Toggler
         collapsed={isCollapsed}
-        disabled={disabled}
-        isEmpty={isEmpty}
-        onClick={toggleDropdown}>
-        {!isEmpty ? valueRender(value) : placeholder}
-      </Toggler>
-      <DropdownList
-        collapsed={isCollapsed}
-        onMouseDown={clicked}
-        onMouseMove={inhibit}
-        onMouseUp={decide}
-        onTouchStart={clicked}
-        onTouchMove={inhibit}
-        onTouchEnd={decide}>
-        {hasSearch ? (
-          <SearchInput
-            ref={searchField}
-            placeholder={searchPh}
-            type='search'
-            onChange={setSearchText}
-          />
-        ) : null}
-        <ScrollingList>
-          {options.map(child =>
-            isValidElement(child)
-              ? cloneElement(child, {
-                  onSelectItem,
-                  isSelected: multiple
-                    ? value?.some(val => valueSelected(val, child.props.value))
-                    : valueSelected(value, child.props.value)
-                })
-              : null
-          )}
-        </ScrollingList>
-      </DropdownList>
-    </DropdownWrapper>
+        error={error}
+        {...props}>
+        <StyledIndicator
+          type='button'
+          role='display'
+          onClick={toggleDropdown}
+          collapsed={isCollapsed}
+          disabled={disabled}
+        />
+        <Toggler
+          collapsed={isCollapsed}
+          disabled={disabled}
+          isEmpty={isEmpty}
+          type='button'
+          role='switch'
+          aria-controls={`drop-${cId}`}
+          onClick={toggleDropdown}>
+          {isEmpty ? placeholder : displayValue}
+        </Toggler>
+        <DropdownList
+          collapsed={isCollapsed}
+          onMouseDown={clicked}
+          onMouseMove={inhibit}
+          onMouseUp={decide}
+          onTouchStart={clicked}
+          onTouchMove={inhibit}
+          onTouchEnd={decide}>
+          {hasSearch ? (
+            <SearchInput
+              ref={searchField}
+              placeholder={searchPh}
+              id={`search-${cId}`}
+              type='search'
+              role='searchbox'
+              onChange={setSearchText}
+            />
+          ) : null}
+          <ScrollingList aria-labelledby={cId} role='menu' id={`drop-${cId}`}>
+            {options.map(child =>
+              isValidElement(child)
+                ? cloneElement(child, {
+                    onSelectItem,
+                    isSelected: isItemSelected(child.props.value)
+                  })
+                : null
+            )}
+          </ScrollingList>
+        </DropdownList>
+      </DropdownWrapper>
+      <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+    </Flex>
   )
 }
 
@@ -281,19 +333,11 @@ const DropdownList = styled.div(
 
 const ScrollingList = styled.div(
   css({
-    maxHeight: '10rem',
+    maxHeight: '172px',
     overflowX: 'hidden',
     overflowY: 'auto'
   })
 )
-
-// const SearchInputPanel = styled.div(
-//   css({
-//     padding: 4,
-//     borderBottom: '1px solid',
-//     borderBottomColor: 'outline'
-//   })
-// )
 
 const SearchInput = styled.input(
   css({
@@ -320,11 +364,15 @@ Dropdown.propTypes = {
     PropTypes.node,
     PropTypes.string
   ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  id: PropTypes.string,
+  required: PropTypes.bool,
+  noBottomSpace: PropTypes.bool,
   value: PropTypes.any,
   onChange: PropTypes.func,
-  valueRender: PropTypes.func,
-  valueSelected: PropTypes.func,
-  valueFilter: PropTypes.func,
+  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  itemSelected: PropTypes.func,
+  itemFilter: PropTypes.func,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   searchPlaceholder: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element)
@@ -333,10 +381,12 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   disabled: false,
   multiple: false,
+  required: false,
+  value: '',
   valueRender: v => v,
-  valueSelected: (value, v) =>
+  itemSelected: (value, v) =>
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
-  valueFilter: (search, v) =>
+  itemFilter: (search, v) =>
     typeof v === 'string'
       ? v.toLowerCase().includes(search)
       : typeof v === 'object'

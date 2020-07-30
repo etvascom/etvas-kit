@@ -7,7 +7,6 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
 import { Icon } from '../Icon'
@@ -64,7 +63,9 @@ export const Input = forwardRef(
         } else {
           resetInputType()
         }
-        ev.preventDefault()
+        if (ev) {
+          ev.preventDefault()
+        }
       },
       [inputType, ref, inputRef, resetInputType]
     )
