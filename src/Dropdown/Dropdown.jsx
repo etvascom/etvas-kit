@@ -60,7 +60,7 @@ const Dropdown = ({
 
   const searchText = useMemo(() => search.trim().toLowerCase(), [search])
   const searchPh = useMemo(
-    () => searchPlaceholder.replace('{len}', children ? children.length : '?'),
+    () => searchPlaceholder.replace('#len', children ? children.length : '?'),
     [searchPlaceholder, children]
   )
 
@@ -349,7 +349,7 @@ Dropdown.defaultProps = {
       : false,
   onChange: () => console.warn('Dropdown.onChange should be a function'),
   placeholder: 'Please select an option',
-  searchPlaceholder: 'Type to search in {len} items. Max 30 items shown.'
+  searchPlaceholder: 'Type to search in #len items. Max 30 items shown.'
 }
 
 Dropdown.Option = Option
