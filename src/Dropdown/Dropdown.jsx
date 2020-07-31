@@ -26,6 +26,8 @@ const Dropdown = ({
   id,
   required,
   noBottomSpace,
+  searchThreshold,
+  searchMaxResults,
   placeholder,
   valueRender,
   itemSelected,
@@ -60,8 +62,8 @@ const Dropdown = ({
   )
 
   const hasSearch = useMemo(
-    () => Array.isArray(children) && children.length > 40,
-    [children]
+    () => Array.isArray(children) && children.length > searchThreshold,
+    [children, searchThreshold]
   )
 
   const searchText = useMemo(() => search.trim().toLowerCase(), [search])
@@ -143,12 +145,12 @@ const Dropdown = ({
     }
 
     if (!searchText) {
-      return Children.toArray(children).slice(0, 30)
+      return Children.toArray(children).slice(0, searchMaxResults)
     }
     return Children.toArray(children)
       .filter(child => itemFilter(searchText, child.props.value))
-      .slice(0, 30)
-  }, [hasSearch, searchText, children, itemFilter])
+      .slice(0, searchMaxResults)
+  }, [hasSearch, searchText, children, itemFilter, searchMaxResults])
 
   const isItemSelected = item => (!isEmpty ? itemSelected(value, item) : false)
 
@@ -368,6 +370,8 @@ Dropdown.propTypes = {
   id: PropTypes.string,
   required: PropTypes.bool,
   noBottomSpace: PropTypes.bool,
+  searchMaxResults: PropTypes.number,
+  searchThreshold: PropTypes.number,
   value: PropTypes.any,
   onChange: PropTypes.func,
   valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
@@ -399,7 +403,9 @@ Dropdown.defaultProps = {
       : false,
   onChange: () => console.warn('Dropdown.onChange should be a function'),
   placeholder: 'Please select an option',
-  searchPlaceholder: 'Type to search in #len items. Max 30 items shown.'
+  searchPlaceholder: 'Type to search in #len items. Max 30 items shown.',
+  searchMaxResults: 30,
+  searchThreshold: 20
 }
 
 Dropdown.Option = Option
