@@ -6,7 +6,18 @@ export default {
   component: Dropdown
 }
 
-const DummySpace = () => <div style={{ height: '200px' }} />
+const DummySpace = () => (
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '200px',
+      position: 'relative'
+    }}>
+    This is just a dummy text
+  </div>
+)
 
 export const Simple = () => {
   const [selected, setSelected] = useState(null)

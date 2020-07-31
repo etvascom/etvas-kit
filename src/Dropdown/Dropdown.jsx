@@ -66,7 +66,10 @@ const Dropdown = ({
     [children, searchThreshold]
   )
 
-  const searchText = useMemo(() => search.trim().toLowerCase(), [search])
+  const searchText = useMemo(
+    () => (search ? search.trim().toLocaleLowerCase() : ''),
+    [search]
+  )
   const searchPh = useMemo(
     () => searchPlaceholder.replace('#len', children ? children.length : '?'),
     [searchPlaceholder, children]
@@ -316,6 +319,7 @@ const DropdownList = styled.div(
     position: 'absolute',
     left: 0,
     right: 0,
+    zIndex: '1',
     appearance: 'none',
     textAlign: 'left',
     width: '100%',
@@ -392,13 +396,13 @@ Dropdown.defaultProps = {
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
   itemFilter: (search, v) =>
     typeof v === 'string'
-      ? v.toLowerCase().includes(search)
+      ? v.toLocaleLowerCase().includes(search)
       : typeof v === 'object'
       ? Object.keys(v).some(
           key =>
             v[key] &&
             typeof v[key] === 'string' &&
-            v[key].toLowerCase().includes(search)
+            v[key].toLocaleLowerCase().includes(search)
         )
       : false,
   onChange: () => console.warn('Dropdown.onChange should be a function'),

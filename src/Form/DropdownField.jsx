@@ -11,6 +11,7 @@ export const DropdownField = ({
   error,
   required,
   multiple,
+  itemFilter,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props)
@@ -41,12 +42,20 @@ export const DropdownField = ({
     return null
   }, [error, required, meta])
 
+  const filterItem =
+    itemFilter ||
+    ((search, option) =>
+      typeof option.label === 'string'
+        ? option.label.toLocaleLowerCase().includes(search)
+        : false)
+
   return (
     <Dropdown
       {...props}
       onChange={handleChange}
       label={props.label}
       value={selectedValue}
+      itemFilter={filterItem}
       valueRender={selectedLabel}
       required={required}
       error={errorDisplay}
@@ -69,7 +78,8 @@ DropdownField.propTypes = {
     key: PropTypes.string,
     value: PropTypes.string,
     label: PropTypes.string
-  })
+  }),
+  itemFilter: PropTypes.func
 }
 
 DropdownField.defaultProps = {
