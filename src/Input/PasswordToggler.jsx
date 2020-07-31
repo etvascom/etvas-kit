@@ -20,7 +20,7 @@ export const PasswordToggler = ({
     if (viewOption.includes('peek')) {
       handleDown()
     }
-  }, [onToggle, viewOption, handleDown])
+  }, [viewOption, handleDown])
 
   return (
     <Touchable

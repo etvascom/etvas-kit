@@ -44,7 +44,11 @@ const formValidate = values => {
     errors.foods = foodErrors
   }
 
-  return errors
+  if (!values.movie) {
+    errors.movie = 'Required'
+  }
+
+  if (values) return errors
 }
 
 export const SimpleForm = () => (
@@ -55,6 +59,7 @@ export const SimpleForm = () => (
     <Typography variant='titleSmall'>Basic info</Typography>
     <TextField
       name='name'
+      id='name'
       label='Name'
       placeholder='e.g. John'
       validate={minLength(3)}
@@ -62,6 +67,7 @@ export const SimpleForm = () => (
     <TextField
       type='password'
       name='password'
+      id='password'
       label='Password'
       placeholder='e.g. secret'
       validate={minLength(3)}
@@ -83,9 +89,14 @@ export const SimpleForm = () => (
     <ErrorDisplay name='foods' type='checkbox' />
 
     <Typography variant='titleSmall'>Movie prefference</Typography>
-    <DropdownField options={movieOptions} name='movie' label='Movie genre' />
+    <DropdownField
+      options={movieOptions}
+      name='movie'
+      label='Movie genre'
+      required
+    />
 
-    <Flex alignItems='center' justifyContent='flex-start'>
+    <Flex alignItems='center' justifyContent='flex-start' mt='140px'>
       <Button type='submit' variant='primary'>
         Submit
       </Button>
