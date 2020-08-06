@@ -10,7 +10,7 @@ export const IntegrationHeader = ({
   title,
   providerPrefix,
   providerName,
-  url,
+  url
 }) => (
   <Flex
     width='100%'
