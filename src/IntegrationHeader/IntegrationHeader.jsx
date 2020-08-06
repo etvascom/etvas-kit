@@ -40,5 +40,5 @@ IntegrationHeader.propTypes = {
   title: PropTypes.node,
   providerPrefix: PropTypes.node,
   providerName: PropTypes.node,
-  url: PropTypes.string,
+  url: PropTypes.string
 }
