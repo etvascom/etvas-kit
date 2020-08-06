@@ -32,7 +32,7 @@ const StyledA = styled.a(
     textDecoration: 'underline',
     textDecorationColor: 'outline',
     color: 'inherit',
-    font: 'inherit',
+    font: 'inherit'
   })
 )
 
