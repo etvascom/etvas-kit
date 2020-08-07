@@ -33,6 +33,7 @@ const Container = styled(Flex)(
     right: 0,
     bottom: [0, 'unset'],
     backgroundColor: ['white', 'transparent'],
+    borderTop: ['1px solid', 'none'],
     color: 'outline',
     padding: [3, 0],
     justifyContent: ['space-between', 'flex-start']
