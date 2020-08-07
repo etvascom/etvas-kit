@@ -23,13 +23,17 @@ export const NavBar = ({ children }) => {
   return <Container>{content}</Container>
 }
 
+// mobile NavBar which is shown on the bottom could be covered by browser navigation
+
 const Container = styled(Flex)(
   css({
     position: ['fixed', 'static'],
-    top: 0,
+    top: ['unset', 0],
     left: 0,
     right: 0,
+    bottom: [0, 'unset'],
     backgroundColor: ['white', 'transparent'],
+    borderTop: ['1px solid', 'none'],
     borderBottom: ['1px solid', 'none'],
     color: 'outline',
     padding: [3, 0],
