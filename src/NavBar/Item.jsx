@@ -7,16 +7,19 @@ import { Flex } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-export const NavItem = ({ icon, label, color, as, onClick, ...props }) => {
+export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => {
   return (
-    <Container as={as} onClick={onClick} alignItems='center' {...props}>
-      <Icon name={icon} color={color} size='18px' />
+    <Container
+      as={as}
+      onClick={onClick}
+      alignItems='center'
+      {...props}
+      width={120}>
+      <Icon name={icon} color={isActive ? 'brand' : 'outline'} size='18px' />
       <Typography
-        maxWidth='120px'
         variant='labelButton'
         truncate
-        color={color}
-        ml={[2, 2]}
+        color={isActive ? 'brand' : 'outline'}
         mt={[1, 0]}>
         {label}
       </Typography>
@@ -27,17 +30,8 @@ export const NavItem = ({ icon, label, color, as, onClick, ...props }) => {
 const Container = styled(Flex)(
   css({
     display: 'flex',
-    minWidth: 'fit-content',
     cursor: 'pointer',
-    paddingLeft: [8, 0],
-    '&:last-child': {
-      paddingRight: [4, 0]
-    },
-    marginLeft: [0, 6],
-    '&:first-child': {
-      paddingLeft: [4, 0]
-    },
-    'scroll-snap-align': 'start'
+    justifyContent: 'center'
   })
 )
 
