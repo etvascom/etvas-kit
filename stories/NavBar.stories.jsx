@@ -1,6 +1,13 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { Box, Flex, TextSkeleton, BlockSkeleton, NavBar } from '../src'
+import {
+  Box,
+  Flex,
+  TextSkeleton,
+  BlockSkeleton,
+  Gradient,
+  NavBar
+} from '../src'
 
 export default {
   title: 'Demo/NavBar',
@@ -14,7 +21,6 @@ export const SimpleNavBar = () => (
       <NavBar.Item
         icon='alertOctagon'
         label='VeryLongItemNameWithoutSpace'
-        isActive
         onClick={action('alert')}
       />
       <NavBar.Item icon='rocket' label='Space' onClick={action('space')} />
