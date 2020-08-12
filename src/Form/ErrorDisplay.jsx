@@ -6,7 +6,7 @@ import { Icon } from '../Icon'
 import { Flex } from '@ivoryio/kogaio'
 
 export const ErrorDisplay = ({ name, type }) => {
-  const [field, meta] = useField({
+  const [, meta] = useField({
     type,
     name
   })

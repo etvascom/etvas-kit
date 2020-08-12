@@ -7,34 +7,24 @@ import { Flex } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => {
-  const color = isActive ? 'brand' : 'outline'
-
-  return (
-    <Container as={as} onClick={onClick} alignItems='center' {...props}>
-      <Icon name={icon} color={color} size='18px' />
-      <Typography
-        width='100%'
-        as='span'
-        variant='labelButton'
-        truncate
-        color={color}
-        ml={[0, 2]}
-        mt={[1, 0]}>
-        {label}
-      </Typography>
-    </Container>
-  )
-}
+export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => (
+  <Container as={as} onClick={onClick} alignItems='center' {...props}>
+    <Icon name={icon} color={isActive ? 'brand' : 'outline'} size='18px' />
+    <Typography
+      variant='labelButton'
+      truncate
+      color={isActive ? 'brand' : 'outline'}
+      ml={2}>
+      {label}
+    </Typography>
+  </Container>
+)
 
 const Container = styled(Flex)(
   css({
+    display: 'flex',
     cursor: 'pointer',
-    flexDirection: ['column', 'row'],
-    marginLeft: [0, 12],
-    '&:first-child': {
-      marginLeft: 0
-    }
+    justifyContent: 'flex-start'
   })
 )
 
@@ -42,6 +32,6 @@ NavItem.propTypes = {
   as: PropTypes.elementType,
   label: PropTypes.node,
   icon: PropTypes.string,
-  isActive: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  isActive: PropTypes.bool
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { useField } from 'formik'
 
 import { RadioButton } from '../Radio'
@@ -7,7 +6,7 @@ import { fieldShape } from './shapes'
 import { makeId } from './utils'
 
 export const RadioField = props => {
-  const [field, meta] = useField({
+  const [field] = useField({
     ...props,
     type: 'radio'
   })
