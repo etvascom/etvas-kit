@@ -17,7 +17,7 @@ export const TextField = props => {
 
 TextField.propTypes = {
   ...fieldShape,
-  type: PropTypes.oneOf(['text', 'password']),
+  type: PropTypes.string,
   placeholder: PropTypes.node,
   required: PropTypes.bool
 }
