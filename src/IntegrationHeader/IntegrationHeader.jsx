@@ -18,11 +18,7 @@ export const IntegrationHeader = ({
     flexDirection={['column', 'row']}
     mb={[6, 8]}>
     <Typography variant='titleLarge'>{title}</Typography>
-    <Typography
-      variant='textSmall'
-      color='outline'
-      display={['flex', 'block']}
-      mt={[4, 0]}>
+    <Typography variant='textSmall' color='outline' mt={[4, 0]}>
       {providerPrefix}{' '}
       <StyledA href={url} target='_blank' rel='noopener noreferrer'>
         {providerName}
