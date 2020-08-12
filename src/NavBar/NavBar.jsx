@@ -6,7 +6,7 @@ import css from '@styled-system/css'
 // import { Flex } from '@ivoryio/kogaio'
 import { NavItem } from './Item'
 
-const ITEM_WIDTH = 120
+// const ITEM_WIDTH = 120
 const GRADIENT_SIZE = 24
 
 export const NavBar = ({ children }) => {
@@ -42,18 +42,40 @@ export const NavBar = ({ children }) => {
       return GRADIENT_SIZE
     }
 
-    const innerWidth = children.length * ITEM_WIDTH
+    const getInnerWidth = () => {
+      if (!main.current) {
+        return 0
+      }
+
+      const items = main.current.getElementsByClassName('nav-bar-item')
+      let innerWidth = 0
+      const elementWidths = []
+      for (let i = 0; i < items.length; i++) {
+        const rect = items[i].getBoundingClientRect()
+        innerWidth += rect.width
+        elementWidths.push(rect.width)
+      }
+      return { innerWidth, elementWidths }
+    }
+
+    const { innerWidth, elementWidths } = getInnerWidth()
 
     const { width } = main.current?.getBoundingClientRect() || {}
-    if ((width && width > innerWidth) || !width) {
+    if (
+      (width && width > innerWidth + 2 * GRADIENT_SIZE) ||
+      !width ||
+      !innerWidth
+    ) {
       return GRADIENT_SIZE
     }
 
-    let pos = width / 2 - ITEM_WIDTH / 2 - activeIndex * ITEM_WIDTH
+    const priorElementWidth = elementWidths
+      .slice(0, activeIndex)
+      .reduce((total, w) => total + w, 0)
+
+    let pos = width / 2 - elementWidths[activeIndex] / 2 - priorElementWidth
     if (pos > GRADIENT_SIZE) {
       pos = GRADIENT_SIZE
-    } else {
-      console.info('we got', { width, innerWidth, pos })
     }
     if (width - innerWidth > pos) {
       pos = width - innerWidth - GRADIENT_SIZE
@@ -66,8 +88,12 @@ export const NavBar = ({ children }) => {
   return (
     <NavContainer ref={main}>
       <NavItemsContainer style={{ left: `${itemsContainerPosition}px` }}>
-        {items.map(item => (
-          <ItemContainer key={item.key} onClick={_scrollToItem(item.idx)}>
+        {items.map((item, idx) => (
+          <ItemContainer
+            className='nav-bar-item'
+            key={item.key}
+            isLastChild={idx === items.length - 1}
+            onClick={_scrollToItem(item.idx)}>
             {item.component}
           </ItemContainer>
         ))}
@@ -83,6 +109,7 @@ const NavContainer = styled.div`
   width: 100%;
   overflow: hidden;
   height: 2rem;
+  margin: 1rem 0;
 `
 const NavItemsContainer = styled.div(
   css({
@@ -119,14 +146,19 @@ const Gradient = styled.button(
         })
 )
 
-const ItemContainer = styled.button`
-  appearance: none;
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  outline: none;
-`
+const ItemContainer = styled.button(
+  css({
+    appearance: 'none',
+    margin: 0,
+    border: 'none',
+    background: 'none',
+    outline: 'none'
+  }),
+  ({ isLastChild }) =>
+    css({
+      padding: isLastChild ? 0 : '0 32px 0 0'
+    })
+)
 
 // const Container = styled(Flex)(
 //   css({
