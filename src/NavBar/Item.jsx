@@ -9,11 +9,11 @@ import { Typography } from '../Typography'
 
 export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => (
   <Container as={as} onClick={onClick} alignItems='center' {...props}>
-    <Icon name={icon} color={isActive ? 'brand' : 'outline'} size='18px' />
+    <Icon name={icon} color={isActive ? 'accent' : 'outline'} size='18px' />
     <Typography
       variant='labelButton'
       truncate
-      color={isActive ? 'brand' : 'outline'}
+      color={isActive ? 'accent' : 'outline'}
       ml={2}>
       {label}
     </Typography>
