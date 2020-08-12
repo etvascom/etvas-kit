@@ -10,9 +10,14 @@ import style from './Modal.style'
 
 import { Box } from '@ivoryio/kogaio'
 
+const inIframe = () => window.self !== window.top
+
+const isModalInIframe = inIframe()
+
 const StyledModalContent = styled(Box)(
   compose(layout, color, flexbox, border),
-  css(style.content)
+  css(style.content),
+  isModalInIframe && css({ position: 'absolute', top: [3, 9] })
 )
 
 export const ModalContent = ({ children, onClose, ...props }) => (
