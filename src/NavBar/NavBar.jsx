@@ -2,11 +2,9 @@ import React, { useMemo, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-
-// import { Flex } from '@ivoryio/kogaio'
 import { NavItem } from './Item'
 
-// const ITEM_WIDTH = 120
+
 const GRADIENT_SIZE = 24
 
 export const NavBar = ({ children }) => {
@@ -160,27 +158,7 @@ const ItemContainer = styled.button(
     })
 )
 
-// const Container = styled(Flex)(
-//   css({
-//     position: ['fixed', 'static'],
-//     top: 0,
-//     left: 0,
-//     right: 0,
-//     backgroundColor: ['white', 'transparent'],
-//     color: 'outline',
-//     padding: [3, 0],
-//     justifyContent: ['space-between', 'flex-start'],
-//     '@media (max-width: 600px)': { // change to md
-//       overflowX: 'scroll',
-//       overflowY: 'none',
-//       'scroll-snap-type': 'x mandatory',
-//       '::-webkit-scrollbar': {
-//         width: 0,
-//         background: 'transparent'
-//       }
-//     }
-//   })
-// )
+
 
 NavBar.propTypes = {
   children: PropTypes.node
