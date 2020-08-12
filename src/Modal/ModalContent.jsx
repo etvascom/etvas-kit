@@ -10,13 +10,8 @@ import style from './Modal.style'
 
 import { Box } from '@ivoryio/kogaio'
 
-const inIframe = () => {
-  try {
-    return window.self !== window.top
-  } catch (e) {
-    return true
-  }
-}
+const inIframe = () => window.self !== window.top
+
 const isModalInIframe = inIframe()
 
 const StyledModalContent = styled(Box)(
