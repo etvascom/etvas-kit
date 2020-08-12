@@ -41,6 +41,8 @@ export const CardSkeleton = ({
       direction = 'column-reverse'
       borderRadius = '2px 2px 10px 10px'
       break
+    default:
+      break
   }
 
   return (

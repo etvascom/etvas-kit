@@ -54,7 +54,11 @@ export const useForeignModalShadow = () => {
 
   return [
     iframeRef,
-    <Shadow backdrop={backdrop} onClick={handleBackdropClick} />
+    <Shadow
+      backdrop={backdrop}
+      key='backdrop-global'
+      onClick={handleBackdropClick}
+    />
   ]
 }
 

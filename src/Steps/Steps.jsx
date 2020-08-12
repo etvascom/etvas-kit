@@ -10,6 +10,7 @@ export const Steps = ({ steps, active, onChange }) => (
   <Flex flexDirection='column'>
     {steps.map((content, i) => (
       <Item
+        // eslint-disable-next-line react/no-array-index-key
         key={i}
         id={i + 1}
         isFirst={i === 0}

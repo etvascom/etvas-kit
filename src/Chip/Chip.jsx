@@ -6,22 +6,13 @@ import css from '@styled-system/css'
 import { Flex } from '@ivoryio/kogaio'
 import { Typography } from '../Typography'
 
-export const Chip = ({
-  color,
-  isRounded,
-  children,
-  label,
-  onClick,
-  onDismiss
-}) => {
-  return (
-    <ChipContainer color={color} isRounded={isRounded} px={2} py={1}>
-      <Typography variant='labelButton' color='inherit'>
-        {label || children}
-      </Typography>
-    </ChipContainer>
-  )
-}
+export const Chip = ({ color, isRounded, children, label }) => (
+  <ChipContainer color={color} isRounded={isRounded} px={2} py={1}>
+    <Typography variant='labelButton' color='inherit'>
+      {label || children}
+    </Typography>
+  </ChipContainer>
+)
 
 const ChipContainer = styled(Flex)(({ isRounded, color }) =>
   css({
@@ -38,9 +29,7 @@ Chip.propTypes = {
   color: PropTypes.string,
   isRounded: PropTypes.bool,
   children: PropTypes.node,
-  label: PropTypes.node,
-  onClick: PropTypes.func,
-  onDismiss: PropTypes.func
+  label: PropTypes.node
 }
 
 Chip.defaultProps = {

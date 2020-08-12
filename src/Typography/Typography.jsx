@@ -42,7 +42,7 @@ const Typography = styled.div(
           overflow: 'hidden',
           display: '-webkit-box',
           '-webkit-box-orient': 'vertical',
-          '-webkit-line-clamp': '' + truncate
+          '-webkit-line-clamp': `${truncate}`
         })
 )
 
