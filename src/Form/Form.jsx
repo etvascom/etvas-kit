@@ -13,7 +13,7 @@ export const Form = ({ name, children, ...props }) => {
     <FormContext.Provider value={{ formName: name }}>
       <Formik {...props}>
         {(...args) => (
-          <FormikForm>
+          <FormikForm noValidate>
             {typeof children === 'function' ? children(...args) : children}
           </FormikForm>
         )}

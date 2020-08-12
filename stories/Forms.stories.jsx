@@ -20,6 +20,7 @@ const values = {
   gender: 'm',
   foods: ['pizza'],
   name: '',
+  maiden: '',
   password: '',
   movie: undefined
 }
@@ -48,6 +49,10 @@ const formValidate = values => {
     errors.movie = 'Required'
   }
 
+  if (!values.maiden) {
+    errors.maiden = 'Required'
+  }
+
   if (values) return errors
 }
 
@@ -63,6 +68,13 @@ export const SimpleForm = () => (
       label='Name'
       placeholder='e.g. John'
       validate={minLength(3)}
+    />
+    <TextField
+      name='maiden'
+      id='maiden'
+      label='Maiden name (required)'
+      placeholder='e.g. Marry'
+      required
     />
     <TextField
       type='password'
