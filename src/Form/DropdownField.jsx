@@ -23,8 +23,12 @@ export const DropdownField = ({
       options.find(option => field.value === option[optionAttributes.value]),
     [field, options, optionAttributes]
   )
-  const selectedLabel = selectedOption ? selectedOption.label : undefined
-  const selectedValue = selectedOption ? selectedOption.value : undefined
+  const selectedLabel = selectedOption
+    ? selectedOption[optionAttributes.label]
+    : undefined
+  const selectedValue = selectedOption
+    ? selectedOption[optionAttributes.value]
+    : undefined
 
   const errorDisplay = useMemo(() => {
     if (!meta.touched) {
@@ -42,11 +46,20 @@ export const DropdownField = ({
     return null
   }, [error, required, meta])
 
+  const mappedOptions = useMemo(
+    () =>
+      options.reduce((mapped, option) => ({
+        ...mapped,
+        [option[optionAttributes.value]]: option[optionAttributes.label]
+      })),
+    [options, optionAttributes]
+  )
+
   const filterItem =
     itemFilter ||
-    ((search, option) =>
-      typeof option.label === 'string'
-        ? option.label.toLocaleLowerCase().includes(search)
+    ((search, value) =>
+      typeof mappedOptions[value] === 'string'
+        ? mappedOptions[value].toLocaleLowerCase().includes(search)
         : false)
 
   return (

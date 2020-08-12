@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 import { NavItem } from './Item'
 
-
 const GRADIENT_SIZE = 24
 
 export const NavBar = ({ children }) => {
