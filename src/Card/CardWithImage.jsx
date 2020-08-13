@@ -20,6 +20,7 @@ const ContentBox = styled(Box)`
 export const CardWithImage = ({
   imageUrl,
   imageSize,
+  imageContain,
   vertical,
   variant,
   children,
@@ -36,7 +37,7 @@ export const CardWithImage = ({
         width='100%'
         height='100%'>
         <ContentBox vertical={vertical} ratio={imageSize}>
-          <Image url={imageUrl} />
+          <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
         <ContentBox
           vertical={vertical}
@@ -53,12 +54,14 @@ CardWithImage.propTypes = {
   ...Card.propTypes,
   variant: PropTypes.oneOf(['default', 'hero']),
   imageUrl: PropTypes.string.isRequired,
+  imageContain: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   imageSize: PropTypes.number,
   vertical: PropTypes.bool
 }
 
 CardWithImage.defaultProps = {
   imageSize: 1 / 3,
-  variant: 'default'
+  variant: 'default',
+  imageContain: 'cover'
 }
 CardWithImage.displayName = 'CardWithImage'
