@@ -1,8 +1,8 @@
 import React from 'react'
-import { NotFound, Link, Flex, Box, Typography } from '../src'
+import { NotFound, NotCompatible, Link, Flex, Box, Typography } from '../src'
 
 export default {
-  title: 'Demo/ErrorPages/NotFound',
+  title: 'Demo/ErrorPages',
   component: NotFound
 }
 
@@ -17,5 +17,11 @@ export const NotFoundPage = () => (
         </Link>
       </Flex>
     </NotFound>
+  </Box>
+)
+
+export const NotCompatibleIncognito = () => (
+  <Box height='600px'>
+    <NotCompatible feature={{ name: 'sessionStorage' }} />
   </Box>
 )
