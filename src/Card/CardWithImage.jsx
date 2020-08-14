@@ -29,6 +29,12 @@ export const CardWithImage = ({
   const direction = vertical ? 'column' : ['column', 'row-reverse']
   const contentPadding = variant === 'hero' ? [4, 8] : [2, 4]
 
+  const invImageSize = Array.isArray(imageSize)
+    ? imageSize.map(size => 1 - size)
+    : imageSize
+    ? 1 - imageSize
+    : undefined
+
   return (
     <CardWrapper vertical={vertical} {...props}>
       <Flex
@@ -39,10 +45,7 @@ export const CardWithImage = ({
         <ContentBox vertical={vertical} ratio={imageSize}>
           <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
-        <ContentBox
-          vertical={vertical}
-          ratio={1 - imageSize}
-          p={contentPadding}>
+        <ContentBox vertical={vertical} p={contentPadding} ratio={invImageSize}>
           {children}
         </ContentBox>
       </Flex>
@@ -54,8 +57,14 @@ CardWithImage.propTypes = {
   ...Card.propTypes,
   variant: PropTypes.oneOf(['default', 'hero']),
   imageUrl: PropTypes.string.isRequired,
-  imageContain: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  imageSize: PropTypes.number,
+  imageContain: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string
+  ]),
+  imageSize: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.number
+  ]),
   vertical: PropTypes.bool
 }
 

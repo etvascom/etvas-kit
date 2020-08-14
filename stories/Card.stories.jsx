@@ -49,3 +49,16 @@ export const WithImageVertical = () => (
     <Typography variant='textSmall'>This is the content</Typography>
   </CardWithImage>
 )
+
+export const WithDifferentLayoutHero = () => (
+  <CardWithImage
+    imageUrl='https://picsum.photos/640/360/?grayscale&blur'
+    variant='hero'
+    imageSize={[1 / 2, 1 / 3]}
+    height='300px'>
+    <Typography variant='titleSmall'>CardWithImage</Typography>
+    <Typography variant='textSmall'>
+      The image should be 1/2 in desktop mode and 1/3 in mobile mode
+    </Typography>
+  </CardWithImage>
+)
