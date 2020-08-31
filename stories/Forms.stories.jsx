@@ -101,7 +101,6 @@ export const SimpleForm = () => (
       required
     />
     <TextAreaField
-      type='text'
       name='comments'
       id='comments'
       label='Comments'

@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import React, { forwardRef, useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
@@ -21,30 +15,27 @@ export const TextArea = forwardRef(
       autoFocus,
       disabled,
       error,
-      icLeft,
-      icRight,
       id,
       label,
       name,
-      noBottomSpace,
       onChange,
       placeholder,
       readOnly,
       required,
-      type,
       valid,
       value,
       variant,
       allowResize,
+      noBottomSpace,
       cols,
       rows,
       maxLength,
+      textAreaProps,
       ...rest
     },
     ref
   ) => {
     const textAreaRef = useRef()
-   
 
     const textAreaVariant = useMemo(() => {
       if (disabled) return 'disabled'
@@ -71,8 +62,6 @@ export const TextArea = forwardRef(
             disabled={readOnly || disabled}
             error={error}
             hasLabel={label}
-            hasIcLeft={icLeft}
-            hasIcRight={icRight}
             id={id}
             name={name}
             onChange={onChange}
@@ -80,14 +69,13 @@ export const TextArea = forwardRef(
             readOnly={readOnly}
             ref={ref || textAreaRef}
             required={required}
-            type={type}
             value={value}
             variant={textAreaVariant}
             allowResize={allowResize}
             maxLength={maxLength}
             cols={cols}
             rows={rows}
-            {...rest}
+            {...textAreaProps}
           />
         </Flex>
         <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
@@ -147,21 +135,17 @@ TextArea.propTypes = {
     PropTypes.node,
     PropTypes.string
   ]),
-  icLeft: PropTypes.string,
-  icRight: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.node,
   name: PropTypes.string,
   /** dummy space added for consistent spacing with validated inputs.
    *
    * remove space by setting this to true */
-  noBottomSpace: PropTypes.bool,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  placeholderTextColor: PropTypes.string,
+  noBottomSpace: PropTypes.bool,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
-  type: PropTypes.string,
   valid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -173,10 +157,9 @@ TextArea.propTypes = {
 TextArea.defaultProps = {
   autoFocus: false,
   rows: 5,
-  allowResize: false,
+  allowResize: true,
   noBottomSpace: false,
   readOnly: false,
-  type: 'text',
   value: '',
   variant: 'default'
 }

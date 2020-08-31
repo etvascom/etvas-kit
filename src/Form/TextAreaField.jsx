@@ -22,11 +22,6 @@ export const TextAreaField = props => {
 
 TextAreaField.propTypes = {
   ...fieldShape,
-  type: PropTypes.string,
   placeholder: PropTypes.node,
   required: PropTypes.bool
-}
-
-TextAreaField.defaultProps = {
-  type: 'text'
 }
