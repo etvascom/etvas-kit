@@ -44,7 +44,7 @@ export const TextArea = forwardRef(
     ref
   ) => {
     const textAreaRef = useRef()
-    //const [textAreaType, setTextAreaType] = useState(type)
+   
 
     const textAreaVariant = useMemo(() => {
       if (disabled) return 'disabled'
