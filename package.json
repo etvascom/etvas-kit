@@ -1,6 +1,6 @@
 {
   "name": "@etvas/etvaskit",
-  "version": "0.11.1",
+  "version": "0.12.0",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -37,7 +37,7 @@
     "@ivoryio/kogaio": "^0.7.93",
     "@styled-system/theme-get": "^5.1.2",
     "hyperid": "^2.0.5",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "use-resize-observer": "^6.1.0"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "eslint-plugin-react-hooks": "^4.0.4",
     "formik": "^2.1.4",
     "lint-staged": "^10.2.7",
-    "nwb": "^0.24.7",
+    "nwb": "^0.25.2",
     "prettier-eslint": "^9.0.2",
     "prettier-eslint-cli": "^5.0.0",
     "react": "^16.13.1",
