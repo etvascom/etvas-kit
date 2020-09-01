@@ -21,7 +21,7 @@ export const ErrorMessage = ({ error, preserveSpace }) => {
 }
 
 const Dummy = styled.div`
-  display: ${({ hide }) => (hide ? 'none' : 'block')};
+  display: block;
   height: 20px;
   opacity: 0;
   visibility: hidden;
