@@ -9,7 +9,8 @@ import {
   RadioField,
   DropdownField,
   ErrorDisplay,
-  TextField
+  TextField,
+  TextAreaField
 } from '../src'
 
 export default {
@@ -22,7 +23,8 @@ const values = {
   name: '',
   maiden: '',
   password: '',
-  movie: undefined
+  movie: undefined,
+  comments: ''
 }
 
 const movieOptions = [
@@ -47,6 +49,9 @@ const formValidate = values => {
 
   if (!values.movie) {
     errors.movie = 'Required'
+  }
+  if (!values.comments) {
+    errors.comments = 'Required'
   }
 
   if (!values.maiden) {
@@ -107,7 +112,13 @@ export const SimpleForm = () => (
       label='Movie genre'
       required
     />
-
+    <TextAreaField
+      name='comments'
+      id='comments'
+      label='Comments'
+      placeholder='Add a comment...'
+      rows={10}
+    />
     <Flex alignItems='center' justifyContent='flex-start' mt='140px'>
       <Button type='submit' variant='primary'>
         Submit
