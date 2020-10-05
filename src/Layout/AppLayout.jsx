@@ -3,14 +3,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { Touchable, Flex } from '@ivoryio/kogaio'
 
 import { Footer } from './Footer'
 import { Icon } from '../Icon'
 
 export const AppLayout = ({
   sidebarContent,
+  sidebarFooterContent,
   headerContent,
+  footerContent,
   footerTooltip,
   footerBgImage,
   variant,
@@ -20,67 +21,104 @@ export const AppLayout = ({
   const toggle = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen])
 
   return (
-    <Container variant={variant}>
-      <SidebarWrapper variant={variant}>
-        <Header variant={variant}>{headerContent}</Header>
-        <Menu variant={variant}>
-          <BurgerButton variant={variant} onClick={toggle}>
-            <Icon name='menu' color='white' size='24px' />
-          </BurgerButton>
-          {isOpen && <Shadow variant={variant} onClick={toggle} />}
-          <ConditionalMenu variant={variant} isOpen={isOpen}>
-            {sidebarContent}
-          </ConditionalMenu>
-          {isOpen && (
-            <CloseButton onClick={toggle}>
-              <Icon name='circleX' size='24px' color='white' />
-            </CloseButton>
+    <Container id='page-container'>
+      <SidebarToggler isOpen={isOpen} variant={variant} onClick={toggle}>
+        <Icon name={isOpen ? 'circleX' : 'menu'} color='white' size='24px' />
+      </SidebarToggler>
+      <Header variant={variant} id='header' isOpen={isOpen}>
+        {headerContent}
+      </Header>
+      <Sidebar id='sidebar' isOpen={isOpen} variant={variant}>
+        <Menu id='sidebar-menu'>{sidebarContent}</Menu>
+        <SidebarFooter id='sidebar-footer'>
+          {sidebarFooterContent}
+        </SidebarFooter>
+      </Sidebar>
+      {isOpen ? (
+        <Shadow id='sidebar-shadow' variant={variant} onClick={toggle} />
+      ) : null}
+      <LayoutPage id='layout-page' variant={variant}>
+        <LayoutBody id='layout-body' variant={variant}>
+          {children}
+        </LayoutBody>
+        <FooterWrapper>
+          {footerContent ? (
+            footerContent
+          ) : (
+            <Footer id='layout-footer' bgImage={footerBgImage}>
+              {footerTooltip}
+            </Footer>
           )}
-        </Menu>
-      </SidebarWrapper>
-      <Flex
-        flexGrow='1'
-        flexDirection='column'
-        justifyContent='space-between'
-        alignItems='stretch'
-        overflow='auto'>
-        <ContentWrapper variant={variant}>{children}</ContentWrapper>
-        <Footer bgImage={footerBgImage}>{footerTooltip}</Footer>
-      </Flex>
+        </FooterWrapper>
+      </LayoutPage>
     </Container>
   )
 }
 
-const CloseButton = styled(Touchable)(
+const SIDEBAR_WIDTH = '240px'
+const TOPBAR_SIZE = '58px'
+const LOGO_HEIGHT = '100px'
+const FOOTER_HEIGHT = '300px'
+const SIDEBAR_FOOTER_HEIGHT = '80px'
+const TRANSITION = 'all 250ms ease-in-out'
+
+const Container = styled.div`
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+`
+const Header = styled.div(
   css({
     position: 'fixed',
-    width: '34px',
-    height: '34px',
-    left: 'calc(30vw - 17px)',
-    top: '23px'
-  })
-)
-
-const BurgerButton = styled(Touchable)(
-  css({
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center'
+    top: 0,
+    background: 'white'
   }),
   variant({
     variants: {
-      web: { display: 'none' },
-      mobile: { display: 'block', backgroundColor: 'brand' }
+      mobile: {
+        height: TOPBAR_SIZE,
+        width: '100%',
+        left: TOPBAR_SIZE,
+        padding: '12px'
+      },
+      web: {
+        display: 'block',
+        padding: '24px',
+        left: 0,
+        width: SIDEBAR_WIDTH,
+        height: LOGO_HEIGHT
+      }
     }
   })
 )
+const SidebarToggler = styled.button(
+  css({
+    backgroundColor: 'brand',
+    border: 'none',
+    outline: 'none',
+    transition: TRANSITION,
+    zIndex: '100',
+    top: 0,
+    position: 'fixed'
+  }),
+  ({ isOpen }) =>
+    variant({
+      variants: {
+        mobile: {
+          width: isOpen ? SIDEBAR_WIDTH : TOPBAR_SIZE,
+          height: TOPBAR_SIZE
+        },
+        web: { display: 'none' }
+      }
+    })
+)
+
 const Shadow = styled.div(
   variant({
     variants: {
       web: { display: 'none' },
       mobile: {
+        zIndex: '9',
         position: 'fixed',
         left: 0,
         right: 0,
@@ -92,147 +130,88 @@ const Shadow = styled.div(
   })
 )
 
-const Container = styled.div(
-  css({
-    display: 'flex',
-    width: '100%',
-    minHeight: '100vh'
-  }),
-
-  variant({
-    variants: {
-      web: {
-        flexDirection: 'row'
-      },
-      mobile: {
-        flexDirection: 'column'
-      }
-    }
-  })
-)
-
-Container.displayName = 'Container'
-
-const SidebarWrapper = styled.div(
-  css({
-    display: 'flex',
-    flexGrow: 0,
-    flexShrink: 0,
-    justifyContent: 'stretch'
-  }),
-  variant({
-    variants: {
-      web: {
-        flexDirection: 'column',
-        width: '240px',
-        borderRightWidth: '1px',
-        borderRightStyle: 'solid',
-        borderRightColor: 'lighterOutline',
-        position: 'static'
-      },
-      mobile: {
-        flexDirection: 'row-reverse',
-        width: '100%',
-        position: 'relative',
-        zIndex: 'menu'
-      }
-    }
-  })
-)
-
-SidebarWrapper.displayName = 'SidebarWrapper'
-
-const Header = styled.div(
-  css({}),
-  variant({
-    variants: {
-      web: {
-        height: '100px',
-        background: 'white',
-        flexGrow: 0,
-        flexShrink: 0,
-        padding: 6
-      },
-      mobile: {
-        height: '58px',
-        flexGrow: 1,
-        flexShrink: 1,
-        padding: 3
-      }
-    }
-  })
-)
-
-Header.displayName = 'Header'
-
-const Menu = styled.div(
+const Sidebar = styled.div(
   css({
     backgroundColor: 'brand',
-    flexGrow: 1
+    width: SIDEBAR_WIDTH,
+    position: 'fixed',
+    bottom: 0,
+    zIndex: '10',
+    background: 'brand',
+    transition: TRANSITION
   }),
-  variant({
-    variants: {
-      web: {
-        width: '100%',
-        flexGrow: 1,
-        flexShrink: 1
-      },
-      mobile: {
-        width: '58px',
-        flexGrow: 0,
-        flexShring: 0
+  ({ isOpen }) =>
+    variant({
+      variants: {
+        mobile: { top: TOPBAR_SIZE, left: isOpen ? 0 : `-${SIDEBAR_WIDTH}` },
+        web: { top: LOGO_HEIGHT, left: 0 }
       }
-    }
-  })
+    })
 )
-
-Menu.displayName = 'Menu'
-
-const ConditionalMenu = styled.div(({ isOpen }) =>
-  variant({
-    variants: {
-      web: { display: 'block', width: 'unset', position: 'static' },
-      mobile: {
-        display: isOpen ? 'block' : 'none',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        width: '60vw',
-        backgroundColor: 'brand'
-      }
-    }
-  })
-)
-
-const ContentWrapper = styled.div(
+const Menu = styled.div(
   css({
-    flexGrow: 0,
-    width: '100%',
-    maxWidth: '1200px'
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: SIDEBAR_FOOTER_HEIGHT,
+    overflowY: 'auto'
+  })
+)
+
+const SidebarFooter = styled.div(
+  css({
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: SIDEBAR_FOOTER_HEIGHT
+  })
+)
+
+const LayoutPage = styled.div(
+  css({
+    display: 'block',
+    minHeight: '100vh',
+    paddingBottom: FOOTER_HEIGHT,
+    position: 'relative'
   }),
   variant({
     variants: {
-      web: {
-        paddingLeft: 16,
-        paddingRight: 16,
-        boxShadow: 'none'
-      },
-      mobile: {
-        padding: 2,
-        boxShadow: 'inset 0 .2rem  .2rem -.2rem rgba(0, 0 ,0, .25)'
-      }
+      mobile: { marginTop: TOPBAR_SIZE },
+      web: { marginTop: 0, marginLeft: SIDEBAR_WIDTH }
+    }
+  })
+)
+const LayoutBody = styled.div(
+  css({
+    width: '100%'
+  }),
+  variant({
+    variants: {
+      mobile: { paddingLeft: '8px', paddingRight: '8px' },
+      web: { paddingLeft: '64px', paddingRight: '64px', maxWidth: '1200px' }
     }
   })
 )
 
-ContentWrapper.displayName = 'ContentWrapper'
+const FooterWrapper = styled.div(
+  css({
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: FOOTER_HEIGHT
+  })
+)
 
 AppLayout.propTypes = {
   sidebarContent: PropTypes.node,
+  sidebarFooterContent: PropTypes.node,
   headerContent: PropTypes.node,
+  footerContent: PropTypes.node,
   footerTooltip: PropTypes.node,
-  footerBgImage: PropTypes.string,
+  footerBgImage: PropTypes.node,
   variant: PropTypes.oneOfType([
     PropTypes.oneOf(['mobile', 'web']),
     PropTypes.arrayOf(PropTypes.oneOf(['mobile', 'web'])),
@@ -244,5 +223,3 @@ AppLayout.propTypes = {
 AppLayout.defaultProps = {
   variant: ['mobile', null, 'web']
 }
-
-AppLayout.displayName = 'AppLayout'
