@@ -92,16 +92,15 @@ const Header = styled.div(
   })
 )
 const SidebarToggler = styled.button(
-  ({ isOpen }) =>
-    css({
-      backgroundColor: 'brand',
-      border: 'none',
-      outline: 'none',
-      transition: TRANSITION,
-      zIndex: '100',
-      top: 0,
-      position: 'fixed'
-    }),
+  css({
+    backgroundColor: 'brand',
+    border: 'none',
+    outline: 'none',
+    transition: TRANSITION,
+    zIndex: '100',
+    top: 0,
+    position: 'fixed'
+  }),
   ({ isOpen }) =>
     variant({
       variants: {
