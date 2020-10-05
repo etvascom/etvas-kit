@@ -71,22 +71,28 @@ const Header = styled.div(
   css({
     position: 'fixed',
     top: 0,
-    background: 'white'
+    left: 0,
+    background: 'white',
+    zIndex: '10'
   }),
   variant({
     variants: {
       mobile: {
         height: TOPBAR_SIZE,
         width: '100%',
-        left: TOPBAR_SIZE,
-        padding: '12px'
+        padding: '12px',
+        paddingLeft: `${12 + parseInt(TOPBAR_SIZE)}px`,
+        boxShadow: 'etvasCard'
       },
       web: {
         display: 'block',
         padding: '24px',
-        left: 0,
         width: SIDEBAR_WIDTH,
-        height: LOGO_HEIGHT
+        height: LOGO_HEIGHT,
+        boxShadow: 'none',
+        borderRightWidth: '1px',
+        borderRightStyle: 'solid',
+        borderRightColor: 'lighterOutline'
       }
     }
   })
@@ -144,7 +150,13 @@ const Sidebar = styled.div(
     variant({
       variants: {
         mobile: { top: TOPBAR_SIZE, left: isOpen ? 0 : `-${SIDEBAR_WIDTH}` },
-        web: { top: LOGO_HEIGHT, left: 0 }
+        web: {
+          top: LOGO_HEIGHT,
+          left: 0,
+          borderRightWidth: '1px',
+          borderRightStyle: 'solid',
+          borderRightColor: 'lighterOutline'
+        }
       }
     })
 )
@@ -178,8 +190,13 @@ const LayoutPage = styled.div(
   }),
   variant({
     variants: {
-      mobile: { marginTop: TOPBAR_SIZE },
-      web: { marginTop: 0, marginLeft: SIDEBAR_WIDTH }
+      mobile: {
+        marginTop: TOPBAR_SIZE
+      },
+      web: {
+        marginTop: 0,
+        marginLeft: SIDEBAR_WIDTH
+      }
     }
   })
 )
