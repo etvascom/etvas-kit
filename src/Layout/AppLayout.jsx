@@ -235,7 +235,11 @@ AppLayout.propTypes = {
   footerContent: PropTypes.node,
   footerTooltip: PropTypes.node,
   footerBgImage: PropTypes.node,
-  headerPadding: PropTypes.oneOfType(PropTypes.string, PropTypes.array),
+  headerPadding: PropTypes.oneOfType(
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.number
+  ),
   variant: PropTypes.oneOfType([
     PropTypes.oneOf(['mobile', 'web']),
     PropTypes.arrayOf(PropTypes.oneOf(['mobile', 'web'])),
@@ -246,5 +250,5 @@ AppLayout.propTypes = {
 
 AppLayout.defaultProps = {
   variant: ['mobile', null, 'web'],
-  headerPadding: '24px'
+  headerPadding: 6
 }
