@@ -14,6 +14,7 @@ export const AppLayout = ({
   footerContent,
   footerTooltip,
   footerBgImage,
+  headerPadding,
   variant,
   children
 }) => {
@@ -25,7 +26,11 @@ export const AppLayout = ({
       <SidebarToggler isOpen={isOpen} variant={variant} onClick={toggle}>
         <Icon name={isOpen ? 'circleX' : 'menu'} color='white' size='24px' />
       </SidebarToggler>
-      <Header variant={variant} id='header' isOpen={isOpen}>
+      <Header
+        variant={variant}
+        id='header'
+        isOpen={isOpen}
+        headerPadding={headerPadding}>
         {headerContent}
       </Header>
       <Sidebar id='sidebar' isOpen={isOpen} variant={variant}>
@@ -75,27 +80,28 @@ const Header = styled.div(
     background: 'white',
     zIndex: '10'
   }),
-  variant({
-    variants: {
-      mobile: {
-        height: TOPBAR_SIZE,
-        width: '100%',
-        padding: '12px',
-        paddingLeft: `${12 + parseInt(TOPBAR_SIZE)}px`,
-        boxShadow: 'etvasCard'
-      },
-      web: {
-        display: 'block',
-        padding: '24px',
-        width: SIDEBAR_WIDTH,
-        height: LOGO_HEIGHT,
-        boxShadow: 'none',
-        borderRightWidth: '1px',
-        borderRightStyle: 'solid',
-        borderRightColor: 'lighterOutline'
+  ({ headerPadding }) =>
+    variant({
+      variants: {
+        mobile: {
+          height: TOPBAR_SIZE,
+          width: '100%',
+          padding: '12px',
+          paddingLeft: `${12 + parseInt(TOPBAR_SIZE)}px`,
+          boxShadow: 'etvasCard'
+        },
+        web: {
+          display: 'block',
+          padding: headerPadding,
+          width: SIDEBAR_WIDTH,
+          height: LOGO_HEIGHT,
+          boxShadow: 'none',
+          borderRightWidth: '1px',
+          borderRightStyle: 'solid',
+          borderRightColor: 'lighterOutline'
+        }
       }
-    }
-  })
+    })
 )
 const SidebarToggler = styled.button(
   css({
@@ -229,6 +235,7 @@ AppLayout.propTypes = {
   footerContent: PropTypes.node,
   footerTooltip: PropTypes.node,
   footerBgImage: PropTypes.node,
+  headerPadding: PropTypes.oneOfType(PropTypes.string, PropTypes.array),
   variant: PropTypes.oneOfType([
     PropTypes.oneOf(['mobile', 'web']),
     PropTypes.arrayOf(PropTypes.oneOf(['mobile', 'web'])),
@@ -238,5 +245,6 @@ AppLayout.propTypes = {
 }
 
 AppLayout.defaultProps = {
-  variant: ['mobile', null, 'web']
+  variant: ['mobile', null, 'web'],
+  headerPadding: '24px'
 }
