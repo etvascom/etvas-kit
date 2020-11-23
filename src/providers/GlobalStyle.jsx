@@ -6,7 +6,10 @@ import EtvasIconsWoff2 from '../assets/icon-font/etvas-icons.woff2'
 
 export const GlobalStyle = createGlobalStyle`
 :root {
-  background: ${themed('colors.background')};
+  background: ${props =>
+    props.backgroundColor
+      ? props.backgroundColor
+      : themed(props.bg || 'colors.background')};
   min-height: 100vh;
   width: 100%;
   margin: 0;
