@@ -9,12 +9,14 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
+import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 
 import { PasswordToggler } from './PasswordToggler'
-import { ErrorMessage } from './ErrorMessage'
+import { default as variants } from './Input.variants'
+import { SubLabel } from './SubLabel'
 
 export const Input = forwardRef(
   (
@@ -23,6 +25,7 @@ export const Input = forwardRef(
       autoFocus,
       disabled,
       error,
+      warning,
       icLeft,
       icRight,
       id,
@@ -38,6 +41,7 @@ export const Input = forwardRef(
       valid,
       value,
       variant,
+      subLabel,
       ...rest
     },
     ref
@@ -46,9 +50,10 @@ export const Input = forwardRef(
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
-      if (disabled) return 'disabled'
-      else if (error) return 'error'
+      if (error) return 'error'
+      else if (warning) return 'warning'
       else if (valid) return 'valid'
+      else if (disabled) return 'disabled'
       return variant
     }, [disabled, error, valid, variant])
 
@@ -130,7 +135,11 @@ export const Input = forwardRef(
             ) : null}
           </Flex>
         </Flex>
-        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+        <SubLabel
+          content={error || warning || subLabel}
+          variant={inputVariant}
+          preserveSpace={!noBottomSpace}
+        />
       </Flex>
     )
   }
@@ -153,26 +162,20 @@ const StyledInput = styled.input(
       borderStyle: 'solid'
     }
   }),
-  ({ error }) =>
-    error
-      ? css({
-          color: 'error',
-          borderColor: 'error'
-        })
-      : null,
-  ({ disabled }) =>
-    disabled
-      ? css({
-          opacity: 0.5
-        })
-      : null
+  variant({ variants })
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
+  subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
+  warning: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
   error: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.node,

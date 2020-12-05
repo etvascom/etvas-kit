@@ -1,11 +1,17 @@
 export default {
   accent: 'rgb(var(--etvas-accent-color))',
-  brand: 'rgb(var(--etvas-brand-color))',
+  brand: process.env.STORYBOOK_PRESENT
+    ? '#0040E3'
+    : 'rgb(var(--etvas-brand-color))',
+  brandLight: process.env.STORYBOOK_PRESENT
+    ? '#5585FF'
+    : 'rgb(var(--etvas-brand-color-light))',
   brandFade: 'rgba(var(--etvas-brand-color), .3)',
   accentFade: 'rgba(var(--etvas-accent-color), .3)',
   text: 'rgb(var(--etvas-text-color))',
   lighterText: 'rgb(var(--etvas-lighter-text-color))',
-  error: '#FF0000',
+  error: '#F72A2A',
+  warning: '#F7D935',
   disabled: '#BABABC',
   divider: '#F2F2F2',
   outline: '#A0AAB2',
@@ -20,5 +26,9 @@ export default {
   dark: '#343434',
   positive: '#27ae60',
   positiveFade: '#87e8af',
-  transparent: 'transparent'
+  transparent: 'transparent',
+  backgroundLightGray: '#FEFEFE',
+  inputGray: '#D8DDE8',
+  backgroundGray: '#F1F4F8',
+  textDefault: '#536083'
 }
