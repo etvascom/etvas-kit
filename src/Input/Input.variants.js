@@ -1,8 +1,12 @@
 import { BORDERS, RADII } from '../assets/core'
 import colors from '../assets/colors'
 import sizes from '../assets/sizes'
-import theme from '../assets/theme'
 import typography from '../Typography/variants'
+
+const DEFAULT_DISABLED_STYLE = {
+  cursor: 'not-allowed',
+  pointerEvents: 'none'
+}
 
 const DEFAULT_STYLE = {
   ...typography.inputLabel,
@@ -22,11 +26,8 @@ const DEFAULT_STYLE = {
     borderColor: colors.brandLight
   },
   ':disabled': {
-    background: colors.backgroundGray,
-    color: colors.textInputDisabled,
-    ':hover, :focus': {
-      borderColor: colors.inputGray
-    }
+    ...DEFAULT_DISABLED_STYLE,
+    background: colors.backgroundGray
   }
 }
 
@@ -40,6 +41,7 @@ const ERROR_STYLE = {
     borderColor: colors.error
   },
   ':disabled': {
+    ...DEFAULT_DISABLED_STYLE,
     background: colors.backgroundGray,
     color: colors.textInputDisabled,
     borderColor: colors.error
@@ -56,6 +58,7 @@ const WARNING_STYLE = {
     borderColor: colors.warning
   },
   ':disabled': {
+    ...DEFAULT_DISABLED_STYLE,
     background: colors.backgroundGray,
     color: colors.textInputDisabled
   }
@@ -67,6 +70,7 @@ const VALID_STYLE = {
 
 const DISABLED_STYLE = {
   ...DEFAULT_STYLE,
+  ...DEFAULT_DISABLED_STYLE,
   background: colors.backgroundGray,
   borderColor: colors.inputGray,
   color: colors.textInputDisabled

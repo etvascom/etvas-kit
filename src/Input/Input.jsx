@@ -51,10 +51,10 @@ export const Input = forwardRef(
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
-      if (error) return 'error'
+      if (disabled) return 'disabled'
+      else if (error) return 'error'
       else if (warning) return 'warning'
       else if (valid) return 'valid'
-      else if (disabled) return 'disabled'
       return variant
     }, [disabled, error, warning, valid, variant])
 
@@ -66,9 +66,9 @@ export const Input = forwardRef(
     }, [error, warning, valid, icRight])
 
     const currentIcRightColor = useMemo(() => {
-      if (error) return colors.error
+      if (disabled) return colors.inputBorderGray
+      else if (error) return colors.error
       else if (warning) return colors.warning
-      else if (disabled) return colors.inputBorderGray
       else if (valid) return colors.success
 
       return colors.inputIcon
@@ -107,7 +107,7 @@ export const Input = forwardRef(
           <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            disabled={readOnly || disabled}
+            ariaDisabled={readOnly || disabled}
             error={error}
             hasLabel={label}
             hasIcLeft={icLeft}
