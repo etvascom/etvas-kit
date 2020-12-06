@@ -13,13 +13,7 @@ export const SubLabel = ({ variant, content, preserveSpace }) => (
 )
 
 const Wrapper = styled(Typography)`
-  font-size: 11px;
-  line-height: 16px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: ${props => (props.preserveSpace ? '16px' : '0')};
-  font-family: ${props => props.theme.fonts.primary};
+  min-height: ${props => (props.preserveSpace ? '16px' : 0)};
   ${variantBuilder({ variants })}
 `
 

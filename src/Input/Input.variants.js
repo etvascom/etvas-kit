@@ -1,15 +1,17 @@
-import { BORDERS } from '../assets/core'
+import { BORDERS, RADII } from '../assets/core'
 import colors from '../assets/colors'
+import sizes from '../assets/sizes'
+import theme from '../assets/theme'
 import typography from '../Typography/variants'
 
 const DEFAULT_STYLE = {
   ...typography.inputLabel,
-  height: '40px',
+  height: sizes.inputHeight,
   background: colors.backgroundLightGray,
   border: `${BORDERS[1]} ${colors.inputGray}`,
   boxSizing: 'border-box',
   color: colors.textInputActive,
-  borderRadius: '3px',
+  borderRadius: RADII[3],
   '::placeholder': {
     color: colors.textInputPlaceholder
   },
