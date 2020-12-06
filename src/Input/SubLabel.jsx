@@ -6,13 +6,11 @@ import { variant as variantBuilder } from 'styled-system'
 import { Typography } from '../Typography'
 import { default as variants } from './SubLabel.variants'
 
-export const SubLabel = ({ variant, content, preserveSpace }) => {
-  return (
-    <Wrapper preserveSpace={preserveSpace} variant={variant}>
-      {content}
-    </Wrapper>
-  )
-}
+export const SubLabel = ({ variant, content, preserveSpace }) => (
+  <Wrapper preserveSpace={preserveSpace} variant={variant}>
+    {content}
+  </Wrapper>
+)
 
 const Wrapper = styled(Typography)`
   font-size: 11px;
@@ -21,6 +19,7 @@ const Wrapper = styled(Typography)`
   align-items: center;
   width: 100%;
   min-height: ${props => (props.preserveSpace ? '16px' : '0')};
+  font-family: ${props => props.theme.fonts.primary};
   ${variantBuilder({ variants })}
 `
 

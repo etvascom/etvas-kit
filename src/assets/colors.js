@@ -12,6 +12,7 @@ export default {
   lighterText: 'rgb(var(--etvas-lighter-text-color))',
   error: '#F72A2A',
   warning: '#F7D935',
+  success: '#1DC06D',
   disabled: '#BABABC',
   divider: '#F2F2F2',
   outline: '#A0AAB2',
@@ -30,5 +31,10 @@ export default {
   backgroundLightGray: '#FEFEFE',
   inputGray: '#D8DDE8',
   backgroundGray: '#F1F4F8',
-  textDefault: '#536083'
+  textDefault: '#536083',
+  inputIcon: '#A1A7B6',
+  inputBorderGray: '#D8DDE8',
+  textInputActive: '#070A15',
+  textInputDisabled: '#A1A7B6',
+  textInputPlaceholder: '#898FA1'
 }

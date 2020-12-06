@@ -8,7 +8,11 @@ const DEFAULT_STYLE = {
   background: colors.backgroundLightGray,
   border: `${BORDERS[1]} ${colors.inputGray}`,
   boxSizing: 'border-box',
+  color: colors.textInputActive,
   borderRadius: '3px',
+  '::placeholder': {
+    color: colors.textInputPlaceholder
+  },
   ':hover': {
     borderColor: colors.brandLight
   },
@@ -16,7 +20,11 @@ const DEFAULT_STYLE = {
     borderColor: colors.brandLight
   },
   ':disabled': {
-    background: colors.backgroundGray
+    background: colors.backgroundGray,
+    color: colors.textInputDisabled,
+    ':hover, :focus': {
+      borderColor: colors.inputGray
+    }
   }
 }
 
@@ -31,6 +39,7 @@ const ERROR_STYLE = {
   },
   ':disabled': {
     background: colors.backgroundGray,
+    color: colors.textInputDisabled,
     borderColor: colors.error
   }
 }
@@ -45,7 +54,8 @@ const WARNING_STYLE = {
     borderColor: colors.warning
   },
   ':disabled': {
-    background: colors.backgroundGray
+    background: colors.backgroundGray,
+    color: colors.textInputDisabled
   }
 }
 
@@ -53,19 +63,16 @@ const VALID_STYLE = {
   ...DEFAULT_STYLE
 }
 
+const DISABLED_STYLE = {
+  ...DEFAULT_STYLE,
+  background: colors.backgroundGray,
+  borderColor: colors.inputGray,
+  color: colors.textInputDisabled
+}
+
 export default {
   default: DEFAULT_STYLE,
-  disabled: {
-    ...DEFAULT_STYLE,
-    boxShadow: 'none',
-    color: '#979ca6',
-    cursor: 'not-allowed',
-    opacity: 0.5,
-    ':focus, :hover': {
-      border: `${BORDERS[1]} ${colors.gray}`,
-      opacity: 0.5
-    }
-  },
+  disabled: DISABLED_STYLE,
   error: ERROR_STYLE,
   warning: WARNING_STYLE,
   valid: VALID_STYLE

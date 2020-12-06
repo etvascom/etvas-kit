@@ -17,6 +17,7 @@ import { Flex, Space } from '@ivoryio/kogaio'
 import { PasswordToggler } from './PasswordToggler'
 import { default as variants } from './Input.variants'
 import { SubLabel } from './SubLabel'
+import colors from '../assets/colors'
 
 export const Input = forwardRef(
   (
@@ -55,7 +56,23 @@ export const Input = forwardRef(
       else if (valid) return 'valid'
       else if (disabled) return 'disabled'
       return variant
-    }, [disabled, error, valid, variant])
+    }, [disabled, error, warning, valid, variant])
+
+    const currentIcRight = useMemo(() => {
+      if (error || warning) return 'alertCircle'
+      else if (valid || !icRight) return 'checkMark'
+
+      return icRight
+    }, [error, warning, valid, icRight])
+
+    const currentIcRightColor = useMemo(() => {
+      if (error) return colors.error
+      else if (warning) return colors.warning
+      else if (disabled) return colors.inputBorderGray
+      else if (valid) return colors.success
+
+      return colors.inputIcon
+    }, [error, warning, valid, disabled, icRight])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 
@@ -118,9 +135,13 @@ export const Input = forwardRef(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icRight ? (
+            {currentIcRight ? (
               <Space mr={1}>
-                <Icon fontSize={3} name={icRight} />
+                <Icon
+                  fontSize={3}
+                  name={currentIcRight}
+                  color={currentIcRightColor}
+                />
               </Space>
             ) : null}
             {type === 'password' && value ? (
