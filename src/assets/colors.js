@@ -1,11 +1,7 @@
 export default {
   accent: 'rgb(var(--etvas-accent-color))',
-  brand: process.env.STORYBOOK_PRESENT
-    ? '#0040E3'
-    : 'rgb(var(--etvas-brand-color))',
-  brandLight: process.env.STORYBOOK_PRESENT
-    ? '#5585FF'
-    : 'rgb(var(--etvas-brand-color-light))',
+  brand: 'var(--etvas-brand-color)',
+  brandLight: 'var(--etvas-brand-color-light)',
   brandFade: 'rgba(var(--etvas-brand-color), .3)',
   accentFade: 'rgba(var(--etvas-accent-color), .3)',
   text: 'rgb(var(--etvas-text-color))',

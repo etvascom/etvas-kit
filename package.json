@@ -25,7 +25,7 @@
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
-    "storybook": "STORYBOOK_PRESENT=true BROWSER=none start-storybook -p 6006",
+    "storybook": "BROWSER=none start-storybook -p 6006",
     "build-storybook": "build-storybook -o build/ --quiet"
   },
   "peerDependencies": {
