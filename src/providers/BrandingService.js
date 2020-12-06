@@ -6,6 +6,7 @@ import { hexToRgb } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',
+  brandColorLight: 'brand-color-light',
   accentColor: 'accent-color',
   textColor: 'text-color',
   lighterTextColor: 'lighter-text-color',
@@ -86,7 +87,8 @@ export class BrandingService extends EventEmitter {
 export const brandingService = new BrandingService({
   prefix: 'etvas',
   defaults: {
-    brandColor: '#015294',
+    brandColor: '#0040E3',
+    brandColorLight: '#5585FF',
     accentColor: '#ef6319',
     textColor: '#000000',
     lighterTextColor: '#35373b'

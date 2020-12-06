@@ -9,12 +9,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
+import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 
 import { PasswordToggler } from './PasswordToggler'
-import { ErrorMessage } from './ErrorMessage'
+import { default as variants } from './Input.variants'
+import { SubLabel } from './SubLabel'
+import colors from '../assets/colors'
 
 export const Input = forwardRef(
   (
@@ -23,6 +26,7 @@ export const Input = forwardRef(
       autoFocus,
       disabled,
       error,
+      warning,
       icLeft,
       icRight,
       id,
@@ -38,6 +42,7 @@ export const Input = forwardRef(
       valid,
       value,
       variant,
+      subLabel,
       ...rest
     },
     ref
@@ -48,9 +53,26 @@ export const Input = forwardRef(
     const inputVariant = useMemo(() => {
       if (disabled) return 'disabled'
       else if (error) return 'error'
+      else if (warning) return 'warning'
       else if (valid) return 'valid'
       return variant
-    }, [disabled, error, valid, variant])
+    }, [disabled, error, warning, valid, variant])
+
+    const currentIcRight = useMemo(() => {
+      if (error || warning) return 'alertCircle'
+      else if (valid || !icRight) return 'checkMark'
+
+      return icRight
+    }, [error, warning, valid, icRight])
+
+    const currentIcRightColor = useMemo(() => {
+      if (disabled) return colors.inputBorderGray
+      else if (error) return colors.error
+      else if (warning) return colors.warning
+      else if (valid) return colors.success
+
+      return colors.inputIcon
+    }, [error, warning, valid, disabled, icRight])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 
@@ -85,7 +107,7 @@ export const Input = forwardRef(
           <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            disabled={readOnly || disabled}
+            ariaDisabled={readOnly || disabled}
             error={error}
             hasLabel={label}
             hasIcLeft={icLeft}
@@ -113,9 +135,13 @@ export const Input = forwardRef(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icRight ? (
+            {currentIcRight ? (
               <Space mr={1}>
-                <Icon fontSize={3} name={icRight} />
+                <Icon
+                  fontSize={3}
+                  name={currentIcRight}
+                  color={currentIcRightColor}
+                />
               </Space>
             ) : null}
             {type === 'password' && value ? (
@@ -130,7 +156,11 @@ export const Input = forwardRef(
             ) : null}
           </Flex>
         </Flex>
-        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+        <SubLabel
+          content={error || warning || subLabel}
+          variant={inputVariant}
+          preserveSpace={!noBottomSpace}
+        />
       </Flex>
     )
   }
@@ -153,26 +183,20 @@ const StyledInput = styled.input(
       borderStyle: 'solid'
     }
   }),
-  ({ error }) =>
-    error
-      ? css({
-          color: 'error',
-          borderColor: 'error'
-        })
-      : null,
-  ({ disabled }) =>
-    disabled
-      ? css({
-          opacity: 0.5
-        })
-      : null
+  variant({ variants })
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
+  subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
+  warning: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
   error: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.node,

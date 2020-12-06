@@ -3,6 +3,7 @@ import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
 
 import colors from './colors'
+import sizes from './sizes'
 
 const breakpoints = ['30rem', '48rem', '80rem']
 const [sm, md, lg] = breakpoints
@@ -37,7 +38,8 @@ const theme = buildTheme({
   shadows: {
     etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)'
   },
-  zIndices
+  zIndices,
+  sizes
 })
 
 export default theme
