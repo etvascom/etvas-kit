@@ -1,5 +1,6 @@
 import sizes from '../assets/sizes'
 import { BORDERS } from '../assets/core'
+import colors from '../assets/colors'
 
 const BUTTON_DEFAULT = {
   minHeight: sizes.buttonMinHeight,
@@ -35,19 +36,19 @@ const BUTTON_DEFAULT = {
 }
 const PRIMARY_DEFAULT = {
   ...BUTTON_DEFAULT,
-  backgroundColor: 'brand',
-  color: 'white',
+  backgroundColor: colors.brand,
+  color: colors.white,
   ':hover': {
-    backgroundColor: 'brandHover'
+    backgroundColor: colors.brandDark
   },
   ':active': {
-    backgroundColor: 'brandPressed'
+    backgroundColor: colors.brandDarkest
   },
   ':focus': {
     opacity: 1
   },
   ':disabled': {
-    backgroundColor: 'brandDisabled',
+    backgroundColor: colors.disabled,
     transform: 'scale(1)',
     cursor: 'not-allowed'
   }
@@ -62,21 +63,21 @@ const PRIMARY_LARGE_STYLE = {
 
 const OUTLINE_DEFAULT = {
   ...BUTTON_DEFAULT,
-  color: 'text',
+  color: colors.text,
   backgroundColor: 'transparent',
   border: `${BORDERS[1]}`,
 }
 const OUTLINE_STYLE = {
   ...OUTLINE_DEFAULT,
-  borderColor: 'accent'
+  borderColor: colors.accent
 }
 const OUTLINE_ALT_STYLE = {
   ...OUTLINE_DEFAULT,
-  borderColor: 'text'
+  borderColor: colors.text
 }
 const POSITIVE_STYLE = {
   ...BUTTON_DEFAULT,
-  backgroundColor: 'positive',
+  backgroundColor: colors.positive,
   color: 'white'
 }
 const LINK_DEFAULT = {
@@ -87,28 +88,28 @@ const LINK_DEFAULT = {
   padding: 0,
   minHeight: 'max-content',
   ':hover': {
-    color: 'brandHover'
+    color: colors.brand
   },
   ':active': {
-    color: 'brandPressed'
+    color: colors.brandDarkest
   },
   ':disabled': {
-    color: 'brandDisabled',
+    color: colors.disabled,
     transform: 'scale(1)',
     cursor: 'not-allowed'
   }
 }
 const LINK_STYLE = {
   ...LINK_DEFAULT,
-  color: 'brand'
+  color: colors.brand
 }
 const LINK_SECONDARY_STYLE = {
   ...LINK_DEFAULT,
-  color: 'lighterText'
+  color: colors.lighterText
 }
 const LINK_POSITIVE_STYLE = {
   ...LINK_DEFAULT,
-  color: 'positive'
+  color: colors.positive
 }
 export default {
   primary: PRIMARY_STYLE,
@@ -123,50 +124,50 @@ export default {
 
 export const iconVariants = {
   primary: {
-    color: 'white',
+    color: colors.white,
     fontSize: '1'
   },
   large: {
-    color: 'white',
+    color: colors.white,
     fontSize: '2'
   },
   link: {
-    color: 'brand',
+    color: colors.brand,
     fontSize: '1'
   }
 }
 
 export const spinnerVariants = {
   primary: {
-    background: 'brand',
-    primary: 'white'
+    background: colors.brand,
+    primary: colors.white
   },
   large: {
-    background: 'brand',
-    primary: 'white'
+    background: colors.brand,
+    primary: colors.white
   },
   outline: {
-    background: 'white',
-    primary: 'accent'
+    background: colors.white,
+    primary: colors.accent
   },
   outlineAlt: {
-    background: 'white',
-    primary: 'text'
+    background: colors.white,
+    primary: colors.text
   },
   positive: {
-    background: 'positive',
-    primary: 'white'
+    background: colors.positive,
+    primary: colors.white
   },
   link: {
-    background: 'white',
-    primary: 'brand'
+    background: colors.white,
+    primary: colors.brand
   },
   linkSecondary: {
-    background: 'white',
-    primary: 'text'
+    background: colors.white,
+    primary: colors.text
   },
   linkPositive: {
-    background: 'white',
-    primary: 'positive'
+    background: colors.white,
+    primary: colors.positive
   }
 }

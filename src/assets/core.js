@@ -39,7 +39,8 @@ export const LETTER_SPACINGS = {
 }
 export const LINE_HEIGHTS = {
   ...lineHeights,
-  buttonLabel: '14px'
+  buttonLabel: '14px',
+  inputLabel: '16px'
 }
 export const TEXT_STYLES = {
   ...textStyles,

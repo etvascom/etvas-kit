@@ -9,6 +9,7 @@ import { Typography } from '../Typography'
 import { Flex, Space } from '../'
 import variants, { iconVariants, spinnerVariants } from './variants'
 import { Icon } from '../Icon'
+import colors from '../assets/colors'
 
 const Button = ({
   children,
@@ -25,7 +26,7 @@ const Button = ({
   let iconColor
   if (iconFace && iconPosition) {
     if (disabled && variant === 'link') {
-      iconColor = 'brandDisabled'
+      iconColor = colors.disabled
     } else {
       iconColor = iconVariants[variant].color
     }
@@ -33,11 +34,11 @@ const Button = ({
   let spinnerColor = spinnerVariants[variant]
   if (loading && disabled && (variant === 'primary' || variant === 'large')) {
     spinnerColor = {
-      background: 'brandDisabled',
-      primary: 'white'
+      background: colors.disabled,
+      primary: colors.white
     }
   }
-
+  console.log(colors)
   return (<StyledButton
     disabled={disabled}
     id={id}

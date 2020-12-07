@@ -64,42 +64,44 @@ export const Variants = () => {
 }
 
 export const LinkIcon = () => {
+  const iconRight = {
+    iconFace: 'info',
+    iconPosition: 'right'
+  }
+  const iconLeft = {
+    iconFace: 'info',
+    iconPosition: 'left'
+  }
   const iconPseudoVariants = [
     {
       variant: 'primary',
       name: 'primaryIconLeft',
-      iconFace: 'info',
-      iconPosition: 'left'
+      ...iconLeft
     },
     {
       variant: 'primary',
       name: 'primaryIconRight',
-      iconFace: 'info',
-      iconPosition: 'right'
+      ...iconRight
     },
     {
       variant: 'large',
       name: 'largeIconLeft',
-      iconFace: 'info',
-      iconPosition: 'left'
+      ...iconLeft
     },
     {
       variant: 'large',
       name: 'largeIconRight',
-      iconFace: 'info',
-      iconPosition: 'right'
+      ...iconRight
     },
     {
       variant: 'link',
       name: 'linkIconLeft',
-      iconFace: 'info',
-      iconPosition: 'left'
+      ...iconLeft
     },
     {
       variant: 'link',
       name: 'linkIconRight',
-      iconFace: 'info',
-      iconPosition: 'right'
+      ...iconRight
     }
   ]
   return (
