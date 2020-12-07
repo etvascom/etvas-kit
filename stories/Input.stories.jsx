@@ -87,3 +87,30 @@ export const Loading = () => (
     <Input id='id' loading error />
   </>
 )
+
+export const Types = () => (
+  <>
+    <Input id='id' type='button' />
+    <Input id='id' type='checkbox' />
+    <Input id='id' type='color' />
+    <Input id='id' type='date' />
+    <Input id='id' type='datetime-local' />
+    <Input id='id' type='email' />
+    <Input id='id' type='file' />
+    <Input id='id' type='hidden' />
+    <Input id='id' type='image' />
+    <Input id='id' type='month' />
+    <Input id='id' type='number' />
+    <Input id='id' type='password' />
+    <Input id='id' type='radio' />
+    <Input id='id' type='range' />
+    <Input id='id' type='reset' />
+    <Input id='id' type='search' />
+    <Input id='id' type='submit' />
+    <Input id='id' type='tel' />
+    <Input id='id' type='text' />
+    <Input id='id' type='time' />
+    <Input id='id' type='url' />
+    <Input id='id' type='week' />
+  </>
+)
