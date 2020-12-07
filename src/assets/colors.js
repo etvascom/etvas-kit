@@ -1,6 +1,17 @@
 export default {
   accent: 'rgb(var(--etvas-accent-color))',
-  brand: 'rgb(var(--etvas-brand-color))',
+  brand: process.env.STORYBOOK_PRESENT
+    ? '#0040E3'
+    : 'rgb(var(--etvas-brand-color))',
+  brandHover: process.env.STORYBOOK_PRESENT
+    ? '#002B99'
+    : 'rgb(var(--etvas-brand-hover-color))',
+  brandPressed: process.env.STORYBOOK_PRESENT
+    ? '#00154D'
+    : 'rgb(var(--etvas-brand-pressed-color))',
+  brandDisabled: process.env.STORYBOOK_PRESENT
+    ? '#A1A7B6'
+    : 'rgb(var(--etvas-brand-disabled-color))',
   brandFade: 'rgba(var(--etvas-brand-color), .3)',
   accentFade: 'rgba(var(--etvas-accent-color), .3)',
   text: 'rgb(var(--etvas-text-color))',
