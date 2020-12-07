@@ -4,6 +4,7 @@ import { INPUT_VARIANTS } from '../Input'
 
 import colors from './colors'
 import sizes from './sizes'
+import animationSpeeds from './animationSpeeds'
 
 const breakpoints = ['30rem', '48rem', '80rem']
 const [sm, md, lg] = breakpoints
@@ -39,7 +40,8 @@ const theme = buildTheme({
     etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)'
   },
   zIndices,
-  sizes
+  sizes,
+  animationSpeeds
 })
 
 export default theme

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import glyphs from './glyphs.json'
+import animationSpeeds from '../assets/animationSpeeds'
 
 export const Icon = ({ name, size, color, rotate }) => {
   const glyph =
@@ -29,7 +30,9 @@ const StyledI = styled.i(({ color, size, rotate }) =>
     fontSize: size,
     lineHeight: size,
     color,
-    animation: rotate ? 'rotation 2s infinite linear' : ''
+    animation: rotate
+      ? `rotation ${animationSpeeds.rotation} infinite linear`
+      : ''
   })
 )
 
