@@ -29,7 +29,7 @@ const StyleGuide = {
 
 export default {
   accent: 'rgb(var(--etvas-accent-color))',
-  brand: 'var(--etvas-brand-color)',
+  brand: 'rgb(var(--etvas-brand-color))',
   brandLight: 'var(--etvas-brand-color-light)',
   brandLighter: 'var(--etvas-brand-color-lighter)',
   brandLightest: 'var(--etvas-brand-color-lightest)',
