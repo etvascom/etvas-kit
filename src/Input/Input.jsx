@@ -43,6 +43,7 @@ export const Input = forwardRef(
       value,
       variant,
       subLabel,
+      loading,
       ...rest
     },
     ref
@@ -51,7 +52,7 @@ export const Input = forwardRef(
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
-      if (disabled) return 'disabled'
+      if (disabled || loading) return 'disabled'
       else if (error) return 'error'
       else if (warning) return 'warning'
       else if (valid) return 'valid'
@@ -59,14 +60,16 @@ export const Input = forwardRef(
     }, [disabled, error, warning, valid, variant])
 
     const currentIcRight = useMemo(() => {
-      if (error || warning) return 'alertCircle'
+      if (loading) return 'loading'
+      else if (error || warning) return 'alertCircle'
       else if (valid || !icRight) return 'checkMark'
 
       return icRight
     }, [error, warning, valid, icRight])
 
     const currentIcRightColor = useMemo(() => {
-      if (disabled) return colors.inputBorderGray
+      if (loading) return colors.brand
+      else if (disabled) return colors.inputBorderGray
       else if (error) return colors.error
       else if (warning) return colors.warning
       else if (valid) return colors.success
@@ -141,6 +144,7 @@ export const Input = forwardRef(
                   fontSize={3}
                   name={currentIcRight}
                   color={currentIcRightColor}
+                  rotate={currentIcRight === 'loading'}
                 />
               </Space>
             ) : null}
@@ -188,6 +192,7 @@ const StyledInput = styled.input(
 
 Input.propTypes = {
   ...propTypes.inputStyle,
+  loading: PropTypes.bool,
   subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,

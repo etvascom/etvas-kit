@@ -77,3 +77,13 @@ export const ContentDisabled = () => (
     <Input id='id4' value='This is some input' disabled valid />
   </>
 )
+
+export const Loading = () => (
+  <>
+    <Input id='id' loading />
+    <Input id='id' loading value='This  is some input' />
+    <Input id='id' loading placeholder='This is a placeholder' />
+    <Input id='id' loading subLabel='This is a placeholder' />
+    <Input id='id' loading error />
+  </>
+)
