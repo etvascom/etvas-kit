@@ -56,7 +56,7 @@ const PRIMARY_DEFAULT = {
 const PRIMARY_STYLE = {
   ...PRIMARY_DEFAULT
 }
-const PRIMARY_LARGE_STYLE = {
+const LARGE_STYLE = {
   ...PRIMARY_DEFAULT,
   minWidth: sizes.largeButtonMinWidth
 }
@@ -71,10 +71,7 @@ const OUTLINE_STYLE = {
   ...OUTLINE_DEFAULT,
   borderColor: colors.accent
 }
-const OUTLINE_ALT_STYLE = {
-  ...OUTLINE_DEFAULT,
-  borderColor: colors.text
-}
+
 const POSITIVE_STYLE = {
   ...BUTTON_DEFAULT,
   backgroundColor: colors.positive,
@@ -88,7 +85,7 @@ const LINK_DEFAULT = {
   padding: 0,
   minHeight: 'max-content',
   ':hover': {
-    color: colors.brand
+    color: colors.brandDark
   },
   ':active': {
     color: colors.brandDarkest
@@ -103,23 +100,25 @@ const LINK_STYLE = {
   ...LINK_DEFAULT,
   color: colors.brand
 }
-const LINK_SECONDARY_STYLE = {
-  ...LINK_DEFAULT,
-  color: colors.lighterText
-}
 const LINK_POSITIVE_STYLE = {
   ...LINK_DEFAULT,
-  color: colors.positive
+  color: colors.positive,
+  ':hover': {
+    opacity: 0.75
+  },
+  ':active': {
+    color: colors.positive
+  }
 }
 export default {
   primary: PRIMARY_STYLE,
-  large: PRIMARY_LARGE_STYLE,
+  large: LARGE_STYLE,
   link: LINK_STYLE,
-  outline: PRIMARY_STYLE,
-  outlineAlt: PRIMARY_STYLE,
-  positive: PRIMARY_STYLE,
-  linkSecondary: PRIMARY_STYLE,
-  linkPositive: PRIMARY_STYLE
+  outline: OUTLINE_STYLE,
+  outlineAlt: OUTLINE_STYLE,
+  positive: POSITIVE_STYLE,
+  linkSecondary: LINK_STYLE,
+  linkPositive: LINK_POSITIVE_STYLE
 }
 
 export const iconVariants = {
@@ -147,13 +146,21 @@ const LINK_SPINNER_VARIANT = {
   background: colors.white,
   primary: colors.brand
 }
+const POSITIVE_SPINNER_VARIANT = {
+  background: colors.positive,
+  primary: colors.white
+}
+const OUTLINE_SPINNER_VARIANT = {
+  background: colors.transparent,
+  primary: colors.white
+}
 export const spinnerVariants = {
   primary: PRIMARY_SPINNER_VARIANT,
   large: LARGE_SPINNER_VARIANT,
   link: LINK_SPINNER_VARIANT,
-  outline: PRIMARY_SPINNER_VARIANT,
-  outlineAlt: PRIMARY_SPINNER_VARIANT,
-  positive: PRIMARY_SPINNER_VARIANT,
-  linkSecondary: PRIMARY_SPINNER_VARIANT,
-  linkPositive: PRIMARY_SPINNER_VARIANT
+  outline: OUTLINE_SPINNER_VARIANT,
+  outlineAlt: OUTLINE_SPINNER_VARIANT,
+  positive: POSITIVE_SPINNER_VARIANT,
+  linkSecondary: LINK_SPINNER_VARIANT,
+  linkPositive: LINK_SPINNER_VARIANT
 }
