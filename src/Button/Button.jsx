@@ -14,7 +14,7 @@ import colors from '../assets/colors'
 const Button = ({
   children,
   disabled,
-  iconFace,
+  icon,
   id,
   loading,
   onClick,
@@ -24,7 +24,7 @@ const Button = ({
   ...rest
 }) => {
   let iconColor
-  if (iconFace && iconPosition) {
+  if (icon && iconPosition) {
     if (disabled && variant === 'link') {
       iconColor = colors.disabled
     } else {
@@ -32,13 +32,12 @@ const Button = ({
     }
   }
   let spinnerColor = spinnerVariants[variant]
-  if (loading && disabled && (variant === 'primary' || variant === 'large')) {
+  if (loading && disabled && variant !== 'link' ) {
     spinnerColor = {
       background: colors.disabled,
       primary: colors.white
     }
   }
-  console.log(colors)
   return (<StyledButton
     disabled={disabled}
     id={id}
@@ -54,9 +53,9 @@ const Button = ({
       />
     ) : (
       <Flex flexDirection={'row'} alignItems={'center'}>
-        {(iconFace && iconPosition === 'left') &&
+        {(icon && iconPosition === 'left') &&
         <Space mr={'10px'}>
-          <Icon name={iconFace} size={iconVariants[variant].fontSize} color={iconColor}/>
+          <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
         </Space>
         }
         <Typography
@@ -67,9 +66,9 @@ const Button = ({
           color='inherit'>
           {children}
         </Typography>
-        {(iconFace && iconPosition === 'right') &&
+        {(icon && iconPosition === 'right') &&
         <Space ml={'10px'}>
-          <Icon name={iconFace} size={iconVariants[variant].fontSize} color={iconColor}/>
+          <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
         </Space>
         }
       </Flex>
@@ -86,7 +85,7 @@ Button.propTypes = {
   ...propTypes.position,
   ...propTypes.space,
   children: PropTypes.node,
-  iconFace: PropTypes.string,
+  icon: PropTypes.string,
   iconPosition: PropTypes.oneOf([
     'left',
     'right'
@@ -105,7 +104,7 @@ Button.propTypes = {
 Button.defaultProps = {
   disabled: false,
   loading: false,
-  iconFace: null,
+  icon: null,
   spinnerSize: '1.5rem',
   type: 'button',
   variant: 'primary'

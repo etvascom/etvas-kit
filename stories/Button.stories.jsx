@@ -65,11 +65,11 @@ export const Variants = () => {
 
 export const LinkIcon = () => {
   const iconRight = {
-    iconFace: 'info',
+    icon: 'info',
     iconPosition: 'right'
   }
   const iconLeft = {
-    iconFace: 'info',
+    icon: 'info',
     iconPosition: 'left'
   }
   const iconPseudoVariants = [
@@ -121,7 +121,7 @@ export const LinkIcon = () => {
               <Button
                 variant={iconPseudoVariant.variant}
                 onClick={action(iconPseudoVariant.name)}
-                iconFace={iconPseudoVariant.iconFace ? iconPseudoVariant.iconFace : null}
+                icon={iconPseudoVariant.icon ? iconPseudoVariant.icon : null}
                 iconPosition={iconPseudoVariant.iconPosition || null}
               >
                 Hello Link
@@ -131,7 +131,7 @@ export const LinkIcon = () => {
               <Button
                 disabled
                 variant={iconPseudoVariant.variant}
-                iconFace={iconPseudoVariant.iconFace ? iconPseudoVariant.iconFace : null}
+                icon={iconPseudoVariant.icon ? iconPseudoVariant.icon : null}
                 iconPosition={iconPseudoVariant.iconPosition || null}
               >
                 Hello Link

@@ -65,7 +65,7 @@ const OUTLINE_DEFAULT = {
   ...BUTTON_DEFAULT,
   color: colors.text,
   backgroundColor: 'transparent',
-  border: `${BORDERS[1]}`,
+  border: `${BORDERS[1]}`
 }
 const OUTLINE_STYLE = {
   ...OUTLINE_DEFAULT,
@@ -115,11 +115,11 @@ export default {
   primary: PRIMARY_STYLE,
   large: PRIMARY_LARGE_STYLE,
   link: LINK_STYLE,
-  outline: OUTLINE_STYLE,
-  outlineAlt: OUTLINE_ALT_STYLE,
-  positive: POSITIVE_STYLE,
-  linkSecondary: LINK_SECONDARY_STYLE,
-  linkPositive: LINK_POSITIVE_STYLE
+  outline: PRIMARY_STYLE,
+  outlineAlt: PRIMARY_STYLE,
+  positive: PRIMARY_STYLE,
+  linkSecondary: PRIMARY_STYLE,
+  linkPositive: PRIMARY_STYLE
 }
 
 export const iconVariants = {
@@ -136,38 +136,24 @@ export const iconVariants = {
     fontSize: '1'
   }
 }
-
+const PRIMARY_SPINNER_VARIANT = {
+  background: colors.brand,
+  primary: colors.white
+}
+const LARGE_SPINNER_VARIANT = {
+  ...PRIMARY_SPINNER_VARIANT
+}
+const LINK_SPINNER_VARIANT = {
+  background: colors.white,
+  primary: colors.brand
+}
 export const spinnerVariants = {
-  primary: {
-    background: colors.brand,
-    primary: colors.white
-  },
-  large: {
-    background: colors.brand,
-    primary: colors.white
-  },
-  outline: {
-    background: colors.white,
-    primary: colors.accent
-  },
-  outlineAlt: {
-    background: colors.white,
-    primary: colors.text
-  },
-  positive: {
-    background: colors.positive,
-    primary: colors.white
-  },
-  link: {
-    background: colors.white,
-    primary: colors.brand
-  },
-  linkSecondary: {
-    background: colors.white,
-    primary: colors.text
-  },
-  linkPositive: {
-    background: colors.white,
-    primary: colors.positive
-  }
+  primary: PRIMARY_SPINNER_VARIANT,
+  large: LARGE_SPINNER_VARIANT,
+  link: LINK_SPINNER_VARIANT,
+  outline: PRIMARY_SPINNER_VARIANT,
+  outlineAlt: PRIMARY_SPINNER_VARIANT,
+  positive: PRIMARY_SPINNER_VARIANT,
+  linkSecondary: PRIMARY_SPINNER_VARIANT,
+  linkPositive: PRIMARY_SPINNER_VARIANT
 }
