@@ -11,7 +11,13 @@ export const TextField = props => {
   const id = props.id || makeId('field', props.name || 'input')
 
   return (
-    <Input {...props} {...field} id={id} error={meta.touched && meta.error} />
+    <Input
+      {...props}
+      {...field}
+      id={id}
+      error={meta.touched && meta.error}
+      valid={!meta.error && meta.touched}
+    />
   )
 }
 
