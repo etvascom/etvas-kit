@@ -136,31 +136,15 @@ export const iconVariants = {
   }
 }
 const PRIMARY_SPINNER_VARIANT = {
-  background: colors.brand,
   primary: colors.white,
-}
-const LARGE_SPINNER_VARIANT = {
-  ...PRIMARY_SPINNER_VARIANT
-}
-const LINK_SPINNER_VARIANT = {
-  background: colors.white,
-  primary: colors.brand
-}
-const POSITIVE_SPINNER_VARIANT = {
-  background: colors.positive,
-  primary: colors.white
-}
-const OUTLINE_SPINNER_VARIANT = {
-  background: OUTLINE_STYLE.backgroundColor,
-  primary: colors.white
 }
 export const spinnerVariants = {
   primary: PRIMARY_SPINNER_VARIANT,
-  large: LARGE_SPINNER_VARIANT,
-  link: LINK_SPINNER_VARIANT,
-  outline: OUTLINE_SPINNER_VARIANT,
-  outlineAlt: OUTLINE_SPINNER_VARIANT,
-  positive: POSITIVE_SPINNER_VARIANT,
-  linkSecondary: LINK_SPINNER_VARIANT,
-  linkPositive: LINK_SPINNER_VARIANT
+  large: PRIMARY_SPINNER_VARIANT,
+  link: PRIMARY_SPINNER_VARIANT,
+  outline: PRIMARY_SPINNER_VARIANT,
+  outlineAlt: PRIMARY_SPINNER_VARIANT,
+  positive: PRIMARY_SPINNER_VARIANT,
+  linkSecondary: PRIMARY_SPINNER_VARIANT,
+  linkPositive: PRIMARY_SPINNER_VARIANT
 }

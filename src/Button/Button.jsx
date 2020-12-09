@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { compose, layout, position, space, variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
 
-import { ActivityIndicator } from '@ivoryio/kogaio'
 import { Typography } from '../Typography'
 import { Flex, Space } from '../'
 import variants, { iconVariants, spinnerVariants } from './variants'
@@ -32,19 +31,6 @@ const Button = ({
     }
   }
 
-  let spinnerColor = spinnerVariants[variant]
-  if(loading){
-    spinnerColor = {
-      background: variants[variant].backgroundColor,
-      primary: colors.white
-    }
-    if(disabled && (variant === 'primary' || variant === 'large')){
-      spinnerColor = {
-        background: colors.disabled,
-        primary: colors.white
-      }
-    }
-  }
   return (<StyledButton
     disabled={disabled}
     id={id}
@@ -53,10 +39,11 @@ const Button = ({
     variant={variant}
     {...rest}>
     {loading ? (
-      <ActivityIndicator
-        colors={spinnerColor}
-        size='1.1rem'
-        variant='spinner'
+      <Icon
+        fontSize={3}
+        name={'loading'}
+        color={spinnerVariants[variant].primary}
+        rotate={true}
       />
     ) : (
       <Flex flexDirection={'row'} alignItems={'center'}>
