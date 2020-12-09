@@ -12,17 +12,17 @@ import { Icon } from '../Icon'
 import colors from '../assets/colors'
 
 const Button = ({
-                  children,
-                  disabled,
-                  icon,
-                  id,
-                  loading,
-                  onClick,
-                  type,
-                  variant,
-                  iconPosition,
-                  ...rest
-                }) => {
+  children,
+  disabled,
+  icon,
+  id,
+  loading,
+  onClick,
+  type,
+  variant,
+  iconPosition,
+  ...rest
+}) => {
   let iconColor
   if (icon && iconPosition) {
     if (disabled && variant === 'link') {
@@ -31,11 +31,18 @@ const Button = ({
       iconColor = iconVariants[variant].color
     }
   }
+
   let spinnerColor = spinnerVariants[variant]
-  if (loading && disabled && (variant === 'primary' || variant === 'large')) {
+  if(loading){
     spinnerColor = {
-      background: colors.disabled,
+      background: variants[variant].backgroundColor,
       primary: colors.white
+    }
+    if(disabled && (variant === 'primary' || variant === 'large')){
+      spinnerColor = {
+        background: colors.disabled,
+        primary: colors.white
+      }
     }
   }
   return (<StyledButton

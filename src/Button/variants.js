@@ -79,7 +79,7 @@ const POSITIVE_STYLE = {
 }
 const LINK_DEFAULT = {
   ...BUTTON_DEFAULT,
-  background: 'none',
+  backgroundColor: 'transparent',
   minWidth: 'max-content',
   height: 'auto',
   padding: 0,
@@ -124,20 +124,20 @@ export default {
 export const iconVariants = {
   primary: {
     color: colors.white,
-    fontSize: '1'
+    fontSize: 1
   },
   large: {
     color: colors.white,
-    fontSize: '2'
+    fontSize: 2
   },
   link: {
     color: colors.brand,
-    fontSize: '1'
+    fontSize: 1
   }
 }
 const PRIMARY_SPINNER_VARIANT = {
   background: colors.brand,
-  primary: colors.white
+  primary: colors.white,
 }
 const LARGE_SPINNER_VARIANT = {
   ...PRIMARY_SPINNER_VARIANT
@@ -151,7 +151,7 @@ const POSITIVE_SPINNER_VARIANT = {
   primary: colors.white
 }
 const OUTLINE_SPINNER_VARIANT = {
-  background: colors.transparent,
+  background: OUTLINE_STYLE.backgroundColor,
   primary: colors.white
 }
 export const spinnerVariants = {
