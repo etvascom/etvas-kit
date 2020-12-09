@@ -5,8 +5,9 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import glyphs from './glyphs.json'
+import animationSpeeds from '../assets/animationSpeeds'
 
-export const Icon = ({ name, size, color }) => {
+export const Icon = ({ name, size, color, rotate }) => {
   const glyph =
     typeof name === 'number'
       ? String.fromCharCode(name)
@@ -15,20 +16,23 @@ export const Icon = ({ name, size, color }) => {
       : name
 
   return (
-    <StyledI color={color} size={size}>
+    <StyledI color={color} size={size} rotate={rotate}>
       {glyph}
     </StyledI>
   )
 }
 
-const StyledI = styled.i(({ color, size }) =>
+const StyledI = styled.i(({ color, size, rotate }) =>
   css({
     fontFamily: 'EtvasIcons',
     fontStyle: 'unset',
     fontWeight: 'normal',
     fontSize: size,
     lineHeight: size,
-    color
+    color,
+    animation: rotate
+      ? `rotation ${animationSpeeds.rotation} infinite linear`
+      : ''
   })
 )
 
@@ -46,5 +50,6 @@ Icon.propTypes = {
     PropTypes.array,
     PropTypes.object,
     PropTypes.string
-  ])
+  ]),
+  rotate: PropTypes.bool
 }

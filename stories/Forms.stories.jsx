@@ -68,6 +68,12 @@ export const SimpleForm = () => (
     validate={formValidate}>
     <Typography variant='titleSmall'>Basic info</Typography>
     <TextField
+      name='name-no-validation'
+      id='name-no-validation'
+      label='Name with no validation'
+      placeholder='e.g. John'
+    />
+    <TextField
       name='name'
       id='name'
       label='Name'
