@@ -263,3 +263,32 @@ export const Types = () => (
     <Input id='id' type='week' />
   </>
 )
+
+export const PasswordInput = () => (
+  <>
+    <Typography variant='h4' mt={3}>
+      Password input with no value:
+    </Typography>
+    <Input id='id' type='password' />
+
+    <Typography variant='h4' mt={3}>
+      Password input with value:
+    </Typography>
+    <Input id='id' type='password' value='Password' />
+
+    <Typography variant='h4' mt={3}>
+      Password input with loading state:
+    </Typography>
+    <Input id='id' type='password' value='Password' loading={true} />
+
+    <Typography variant='h4' mt={3}>
+      Password input with error state:
+    </Typography>
+    <Input
+      id='id'
+      type='password'
+      error='There is a problem with your password'
+      value='Password'
+    />
+  </>
+)
