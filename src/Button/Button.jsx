@@ -12,17 +12,17 @@ import { Icon } from '../Icon'
 import colors from '../assets/colors'
 
 const Button = ({
-  children,
-  disabled,
-  icon,
-  id,
-  loading,
-  onClick,
-  type,
-  variant,
-  iconPosition,
-  ...rest
-}) => {
+                  children,
+                  disabled,
+                  icon,
+                  id,
+                  loading,
+                  onClick,
+                  type,
+                  variant,
+                  iconPosition,
+                  ...rest
+                }) => {
   let iconColor
   if (icon && iconPosition) {
     if (disabled && variant === 'link') {
@@ -32,7 +32,7 @@ const Button = ({
     }
   }
   let spinnerColor = spinnerVariants[variant]
-  if (loading && disabled && (variant === 'primary' || variant === 'large') ) {
+  if (loading && disabled && (variant === 'primary' || variant === 'large')) {
     spinnerColor = {
       background: colors.disabled,
       primary: colors.white
@@ -54,7 +54,7 @@ const Button = ({
     ) : (
       <Flex flexDirection={'row'} alignItems={'center'}>
         {(icon && iconPosition === 'left') &&
-        <Space mr={'0.5em'}>
+        <Space mr='0.5em'>
           <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
         </Space>
         }
@@ -67,7 +67,7 @@ const Button = ({
           {children}
         </Typography>
         {(icon && iconPosition === 'right') &&
-        <Space ml={"0.5em"}>
+        <Space ml='0.5em'>
           <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
         </Space>
         }
