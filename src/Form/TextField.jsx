@@ -16,9 +16,13 @@ export const TextField = props => {
       {...field}
       id={id}
       error={meta.touched && meta.error}
-      valid={!meta.error && meta.touched}
+      valid={hasValidation(props) && !meta.error && meta.touched}
     />
   )
+}
+
+const hasValidation = props => {
+  return props.validate || props.required
 }
 
 TextField.propTypes = {
