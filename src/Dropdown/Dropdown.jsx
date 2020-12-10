@@ -257,8 +257,8 @@ const Toggler = styled.button(
   ({ error }) =>
     error
       ? css({
-          color: 'error',
-          borderColor: 'error'
+          color: colors.error,
+          borderColor: colors.error
         })
       : null,
   ({ disabled }) =>
@@ -289,12 +289,12 @@ const StyledIndicator = styled.button(
     appearance: 'none',
     margin: 0,
     padding: 0,
-    background: 'transparent',
+    background: colors.transparent,
     width: 0,
     height: 0,
     borderStyle: 'solid',
     borderWidth: '0 5px 8px 5px',
-    borderColor: 'transparent transparent #303a45 transparent',
+    borderColor: `${colors.transparent} ${colors.transparent} ${colors.inputGray} ${colors.transparent}`,
     borderBottomColor: colors.inputIcon,
     position: 'absolute',
     right: '1em',
@@ -327,13 +327,13 @@ const DropdownList = styled.div(
     appearance: 'none',
     textAlign: 'left',
     width: '100%',
-    background: 'white',
+    background: colors.white,
     borderWidth: 1,
     marginTop: '-3px',
     borderStyle: 'solid',
-    borderColor: 'outline',
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderColor: colors.inputBorderGray,
+    borderBottomLeftRadius: RADII[3],
+    borderBottomRightRadius: RADII[3],
     color: 'text',
     paddingBottom: 3,
     boxShadow: 'etvasCard'
@@ -356,11 +356,11 @@ const SearchInput = styled.input(
     padding: 3,
     display: 'block',
     width: '100%',
-    background: 'white',
+    background: colors.white,
     border: 'none',
     outline: 'none',
     borderBottom: '1px solid',
-    borderBottomColor: 'outline',
+    borderBottomColor: colors.inputBorderGray,
     borderBottomStyle: 'solid',
     borderRadius: 0
   })

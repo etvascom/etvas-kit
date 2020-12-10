@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { typography } from '../Typography'
+import colors from '../assets/colors'
 
 const DropdownItem = ({
   children,
@@ -42,7 +43,7 @@ const Option = styled.div(
     ...typography.labelSmall,
     padding: 3,
     appearance: 'none',
-    background: 'transparent',
+    background: colors.transparent,
     display: 'block',
     width: '100%',
     textAlign: 'left',
@@ -53,17 +54,17 @@ const Option = styled.div(
     !touch
       ? css({
           ':hover': {
-            backgroundColor: 'brandFade'
+            backgroundColor: colors.brandLighter
           }
         })
       : null,
   ({ selected }) =>
     selected
       ? css({
-          backgroundColor: 'brand',
-          color: 'white',
+          backgroundColor: colors.brand,
+          color: colors.white,
           ':hover': {
-            backgroundColor: 'brand'
+            backgroundColor: colors.brand
           }
         })
       : null
