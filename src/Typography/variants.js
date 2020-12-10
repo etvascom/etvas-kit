@@ -1,3 +1,5 @@
+import colors from '../assets/colors'
+
 export default {
   default: {
     fontFamily: 'primary',
@@ -44,8 +46,10 @@ export default {
   inputLabel: {
     fontFamily: 'primary',
     fontSize: 1,
-    textTransform: 'unset',
-    lineHeight: '19px'
+    textTransform: 'capitalize',
+    letterSpacing: '0.3px',
+    lineHeight: '16px',
+    color: colors.textLabelDefault
   },
   labelSmallBold: {
     fontFamily: 'primary',

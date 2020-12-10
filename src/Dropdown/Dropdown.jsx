@@ -16,6 +16,8 @@ import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
+import colors from '../assets/colors'
+import { RADII } from '../assets/core'
 
 const Dropdown = ({
   disabled,
@@ -210,7 +212,7 @@ const Dropdown = ({
               id={`search-${cId}`}
               type='search'
               role='searchbox'
-              autocomplete='off'
+              autocomplete='false'
               onChange={setSearchText}
             />
           ) : null}
@@ -240,13 +242,13 @@ const Toggler = styled.button(
     padding: 3,
     display: 'block',
     width: '100%',
-    background: 'transparent',
-    border: 'none',
+    background: colors.backgroundLightGray,
     outline: 'none',
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
+    borderColor: colors.inputGray,
+    borderRadius: RADII[3],
+    color: colors.textInputActive,
     ':hover, :focus': {
       borderWidth: 1,
       borderStyle: 'solid'
@@ -263,13 +265,14 @@ const Toggler = styled.button(
     disabled
       ? css({
           opacity: 0.5,
+          color: colors.textInputDisabled,
           cursor: 'forbidden',
           pointerEvents: 'none'
         })
       : null,
   ({ isEmpty }) =>
     css({
-      color: isEmpty ? '#757575' : 'text'
+      color: isEmpty ? colors.textInputPlaceholder : colors.textInputActive
     }),
   ({ collapsed }) =>
     !collapsed
@@ -292,7 +295,7 @@ const StyledIndicator = styled.button(
     borderStyle: 'solid',
     borderWidth: '0 5px 8px 5px',
     borderColor: 'transparent transparent #303a45 transparent',
-    borderBottomColor: 'brand',
+    borderBottomColor: colors.inputIcon,
     position: 'absolute',
     right: '1em',
     top: '50%',
