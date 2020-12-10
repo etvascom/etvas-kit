@@ -95,6 +95,8 @@ export const Input = forwardRef(
       [inputType, ref, inputRef, resetInputType]
     )
 
+    const icStateIsNotIconToggle = () => type !== 'password' || error || loading
+
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
@@ -138,7 +140,7 @@ export const Input = forwardRef(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {currentIcRight ? (
+            {icStateIsNotIconToggle() && currentIcRight ? (
               <Space mr={1}>
                 <Icon
                   fontSize={3}
@@ -147,8 +149,7 @@ export const Input = forwardRef(
                   rotate={currentIcRight === 'loading'}
                 />
               </Space>
-            ) : null}
-            {type === 'password' && value ? (
+            ) : (
               <PasswordToggler
                 error={!!error}
                 inputType={inputType}
@@ -157,7 +158,7 @@ export const Input = forwardRef(
                 onToggle={togglePassword}
                 viewOption={passwordView}
               />
-            ) : null}
+            )}
           </Flex>
         </Flex>
         <SubLabel
