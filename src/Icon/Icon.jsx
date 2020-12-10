@@ -29,6 +29,8 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
     }
   }, [name])
 
+  console.warning("You are using the old version of icons")
+
   return <StyledI color={color} size={size} rotate={rotate} {...props}>
     {glyph}
   </StyledI>
