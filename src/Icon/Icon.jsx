@@ -23,9 +23,13 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
         spin={rotate}
         {...props}
       />
+    } else {
+      glyph = glyphs[name]
     }
+  } else {
+    glyph = name
   }
-  console.warn("You are using old icons!")
+  console.warn('You are using old icons!')
   return (
     <StyledI color={color} size={size} rotate={rotate} {...props}>
       {glyph}
