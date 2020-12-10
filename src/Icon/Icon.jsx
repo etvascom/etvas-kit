@@ -10,25 +10,34 @@ import { default as BaseIcon } from '@mdi/react'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
   let glyph
-  if (typeof name === 'number') {
-    glyph = String.fromCharCode(name)
-  } else if (typeof name === 'string') {
-    if (typeof glyphs[name] === 'number') {
-      glyph = String.fromCharCode(glyphs[name])
-    } else if (typeof glyphs[name] === 'string') {
-      return <BaseIcon
-        path={glyphs[name]}
-        size={size}
-        color={color}
-        spin={rotate}
-        {...props}
-      />
-    } else {
-      glyph = glyphs[name]
-    }
-  } else {
-    glyph = name
+  switch (typeof name) {
+    case 'number':
+      glyph = String.fromCharCode(name)
+      break
+    case 'string':
+      switch (typeof glyphs[name]) {
+        case 'number':
+          glyph = String.fromCharCode(glyphs[name])
+          break
+        case 'string':
+          return <BaseIcon
+            path={glyphs[name]}
+            size={size}
+            color={color}
+            spin={rotate}
+            {...props}
+          />
+          break
+        default:
+          glyph = glyphs[name]
+          break
+      }
+      break
+    default:
+      glyph = name
+      break
   }
+
   console.warn('You are using old icons!')
   return (
     <StyledI color={color} size={size} rotate={rotate} {...props}>
