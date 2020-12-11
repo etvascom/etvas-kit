@@ -7,6 +7,7 @@ import css from '@styled-system/css'
 import glyphs from './glyphs.js'
 import animationSpeeds from '../assets/animationSpeeds'
 import { default as BaseIcon } from '@mdi/react'
+import colors from '../assets/colors'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
   const glyph = useMemo(() => {
@@ -23,7 +24,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
     return <BaseIcon
       path={glyphs[name]}
       size={size}
-      color={color}
+      color={colors[color] || 'currentColor'}
       spin={rotate}
       {...props}
     />
