@@ -1,6 +1,5 @@
 import sizes from '../assets/sizes'
 import { BORDERS } from '../assets/core'
-import colors from '../assets/colors'
 
 const BUTTON_DEFAULT = {
   height: sizes.buttonHeight,
@@ -35,19 +34,19 @@ const BUTTON_DEFAULT = {
 }
 const PRIMARY_DEFAULT = {
   ...BUTTON_DEFAULT,
-  backgroundColor: colors.brand,
-  color: colors.white,
+  backgroundColor: 'brand',
+  color: 'white',
   ':hover': {
-    backgroundColor: colors.brandDark
+    backgroundColor: 'brandDark'
   },
   ':active': {
-    backgroundColor: colors.brandDarkest
+    backgroundColor: 'brandDarkest'
   },
   ':focus': {
     opacity: 1
   },
   ':disabled': {
-    backgroundColor: colors.disabled,
+    backgroundColor: 'disabled',
     transform: 'scale(1)',
     cursor: 'not-allowed'
   }
@@ -62,18 +61,18 @@ const LARGE_STYLE = {
 
 const OUTLINE_DEFAULT = {
   ...BUTTON_DEFAULT,
-  color: colors.text,
+  color: 'text',
   backgroundColor: 'transparent',
   border: `${BORDERS[1]}`
 }
 const OUTLINE_STYLE = {
   ...OUTLINE_DEFAULT,
-  borderColor: colors.accent
+  borderColor: 'accent'
 }
 
 const POSITIVE_STYLE = {
   ...BUTTON_DEFAULT,
-  backgroundColor: colors.positive,
+  backgroundColor: 'positive',
   color: 'white'
 }
 const LINK_DEFAULT = {
@@ -84,29 +83,29 @@ const LINK_DEFAULT = {
   padding: 0,
   minHeight: 'max-content',
   ':hover': {
-    color: colors.brandDark
+    color: 'brandDark'
   },
   ':active': {
-    color: colors.brandDarkest
+    color: 'brandDarkest'
   },
   ':disabled': {
-    color: colors.disabled,
+    color: 'disabled',
     transform: 'scale(1)',
     cursor: 'not-allowed'
   }
 }
 const LINK_STYLE = {
   ...LINK_DEFAULT,
-  color: colors.brand
+  color: 'brand'
 }
 const LINK_POSITIVE_STYLE = {
   ...LINK_DEFAULT,
-  color: colors.positive,
+  color: 'positive',
   ':hover': {
     opacity: 0.75
   },
   ':active': {
-    color: colors.positive
+    color: 'positive'
   }
 }
 export default {
@@ -122,20 +121,20 @@ export default {
 
 export const iconVariants = {
   primary: {
-    color: colors.white,
+    color: 'white',
     fontSize: 1
   },
   large: {
-    color: colors.white,
+    color: 'white',
     fontSize: 2
   },
   link: {
-    color: colors.brand,
+    color: 'brand',
     fontSize: 1
   }
 }
 const PRIMARY_SPINNER_VARIANT = {
-  primary: colors.white
+  primary: 'white'
 }
 export const spinnerVariants = {
   primary: PRIMARY_SPINNER_VARIANT,
