@@ -9,16 +9,6 @@ import animationSpeeds from '../assets/animationSpeeds'
 import { default as BaseIcon } from '@mdi/react'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
-  if (typeof name === 'string' && typeof glyphs[name] === 'string') {
-    return <BaseIcon
-      path={glyphs[name]}
-      size={size}
-      color={color}
-      spin={rotate}
-      {...props}
-    />
-  }
-
   const glyph = useMemo(() => {
     if (typeof name === 'number') {
       return String.fromCharCode(name)
@@ -29,10 +19,19 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
     return name
   }, [name])
 
+  if (typeof name === 'string' && typeof glyphs[name] === 'string') {
+    return <BaseIcon
+      path={glyphs[name]}
+      size={size}
+      color={color}
+      spin={rotate}
+      {...props}
+    />
+  }
   console.warn('You are using the old version of icons')
 
   return <StyledI color={color} size={size} rotate={rotate} {...props}>
-    {glyph || "undefined"}
+    {glyph || 'undefined'}
   </StyledI>
 }
 
