@@ -3,8 +3,8 @@ import { BORDERS } from '../assets/core'
 import colors from '../assets/colors'
 
 const BUTTON_DEFAULT = {
-  minHeight: sizes.buttonMinHeight,
-  minWidth: sizes.buttonMinWidth,
+  height: sizes.buttonHeight,
+  width: sizes.buttonWidth,
   alignItems: 'center',
   border: 'none',
   boxSizing: 'border-box',
@@ -12,7 +12,6 @@ const BUTTON_DEFAULT = {
   borderRadius: '6px',
   display: 'flex',
   justifyContent: 'center',
-  width: 'fit-content',
   label: {
     cursor: 'pointer',
     pointerEvents: 'none'
@@ -58,7 +57,7 @@ const PRIMARY_STYLE = {
 }
 const LARGE_STYLE = {
   ...PRIMARY_DEFAULT,
-  minWidth: sizes.largeButtonMinWidth
+  width: sizes.largeButtonWidth
 }
 
 const OUTLINE_DEFAULT = {
