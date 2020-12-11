@@ -34,7 +34,7 @@ export const PasswordToggler = ({
       tabIndex={tabIndex}>
       <Icon
         color={colors.inputIcon}
-        size={3}
+        size={1}
         name={inputType === 'password' ? 'eye' : 'eyeNo'}
         {...props}
       />
