@@ -44,4 +44,6 @@ const theme = buildTheme({
   animationSpeeds
 })
 
+console.info('THEME', theme)
+
 export default theme
