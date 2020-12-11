@@ -8,5 +8,6 @@ export default {
   inputHeight: BASE_SIZES.controlHeight,
   buttonHeight: BASE_SIZES.controlHeight,
   buttonWidth: BASE_SIZES.controlWidth,
+  buttonMinWidth: '40px',
   largeButtonWidth: '190px'
 }

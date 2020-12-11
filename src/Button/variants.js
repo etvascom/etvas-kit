@@ -4,6 +4,7 @@ import { BORDERS } from '../assets/core'
 const BUTTON_DEFAULT = {
   height: sizes.buttonHeight,
   width: sizes.buttonWidth,
+  minWidth: sizes.buttonMinWidth,
   alignItems: 'center',
   border: 'none',
   boxSizing: 'border-box',
@@ -78,7 +79,6 @@ const POSITIVE_STYLE = {
 const LINK_DEFAULT = {
   ...BUTTON_DEFAULT,
   backgroundColor: 'transparent',
-  minWidth: 'max-content',
   height: 'auto',
   padding: 0,
   minHeight: 'max-content',
