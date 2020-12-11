@@ -29,12 +29,14 @@
     "build-storybook": "build-storybook -o build/ --quiet"
   },
   "peerDependencies": {
-    "react": "16.x",
     "formik": "^2.1.4",
+    "react": "16.x",
     "styled-components": "^5.1.0"
   },
   "dependencies": {
     "@ivoryio/kogaio": "^0.7.93",
+    "@mdi/js": "^5.8.55",
+    "@mdi/react": "^1.4.0",
     "@styled-system/theme-get": "^5.1.2",
     "hyperid": "^2.0.5",
     "lodash": "^4.17.20",
