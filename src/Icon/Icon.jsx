@@ -7,6 +7,7 @@ import css from '@styled-system/css'
 import glyphs from './glyphs.js'
 import animationSpeeds from '../assets/animationSpeeds'
 import { default as BaseIcon } from '@mdi/react'
+import { Flex } from '@ivoryio/kogaio'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
   const glyph = useMemo(() => {
@@ -20,13 +21,15 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   }, [name])
 
   if (typeof name === 'string' && typeof glyphs[name] === 'string') {
-    return <BaseIcon
-      path={glyphs[name]}
-      size={size}
-      color={color}
-      spin={rotate}
-      {...props}
-    />
+    return <Flex flexDirection={'row'} justifyContent={'center'} alignItems={'true'}>
+      <BaseIcon
+        path={glyphs[name]}
+        size={size}
+        color={color}
+        spin={rotate}
+        {...props}
+      />
+    </Flex>
   }
   console.warn('You are using the old version of icons')
 
