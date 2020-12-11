@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Touchable } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
+import colors from '../assets/colors'
 
 export const PasswordToggler = ({
   error,
@@ -32,7 +33,7 @@ export const PasswordToggler = ({
       onTouchEnd={handleUp}
       tabIndex={tabIndex}>
       <Icon
-        color={error ? 'error' : 'outline'}
+        color={colors.inputIcon}
         size={3}
         name={inputType === 'password' ? 'eye' : 'eyeNo'}
         {...props}

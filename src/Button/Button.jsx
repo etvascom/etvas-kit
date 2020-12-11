@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { compose, layout, position, space, variant } from 'styled-system'
@@ -22,14 +22,16 @@ const Button = ({
   iconPosition,
   ...rest
 }) => {
-  let iconColor
-  if (icon && iconPosition) {
-    if (disabled && variant === 'link') {
-      iconColor = colors.disabled
-    } else {
-      iconColor = iconVariants[variant].color
+  const iconColor = useMemo(() => {
+    if (!icon || !iconPosition) {
+      return null
     }
-  }
+    if (disabled && variant === 'link'){
+      return colors.disabled
+    }
+    return iconVariants[variant].color
+  }, [iconPosition, disabled, icon, variant])
+
 
   return (<StyledButton
     disabled={disabled}
@@ -40,7 +42,7 @@ const Button = ({
     {...rest}>
     {loading ? (
       <Icon
-        fontSize={3}
+        size={1}
         name={'loading'}
         color={spinnerVariants[variant].primary}
         rotate={true}

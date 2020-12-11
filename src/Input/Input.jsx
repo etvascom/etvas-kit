@@ -9,15 +9,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
-import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 
 import { PasswordToggler } from './PasswordToggler'
-import { default as variants } from './Input.variants'
-import { SubLabel } from './SubLabel'
-import colors from '../assets/colors'
+import { ErrorMessage } from './ErrorMessage'
 
 export const Input = forwardRef(
   (
@@ -26,7 +23,6 @@ export const Input = forwardRef(
       autoFocus,
       disabled,
       error,
-      warning,
       icLeft,
       icRight,
       id,
@@ -42,8 +38,6 @@ export const Input = forwardRef(
       valid,
       value,
       variant,
-      subLabel,
-      loading,
       ...rest
     },
     ref
@@ -52,30 +46,11 @@ export const Input = forwardRef(
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
-      if (disabled || loading) return 'disabled'
+      if (disabled) return 'disabled'
       else if (error) return 'error'
-      else if (warning) return 'warning'
       else if (valid) return 'valid'
       return variant
-    }, [disabled, error, warning, valid, variant])
-
-    const currentIcRight = useMemo(() => {
-      if (loading) return 'loading'
-      else if (error || warning) return 'alertCircle'
-      else if (valid || !icRight) return 'checkMark'
-
-      return icRight
-    }, [error, warning, valid, icRight])
-
-    const currentIcRightColor = useMemo(() => {
-      if (loading) return colors.brand
-      else if (disabled) return colors.inputBorderGray
-      else if (error) return colors.error
-      else if (warning) return colors.warning
-      else if (valid) return colors.success
-
-      return colors.inputIcon
-    }, [error, warning, valid, disabled, icRight])
+    }, [disabled, error, valid, variant])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 
@@ -94,6 +69,7 @@ export const Input = forwardRef(
       },
       [inputType, ref, inputRef, resetInputType]
     )
+
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
@@ -109,7 +85,7 @@ export const Input = forwardRef(
           <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            ariaDisabled={readOnly || disabled}
+            disabled={readOnly || disabled}
             error={error}
             hasLabel={label}
             hasIcLeft={icLeft}
@@ -137,14 +113,9 @@ export const Input = forwardRef(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {currentIcRight ? (
+            {icRight ? (
               <Space mr={1}>
-                <Icon
-                  fontSize={3}
-                  name={currentIcRight}
-                  color={currentIcRightColor}
-                  rotate={currentIcRight === 'loading'}
-                />
+                <Icon fontSize={3} name={icRight} />
               </Space>
             ) : null}
             {type === 'password' && value ? (
@@ -159,11 +130,7 @@ export const Input = forwardRef(
             ) : null}
           </Flex>
         </Flex>
-        <SubLabel
-          content={error || warning || subLabel}
-          variant={inputVariant}
-          preserveSpace={!noBottomSpace}
-        />
+        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
       </Flex>
     )
   }
@@ -186,21 +153,26 @@ const StyledInput = styled.input(
       borderStyle: 'solid'
     }
   }),
-  variant({ variants })
+  ({ error }) =>
+    error
+      ? css({
+        color: 'error',
+        borderColor: 'error'
+      })
+      : null,
+  ({ disabled }) =>
+    disabled
+      ? css({
+        opacity: 0.5
+      })
+      : null
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
-  loading: PropTypes.bool,
-  subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
-  warning: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
   error: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.node,
