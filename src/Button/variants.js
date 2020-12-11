@@ -136,7 +136,7 @@ export const iconVariants = {
   }
 }
 const PRIMARY_SPINNER_VARIANT = {
-  primary: colors.white,
+  primary: colors.white
 }
 export const spinnerVariants = {
   primary: PRIMARY_SPINNER_VARIANT,
