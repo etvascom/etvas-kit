@@ -17,7 +17,6 @@ import { Flex, Space } from '@ivoryio/kogaio'
 import { PasswordToggler } from './PasswordToggler'
 import { default as variants } from './Input.variants'
 import { SubLabel } from './SubLabel'
-import colors from '../assets/colors'
 
 export const Input = forwardRef(
   (
@@ -68,13 +67,13 @@ export const Input = forwardRef(
     }, [loading, error, warning, valid, icRight])
 
     const currentIcRightColor = useMemo(() => {
-      if (loading) return colors.brand
-      else if (disabled) return colors.inputBorderGray
-      else if (error) return colors.error
-      else if (warning) return colors.warning
-      else if (valid) return colors.success
+      if (loading) return 'brand'
+      else if (disabled) return 'inputBorderGray'
+      else if (error) return 'error'
+      else if (warning) return 'warning'
+      else if (valid) return 'success'
 
-      return colors.inputIcon
+      return 'inputIcon'
     }, [loading, error, warning, valid, disabled])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
@@ -131,7 +130,7 @@ export const Input = forwardRef(
           />
           {icLeft ? (
             <Icon
-              fontSize={3}
+              size={1}
               left={2}
               name={icLeft}
               pointerEvents='none'
@@ -143,7 +142,7 @@ export const Input = forwardRef(
             {icStateIsNotIconToggle() && currentIcRight ? (
               <Space mr={1}>
                 <Icon
-                  fontSize={3}
+                  size={1}
                   name={currentIcRight}
                   color={currentIcRightColor}
                   rotate={currentIcRight === 'loading'}
