@@ -57,7 +57,7 @@ export const Input = forwardRef(
       else if (warning) return 'warning'
       else if (valid) return 'valid'
       return variant
-    }, [disabled, error, warning, valid, variant])
+    }, [loading, disabled, error, warning, valid, variant])
 
     const currentIcRight = useMemo(() => {
       if (loading) return 'loading'
@@ -65,7 +65,7 @@ export const Input = forwardRef(
       else if (valid || !icRight) return 'checkMark'
 
       return icRight
-    }, [error, warning, valid, icRight])
+    }, [loading, error, warning, valid, icRight])
 
     const currentIcRightColor = useMemo(() => {
       if (loading) return colors.brand
@@ -75,7 +75,7 @@ export const Input = forwardRef(
       else if (valid) return colors.success
 
       return colors.inputIcon
-    }, [error, warning, valid, disabled, icRight])
+    }, [loading, error, warning, valid, disabled])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 

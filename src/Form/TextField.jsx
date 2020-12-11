@@ -21,9 +21,7 @@ export const TextField = props => {
   )
 }
 
-const hasValidation = props => {
-  return props.validate || props.required
-}
+const hasValidation = props => props.validate || props.required
 
 TextField.propTypes = {
   ...fieldShape,
