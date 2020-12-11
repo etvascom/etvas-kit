@@ -7,3 +7,5 @@
 npm-debug.log*
 .vscode/
 .idea/
+yarn.lock
+yarn-error.log
