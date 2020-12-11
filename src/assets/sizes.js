@@ -1,3 +1,13 @@
+const BASE_SIZES = {
+  controlHeight: '40px',
+  controlWidth: '160px'
+}
+
 export default {
-  inputHeight: '40px'
+  ...BASE_SIZES,
+  inputHeight: BASE_SIZES.controlHeight,
+  buttonHeight: BASE_SIZES.controlHeight,
+  buttonWidth: BASE_SIZES.controlWidth,
+  buttonMinWidth: '40px',
+  largeButtonWidth: '190px'
 }

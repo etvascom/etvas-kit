@@ -12,12 +12,13 @@ export default {
 export const Variants = () => {
   const variants = [
     'primary',
-    'outline',
-    'outlineAlt',
-    'positive',
+    'large',
     'link',
     'linkSecondary',
-    'linkPositive'
+    'linkPositive',
+    'outline',
+    'outlineAlt',
+    'positive'
   ]
 
   return (
@@ -53,6 +54,87 @@ export const Variants = () => {
             <Cell>
               <Button disabled loading variant={variant}>
                 Hello Button
+              </Button>
+            </Cell>
+          </Row>
+        ))}
+      </Body>
+    </Table>
+  )
+}
+
+export const LinkIcon = () => {
+  const iconRight = {
+    icon: 'info',
+    iconPosition: 'right'
+  }
+  const iconLeft = {
+    icon: 'info',
+    iconPosition: 'left'
+  }
+  const iconPseudoVariants = [
+    {
+      variant: 'primary',
+      name: 'primaryIconLeft',
+      ...iconLeft
+    },
+    {
+      variant: 'primary',
+      name: 'primaryIconRight',
+      ...iconRight
+    },
+    {
+      variant: 'large',
+      name: 'largeIconLeft',
+      ...iconLeft
+    },
+    {
+      variant: 'large',
+      name: 'largeIconRight',
+      ...iconRight
+    },
+    {
+      variant: 'link',
+      name: 'linkIconLeft',
+      ...iconLeft
+    },
+    {
+      variant: 'link',
+      name: 'linkIconRight',
+      ...iconRight
+    }
+  ]
+  return (
+    <Table breakpoint={400}>
+      <Header>
+        <Row>
+          <Cell>Type</Cell>
+          <Cell>Normal</Cell>
+          <Cell>Disabled</Cell>
+        </Row>
+      </Header>
+      <Body>
+        {iconPseudoVariants.map(iconPseudoVariant => (
+          <Row key={iconPseudoVariant.name}>
+            <Cell leader>{iconPseudoVariant.name}</Cell>
+            <Cell>
+              <Button
+                variant={iconPseudoVariant.variant}
+                onClick={action(iconPseudoVariant.name)}
+                icon={iconPseudoVariant.icon ? iconPseudoVariant.icon : null}
+                iconPosition={iconPseudoVariant.iconPosition || null}
+              >
+                Hello Link
+              </Button>
+            </Cell>
+            <Cell>
+              <Button
+                disabled
+                variant={iconPseudoVariant.variant}
+                icon={iconPseudoVariant.icon ? iconPseudoVariant.icon : null}
+                iconPosition={iconPseudoVariant.iconPosition || null}
+              >
+                Hello Link
               </Button>
             </Cell>
           </Row>
