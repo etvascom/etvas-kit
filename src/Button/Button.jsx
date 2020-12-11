@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 import { compose, layout, position, space, variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
 
-import { ActivityIndicator } from '@ivoryio/kogaio'
 import { Typography } from '../Typography'
-
-import variants, { spinnerVariants } from './variants'
+import { Flex, Space } from '../'
+import variants, { iconVariants, spinnerVariants } from './variants'
+import { Icon } from '../Icon'
+import colors from '../assets/colors'
 
 const Button = ({
   children,
@@ -19,9 +19,21 @@ const Button = ({
   onClick,
   type,
   variant,
+  iconPosition,
   ...rest
-}) => (
-  <StyledButton
+}) => {
+  const iconColor = useMemo(() => {
+    if (!icon || !iconPosition) {
+      return null
+    }
+    if (disabled && variant === 'link'){
+      return colors.disabled
+    }
+    return iconVariants[variant].color
+  }, [iconPosition, disabled, icon, variant])
+
+
+  return (<StyledButton
     disabled={disabled}
     id={id}
     onClick={onClick}
@@ -29,58 +41,38 @@ const Button = ({
     variant={variant}
     {...rest}>
     {loading ? (
-      <ActivityIndicator
-        colors={spinnerVariants[variant]}
-        size='1.1rem'
-        variant='spinner'
+      <Icon
+        size={1}
+        name={'loading'}
+        color={spinnerVariants[variant].primary}
+        rotate={true}
       />
     ) : (
-      <Typography
-        as='label'
-        variant='labelButton'
-        htmlFor={id}
-        px={3}
-        color='inherit'>
-        {children}
-      </Typography>
+      <Flex flexDirection={'row'} alignItems={'center'}>
+        {(icon && iconPosition === 'left') &&
+        <Space mr='0.5em'>
+          <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
+        </Space>
+        }
+        <Typography
+          as='label'
+          variant='labelButton'
+          htmlFor={id}
+          px={3}
+          color='inherit'>
+          {children}
+        </Typography>
+        {(icon && iconPosition === 'right') &&
+        <Space ml='0.5em'>
+          <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
+        </Space>
+        }
+      </Flex>
     )}
-  </StyledButton>
-)
+  </StyledButton>)
+}
 
 const StyledButton = styled.button(
-  css({
-    alignItems: 'center',
-    border: 'none',
-    boxSizing: 'border-box',
-    cursor: 'pointer',
-    borderRadius: '8px',
-    display: 'flex',
-    justifyContent: 'center',
-    minHeight: '40px',
-    minWidth: '160px',
-    width: 'fit-content',
-    label: {
-      cursor: 'pointer',
-      pointerEvents: 'none'
-    },
-    ':hover': {
-      opacity: 0.75
-    },
-    ':active ': {
-      transform: 'scale(0.965)'
-    },
-    ':focus': {
-      opacity: 0.75,
-      outlineStyle: 'none',
-      outlineColor: 'transparent'
-    },
-    ':disabled': {
-      opacity: 0.3,
-      transform: 'scale(1)',
-      cursor: 'not-allowed'
-    }
-  }),
-
   compose(layout, position, space, variant({ variants }))
 )
 
@@ -89,6 +81,11 @@ Button.propTypes = {
   ...propTypes.position,
   ...propTypes.space,
   children: PropTypes.node,
+  icon: PropTypes.string,
+  iconPosition: PropTypes.oneOf([
+    'left',
+    'right'
+  ]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   onClick: PropTypes.func,
@@ -103,6 +100,7 @@ Button.propTypes = {
 Button.defaultProps = {
   disabled: false,
   loading: false,
+  icon: null,
   spinnerSize: '1.5rem',
   type: 'button',
   variant: 'primary'
