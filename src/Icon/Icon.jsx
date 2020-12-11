@@ -21,7 +21,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   }, [name])
 
   if (typeof name === 'string' && typeof glyphs[name] === 'string') {
-    return <Flex flexDirection={'row'} justifyContent={'center'} alignItems={'true'}>
+    return <Flex flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
       <BaseIcon
         path={glyphs[name]}
         size={size}
