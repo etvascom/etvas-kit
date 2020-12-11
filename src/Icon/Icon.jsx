@@ -1,25 +1,38 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
 import css from '@styled-system/css'
 
-import glyphs from './glyphs.json'
+import glyphs from './glyphs.js'
 import animationSpeeds from '../assets/animationSpeeds'
+import { default as BaseIcon } from '@mdi/react'
 
-export const Icon = ({ name, size, color, rotate }) => {
-  const glyph =
-    typeof name === 'number'
-      ? String.fromCharCode(name)
-      : glyphs[name]
-      ? String.fromCharCode(glyphs[name])
-      : name
+export const Icon = ({ name, size, color, rotate, ...props }) => {
+  const glyph = useMemo(() => {
+    if (typeof name === 'number') {
+      return String.fromCharCode(name)
+    }
+    if (typeof name === 'string' && typeof glyphs[name] === 'number') {
+      return String.fromCharCode(glyphs[name])
+    }
+    return name
+  }, [name])
 
-  return (
-    <StyledI color={color} size={size} rotate={rotate}>
-      {glyph}
-    </StyledI>
-  )
+  if (typeof name === 'string' && typeof glyphs[name] === 'string') {
+    return <BaseIcon
+      path={glyphs[name]}
+      size={size}
+      color={color}
+      spin={rotate}
+      {...props}
+    />
+  }
+  console.warn('You are using the old version of icons')
+
+  return <StyledI color={color} size={size} rotate={rotate} {...props}>
+    {glyph || 'undefined'}
+  </StyledI>
 }
 
 const StyledI = styled.i(({ color, size, rotate }) =>
