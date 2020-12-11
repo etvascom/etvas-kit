@@ -22,17 +22,17 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   const glyph = useMemo(() => {
     if (typeof name === 'number') {
       return String.fromCharCode(name)
-    } else if (typeof name === 'string' && typeof glyphs[name] === 'number') {
-      return String.fromCharCode(glyphs[name])
-    } else {
-      return name
     }
+    if (typeof name === 'string' && typeof glyphs[name] === 'number') {
+      return String.fromCharCode(glyphs[name])
+    }
+    return name
   }, [name])
 
-  console.warning("You are using the old version of icons")
+  console.warn('You are using the old version of icons')
 
   return <StyledI color={color} size={size} rotate={rotate} {...props}>
-    {glyph}
+    {glyph || "undefined"}
   </StyledI>
 }
 
