@@ -16,6 +16,7 @@ import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
+import { RADII } from '../assets/core'
 
 const Dropdown = ({
   disabled,
@@ -210,7 +211,7 @@ const Dropdown = ({
               id={`search-${cId}`}
               type='search'
               role='searchbox'
-              autocomplete='off'
+              autocomplete='false'
               onChange={setSearchText}
             />
           ) : null}
@@ -240,13 +241,13 @@ const Toggler = styled.button(
     padding: 3,
     display: 'block',
     width: '100%',
-    background: 'transparent',
-    border: 'none',
+    backgroundColor: 'backgroundLightGray',
     outline: 'none',
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
+    borderColor: 'inputBorderGray',
+    borderRadius: RADII[3],
+    color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,
       borderStyle: 'solid'
@@ -263,13 +264,14 @@ const Toggler = styled.button(
     disabled
       ? css({
           opacity: 0.5,
+          color: 'textInputDisabled',
           cursor: 'forbidden',
           pointerEvents: 'none'
         })
       : null,
   ({ isEmpty }) =>
     css({
-      color: isEmpty ? '#757575' : 'text'
+      color: isEmpty ? 'textInputPlaceholder' : 'textInputActive'
     }),
   ({ collapsed }) =>
     !collapsed
@@ -286,13 +288,13 @@ const StyledIndicator = styled.button(
     appearance: 'none',
     margin: 0,
     padding: 0,
-    background: 'transparent',
+    backgroundColor: 'transparent',
     width: 0,
     height: 0,
     borderStyle: 'solid',
     borderWidth: '0 5px 8px 5px',
-    borderColor: 'transparent transparent #303a45 transparent',
-    borderBottomColor: 'brand',
+    borderColor: 'transparent',
+    borderBottomColor: 'inputIcon',
     position: 'absolute',
     right: '1em',
     top: '50%',
@@ -324,13 +326,13 @@ const DropdownList = styled.div(
     appearance: 'none',
     textAlign: 'left',
     width: '100%',
-    background: 'white',
+    backgroundColor: 'white',
     borderWidth: 1,
     marginTop: '-3px',
     borderStyle: 'solid',
-    borderColor: 'outline',
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderColor: 'inputBorderGray',
+    borderBottomLeftRadius: RADII[3],
+    borderBottomRightRadius: RADII[3],
     color: 'text',
     paddingBottom: 3,
     boxShadow: 'etvasCard'
@@ -357,7 +359,7 @@ const SearchInput = styled.input(
     border: 'none',
     outline: 'none',
     borderBottom: '1px solid',
-    borderBottomColor: 'outline',
+    borderBottomColor: 'inputBorderGray',
     borderBottomStyle: 'solid',
     borderRadius: 0
   })

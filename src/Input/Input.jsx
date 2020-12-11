@@ -14,7 +14,8 @@ import { Typography, typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 
 import { PasswordToggler } from './PasswordToggler'
-import { ErrorMessage } from './ErrorMessage'
+import { default as variants } from './Input.variants'
+import { SubLabel } from './SubLabel'
 
 export const Input = forwardRef(
   (
@@ -50,7 +51,25 @@ export const Input = forwardRef(
       else if (error) return 'error'
       else if (valid) return 'valid'
       return variant
-    }, [disabled, error, valid, variant])
+    }, [loading, disabled, error, warning, valid, variant])
+
+    const currentIcRight = useMemo(() => {
+      if (loading) return 'loading'
+      else if (error || warning) return 'alertCircle'
+      else if (valid || !icRight) return 'checkMark'
+
+      return icRight
+    }, [loading, error, warning, valid, icRight])
+
+    const currentIcRightColor = useMemo(() => {
+      if (loading) return 'brand'
+      else if (disabled) return 'inputBorderGray'
+      else if (error) return 'error'
+      else if (warning) return 'warning'
+      else if (valid) return 'success'
+
+      return 'inputIcon'
+    }, [loading, error, warning, valid, disabled])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 
@@ -104,7 +123,7 @@ export const Input = forwardRef(
           />
           {icLeft ? (
             <Icon
-              fontSize={3}
+              size={1}
               left={2}
               name={icLeft}
               pointerEvents='none'
@@ -115,7 +134,12 @@ export const Input = forwardRef(
           <Flex pointerEvents='auto' position='absolute' right={2}>
             {icRight ? (
               <Space mr={1}>
-                <Icon fontSize={3} name={icRight} />
+                <Icon
+                  size={1}
+                  name={currentIcRight}
+                  color={currentIcRightColor}
+                  rotate={currentIcRight === 'loading'}
+                />
               </Space>
             ) : null}
             {type === 'password' && value ? (

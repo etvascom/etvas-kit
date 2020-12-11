@@ -42,7 +42,7 @@ const Option = styled.div(
     ...typography.labelSmall,
     padding: 3,
     appearance: 'none',
-    background: 'transparent',
+    backgroundColor: 'transparent',
     display: 'block',
     width: '100%',
     textAlign: 'left',
@@ -53,7 +53,7 @@ const Option = styled.div(
     !touch
       ? css({
           ':hover': {
-            backgroundColor: 'brandFade'
+            backgroundColor: 'brandLighter'
           }
         })
       : null,

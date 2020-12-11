@@ -1,5 +1,4 @@
 import { BORDERS, RADII } from '../assets/core'
-import colors from '../assets/colors'
 import sizes from '../assets/sizes'
 import typography from '../Typography/variants'
 
@@ -11,56 +10,59 @@ const DEFAULT_DISABLED_STYLE = {
 const DEFAULT_STYLE = {
   ...typography.inputLabel,
   height: sizes.inputHeight,
-  background: colors.backgroundLightGray,
-  border: `${BORDERS[1]} ${colors.inputGray}`,
+  background: 'backgroundLightGray',
+  borderSize: `${BORDERS[1]}`,
+  borderColor: 'inputBorderGray',
   boxSizing: 'border-box',
-  color: colors.textInputActive,
+  color: 'textInputActive',
   borderRadius: RADII[3],
   '::placeholder': {
-    color: colors.textInputPlaceholder
+    color: 'textInputPlaceholder'
   },
   ':hover': {
-    borderColor: colors.brandLight
+    borderColor: 'brandLight'
   },
   ':focus': {
-    borderColor: colors.brandLight
+    borderColor: 'brandLight'
   },
   ':disabled': {
     ...DEFAULT_DISABLED_STYLE,
-    background: colors.backgroundGray
+    background: 'backgroundGray'
   }
 }
 
 const ERROR_STYLE = {
   ...DEFAULT_STYLE,
-  border: `${BORDERS[1]} ${colors.error}`,
+  borderSize: `${BORDERS[1]}`,
+  borderColor: 'error',
   ':hover': {
-    borderColor: colors.error
+    borderColor: 'error'
   },
   ':focus': {
-    borderColor: colors.error
+    borderColor: 'error'
   },
   ':disabled': {
     ...DEFAULT_DISABLED_STYLE,
-    background: colors.backgroundGray,
-    color: colors.textInputDisabled,
-    borderColor: colors.error
+    backgroundColor: 'backgroundGray',
+    color: 'textInputDisabled',
+    borderColor: 'error'
   }
 }
 
 const WARNING_STYLE = {
   ...DEFAULT_STYLE,
-  border: `${BORDERS[1]} ${colors.warning}`,
+  borderSize: `${BORDERS[1]}`,
+  borderColor: 'warning',
   ':hover': {
-    borderColor: colors.warning
+    borderColor: 'warning'
   },
   ':focus': {
-    borderColor: colors.warning
+    borderColor: 'warning'
   },
   ':disabled': {
     ...DEFAULT_DISABLED_STYLE,
-    background: colors.backgroundGray,
-    color: colors.textInputDisabled
+    background: 'backgroundGray',
+    color: 'textInputDisabled'
   }
 }
 
@@ -71,9 +73,9 @@ const VALID_STYLE = {
 const DISABLED_STYLE = {
   ...DEFAULT_STYLE,
   ...DEFAULT_DISABLED_STYLE,
-  background: colors.backgroundGray,
-  borderColor: colors.inputGray,
-  color: colors.textInputDisabled
+  backgroundColor: 'backgroundGray',
+  borderColor: 'inputGray',
+  color: 'textInputDisabled'
 }
 
 export default {
