@@ -16,7 +16,6 @@ import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
-import colors from '../assets/colors'
 import { RADII } from '../assets/core'
 
 const Dropdown = ({
@@ -242,13 +241,13 @@ const Toggler = styled.button(
     padding: 3,
     display: 'block',
     width: '100%',
-    background: colors.backgroundLightGray,
+    backgroundColor: 'backgroundLightGray',
     outline: 'none',
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: colors.inputGray,
+    borderColor: 'inputBorderGray',
     borderRadius: RADII[3],
-    color: colors.textInputActive,
+    color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,
       borderStyle: 'solid'
@@ -257,22 +256,22 @@ const Toggler = styled.button(
   ({ error }) =>
     error
       ? css({
-          color: colors.error,
-          borderColor: colors.error
+          color: 'error',
+          borderColor: 'error'
         })
       : null,
   ({ disabled }) =>
     disabled
       ? css({
           opacity: 0.5,
-          color: colors.textInputDisabled,
+          color: 'textInputDisabled',
           cursor: 'forbidden',
           pointerEvents: 'none'
         })
       : null,
   ({ isEmpty }) =>
     css({
-      color: isEmpty ? colors.textInputPlaceholder : colors.textInputActive
+      color: isEmpty ? 'textInputPlaceholder' : 'textInputActive'
     }),
   ({ collapsed }) =>
     !collapsed
@@ -289,13 +288,13 @@ const StyledIndicator = styled.button(
     appearance: 'none',
     margin: 0,
     padding: 0,
-    background: colors.transparent,
+    backgroundColor: 'transparent',
     width: 0,
     height: 0,
     borderStyle: 'solid',
     borderWidth: '0 5px 8px 5px',
-    borderColor: `${colors.transparent} ${colors.transparent} ${colors.inputGray} ${colors.transparent}`,
-    borderBottomColor: colors.inputIcon,
+    borderColor: 'transparent',
+    borderBottomColor: 'inputIcon',
     position: 'absolute',
     right: '1em',
     top: '50%',
@@ -327,11 +326,11 @@ const DropdownList = styled.div(
     appearance: 'none',
     textAlign: 'left',
     width: '100%',
-    background: colors.white,
+    backgroundColor: 'white',
     borderWidth: 1,
     marginTop: '-3px',
     borderStyle: 'solid',
-    borderColor: colors.inputBorderGray,
+    borderColor: 'inputBorderGray',
     borderBottomLeftRadius: RADII[3],
     borderBottomRightRadius: RADII[3],
     color: 'text',
@@ -356,11 +355,11 @@ const SearchInput = styled.input(
     padding: 3,
     display: 'block',
     width: '100%',
-    background: colors.white,
+    background: 'white',
     border: 'none',
     outline: 'none',
     borderBottom: '1px solid',
-    borderBottomColor: colors.inputBorderGray,
+    borderBottomColor: 'inputBorderGray',
     borderBottomStyle: 'solid',
     borderRadius: 0
   })

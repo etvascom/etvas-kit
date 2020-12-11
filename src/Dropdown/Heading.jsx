@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { typography } from '../Typography'
-import colors from '../assets/colors'
 
 const DropdownHeading = ({ children }) => <Heading>{children}</Heading>
 
@@ -13,8 +12,8 @@ const Heading = styled.div(
     ...typography.labelSmall,
     padding: 3,
     appearance: 'none',
-    background: colors.transparent,
-    color: colors.textLabelDefault,
+    backgroundColor: 'transparent',
+    color: 'textLabelDefault',
     fontSize: '10px',
     textTransform: 'uppercase',
     fontWeight: 'bold',
