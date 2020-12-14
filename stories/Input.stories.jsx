@@ -8,283 +8,222 @@ export default {
 
 export const Default = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default:
-    </Typography>
-    <Input id='id' />
-    <Typography variant='h4' mt={3}>
-      Input in warning state:
-    </Typography>
-    <Input id='id' warning />
-    <Typography variant='h4' mt={3}>
-      Input in error state:
-    </Typography>
-    <Input id='id' error />
-    <Typography variant='h4' mt={3}>
-      Input in valid state:
-    </Typography>
-    <Input id='id' valid />
+    <Input label='Input default' id='id' />
+    <Input label='Input in warning state' id='id' warning />
+    <Input label='Input in error state' id='id' error />
+    <Input label='Input in valid state' id='id' valid />
   </>
 )
 
 export const Placeholder = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default with placeholder:
-    </Typography>
-    <Input id='id' placeholder='This is a placeholder' />
-    <Typography variant='h4' mt={3}>
-      Input in warning state with placeholder:
-    </Typography>
     <Input
+      label='Input default with placeholder'
+      id='id'
+      placeholder='This is a placeholder'
+    />
+    <Input
+      label='Input in warning state with placeholder'
       id='id'
       placeholder='This is a placeholder'
       warning='This is a warning'
     />
-    <Typography variant='h4' mt={3}>
-      Input in error state with placeholder:
-    </Typography>
     <Input
+      label='Input in error state with placeholder'
       id='id'
       placeholder='This is a placeholder'
       error='This is an error'
     />
-    <Typography variant='h4' mt={3}>
-      Input in valid state with placeholder:
-    </Typography>
-    <Input id='id' placeholder='This is a placeholder' valid />
+    <Input
+      label='Input in valid state with placeholder'
+      id='id'
+      placeholder='This is a placeholder'
+      valid
+    />
   </>
 )
 
 export const SubLabel = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default with sub label:
-    </Typography>
-    <Input id='id' subLabel='This is a sub label' />
-    <Typography variant='h4' mt={3}>
-      Input in warning state with sub label:
-    </Typography>
-    <Input id='id' subLabel='This is a sub label' warning='This is a warning' />
-    <Typography variant='h4' mt={3}>
-      Input in error state with sub label:
-    </Typography>
-    <Input id='id' subLabel='This is a sub label' error='This is an error' />
-    <Typography variant='h4' mt={3}>
-      Input in valid state with sub label:
-    </Typography>
-    <Input id='id' subLabel='This is a sub label' valid />
+    <Input
+      label='Input default with sub label'
+      id='id'
+      subLabel='This is a sub label'
+    />
+    <Input
+      label='Input in warning state with sub label'
+      id='id'
+      subLabel='This is a sub label'
+      warning='This is a warning'
+    />
+    <Input
+      label='Input in error state with sub label'
+      id='id'
+      subLabel='This is a sub label'
+      error='This is an error'
+    />
+    <Input
+      label='Input in valid state with sub label'
+      id='id'
+      subLabel='This is a sub label'
+      valid
+    />
   </>
 )
 
 export const Content = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default with value:
-    </Typography>
-    <Input id='id' value='This is some input' />
-    <Typography variant='h4' mt={3}>
-      Input in warning state with value:
-    </Typography>
-    <Input id='id' value='This is some input' warning='This is a warning' />
-    <Typography variant='h4' mt={3}>
-      Input in error state with value:
-    </Typography>
-    <Input id='id' value='This is some input' error='This is an error' />
-    <Typography variant='h4' mt={3}>
-      Input in valid state with value:
-    </Typography>
-    <Input id='id' value='This is some input' valid />
+    <Input
+      label='Input default with value'
+      id='id'
+      value='This is some input'
+    />
+    <Input
+      label='Input in warning state with value'
+      id='id'
+      value='This is some input'
+      warning='This is a warning'
+    />
+    <Input
+      label='Input in error state with value'
+      id='id'
+      value='This is some input'
+      error='This is an error'
+    />
+    <Input
+      label='Input in valid state with value'
+      id='id'
+      value='This is some input'
+      valid
+    />
   </>
 )
 
 export const Disabled = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default with disabled attribute:
-    </Typography>
-    <Input id='id' disabled />
-    <Typography variant='h4' mt={3}>
-      Input in warning state with disabled attribute:
-    </Typography>
-    <Input id='id2' disabled warning='This is a warning' />
-    <Typography variant='h4' mt={3}>
-      Input in error state with disabled attribute:
-    </Typography>
-    <Input id='id3' disabled error='This is an error' />
-    <Typography variant='h4' mt={3}>
-      Input in valid state with disabled attribute:
-    </Typography>
-    <Input id='id4' disabled valid />
+    <Input label='Input default with disabled attribute' id='id' disabled />
+    <Input
+      label='Input in warning state with disabled attribute'
+      id='id2'
+      disabled
+      warning='This is a warning'
+    />
+    <Input
+      label='Input in error state with disabled attribute'
+      id='id3'
+      disabled
+      error='This is an error'
+    />
+    <Input
+      label='Input in valid state with disabled attribute'
+      id='id4'
+      disabled
+      valid
+    />
   </>
 )
 
 export const ContentDisabled = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default with disabled attribute and value:
-    </Typography>
-    <Input id='id' value='This is some input' disabled />
-    <Typography variant='h4' mt={3}>
-      Input in warning state with disabled attribute and value:
-    </Typography>
     <Input
+      label='Input default with disabled attribute and value'
+      id='id'
+      value='This is some input'
+      disabled
+    />
+    <Input
+      label='Input in warning state with disabled attribute and value'
       id='id2'
       value='This is some input'
       disabled
       warning='This is a warning'
     />
-    <Typography variant='h4' mt={3}>
-      Input in error state with disabled attribute and value:
-    </Typography>
     <Input
+      label='Input in error state with disabled attribute and value'
       id='id3'
       value='This is some input'
       disabled
       error='This is an error'
     />
-    <Typography variant='h4' mt={3}>
-      Input in valid state with disabled attribute and value:
-    </Typography>
-    <Input id='id4' value='This is some input' disabled valid />
+    <Input
+      label='Input in valid state with disabled attribute and value'
+      id='id4'
+      value='This is some input'
+      disabled
+      valid
+    />
   </>
 )
 
 export const Loading = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input default with loading:
-    </Typography>
-    <Input id='id' loading />
-    <Typography variant='h4' mt={3}>
-      Input default with loading and value:
-    </Typography>
-    <Input id='id' loading value='This  is some input' />
-    <Typography variant='h4' mt={3}>
-      Input default with loading and placeholder:
-    </Typography>
-    <Input id='id' loading placeholder='This is a placeholder' />
-    <Typography variant='h4' mt={3}>
-      Input default with loading and sub label:
-    </Typography>
-    <Input id='id' loading subLabel='This is a sub label' />
-    <Typography variant='h4' mt={3}>
-      Input in error state with loading:
-    </Typography>
-    <Input id='id' loading error />
+    <Input label='Input default with loading' id='id' loading />
+    <Input
+      label='Input default with loading and value'
+      id='id'
+      loading
+      value='This  is some input'
+    />
+    <Input
+      label='Input default with loading and placeholder'
+      id='id'
+      loading
+      placeholder='This is a placeholder'
+    />
+    <Input
+      label='Input default with loading and sub label'
+      id='id'
+      loading
+      subLabel='This is a sub label'
+    />
+    <Input label='Input in error state with loading' id='id' loading error />
   </>
 )
 
 export const Types = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Input type button:
-    </Typography>
-    <Input id='id' type='button' />
-    <Typography variant='h4' mt={3}>
-      Input type checkbox:
-    </Typography>
-    <Input id='id' type='checkbox' />
-    <Typography variant='h4' mt={3}>
-      Input type color:
-    </Typography>
-    <Input id='id' type='color' />
-    <Typography variant='h4' mt={3}>
-      Input type date:
-    </Typography>
-    <Input id='id' type='date' />
-    <Typography variant='h4' mt={3}>
-      Input type datetime-local:
-    </Typography>
-    <Input id='id' type='datetime-local' />
-    <Typography variant='h4' mt={3}>
-      Input type email:
-    </Typography>
-    <Input id='id' type='email' />
-    <Typography variant='h4' mt={3}>
-      Input type hidden:
-    </Typography>
-    <Input id='id' type='hidden' />
-    <Typography variant='h4' mt={3}>
-      Input type image:
-    </Typography>
-    <Input id='id' type='image' />
-    <Typography variant='h4' mt={3}>
-      Input type month:
-    </Typography>
-    <Input id='id' type='month' />
-    <Typography variant='h4' mt={3}>
-      Input type number:
-    </Typography>
-    <Input id='id' type='number' />
-    <Typography variant='h4' mt={3}>
-      Input type password:
-    </Typography>
-    <Input id='id' type='password' />
-    <Typography variant='h4' mt={3}>
-      Input type radio:
-    </Typography>
-    <Input id='id' type='radio' />
-    <Typography variant='h4' mt={3}>
-      Input type range:
-    </Typography>
-    <Input id='id' type='range' />
-    <Typography variant='h4' mt={3}>
-      Input type reset:
-    </Typography>
-    <Input id='id' type='reset' />
-    <Typography variant='h4' mt={3}>
-      Input type search:
-    </Typography>
-    <Input id='id' type='search' />
-    <Typography variant='h4' mt={3}>
-      Input type submit:
-    </Typography>
-    <Input id='id' type='submit' />
-    <Typography variant='h4' mt={3}>
-      Input type tel:
-    </Typography>
-    <Input id='id' type='tel' />
-    <Typography variant='h4' mt={3}>
-      Input type text:
-    </Typography>
-    <Input id='id' type='text' />
-    <Typography variant='h4' mt={3}>
-      Input type time:
-    </Typography>
-    <Input id='id' type='time' />
-    <Typography variant='h4' mt={3}>
-      Input type url:
-    </Typography>
-    <Input id='id' type='url' />
-    <Typography variant='h4' mt={3}>
-      Input type week:
-    </Typography>
-    <Input id='id' type='week' />
+    <Input label='Input type button' id='id' type='button' />
+    <Input label='Input type checkbox' id='id' type='checkbox' />
+    <Input label='Input type color' id='id' type='color' />
+    <Input label='Input type date' id='id' type='date' />
+    <Input label='Input type datetime-local' id='id' type='datetime-local' />
+    <Input label='Input type email' id='id' type='email' />
+    <Input label='Input type hidden' id='id' type='hidden' />
+    <Input label='Input type image' id='id' type='image' />
+    <Input label='Input type month' id='id' type='month' />
+    <Input label='Input type number' id='id' type='number' />
+    <Input label='Input type password' id='id' type='password' />
+    <Input label='Input type radio' id='id' type='radio' />
+    <Input label='Input type range' id='id' type='range' />
+    <Input label='Input type reset' id='id' type='reset' />
+    <Input label='Input type search' id='id' type='search' />
+    <Input label='Input type submit' id='id' type='submit' />
+    <Input label='Input type tel' id='id' type='tel' />
+    <Input label='Input type text' id='id' type='text' />
+    <Input label='Input type time' id='id' type='time' />
+    <Input label='Input type url' id='id' type='url' />
+    <Input label='Input type week' id='id' type='week' />
   </>
 )
 
 export const PasswordInput = () => (
   <>
-    <Typography variant='h4' mt={3}>
-      Password input with no value:
-    </Typography>
-    <Input id='id' type='password' />
-
-    <Typography variant='h4' mt={3}>
-      Password input with value:
-    </Typography>
-    <Input id='id' type='password' value='Password' />
-
-    <Typography variant='h4' mt={3}>
-      Password input with loading state:
-    </Typography>
-    <Input id='id' type='password' value='Password' loading={true} />
-
-    <Typography variant='h4' mt={3}>
-      Password input with error state:
-    </Typography>
+    <Input label='Password input with no value' id='id' type='password' />
     <Input
+      label='Password input with value'
+      id='id'
+      type='password'
+      value='Password'
+    />
+    <Input
+      label='Password input with loading state'
+      id='id'
+      type='password'
+      value='Password'
+      loading={true}
+    />
+    <Input
+      label='Password input with error state'
       id='id'
       type='password'
       error='There is a problem with your password'

@@ -9,5 +9,8 @@ export default {
   buttonHeight: BASE_SIZES.controlHeight,
   buttonWidth: BASE_SIZES.controlWidth,
   buttonMinWidth: '40px',
-  largeButtonWidth: '190px'
+  largeButtonWidth: '190px',
+  small: '16px',
+  medium: '24px',
+  large: '32px'
 }

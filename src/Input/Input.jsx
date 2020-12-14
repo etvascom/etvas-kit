@@ -9,9 +9,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
+import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
-import { Flex, Space } from '@ivoryio/kogaio'
+import { Flex } from '@ivoryio/kogaio'
 
 import { PasswordToggler } from './PasswordToggler'
 import { default as variants } from './Input.variants'
@@ -24,6 +25,7 @@ export const Input = forwardRef(
       autoFocus,
       disabled,
       error,
+      warning,
       icLeft,
       icRight,
       id,
@@ -39,6 +41,8 @@ export const Input = forwardRef(
       valid,
       value,
       variant,
+      subLabel,
+      loading,
       ...rest
     },
     ref
@@ -47,8 +51,9 @@ export const Input = forwardRef(
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
-      if (disabled) return 'disabled'
+      if (disabled || loading) return 'disabled'
       else if (error) return 'error'
+      else if (warning) return 'warning'
       else if (valid) return 'valid'
       return variant
     }, [loading, disabled, error, warning, valid, variant])
@@ -89,6 +94,8 @@ export const Input = forwardRef(
       [inputType, ref, inputRef, resetInputType]
     )
 
+    const icStateIsNotIconToggle = () => type !== 'password' || error || loading
+
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
@@ -104,7 +111,7 @@ export const Input = forwardRef(
           <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            disabled={readOnly || disabled}
+            ariaDisabled={readOnly || disabled}
             error={error}
             hasLabel={label}
             hasIcLeft={icLeft}
@@ -123,7 +130,7 @@ export const Input = forwardRef(
           />
           {icLeft ? (
             <Icon
-              size={1}
+              fontSize={3}
               left={2}
               name={icLeft}
               pointerEvents='none'
@@ -132,17 +139,15 @@ export const Input = forwardRef(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icRight ? (
-              <Space mr={1}>
-                <Icon
-                  size={1}
-                  name={currentIcRight}
-                  color={currentIcRightColor}
-                  rotate={currentIcRight === 'loading'}
-                />
-              </Space>
-            ) : null}
-            {type === 'password' && value ? (
+            {icStateIsNotIconToggle() && currentIcRight ? (
+              <Icon
+                mr={5}
+                size='small'
+                name={currentIcRight}
+                color={currentIcRightColor}
+                rotate={currentIcRight === 'loading'}
+              />
+            ) : (
               <PasswordToggler
                 error={!!error}
                 inputType={inputType}
@@ -151,10 +156,14 @@ export const Input = forwardRef(
                 onToggle={togglePassword}
                 viewOption={passwordView}
               />
-            ) : null}
+            )}
           </Flex>
         </Flex>
-        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+        <SubLabel
+          content={error || warning || subLabel}
+          variant={inputVariant}
+          preserveSpace={!noBottomSpace}
+        />
       </Flex>
     )
   }
@@ -177,26 +186,21 @@ const StyledInput = styled.input(
       borderStyle: 'solid'
     }
   }),
-  ({ error }) =>
-    error
-      ? css({
-        color: 'error',
-        borderColor: 'error'
-      })
-      : null,
-  ({ disabled }) =>
-    disabled
-      ? css({
-        opacity: 0.5
-      })
-      : null
+  variant({ variants })
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
+  loading: PropTypes.bool,
+  subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
+  warning: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
   error: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.node,
