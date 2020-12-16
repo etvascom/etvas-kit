@@ -7,6 +7,7 @@ import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
 import { Flex, Touchable } from '@ivoryio/kogaio'
+import { v4 } from 'uuid'
 
 import { default as variants } from './CardDisplayInput.variants'
 import { SubLabel } from './SubLabel'
@@ -24,6 +25,8 @@ export const CardDisplayInput = ({
   subLabel,
   ...rest
 }) => {
+  id = id || v4()
+
   const inputVariant = useMemo(() => {
     if (disabled) return 'disabled'
     return variant
@@ -54,13 +57,18 @@ export const CardDisplayInput = ({
           id={id}
           name={name}
           readOnly={true}
-          value={`●●●● ●●●● ●●●● ${value || '0000'}`}
+          value={value ? `●●●● ●●●● ●●●● ${value.substr(-4)}` : ''}
           variant={inputVariant}
           {...rest}
         />
         <Flex pointerEvents='auto' position='absolute' right={2}>
-          <StyledTouchable onClick={handleEdit}>
-            <Icon mr={5} size='small' name='edit' color='inputIcon' />
+          <StyledTouchable onClick={handleEdit} pointerEvents='none'>
+            <Icon
+              mr={5}
+              size='small'
+              name='edit'
+              color={disabled ? 'inputBorderGray' : 'inputIcon'}
+            />
           </StyledTouchable>
         </Flex>
       </Flex>
@@ -104,18 +112,13 @@ const StyledTouchable = styled(Touchable)`
 CardDisplayInput.propTypes = {
   ...propTypes.inputStyle,
   subLabel: PropTypes.string,
-  autoComplete: PropTypes.string,
   disabled: PropTypes.bool,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.node,
   name: PropTypes.string,
   noBottomSpace: PropTypes.bool,
   onEdit: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 CardDisplayInput.defaultProps = {
