@@ -46,7 +46,7 @@ export default {
     fontSize: 1,
     letterSpacing: '0.3px',
     lineHeight: '16px',
-    color: 'textLabelDefault'
+    color: 'textLabel'
   },
   labelSmallBold: {
     fontFamily: 'primary',

@@ -8,6 +8,7 @@ import glyphs from './glyphs.js'
 import animationSpeeds from '../assets/animationSpeeds'
 import { default as BaseIcon } from '@mdi/react'
 import colors from '../assets/colors'
+import sizes from '../assets/sizes'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
   const glyph = useMemo(() => {
@@ -23,7 +24,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   if (typeof name === 'string' && typeof glyphs[name] === 'string') {
     return <BaseIcon
       path={glyphs[name]}
-      size={size}
+      size={sizes[size]}
       color={colors[color] || 'currentColor'}
       spin={rotate}
       {...props}
@@ -31,9 +32,11 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   }
   console.warn('You are using the old version of icons')
 
-  return <StyledI color={color} size={size} rotate={rotate} {...props}>
-    {glyph || 'undefined'}
-  </StyledI>
+  return (
+    <StyledI color={color} size={size} rotate={rotate} {...props}>
+      {glyph || 'undefined'}
+    </StyledI>
+  )
 }
 
 const StyledI = styled.i(({ color, size, rotate }) =>
