@@ -7,6 +7,7 @@ import css from '@styled-system/css'
 import glyphs from './glyphs.js'
 import animationSpeeds from '../assets/animationSpeeds'
 import { default as BaseIcon } from '@mdi/react'
+import colors from '../assets/colors'
 import sizes from '../assets/sizes'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
@@ -21,15 +22,13 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   }, [name])
 
   if (typeof name === 'string' && typeof glyphs[name] === 'string') {
-    return (
-      <BaseIcon
-        path={glyphs[name]}
-        size={sizes[size]}
-        color={color}
-        spin={rotate}
-        {...props}
-      />
-    )
+    return <BaseIcon
+      path={glyphs[name]}
+      size={sizes[size]}
+      color={colors[color] || 'currentColor'}
+      spin={rotate}
+      {...props}
+    />
   }
   console.warn('You are using the old version of icons')
 
