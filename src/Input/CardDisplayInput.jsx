@@ -62,7 +62,9 @@ export const CardDisplayInput = ({
           {...rest}
         />
         <Flex pointerEvents='auto' position='absolute' right={2}>
-          <StyledTouchable onClick={handleEdit} pointerEvents='none'>
+          <StyledTouchable
+            onClick={handleEdit}
+            pointerEvents={disabled ? 'none' : ''}>
             <Icon
               mr={5}
               size='small'
