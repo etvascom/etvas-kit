@@ -26,7 +26,7 @@ const Button = ({
     if (!icon || !iconPosition) {
       return null
     }
-    if (disabled && variant === 'link'){
+    if (disabled && variant === 'link') {
       return colors.disabled
     }
     return iconVariants[variant].color
@@ -42,16 +42,16 @@ const Button = ({
     {...rest}>
     {loading ? (
       <Icon
-        size={1}
-        name={'loading'}
+        size='medium'
+        name='loading'
         color={spinnerVariants[variant].primary}
         rotate={true}
       />
     ) : (
-      <Flex flexDirection={'row'} alignItems={'center'}>
+      <Flex flexDirection='row' alignItems='center'>
         {(icon && iconPosition === 'left') &&
         <Space mr='0.5em'>
-          <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
+          <Icon name={icon} size={iconVariants[variant].size} color={iconColor}/>
         </Space>
         }
         <Typography
@@ -59,12 +59,13 @@ const Button = ({
           variant='labelButton'
           htmlFor={id}
           px={3}
-          color='inherit'>
+          color='inherit'
+        >
           {children}
         </Typography>
         {(icon && iconPosition === 'right') &&
         <Space ml='0.5em'>
-          <Icon name={icon} size={iconVariants[variant].fontSize} color={iconColor}/>
+          <Icon name={icon} size={iconVariants[variant].size} color={iconColor}/>
         </Space>
         }
       </Flex>

@@ -19,7 +19,7 @@ export const AllIcons = () => {
             justifyContent='center'
             alignItems='center'>
             <Box mb={1}>
-              <Icon name={k} size='18px' />
+              <Icon name={k} size='small' />
             </Box>
             <Typography color='outline' variant='textSmall'>
               {k}
