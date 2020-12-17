@@ -9,7 +9,8 @@ export default {
     flex: '1',
     border: 'none',
     outline: 'none',
-    color: 'text'
+    color: 'text',
+    maxHeight:'100%'
   },
   phoneNumberWrapper: {
     ...typography.labelSmall,
@@ -19,8 +20,11 @@ export default {
     width: '100%',
     backgroundColor: 'backgroundLightGray',
     borderRadius: RADII[3],
+    borderStyle: 'solid',
+    borderColor: 'inputBorderGray',
     outline: 'none',
-    color: 'text'
+    color: 'text',
+    borderWidth: 1
   },
   dropdownTrigger: {
     display: 'flex',
@@ -32,10 +36,10 @@ export default {
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: 'backgroundLightGray',
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'outline',
+    borderColor: 'inputBorderGray',
     overflowY: 'scroll'
   },
   dropdownItem: {
@@ -46,10 +50,7 @@ export default {
     minHeight: sizes.dropdownItemHeightMobile,
     paddingLeft: 3,
     paddingRight: 3,
-    cursor: 'pointer',
-    ':hover': {
-      backgroundColor: 'brandLighter'
-    }
+    cursor: 'pointer'
   },
   prefixTitle: {
     ...typography.labelSmall,
@@ -59,8 +60,8 @@ export default {
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
-  separator: {
-    minHeight: '1em',
+  line: {
+    minHeight: '1px',
     width: '100%',
     backgroundColor: 'inputBorderGray'
   }

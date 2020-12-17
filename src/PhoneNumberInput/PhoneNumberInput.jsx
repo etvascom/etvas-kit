@@ -5,15 +5,11 @@ import { Icon } from '../Icon'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import css from '@styled-system/css'
-// import { variant } from 'styled-system'
+import { variant } from 'styled-system'
 import { Input } from '../Input'
-// import { default as variants } from '../Input/Input.variants'
+import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
-import {
-  statesWorld,
-  statesEu,
-  prefixLengthOrderedStates
-} from './world-states'
+import { prefixLengthOrderedStates, statesEu, statesWorld } from './world-states'
 import { md } from '../utils'
 import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
@@ -113,16 +109,15 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     onCountryNumberChange(country)
   }
 
-  const onCountryNumberChange = event => {
-    const value = `${event?.prefix || country.prefix}${event?.target?.value ||
-      displayValue}`
-    onChange({
-      target: {
-        value
-      }
-    })
+  const onCountryNumberChange = country => {
+    const value = `${country.prefix}${displayValue}`
+    const event = { target: { value } }
+    onChange(event)
   }
-
+  const onNumberChange = event => {
+    event.target.value = `${country.prefix}${event.target.value}`
+    onChange(event)
+  }
   return (
     <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
       {label ? (
@@ -135,7 +130,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
         </Typography>
       ) : null}
       <Flex alignItems='center' position='relative' width='100%'>
-        <StyledPhoneNumberWrapper>
+        <StyledPhoneNumberWrapper variant={inputVariant}>
           <PrefixDropdownTrigger
             ref={wrapperRef}
             onClick={handleToggleOpenDropdown}>
@@ -154,7 +149,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
             hasLabel={label}
             id={id}
             name={name}
-            onChange={onCountryNumberChange}
+            onChange={onNumberChange}
             placeholder={readOnly ? '' : placeholder}
             readOnly={readOnly}
             ref={ref || inputRef}
@@ -179,9 +174,11 @@ const PhoneNumberInput = forwardRef((props, ref) => {
         </Flex>
         {dropdownOpen && (
           <StyledDropdown dropdownSize={dropdownSize} dropUp={dropUp}>
-            {displayItems(statesEu, 'eu-states', handleSelectCountry)}
-            <StyledSeparator />
-            {displayItems(statesWorld, 'world-states', handleSelectCountry)}
+            {displayItems(statesEu, 'eu-states', handleSelectCountry, country)}
+            <Flex alignItems={'center'} width={'100%'} minHeight={'1em'}>
+              <StyledLine/>
+            </Flex>
+            {displayItems(statesWorld, 'world-states', handleSelectCountry, country)}
           </StyledDropdown>
         )}
       </Flex>
@@ -193,11 +190,15 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     </Flex>
   )
 })
-const displayItems = (states, label, onClick) =>
+const displayItems = (states, label, onClick, country) =>
   states.map(state => (
-    <StyledDropdownItem key={`${label}-${state.code}`} onClick={onClick(state)}>
+    <StyledDropdownItem
+      key={`${label}-${state.code}`}
+      isSelected={state.code === country.code}
+      onClick={onClick(state)}
+    >
       <Space mr={2}>
-        <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`} />
+        <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`}/>
       </Space>
       <PrefixTitle>
         {state.prefix} {state.name}
@@ -205,9 +206,15 @@ const displayItems = (states, label, onClick) =>
     </StyledDropdownItem>
   ))
 
-const StyledPhoneNumberWrapper = styled.div(css(styles.phoneNumberWrapper))
+const StyledPhoneNumberWrapper = styled.div(
+  css(styles.phoneNumberWrapper),
+  variant({ variants })
+)
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger))
-const StyledPhoneNumberInput = styled.input(css(styles.phoneNumberInput))
+const StyledPhoneNumberInput = styled.input(
+  css(styles.phoneNumberInput),
+  variant({ variants })
+)
 
 const calcDropdownHeight = (height, size) => `${parseInt(height, 10) * size}px`
 
@@ -216,21 +223,21 @@ const StyledDropdown = styled(Flex)(
   ({ dropUp }) =>
     dropUp
       ? css({
-          top: 'auto',
-          bottom: 10,
-          borderTopLeftRadius: 8,
-          borderTopRightRadius: 8,
-          boxShadow:
-            '0px -1px -3px rgba(8, 8, 8, 0.08), 0px -1px -2px rgba(8, 8, 8, 0.16)'
-        })
+        top: 'auto',
+        bottom: 10,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        boxShadow:
+          '0px -1px -3px rgba(8, 8, 8, 0.08), 0px -1px -2px rgba(8, 8, 8, 0.16)'
+      })
       : css({
-          bottom: 'auto',
-          top: 10,
-          borderBottomRightRadius: 8,
-          borderBottomLeftRadius: 8,
-          boxShadow:
-            '0px 1px 3px rgba(8, 8, 8, 0.08), 0px 1px 2px rgba(8, 8, 8, 0.16)'
-        }),
+        bottom: 'auto',
+        top: 10,
+        borderBottomRightRadius: 8,
+        borderBottomLeftRadius: 8,
+        boxShadow:
+          '0px 1px 3px rgba(8, 8, 8, 0.08), 0px 1px 2px rgba(8, 8, 8, 0.16)'
+      }),
   ({ theme, dropdownSize }) =>
     css({
       height: `${calcDropdownHeight(
@@ -242,15 +249,21 @@ const StyledDropdown = styled(Flex)(
       })
     })
 )
-const StyledDropdownItem = styled(Flex)(css(styles.dropdownItem), ({ theme }) =>
+const StyledDropdownItem = styled(Flex)(css(styles.dropdownItem), ({ theme, isSelected }) =>
   css({
+    backgroundColor: isSelected ? 'brand' : 'backgroundLightGray',
+    ':hover': {
+      backgroundColor: isSelected ? 'brand' : 'brandLighter'
+    },
+    color: isSelected ? 'white' : 'text',
     ...md(theme)({
       minHeight: sizes.dropdownItemHeight
     })
   })
 )
 const PrefixTitle = styled.div(css(styles.prefixTitle))
-const StyledSeparator = styled.div(css(styles.separator))
+const StyledLine = styled.div(css(styles.line))
+
 const { icLeft, icRight, passwordView, ...rest } = Input.propTypes
 PhoneNumberInput.propTypes = {
   ...rest,

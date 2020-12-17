@@ -251,17 +251,20 @@ export const statesWorld = [
   {
     name: 'Cyprus',
     prefix: '+357',
-    code: 'CY'
+    code: 'CY',
+    isEU: true
   },
   {
     name: 'Czech Republic',
     prefix: '+420',
-    code: 'CZ'
+    code: 'CZ',
+    isEU: true
   },
   {
     name: 'Denmark',
     prefix: '+45',
-    code: 'DK'
+    code: 'DK',
+    isEU: true
   },
   {
     name: 'Djibouti',
@@ -306,7 +309,8 @@ export const statesWorld = [
   {
     name: 'Estonia',
     prefix: '+372',
-    code: 'EE'
+    code: 'EE',
+    isEU: true
   },
   {
     name: 'Ethiopia',
@@ -326,12 +330,14 @@ export const statesWorld = [
   {
     name: 'Finland',
     prefix: '+358',
-    code: 'FI'
+    code: 'FI',
+    isEU: true
   },
   {
     name: 'France',
     prefix: '+33',
-    code: 'FR'
+    code: 'FR',
+    isEU: true
   },
   {
     name: 'French Guiana',
@@ -361,7 +367,8 @@ export const statesWorld = [
   {
     name: 'Germany',
     prefix: '+49',
-    code: 'DE'
+    code: 'DE',
+    isEU: true
   },
   {
     name: 'Ghana',
@@ -376,7 +383,8 @@ export const statesWorld = [
   {
     name: 'Greece',
     prefix: '+30',
-    code: 'GR'
+    code: 'GR',
+    isEU: true
   },
   {
     name: 'Greenland',
@@ -431,7 +439,8 @@ export const statesWorld = [
   {
     name: 'Hungary',
     prefix: '+36',
-    code: 'HU'
+    code: 'HU',
+    isEU: true
   },
   {
     name: 'Iceland',
@@ -456,12 +465,14 @@ export const statesWorld = [
   {
     name: 'Ireland',
     prefix: '+353',
-    code: 'IE'
+    code: 'IE',
+    isEU: true
   },
   {
     name: 'Italy',
     prefix: '+39',
-    code: 'IT'
+    code: 'IT',
+    isEU: true
   },
   {
     name: 'Jamaica',
@@ -506,7 +517,8 @@ export const statesWorld = [
   {
     name: 'Latvia',
     prefix: '+371',
-    code: 'LV'
+    code: 'LV',
+    isEU: true
   },
   {
     name: 'Lebanon',
@@ -531,12 +543,14 @@ export const statesWorld = [
   {
     name: 'Lithuania',
     prefix: '+370',
-    code: 'LT'
+    code: 'LT',
+    isEU: true
   },
   {
     name: 'Luxembourg',
     prefix: '+352',
-    code: 'LU'
+    code: 'LU',
+    isEU: true
   },
   {
     name: 'Madagascar',
@@ -566,7 +580,8 @@ export const statesWorld = [
   {
     name: 'Malta',
     prefix: '+356',
-    code: 'MT'
+    code: 'MT',
+    isEU: true
   },
   {
     name: 'Marshall Islands',
@@ -646,7 +661,8 @@ export const statesWorld = [
   {
     name: 'Netherlands',
     prefix: '+31',
-    code: 'NL'
+    code: 'NL',
+    isEU: true
   },
   {
     name: 'Netherlands Antilles',
@@ -741,12 +757,14 @@ export const statesWorld = [
   {
     name: 'Poland',
     prefix: '+48',
-    code: 'PL'
+    code: 'PL',
+    isEU: true
   },
   {
     name: 'Portugal',
     prefix: '+351',
-    code: 'PT'
+    code: 'PT',
+    isEU: true
   },
   {
     name: 'Puerto Rico',
@@ -761,7 +779,8 @@ export const statesWorld = [
   {
     name: 'Romania',
     prefix: '+40',
-    code: 'RO'
+    code: 'RO',
+    isEU: true
   },
   {
     name: 'Rwanda',
@@ -811,12 +830,15 @@ export const statesWorld = [
   {
     name: 'Slovakia',
     prefix: '+421',
-    code: 'SK'
+    code: 'SK',
+    isEU: true
   },
   {
     name: 'Slovenia',
     prefix: '+386',
-    code: 'SI'
+    code: 'SI',
+    isEU: true
+
   },
   {
     name: 'Solomon Islands',
@@ -836,7 +858,9 @@ export const statesWorld = [
   {
     name: 'Spain',
     prefix: '+34',
-    code: 'ES'
+    code: 'ES',
+    isEU: true
+
   },
   {
     name: 'Sri Lanka',
@@ -861,7 +885,8 @@ export const statesWorld = [
   {
     name: 'Sweden',
     prefix: '+46',
-    code: 'SE'
+    code: 'SE',
+    isEU: true
   },
   {
     name: 'Switzerland',
@@ -1004,7 +1029,7 @@ export const statesWorld = [
     code: 'CD'
   },
   {
-    name: "Cote d'Ivoire",
+    name: 'Cote d\'Ivoire',
     prefix: '+225',
     code: 'CI'
   },
@@ -1044,7 +1069,7 @@ export const statesWorld = [
     code: 'JE'
   },
   {
-    name: "Korea, Democratic People's Republic of",
+    name: 'Korea, Democratic People\'s Republic of',
     prefix: '+850',
     code: 'KP'
   },
@@ -1054,7 +1079,7 @@ export const statesWorld = [
     code: 'KR'
   },
   {
-    name: "Lao People's Democratic Republic",
+    name: 'Lao People\'s Democratic Republic',
     prefix: '+856',
     code: 'LA'
   },
