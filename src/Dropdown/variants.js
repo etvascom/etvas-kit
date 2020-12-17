@@ -1,65 +1,62 @@
-import { BORDERS, RADII } from '../assets/core'
-import colors from '../assets/colors'
-
 const DEFAULT_DROPDOWN = {
-  'background-color': colors.white,
-  border: `${BORDERS[1]} ${colors.outline}`,
+  'background-color': 'white',
+  border: '1 outline',
   'border-top-color': 'transparent',
-  'border-bottom-left-radius': `${RADII[8]}px`,
-  'border-bottom-right-radius': `${RADII[8]}px`,
+  'border-bottom-left-radius': 8,
+  'border-bottom-right-radius': 8,
   '&.dropdown-selected': {
-    border: `${BORDERS[1]} ${colors.outline}`,
-    'border-radius': `${RADII[8]}px`
+    border: '1 outline',
+    'border-radius': 8
   },
   '&.dropdown-active': {
-    'border-radius': `${RADII[8]}px ${RADII[8]}px 0 0`
+    'border-radius': '8 8 0 0'
   },
   '.dropdown-item': {
     flex: '1 0 auto',
     '.dropdown-text': {
-      color: colors.text
+      color: 'text'
     },
     '&.selected': {
-      background: colors.accentFade,
+      background: 'accentFade',
       '.dropdown-text': {
-        color: colors.text
+        color: 'text'
       }
     },
     '&:hover': {
-      background: colors.accent,
+      background: 'accent',
       '.dropdown-text': {
-        color: colors.white
+        color: 'white'
       }
     },
-    ':nth-child(n + 2)': { 'border-top': `${BORDERS[1]} ${colors.outline}` }
+    ':nth-child(n + 2)': { 'border-top': '1 outline' }
   }
 }
 export default {
   default: DEFAULT_DROPDOWN,
   disabled: {
     ...DEFAULT_DROPDOWN,
-    'background-color': colors.white,
-    border: `${BORDERS[1]} ${colors.outline}`,
+    'background-color': 'white',
+    border: '1 outline',
     opacity: 0.5,
-    ':focus, :hover': { border: `${BORDERS[1]} ${colors.outline}` },
+    ':focus, :hover': { border: '1 outline' },
     '.dropdown-text': { color: '#1b202f' },
     '&.dropdown-selected': {
-      ':focus, :hover': { border: `${BORDERS[1]} ${colors.outline}` },
-      'border-radius': `${RADII[8]}px`
+      ':focus, :hover': { border: '1 outline' },
+      'border-radius': 8
     },
-    '&.dropdown-active': { 'border-color': colors.outline }
+    '&.dropdown-active': { 'border-color': 'outline' }
   },
   error: {
     ...DEFAULT_DROPDOWN,
     '&.dropdown-selected': {
-      border: `${BORDERS[1]} ${colors.error}`,
-      'border-radius': `${RADII[8]}px`
+      border: '1 error',
+      'border-radius': 8
     },
     '&.dropdown-active': {
-      'border-radius': `${RADII[8]}px ${RADII[8]}px 0 0`
+      'border-radius': '8 8 0 0'
     },
     '&.dropdown-active, &.dropdown-active:hover': {
-      'border-color': colors.error
+      'border-color': 'error'
     }
   }
 }
