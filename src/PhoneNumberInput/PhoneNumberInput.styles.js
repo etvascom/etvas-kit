@@ -50,7 +50,8 @@ export default {
     minHeight: sizes.dropdownItemHeightMobile,
     paddingLeft: 3,
     paddingRight: 3,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    zIndex: '1'
   },
   prefixTitle: {
     ...typography.labelSmall,

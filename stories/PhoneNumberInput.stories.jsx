@@ -63,6 +63,7 @@ export const DropUp = () => {
         value={value}
         onChange={onChange}
         label='Phone Number Up'
+        dropUp
         valid
       />
       <PhoneNumberInput
@@ -70,6 +71,7 @@ export const DropUp = () => {
         value={value}
         onChange={onChange}
         label='Phone Number Up'
+        dropUp
         warning
       />
       <PhoneNumberInput
@@ -77,6 +79,7 @@ export const DropUp = () => {
         value={value}
         onChange={onChange}
         label='Phone Number Up'
+        dropUp
         error
       />
       <PhoneNumberInput
@@ -84,6 +87,7 @@ export const DropUp = () => {
         value={value}
         onChange={onChange}
         label='Phone Number Up'
+        dropUp
         disabled
       />
     </>
