@@ -1,5 +1,6 @@
 import { typography } from '../Typography'
 import sizes from '../assets/sizes'
+import { RADII } from '../assets/core'
 
 export default {
   phoneNumberInput: {
@@ -10,22 +11,20 @@ export default {
     outline: 'none',
     color: 'text'
   },
-  phoneNumberDiv: {
+  phoneNumberWrapper: {
     ...typography.labelSmall,
+    height: sizes.inputHeight,
+    padding: 3,
     display: 'flex',
     width: '100%',
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
+    backgroundColor: 'backgroundLightGray',
+    borderRadius: RADII[3],
     outline: 'none',
-    color: 'text',
-    padding: 3,
-    ':hover, :focus': {
-      borderWidth: 1,
-      borderStyle: 'solid'
-    }
+    color: 'text'
+  },
+  dropdownTrigger: {
+    display: 'flex',
+    alignItems: 'center'
   },
   dropdown: {
     flexDirection: 'column',
