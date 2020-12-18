@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { compose, layout, position, space, variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
+import css from '@styled-system/css'
 
 import { Typography } from '../Typography'
 import { Flex, Space } from '../'
@@ -11,17 +12,17 @@ import { Icon } from '../Icon'
 import colors from '../assets/colors'
 
 const Button = ({
-  children,
-  disabled,
-  icon,
-  id,
-  loading,
-  onClick,
-  type,
-  variant,
-  iconPosition,
-  ...rest
-}) => {
+                  children,
+                  disabled,
+                  icon,
+                  id,
+                  loading,
+                  onClick,
+                  type,
+                  variant,
+                  iconPosition,
+                  ...rest
+                }) => {
   const iconColor = useMemo(() => {
     if (!icon || !iconPosition) {
       return null
@@ -74,7 +75,7 @@ const Button = ({
 }
 
 const StyledButton = styled.button(
-  compose(layout, position, space, variant({ variants }))
+  compose(layout, position, space, variant({ variants })),
 )
 
 Button.propTypes = {
