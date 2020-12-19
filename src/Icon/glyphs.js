@@ -72,7 +72,8 @@ import {
   mdiStarOutline,
   mdiSwapHorizontal,
   mdiWeb,
-  mdiXml
+  mdiXml,
+  mdiBadgeAccountHorizontal
 } from '@mdi/js'
 
 export default {
@@ -149,5 +150,6 @@ export default {
   'deleteForever': mdiDeleteForever,
   'forwardburger': mdiForwardburger,
   'backburger': mdiBackburger,
+  'badgeAccountHorizontal': mdiBadgeAccountHorizontal,
   ...oldGlyphs
 }
