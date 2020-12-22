@@ -190,8 +190,8 @@ const StyledInput = styled.input(
   }),
   variant({ variants }),
   props => ({
-    backgroundColor: props.tainted && 'white',
-    borderColor: props.tainted && 'white'
+    backgroundColor: props.tainted && !(props.error || props.warn) && 'white',
+    borderColor: props.tainted && !(props.error || props.warn) && 'white'
   })
 )
 
