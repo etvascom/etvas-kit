@@ -6,6 +6,7 @@ import {
   mdiAlertCircle,
   mdiAlertCircleOutline,
   mdiArrowLeft,
+  mdiBackburger,
   mdiBookOpenOutline,
   mdiBriefcaseVariant,
   mdiBullhorn,
@@ -30,6 +31,7 @@ import {
   mdiCreditCardRemoveOutline,
   mdiCreditCardSettingsOutline,
   mdiCurrencyEur,
+  mdiDeleteForever,
   mdiDotsHorizontal,
   mdiEye,
   mdiEyeOff,
@@ -39,6 +41,7 @@ import {
   mdiFormatColorFill,
   mdiFormatQuoteClose,
   mdiFormatQuoteOpen,
+  mdiForwardburger,
   mdiFullscreen,
   mdiHandshake,
   mdiHeart,
@@ -69,7 +72,8 @@ import {
   mdiStarOutline,
   mdiSwapHorizontal,
   mdiWeb,
-  mdiXml
+  mdiXml,
+  mdiBadgeAccountHorizontal
 } from '@mdi/js'
 
 export default {
@@ -143,5 +147,9 @@ export default {
   'loading': mdiLoading,
   'commentQuote': mdiCommentQuote,
   'fileDocumentOutline': mdiFileDocumentOutline,
+  'deleteForever': mdiDeleteForever,
+  'forwardburger': mdiForwardburger,
+  'backburger': mdiBackburger,
+  'badgeAccountHorizontal': mdiBadgeAccountHorizontal,
   ...oldGlyphs
 }
