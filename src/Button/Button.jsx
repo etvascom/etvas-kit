@@ -74,7 +74,7 @@ const Button = ({
 }
 
 const StyledButton = styled.button(
-  compose(layout, position, space, variant({ variants })),
+  compose(layout, position, space, variant({ variants }))
 )
 
 Button.propTypes = {
