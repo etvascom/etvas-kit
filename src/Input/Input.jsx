@@ -171,20 +171,7 @@ export const Input = forwardRef(
 
 const StyledInput = styled.input(
   css({
-    ...typography.labelSmall,
-    display: 'block',
-    width: '100%',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
-    outline: 'none',
-    color: 'text',
-    padding: 3,
-    ':hover, :focus': {
-      borderWidth: 1,
-      borderStyle: 'solid'
-    }
+    ...typography.labelSmall
   }),
   variant({ variants })
 )

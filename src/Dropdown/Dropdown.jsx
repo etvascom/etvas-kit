@@ -16,7 +16,6 @@ import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
-import { RADII } from '../assets/core'
 
 const Dropdown = ({
   disabled,
@@ -246,7 +245,7 @@ const Toggler = styled.button(
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'inputBorderGray',
-    borderRadius: RADII[3],
+    borderRadius: 3,
     color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,
@@ -331,8 +330,8 @@ const DropdownList = styled.div(
     marginTop: '-3px',
     borderStyle: 'solid',
     borderColor: 'inputBorderGray',
-    borderBottomLeftRadius: RADII[3],
-    borderBottomRightRadius: RADII[3],
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
     color: 'text',
     paddingBottom: 3,
     boxShadow: 'etvasCard'
