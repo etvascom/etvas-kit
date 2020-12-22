@@ -17,6 +17,7 @@ export const TextField = props => {
       id={id}
       error={meta.touched && meta.error}
       valid={hasValidation(props) && !meta.error && meta.touched}
+      tainted={props.tainted}
     />
   )
 }
@@ -27,9 +28,11 @@ TextField.propTypes = {
   ...fieldShape,
   type: PropTypes.string,
   placeholder: PropTypes.node,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  tainted: PropTypes.bool
 }
 
 TextField.defaultProps = {
-  type: 'text'
+  type: 'text',
+  tainted: false
 }

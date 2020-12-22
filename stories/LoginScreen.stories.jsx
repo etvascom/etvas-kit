@@ -41,6 +41,7 @@ export const Tainted = () => <LoginScreen tainted />
 // eslint-disable-next-line react/prop-types
 const LoginScreen = ({ tainted }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [isShowingErrors, setIsShowingErrors] = useState(false)
 
   const isDisabled = values => !values.email || !values.password
 
@@ -56,13 +57,19 @@ const LoginScreen = ({ tainted }) => {
     }, 2000)
   }
 
+  const handleSubmit = (values, { setFieldError }) => {
+    setFieldError('email', isShowingErrors ? '' : 'Oh no ... error')
+    setFieldError('password', isShowingErrors ? '' : 'Oh no ... error')
+    setIsShowingErrors(!isShowingErrors)
+  }
+
   return (
-    <Card width='304px' height='504px' tainted={tainted}>
+    <Card width='304px' height='504px' variant={tainted ? 'tainted' : ''}>
       <Form
         initialValues={values}
         validate={formValidate}
-        onSubmit={action('submit')}>
-        {({ values }) => (
+        onSubmit={handleSubmit}>
+        {({ values, submitForm }) => (
           <>
             <Flex justifyContent='center' pt={8} pb={2}>
               <Image src={logo} size={80} />
@@ -100,15 +107,15 @@ const LoginScreen = ({ tainted }) => {
               </Button>
             </Flex>
             <Flex justifyContent='center'>
-              <Typography pr={2}>Forgot you password?</Typography>
-              <Typography color='brand'>
-                <Link color='brand' onClick={setLoadingFor2Seconds}>
-                  Reset it here
-                </Link>
+              <Typography pr={2} variant='textSmall'>
+                Forgot you password?{' '}
+                <Link onClick={setLoadingFor2Seconds}>Reset it here</Link>
               </Typography>
             </Flex>
-            <Flex justifyContent='center' mt={4}>
-              <Link color='brand'>Create new account</Link>
+            <Flex justifyContent='center' mt={4} variant='textSmall'>
+              <Link color='brand' type='submit' onClick={submitForm}>
+                Create new account
+              </Link>
             </Flex>
           </>
         )}
