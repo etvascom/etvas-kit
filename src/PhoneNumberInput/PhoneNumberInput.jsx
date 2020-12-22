@@ -14,6 +14,7 @@ import { md } from '../utils'
 import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
 import 'flag-icon-css/css/flag-icon.css'
+import { RADII, SHADOWS } from '../assets/core'
 
 const PhoneNumberInput = forwardRef((props, ref) => {
   const {
@@ -225,18 +226,16 @@ const StyledDropdown = styled(Flex)(
       ? css({
         top: 'auto',
         bottom: 10,
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        boxShadow:
-          '0px -1px -3px rgba(8, 8, 8, 0.08), 0px -1px -2px rgba(8, 8, 8, 0.16)'
+        borderTopLeftRadius: RADII[8],
+        borderTopRightRadius: RADII[8],
+        boxShadow: SHADOWS.phoneNumberInputUp
       })
       : css({
         bottom: 'auto',
         top: 10,
-        borderBottomRightRadius: 8,
-        borderBottomLeftRadius: 8,
-        boxShadow:
-          '0px 1px 3px rgba(8, 8, 8, 0.08), 0px 1px 2px rgba(8, 8, 8, 0.16)'
+        borderBottomRightRadius: RADII[8],
+        borderBottomLeftRadius: RADII[8],
+        boxShadow: SHADOWS.phoneNumberInputDown
       }),
   ({ theme, dropdownSize }) =>
     css({
