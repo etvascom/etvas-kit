@@ -11,6 +11,8 @@ const DEFAULT_STYLE = {
   ...typography.inputLabel,
   height: sizes.inputHeight,
   background: 'backgroundLightGray',
+  paddingLeft: 2,
+  paddingRight: 10,
   borderSize: `${BORDERS[1]}`,
   borderColor: 'inputBorderGray',
   borderStyle: 'solid',
