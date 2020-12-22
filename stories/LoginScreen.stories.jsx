@@ -112,10 +112,12 @@ const LoginScreen = ({ tainted }) => {
                 <Link onClick={setLoadingFor2Seconds}>Reset it here</Link>
               </Typography>
             </Flex>
-            <Flex justifyContent='center' mt={4} variant='textSmall'>
-              <Link color='brand' type='submit' onClick={submitForm}>
-                Create new account
-              </Link>
+            <Flex justifyContent='center' mt={4}>
+              <Typography variant='textSmall'>
+                <Link type='submit' onClick={submitForm}>
+                  Create new account
+                </Link>
+              </Typography>
             </Flex>
           </>
         )}
