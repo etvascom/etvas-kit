@@ -16,16 +16,26 @@ const BUTTON_DEFAULT = {
   ':hover': { opacity: 0.75 },
   ':active ': { transform: 'scale(0.965)' },
   ':focus': { opacity: 0.75, outlineStyle: 'none', outlineColor: 'transparent' },
-  ':disabled': { opacity: 0.3, transform: 'scale(1)', cursor: 'not-allowed' }
+  ':disabled': {
+    opacity: 0.3,
+    transform: 'scale(1)',
+    cursor: 'not-allowed'
+  }
 }
 const PRIMARY_DEFAULT = {
   ...BUTTON_DEFAULT,
   backgroundColor: 'brand',
   color: 'white',
-  ':hover': { backgroundColor: 'brandDark' },
-  ':active': { backgroundColor: 'brandDarkest' },
+  ':not([disabled])': {
+    ':hover': { backgroundColor: 'brandDark' },
+    ':active': { backgroundColor: 'brandDarkest' }
+  },
   ':focus': { opacity: 1 },
-  ':disabled': { backgroundColor: 'disabled', transform: 'scale(1)', cursor: 'not-allowed' }
+  ':hover': { opacity: 1 },
+  ':disabled': {
+    backgroundColor: 'disabled', transform: 'scale(1)', cursor: 'not-allowed'
+  }
+
 }
 const PRIMARY_STYLE = { ...PRIMARY_DEFAULT }
 const LARGE_STYLE = { ...PRIMARY_DEFAULT, width: sizes.largeButtonWidth }
@@ -38,16 +48,21 @@ const LINK_DEFAULT = {
   height: 'auto',
   padding: 0,
   minHeight: 'max-content',
-  ':hover': { color: 'brandDark' },
-  ':active': { color: 'brandDarkest' },
+  ':not([disabled])': {
+    ':hover': { color: 'brandDark' },
+    ':active': { color: 'brandDarkest' }
+  },
+  ':hover': { opacity: 1 },
   ':disabled': { color: 'disabled', transform: 'scale(1)', cursor: 'not-allowed' }
 }
 const LINK_STYLE = { ...LINK_DEFAULT, color: 'brand' }
 const LINK_POSITIVE_STYLE = {
   ...LINK_DEFAULT,
   color: 'positive',
-  ':hover': { opacity: 0.75 },
-  ':active': { color: 'positive' }
+  ':not([disabled])': {
+    ':hover': { opacity: 0.75, color: 'positive' },
+    ':active': { color: 'positive' }
+  }
 }
 export default {
   primary: PRIMARY_STYLE,
