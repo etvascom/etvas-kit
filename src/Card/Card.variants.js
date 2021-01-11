@@ -4,7 +4,7 @@ export default {
     border: '1px solid',
     borderColor: 'lighterOutline'
   },
-  tainted: {
+  tinted: {
     backgroundColor: 'backgroundCustomers'
   }
 }

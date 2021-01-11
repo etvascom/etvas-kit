@@ -36,10 +36,10 @@ const formValidate = values => {
 }
 
 export const Default = () => <LoginScreen />
-export const Tainted = () => <LoginScreen tainted />
+export const Tinted = () => <LoginScreen tinted />
 
 // eslint-disable-next-line react/prop-types
-const LoginScreen = ({ tainted }) => {
+const LoginScreen = ({ tinted }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isShowingErrors, setIsShowingErrors] = useState(false)
 
@@ -64,7 +64,7 @@ const LoginScreen = ({ tainted }) => {
   }
 
   return (
-    <Card width='304px' height='504px' variant={tainted ? 'tainted' : ''}>
+    <Card width='304px' height='504px' variant={tinted ? 'tinted' : ''}>
       <Form
         initialValues={values}
         validate={formValidate}
@@ -85,7 +85,7 @@ const LoginScreen = ({ tainted }) => {
                 placeholder='e.g. yourname@domain.com'
                 required
                 loading={isLoading}
-                tainted={tainted}
+                tinted={tinted}
               />
               <TextField
                 name='password'
@@ -95,7 +95,7 @@ const LoginScreen = ({ tainted }) => {
                 placeholder='e.g. password'
                 required
                 loading={isLoading}
-                tainted={tainted}
+                tinted={tinted}
               />
             </Flex>
             <Flex justifyContent='center' mb={4}>
