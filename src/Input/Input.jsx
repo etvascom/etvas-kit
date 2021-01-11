@@ -130,7 +130,7 @@ export const Input = forwardRef(
           />
           {icLeft ? (
             <Icon
-              fontSize={3}
+              size='small'
               left={2}
               name={icLeft}
               pointerEvents='none'
