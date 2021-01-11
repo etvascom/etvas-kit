@@ -43,7 +43,7 @@ export const Input = forwardRef(
       variant,
       subLabel,
       loading,
-      tainted,
+      tinted,
       ...rest
     },
     ref
@@ -110,7 +110,7 @@ export const Input = forwardRef(
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
-            tainted={tainted}
+            tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             ariaDisabled={readOnly || disabled}
@@ -190,14 +190,14 @@ const StyledInput = styled.input(
   }),
   variant({ variants }),
   props => ({
-    backgroundColor: props.tainted && !(props.error || props.warn) && 'white',
-    borderColor: props.tainted && !(props.error || props.warn) && 'white'
+    backgroundColor: props.tinted && !(props.error || props.warn) && 'white',
+    borderColor: props.tinted && !(props.error || props.warn) && 'white'
   })
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
-  tainted: PropTypes.bool,
+  tinted: PropTypes.bool,
   loading: PropTypes.bool,
   subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
@@ -245,7 +245,7 @@ Input.defaultProps = {
   readOnly: false,
   type: 'text',
   value: '',
-  tainted: false,
+  tinted: false,
   variant: 'default'
 }
 
