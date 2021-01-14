@@ -43,6 +43,7 @@ export const Input = forwardRef(
       variant,
       subLabel,
       loading,
+      tinted,
       ...rest
     },
     ref
@@ -109,6 +110,7 @@ export const Input = forwardRef(
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
+            tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             ariaDisabled={readOnly || disabled}
@@ -173,11 +175,16 @@ const StyledInput = styled.input(
   css({
     ...typography.labelSmall
   }),
-  variant({ variants })
+  variant({ variants }),
+  props => ({
+    backgroundColor: props.tinted && !(props.error || props.warn) && 'white',
+    borderColor: props.tinted && !(props.error || props.warn) && 'white'
+  })
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
+  tinted: PropTypes.bool,
   loading: PropTypes.bool,
   subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
@@ -225,6 +232,7 @@ Input.defaultProps = {
   readOnly: false,
   type: 'text',
   value: '',
+  tinted: false,
   variant: 'default'
 }
 

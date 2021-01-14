@@ -7,7 +7,7 @@ import { typography } from '../Typography'
 
 const styles = {
   textDecoration: 'inherit',
-  color: 'accent',
+  color: 'brand',
   font: 'inherit',
   lineHeight: 'inherit'
 }
