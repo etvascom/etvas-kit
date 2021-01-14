@@ -38,6 +38,7 @@
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
     "@styled-system/theme-get": "^5.1.2",
+    "flag-icon-css": "^3.5.0",
     "hyperid": "^2.0.5",
     "lodash": "^4.17.20",
     "use-resize-observer": "^6.1.0"

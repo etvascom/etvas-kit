@@ -1,4 +1,5 @@
 import { buildTheme } from '@ivoryio/kogaio/utils'
+
 const kogaioTheme = buildTheme({})
 
 const {
@@ -56,6 +57,8 @@ export const RADII = {
 }
 export const SHADOWS = {
   ...shadows,
-  etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)'
+  etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)',
+  phoneNumberInputUp: '0px -1px 3px rgba(8, 8, 8, 0.08), 0px -1px 2px rgba(8, 8, 8, 0.16)',
+  phoneNumberInputDown: '0px 1px 3px rgba(8, 8, 8, 0.08), 0px 1px 2px rgba(8, 8, 8, 0.16)'
 }
 export const SPACE = [...space]
