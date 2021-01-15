@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "module": "es/index.js",
   "files": [
+    "src",
     "css",
     "es",
     "lib",
