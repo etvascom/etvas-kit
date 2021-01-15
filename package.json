@@ -2,10 +2,9 @@
   "name": "@etvas/etvaskit",
   "version": "1.0.0",
   "description": "ETVAS UI Kit",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "src",
     "css",
     "es",
     "lib",
