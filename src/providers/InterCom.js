@@ -51,7 +51,7 @@ export class InterCom extends EventEmitter {
     }
   }
 
-  handleMessage = event => {
+  handleMessage(event) {
     const { data } = event
     if (data.namespace === this.namespace) {
       this.emit(data.event, data.payload)
