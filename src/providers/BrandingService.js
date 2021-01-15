@@ -59,11 +59,11 @@ export class BrandingService extends EventEmitter {
     Object.keys(this.cssVars).forEach(k => this.write(k, this.cssVars[k]))
   }
 
-  sendCssVars() {
+  sendCssVars = () => {
     this.intercom.response('cssVars', this.cssVars)
   }
 
-  handleNewCssVars(cssVars) {
+  handleNewCssVars = cssVars => {
     this.updateCssVars(cssVars)
   }
 
