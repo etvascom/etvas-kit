@@ -32,8 +32,8 @@ export const Checkbox = ({
     <StyledLabel htmlFor={id}>
       <Icon
         color={color}
-        size='24px'
-        name={isChecked ? 'checkboxChecked' : 'checkboxUnchecked'}
+        size='medium'
+        name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
       />
       <input
         type='checkbox'

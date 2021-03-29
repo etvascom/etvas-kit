@@ -22,15 +22,17 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   }, [name])
 
   if (typeof name === 'string' && typeof glyphs[name] === 'string') {
-    return <BaseIcon
-      path={glyphs[name]}
-      size={sizes[size]}
-      color={colors[color] || 'currentColor'}
-      spin={rotate}
-      {...props}
-    />
+    return (
+      <BaseIcon
+        path={glyphs[name]}
+        size={sizes[size]}
+        color={colors[color] || 'currentColor'}
+        spin={rotate}
+        {...props}
+      />
+    )
   }
-  console.warn('You are using the old version of icons')
+  console.warn('You are using the old version of icons', glyph)
 
   return (
     <StyledI color={color} size={size} rotate={rotate} {...props}>
