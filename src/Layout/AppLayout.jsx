@@ -24,7 +24,11 @@ export const AppLayout = ({
   return (
     <Container id='page-container'>
       <SidebarToggler isOpen={isOpen} variant={variant} onClick={toggle}>
-        <Icon name={isOpen ? 'circleX' : 'menu'} color='white' size='24px' />
+        <Icon
+          name={isOpen ? 'backburger' : 'forwardburger'}
+          color='white'
+          size='24px'
+        />
       </SidebarToggler>
       <Header
         variant={variant}
