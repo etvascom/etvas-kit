@@ -20,6 +20,6 @@ const Wrapper = styled(Typography)`
 SubLabel.propTypes = {
   preserveSpace: PropTypes.bool,
   variant: PropTypes.string,
-  content: PropTypes.node.isRequired
+  content: PropTypes.any
 }
 SubLabel.displayName = 'SubLabel'
