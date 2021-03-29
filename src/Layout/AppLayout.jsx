@@ -27,7 +27,7 @@ export const AppLayout = ({
         <Icon
           name={isOpen ? 'backburger' : 'forwardburger'}
           color='white'
-          size='24px'
+          size='medium'
         />
       </SidebarToggler>
       <Header
