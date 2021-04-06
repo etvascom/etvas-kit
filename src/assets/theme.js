@@ -31,7 +31,8 @@ const theme = buildTheme({
   },
   fontSizes: ['12px', '14px', '16px', '20px', '24px', '32px'],
   fontWeights: {
-    ligher: '300',
+    lighter: '300',
+    normal: '500',
     bold: '600',
     black: '900'
   },

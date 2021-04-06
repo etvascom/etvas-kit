@@ -67,3 +67,17 @@ export const ResponsiveVariant = () => (
     </Typography>
   </Card>
 )
+
+export const NoStyling = () => (
+  <Card width='350px' p={2} m={1} fontFamily='"Helvetica Now"'>
+    <p style={{ fontWeight: 100 }}>
+      The quick brown fox jumps over the lazy dog.
+    </p>
+    <p style={{ fontWeight: 400 }}>
+      The quick brown fox jumps over the lazy dog.
+    </p>
+    <p style={{ fontWeight: 800 }}>
+      The quick brown fox jumps over the lazy dog.
+    </p>
+  </Card>
+)

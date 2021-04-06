@@ -7,8 +7,8 @@ import EtvasIconsWoff2 from '../assets/icon-font/etvas-icons.woff2'
 import RegularFont from '../assets/webfont/regular.woff'
 import RegularFont2 from '../assets/webfont/regular.woff2'
 
-import BoldFont from '../assets/webfont/bold.woff'
-import BoldFont2 from '../assets/webfont/bold.woff2'
+import BoldFont from '../assets/webfont/xbold.woff'
+import BoldFont2 from '../assets/webfont/xbold.woff2'
 
 import LightFont from '../assets/webfont/light.woff'
 import LightFont2 from '../assets/webfont/light.woff2'
@@ -47,6 +47,7 @@ html {
 
 * {
   box-sizing: border-box;
+  letter-spacing: 0.2px;
 }
 
 a { 
@@ -64,30 +65,37 @@ a {
 /* FONTS */
 @font-face {
   font-family: 'Helvetica Now';
-  src: url(${RegularFont2}) format('woff2'),
+  src: local('Helvetica Now'), local('HelveticaNow'),
+    url(${RegularFont2}) format('woff2'),
     url(${RegularFont}) format('woff');
   font-weight: normal;
-  /* font-style: normal; */
-  
+  font-weight: 400;
+  font-weight: 500;
 }
+
 
 @font-face {
   font-family: 'Helvetica Now';
-  src: url(${LightFont2}) format('woff2'),
+  src: local('Helvetica Now'), local('HelveticaNow'),
+    url(${LightFont2}) format('woff2'),
     url(${LightFont}) format('woff');
-  font-weight: light;
-  
+  font-weight: lighter;
+  font-weight: 100;
+  font-weight: 200;
+  font-weight: 300;
 }
 
 @font-face {
   font-family: 'Helvetica Now';
-  src: url(${BoldFont2}) format('woff2'),
+  src: local('Helvetica Now'), local('HelveticaNow'),
+    url(${BoldFont2}) format('woff2'),
     url(${BoldFont}) format('woff');
+  font-weight: bold;
+  font-weight: 600;
+  font-weight: 700;
   font-weight: 800;
-  /* font-style: normal; */
-  
+  font-weight: 900;
 }
-
 
 @keyframes rotation {
   from {

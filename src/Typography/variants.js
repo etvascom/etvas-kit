@@ -64,7 +64,7 @@ export default {
   },
   labelButton: {
     fontFamily: 'primary',
-    fontWeight: '800',
+    fontWeight: '700',
     fontSize: '12px',
     lineHeight: '16px',
     textTransform: 'uppercase',
