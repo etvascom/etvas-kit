@@ -7,7 +7,7 @@ import { Typography } from '../Typography'
 import { default as variants } from './SubLabel.variants'
 
 export const SubLabel = ({ variant, content, preserveSpace }) => (
-  <Wrapper preserveSpace={preserveSpace} variant={variant}>
+  <Wrapper preserveSpace={preserveSpace} variant={variant} mt={1}>
     {content}
   </Wrapper>
 )

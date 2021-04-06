@@ -39,6 +39,7 @@ export const SubdomainInput = forwardRef(
       variant,
       subLabel,
       loading,
+      tinted,
       ...rest
     },
     ref
@@ -73,14 +74,21 @@ export const SubdomainInput = forwardRef(
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
     const getTextWidth = (text, font) => {
-      const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'))
+      const canvas =
+        getTextWidth.canvas ||
+        (getTextWidth.canvas = document.createElement('canvas'))
       const context = canvas.getContext('2d')
       context.font = font
       const metrics = context.measureText(text)
       return metrics.width
     }
 
-    const inputWidth = Math.ceil(getTextWidth(value || placeholder, `${theme.fontSizes[1]} ${theme.fonts.primary}`))
+    const inputWidth = Math.ceil(
+      getTextWidth(
+        value || placeholder,
+        `${theme.fontSizes[1]} ${theme.fonts.primary}`
+      )
+    )
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
@@ -94,13 +102,15 @@ export const SubdomainInput = forwardRef(
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInputWrapper
+            warning={warning}
             error={error}
+            disabled={disabled}
+            tinted={tinted}
             hasLabel={label}
             hasIcLeft={icLeft}
             hasIcRight={icRight}
             variant={inputVariant}
-            {...rest}
-          >
+            {...rest}>
             <Typography color='formsPlaceholder' variant='labelSmall'>
               {prefix}
             </Typography>
@@ -163,7 +173,11 @@ const StyledInputWrapper = styled(Flex)(
     alignItems: 'center',
     backgroundColor: 'white'
   }),
-  variant({ variants })
+  variant({ variants }),
+  ({ tinted, error, warn, disabled }) => ({
+    backgroundColor: tinted && !(error || warn || disabled) && 'white',
+    borderColor: tinted && !(error || warn || disabled) && 'white'
+  })
 )
 
 const StyledInput = styled.input(
@@ -174,14 +188,16 @@ const StyledInput = styled.input(
     border: 'none',
     padding: 0
   }),
-  (({ placeholderColor }) => css({
-    '::placeholder': {
-      color: placeholderColor
-    }
-  })),
-  (({ width }) => css({
-     width
-  }))
+  ({ placeholderColor }) =>
+    css({
+      '::placeholder': {
+        color: placeholderColor
+      }
+    }),
+  ({ width }) =>
+    css({
+      width
+    })
 )
 
 const { icLeft, passwordView, ...rest } = Input.propTypes

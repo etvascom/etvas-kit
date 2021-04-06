@@ -1,8 +1,8 @@
-import { FONTS, LINE_HEIGHTS, FONT_SIZES } from '../assets/core'
+import { FONTS, LINE_HEIGHTS } from '../assets/core'
 
 const DEFAULT_STYLE = {
   color: 'textDefault',
-  fontSize: FONT_SIZES[0],
+  fontSize: '11px',
   lineHeight: LINE_HEIGHTS.inputLabel,
   fontFamily: FONTS.primary
 }

@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
+import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
 import { Flex } from '@ivoryio/kogaio'
@@ -98,13 +99,15 @@ export const Input = forwardRef(
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
     return (
-      <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <Styled flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
-            htmlFor={id}
+            htmlFor={!loading && !disabled && id}
             variant='inputLabel'
-            width='fit-content'>
+            color='textLabelDefault'
+            width='fit-content'
+            mb={1}>
             {label} {required ? '*' : ''}
           </Typography>
         ) : null}
@@ -114,6 +117,7 @@ export const Input = forwardRef(
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             ariaDisabled={readOnly || disabled}
+            disabled={disabled}
             error={error}
             hasLabel={label}
             hasIcLeft={icLeft}
@@ -166,19 +170,27 @@ export const Input = forwardRef(
           variant={inputVariant}
           preserveSpace={!noBottomSpace}
         />
-      </Flex>
+      </Styled>
     )
   }
 )
+
+const Styled = styled(Flex)`
+  &:focus-within {
+    label {
+      color: ${themed('colors.textInputFocused')};
+    }
+  }
+`
 
 const StyledInput = styled.input(
   css({
     ...typography.labelSmall
   }),
   variant({ variants }),
-  props => ({
-    backgroundColor: props.tinted && !(props.error || props.warn) && 'white',
-    borderColor: props.tinted && !(props.error || props.warn) && 'white'
+  ({ tinted, error, warn, disabled }) => ({
+    backgroundColor: tinted && !(error || warn || disabled) && 'white',
+    borderColor: tinted && !(error || warn || disabled) && 'white'
   })
 )
 

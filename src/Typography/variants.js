@@ -48,10 +48,10 @@ export default {
   },
   inputLabel: {
     fontFamily: 'primary',
-    fontSize: 2,
+    fontWeight: 'normal',
+    fontSize: 1,
     letterSpacing: '0.3px',
-    lineHeight: '16px',
-    color: 'textLabel'
+    lineHeight: '16px'
   },
   labelSmallBold: {
     fontFamily: 'primary',

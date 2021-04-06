@@ -81,6 +81,7 @@ export default {
   inputIcon: StyleGuide.gray400,
   textInputDisabled: StyleGuide.gray400,
   backgroundDisabled: StyleGuide.gray400,
+  textInputFocused: StyleGuide.gray400,
   textInputPlaceholder: StyleGuide.gray500,
   textLabelDefault: StyleGuide.black400,
   textCardTitle: StyleGuide.black200,
