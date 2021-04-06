@@ -63,11 +63,20 @@ export default {
     lineHeight: '19px'
   },
   labelButton: {
-    fontFamily: 'complementary',
-    fontWeight: 'black',
-    fontSize: 0,
-    lineHeight: '14px',
-    textTransform: 'uppercase'
+    fontFamily: 'primary',
+    fontWeight: '800',
+    fontSize: '12px',
+    lineHeight: '16px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.4px'
+  },
+  labelLargeButton: {
+    fontFamily: 'primary',
+    fontWeight: '800',
+    fontSize: '14px',
+    lineHeight: '16px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.2px'
   },
   textSmall: {
     fontFamily: 'primary',

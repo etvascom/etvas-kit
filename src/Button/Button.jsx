@@ -32,45 +32,53 @@ const Button = ({
     return iconVariants[variant].color
   }, [iconPosition, disabled, icon, variant])
 
-
-  return (<StyledButton
-    disabled={disabled}
-    id={id}
-    onClick={onClick}
-    type={type}
-    variant={variant}
-    {...rest}>
-    {loading ? (
-      <Icon
-        size='medium'
-        name='loading'
-        color={spinnerVariants[variant].primary}
-        rotate={true}
-      />
-    ) : (
-      <Flex flexDirection='row' alignItems='center'>
-        {(icon && iconPosition === 'left') &&
-        <Space mr='0.5em'>
-          <Icon name={icon} size={iconVariants[variant].size} color={iconColor}/>
-        </Space>
-        }
-        <Typography
-          as='label'
-          variant='labelButton'
-          htmlFor={id}
-          px={3}
-          color='inherit'
-        >
-          {children}
-        </Typography>
-        {(icon && iconPosition === 'right') &&
-        <Space ml='0.5em'>
-          <Icon name={icon} size={iconVariants[variant].size} color={iconColor}/>
-        </Space>
-        }
-      </Flex>
-    )}
-  </StyledButton>)
+  return (
+    <StyledButton
+      disabled={disabled}
+      id={id}
+      onClick={onClick}
+      type={type}
+      variant={variant}
+      {...rest}>
+      {loading ? (
+        <Icon
+          size='medium'
+          name='loading'
+          color={spinnerVariants[variant].primary}
+          rotate={true}
+        />
+      ) : (
+        <Flex flexDirection='row' alignItems='center'>
+          {icon && iconPosition === 'left' && (
+            <Space mr='0.5em'>
+              <Icon
+                name={icon}
+                size={iconVariants[variant].size}
+                color={iconColor}
+              />
+            </Space>
+          )}
+          <Typography
+            as='label'
+            variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
+            htmlFor={id}
+            px={3}
+            color='inherit'>
+            {children}
+          </Typography>
+          {icon && iconPosition === 'right' && (
+            <Space ml='0.5em'>
+              <Icon
+                name={icon}
+                size={iconVariants[variant].size}
+                color={iconColor}
+              />
+            </Space>
+          )}
+        </Flex>
+      )}
+    </StyledButton>
+  )
 }
 
 const StyledButton = styled.button(
@@ -83,10 +91,7 @@ Button.propTypes = {
   ...propTypes.space,
   children: PropTypes.node,
   icon: PropTypes.string,
-  iconPosition: PropTypes.oneOf([
-    'left',
-    'right'
-  ]),
+  iconPosition: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   onClick: PropTypes.func,

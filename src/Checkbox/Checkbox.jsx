@@ -14,7 +14,8 @@ export const Checkbox = ({
   value,
   name,
   id,
-  onChange
+  onChange,
+  size
 }) => {
   const [isChecked, setIsChecked] = useState(!!checked)
 
@@ -32,7 +33,7 @@ export const Checkbox = ({
     <StyledLabel htmlFor={id}>
       <Icon
         color={color}
-        size='medium'
+        size={size}
         name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
       />
       <input
@@ -74,5 +75,6 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {
   color: 'accent',
-  value: 'on'
+  value: 'on',
+  size: 'medium'
 }
