@@ -10,11 +10,13 @@ export default {
 
 export const Variants = () => {
   const variants = [
+    'textSmallest',
     'textSmall',
     'textLarge',
-    'titleLargest',
-    'labelLarge',
     'titleSmall',
+    'labelLarge',
+    'titleLarge',
+    'titleLargest',
     'labelSmall',
     'labelSmallBold',
     'labelButton'

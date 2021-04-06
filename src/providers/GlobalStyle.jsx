@@ -69,7 +69,6 @@ a {
     url(${RegularFont2}) format('woff2'),
     url(${RegularFont}) format('woff');
   font-weight: normal;
-  font-weight: 400;
   font-weight: 500;
 }
 
@@ -83,6 +82,7 @@ a {
   font-weight: 100;
   font-weight: 200;
   font-weight: 300;
+  font-weight: 400;
 }
 
 @font-face {

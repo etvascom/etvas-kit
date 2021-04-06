@@ -50,7 +50,7 @@ const Button = ({
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
-            <Space mr='0.5em'>
+            <Space mr='10px'>
               <Icon
                 name={icon}
                 size={iconVariants[variant].size}
@@ -62,12 +62,11 @@ const Button = ({
             as='label'
             variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
             htmlFor={id}
-            px={3}
             color='inherit'>
             {children}
           </Typography>
           {icon && iconPosition === 'right' && (
-            <Space ml='0.5em'>
+            <Space ml='10px'>
               <Icon
                 name={icon}
                 size={iconVariants[variant].size}

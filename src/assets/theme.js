@@ -29,7 +29,7 @@ const theme = buildTheme({
     complementary:
       'Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif'
   },
-  fontSizes: ['12px', '14px', '16px', '20px', '24px', '32px'],
+  fontSizes: ['11px', '12px', '14px', '16px', '20px', '24px', '32px', '48px'],
   fontWeights: {
     lighter: '300',
     normal: '500',
