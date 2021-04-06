@@ -91,6 +91,7 @@ export default {
   formsInputBorder: StyleGuide.gray200,
   formsPlaceholder: StyleGuide.gray700,
   formsLabel: StyleGuide.gray800,
+  uncheckedCheckbox: StyleGuide.gray800,
   baseGray: StyleGuide.gray900,
   baseBlack: StyleGuide.gray1000,
   textDefault: StyleGuide.black400

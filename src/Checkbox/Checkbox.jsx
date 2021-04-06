@@ -32,7 +32,7 @@ export const Checkbox = ({
   return (
     <StyledLabel htmlFor={id}>
       <Icon
-        color={color}
+        color={isChecked ? color : 'uncheckedCheckbox'}
         size={size}
         name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
       />
@@ -70,7 +70,8 @@ Checkbox.propTypes = {
   id: PropTypes.string,
   onChange: PropTypes.func,
   checked: PropTypes.bool,
-  value: PropTypes.any
+  value: PropTypes.any,
+  size: PropTypes.string
 }
 
 Checkbox.defaultProps = {
