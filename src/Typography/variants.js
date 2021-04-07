@@ -46,43 +46,6 @@ export default {
     textTransform: 'unset',
     lineHeight: '24px'
   },
-  inputLabel: {
-    fontFamily: 'primary',
-    fontWeight: 'normal',
-    fontSize: 1,
-    letterSpacing: '0.3px',
-    lineHeight: '16px'
-  },
-  labelSmallBold: {
-    fontFamily: 'primary',
-    fontWeight: 'bold',
-    fontSize: 2,
-    textTransform: 'unset',
-    lineHeight: '19px'
-  },
-  labelSmall: {
-    fontFamily: 'primary',
-    fontWeight: 'normal',
-    fontSize: 2,
-    textTransform: 'unset',
-    lineHeight: '19px'
-  },
-  labelButton: {
-    fontFamily: 'primary',
-    fontWeight: '700',
-    fontSize: 1,
-    lineHeight: '16px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.4px'
-  },
-  labelLargeButton: {
-    fontFamily: 'primary',
-    fontWeight: '800',
-    fontSize: 2,
-    lineHeight: '16px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.2px'
-  },
   textSmall: {
     fontFamily: 'primary',
     fontWeight: 'lighter',
@@ -97,5 +60,42 @@ export default {
     fontSize: 0,
     textTransform: 'unset',
     lineHeight: '16px'
+  },
+  inputLabel: {
+    fontFamily: 'primary',
+    fontWeight: '500',
+    fontSize: 1,
+    letterSpacing: '0.3px',
+    lineHeight: '16px'
+  },
+  labelSmallBold: {
+    fontFamily: 'primary',
+    fontWeight: 'bold',
+    fontSize: 2,
+    textTransform: 'unset',
+    lineHeight: '19px'
+  },
+  labelSmall: {
+    fontFamily: 'primary',
+    fontWeight: '300',
+    fontSize: 2,
+    textTransform: 'unset',
+    lineHeight: '19px'
+  },
+  labelButton: {
+    fontFamily: 'primary',
+    fontWeight: '800',
+    fontSize: 1,
+    lineHeight: '16px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.4px'
+  },
+  labelLargeButton: {
+    fontFamily: 'primary',
+    fontWeight: '800',
+    fontSize: 2,
+    lineHeight: '16px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.2px'
   }
 }

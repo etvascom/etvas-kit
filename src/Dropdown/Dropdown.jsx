@@ -165,7 +165,8 @@ const Dropdown = ({
           as='label'
           htmlFor={cId}
           variant='inputLabel'
-          width='fit-content'>
+          width='fit-content'
+          mb={1}>
           {label} {required ? '*' : ''}
         </Typography>
       ) : null}
