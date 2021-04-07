@@ -99,13 +99,12 @@ export const Input = forwardRef(
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
     return (
-      <Styled flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
             htmlFor={!loading && !disabled && id}
             variant='inputLabel'
-            color='textLabelDefault'
             width='fit-content'
             mb={1}>
             {label} {required ? '*' : ''}
@@ -170,12 +169,12 @@ export const Input = forwardRef(
           variant={inputVariant}
           preserveSpace={!noBottomSpace}
         />
-      </Styled>
+      </StyledFlex>
     )
   }
 )
 
-const Styled = styled(Flex)`
+const StyledFlex = styled(Flex)`
   &:focus-within {
     label {
       color: ${themed('colors.textInputFocused')};

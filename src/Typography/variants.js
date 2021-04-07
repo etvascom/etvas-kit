@@ -62,6 +62,7 @@ export default {
     lineHeight: '16px'
   },
   inputLabel: {
+    color: 'textLabelDefault',
     fontFamily: 'primary',
     fontWeight: '500',
     fontSize: 1,
@@ -73,14 +74,14 @@ export default {
     fontWeight: 'bold',
     fontSize: 2,
     textTransform: 'unset',
-    lineHeight: '19px'
+    lineHeight: '20px'
   },
   labelSmall: {
     fontFamily: 'primary',
     fontWeight: '300',
     fontSize: 2,
     textTransform: 'unset',
-    lineHeight: '19px'
+    lineHeight: '20px'
   },
   labelButton: {
     fontFamily: 'primary',

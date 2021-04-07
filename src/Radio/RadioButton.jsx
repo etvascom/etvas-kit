@@ -31,7 +31,7 @@ const RadioButton = ({
     {variant === 'normal' && (
       <RoundedBox disabled={disabled}>{checked && <span></span>}</RoundedBox>
     )}
-    {label && <Typography variant='inputLabel'>{label}</Typography>}
+    {label && <Typography variant='labelSmall'>{label}</Typography>}
   </LabelWrapper>
 )
 

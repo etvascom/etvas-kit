@@ -46,7 +46,7 @@ export const Checkbox = ({
         onChange={handleChange}
       />
       {label && (
-        <Typography variant='inputLabel' ml={3}>
+        <Typography variant='labelSmall' ml={3}>
           {label}
         </Typography>
       )}
