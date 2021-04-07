@@ -4,14 +4,20 @@ import { createGlobalStyle } from 'styled-components'
 import EtvasIconsWoff from '../assets/icon-font/etvas-icons.woff'
 import EtvasIconsWoff2 from '../assets/icon-font/etvas-icons.woff2'
 
+import LightFont from '../assets/webfont/light.woff'
+import LightFont2 from '../assets/webfont/light.woff2'
+
 import RegularFont from '../assets/webfont/regular.woff'
 import RegularFont2 from '../assets/webfont/regular.woff2'
 
-import BoldFont from '../assets/webfont/xbold.woff'
-import BoldFont2 from '../assets/webfont/xbold.woff2'
+import MediumFont from '../assets/webfont/medium.woff'
+import MediumFont2 from '../assets/webfont/medium.woff2'
 
-import LightFont from '../assets/webfont/light.woff'
-import LightFont2 from '../assets/webfont/light.woff2'
+import BoldFont from '../assets/webfont/bold.woff'
+import BoldFont2 from '../assets/webfont/bold.woff2'
+
+import XBoldFont from '../assets/webfont/xbold.woff'
+import XBoldFont2 from '../assets/webfont/xbold.woff2'
 
 // import BoldItalicFont from '../assets/webfont/bold_italic.woff'
 // import BoldItalicFont2 from '../assets/webfont/bold_italic.woff2'
@@ -66,23 +72,30 @@ a {
 @font-face {
   font-family: 'Helvetica Now';
   src: local('Helvetica Now'), local('HelveticaNow'),
-    url(${RegularFont2}) format('woff2'),
-    url(${RegularFont}) format('woff');
-  font-weight: normal;
-  font-weight: 500;
-}
-
-
-@font-face {
-  font-family: 'Helvetica Now';
-  src: local('Helvetica Now'), local('HelveticaNow'),
     url(${LightFont2}) format('woff2'),
     url(${LightFont}) format('woff');
   font-weight: lighter;
   font-weight: 100;
   font-weight: 200;
   font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Helvetica Now';
+  src: local('Helvetica Now'), local('HelveticaNow'),
+    url(${RegularFont2}) format('woff2'),
+    url(${RegularFont}) format('woff');
+  font-weight: normal;
   font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Helvetica Now';
+  src: local('Helvetica Now'), local('HelveticaNow'),
+    url(${MediumFont2}) format('woff2'),
+    url(${MediumFont}) format('woff');
+  font-weight: normal;
+  font-weight: 500;
 }
 
 @font-face {
@@ -93,6 +106,13 @@ a {
   font-weight: bold;
   font-weight: 600;
   font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Helvetica Now';
+  src: local('Helvetica Now'), local('HelveticaNow'),
+    url(${XBoldFont2}) format('woff2'),
+    url(${XBoldFont}) format('woff');
   font-weight: 800;
   font-weight: 900;
 }

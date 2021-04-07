@@ -70,16 +70,17 @@ export const ResponsiveVariant = () => (
   </Card>
 )
 
+const weights = [100, 200, 300, 400, 500, 600, 700, 800, 900]
+
 export const NoStyling = () => (
-  <Card width='350px' p={2} m={1} fontFamily='"Helvetica Now"'>
-    <p style={{ fontWeight: 100 }}>
-      The quick brown fox jumps over the lazy dog.
-    </p>
-    <p style={{ fontWeight: 400 }}>
-      The quick brown fox jumps over the lazy dog.
-    </p>
-    <p style={{ fontWeight: 800 }}>
-      The quick brown fox jumps over the lazy dog.
-    </p>
+  <Card width='100%' p={2} m={1} fontFamily='"Helvetica Now"'>
+    {weights.map(weight => (
+      <>
+        <b style={{ color: 'gray' }}>FONT WEIGHT: {weight}</b>
+        <p style={{ fontWeight: weight }}>
+          The quick brown fox jumps over the lazy dog.
+        </p>
+      </>
+    ))}
   </Card>
 )
