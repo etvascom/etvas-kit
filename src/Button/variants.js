@@ -18,6 +18,7 @@ const BUTTON_DEFAULT = {
   ':focus': {
     opacity: 0.75,
     outlineStyle: 'none',
+    userSelect: 'none',
     outlineColor: 'transparent'
   },
   ':disabled': {
@@ -34,7 +35,6 @@ const PRIMARY_DEFAULT = {
     ':hover': { backgroundColor: 'brandDark' },
     ':active': { backgroundColor: 'brandDarkest' }
   },
-  ':focus': { opacity: 1 },
   ':hover': { opacity: 1 },
   ':disabled': {
     backgroundColor: 'disabled',
