@@ -34,6 +34,7 @@ const Dropdown = ({
   itemFilter,
   searchPlaceholder,
   onChange,
+  tinted,
   children,
   ...props
 }) => {
@@ -164,7 +165,8 @@ const Dropdown = ({
           as='label'
           htmlFor={cId}
           variant='inputLabel'
-          width='fit-content'>
+          width='fit-content'
+          mb={1}>
           {label} {required ? '*' : ''}
         </Typography>
       ) : null}
@@ -192,6 +194,8 @@ const Dropdown = ({
           type='button'
           role='switch'
           aria-controls={`drop-${cId}`}
+          error={error}
+          tinted={tinted}
           onClick={toggleDropdown}>
           {isEmpty ? placeholder : displayValue}
         </Toggler>
@@ -278,7 +282,11 @@ const Toggler = styled.button(
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0
         })
-      : null
+      : null,
+  ({ tinted, error, disabled }) => ({
+    backgroundColor: tinted && !(error || disabled) && 'white',
+    borderColor: tinted && !(error || disabled) && 'white'
+  })
 )
 
 const StyledIndicator = styled.button(
@@ -385,6 +393,7 @@ Dropdown.propTypes = {
   itemFilter: PropTypes.func,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   searchPlaceholder: PropTypes.string,
+  tinted: PropTypes.bool,
   children: PropTypes.arrayOf(PropTypes.element)
 }
 

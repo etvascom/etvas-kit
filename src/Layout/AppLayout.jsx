@@ -217,7 +217,7 @@ const LayoutBody = styled.div(
   variant({
     variants: {
       mobile: { paddingLeft: '8px', paddingRight: '8px' },
-      web: { paddingLeft: '64px', paddingRight: '64px', maxWidth: '1200px' }
+      web: { paddingLeft: '24px', paddingRight: '24px', maxWidth: '1200px' }
     }
   })
 )

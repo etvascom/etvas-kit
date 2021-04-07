@@ -24,10 +24,11 @@ export const BREAKPOINTS = {
 // #region font
 export const FONTS = {
   primary:
-    'Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif',
+    '"Helvetica Now", -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif',
   complementary:
     'Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif'
 }
+
 export const FONT_WEIGHTS = {
   ...fontWeights,
   lighter: '300',
@@ -58,7 +59,9 @@ export const RADII = {
 export const SHADOWS = {
   ...shadows,
   etvasCard: '0px 2px 4px rgba(19, 51, 77, 0.15)',
-  phoneNumberInputUp: '0px -1px 3px rgba(8, 8, 8, 0.08), 0px -1px 2px rgba(8, 8, 8, 0.16)',
-  phoneNumberInputDown: '0px 1px 3px rgba(8, 8, 8, 0.08), 0px 1px 2px rgba(8, 8, 8, 0.16)'
+  phoneNumberInputUp:
+    '0px -1px 3px rgba(8, 8, 8, 0.08), 0px -1px 2px rgba(8, 8, 8, 0.16)',
+  phoneNumberInputDown:
+    '0px 1px 3px rgba(8, 8, 8, 0.08), 0px 1px 2px rgba(8, 8, 8, 0.16)'
 }
 export const SPACE = [...space]

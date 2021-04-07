@@ -15,7 +15,12 @@ const BUTTON_DEFAULT = {
   label: { cursor: 'pointer', pointerEvents: 'none' },
   ':hover': { opacity: 0.75 },
   ':active ': { transform: 'scale(0.965)' },
-  ':focus': { opacity: 0.75, outlineStyle: 'none', outlineColor: 'transparent' },
+  ':focus': {
+    opacity: 0.75,
+    outlineStyle: 'none',
+    userSelect: 'none',
+    outlineColor: 'transparent'
+  },
   ':disabled': {
     opacity: 0.3,
     transform: 'scale(1)',
@@ -30,18 +35,31 @@ const PRIMARY_DEFAULT = {
     ':hover': { backgroundColor: 'brandDark' },
     ':active': { backgroundColor: 'brandDarkest' }
   },
-  ':focus': { opacity: 1 },
   ':hover': { opacity: 1 },
   ':disabled': {
-    backgroundColor: 'disabled', transform: 'scale(1)', cursor: 'not-allowed'
+    backgroundColor: 'disabled',
+    transform: 'scale(1)',
+    cursor: 'not-allowed'
   }
-
 }
 const PRIMARY_STYLE = { ...PRIMARY_DEFAULT }
-const LARGE_STYLE = { ...PRIMARY_DEFAULT, width: sizes.largeButtonWidth }
-const OUTLINE_DEFAULT = { ...BUTTON_DEFAULT, color: 'text', backgroundColor: 'transparent', border: `${BORDERS[1]}` }
+const LARGE_STYLE = {
+  ...PRIMARY_DEFAULT,
+  width: sizes.largeButtonWidth,
+  height: sizes.largeButtonHeight
+}
+const OUTLINE_DEFAULT = {
+  ...BUTTON_DEFAULT,
+  color: 'text',
+  backgroundColor: 'transparent',
+  border: `${BORDERS[1]}`
+}
 const OUTLINE_STYLE = { ...OUTLINE_DEFAULT, borderColor: 'accent' }
-const POSITIVE_STYLE = { ...BUTTON_DEFAULT, backgroundColor: 'positive', color: 'white' }
+const POSITIVE_STYLE = {
+  ...BUTTON_DEFAULT,
+  backgroundColor: 'positive',
+  color: 'white'
+}
 const LINK_DEFAULT = {
   ...BUTTON_DEFAULT,
   backgroundColor: 'transparent',
@@ -53,7 +71,11 @@ const LINK_DEFAULT = {
     ':active': { color: 'brandDarkest' }
   },
   ':hover': { opacity: 1 },
-  ':disabled': { color: 'disabled', transform: 'scale(1)', cursor: 'not-allowed' }
+  ':disabled': {
+    color: 'disabled',
+    transform: 'scale(1)',
+    cursor: 'not-allowed'
+  }
 }
 const LINK_STYLE = { ...LINK_DEFAULT, color: 'brand' }
 const LINK_POSITIVE_STYLE = {

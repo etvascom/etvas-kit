@@ -25,13 +25,14 @@ const theme = buildTheme({
   // basic*s
   fonts: {
     primary:
-      'Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif',
+      '"Helvetica Now", -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif',
     complementary:
       'Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, sans-serif'
   },
-  fontSizes: ['12px', '14px', '16px', '20px', '24px', '32px'],
+  fontSizes: ['11px', '12px', '14px', '16px', '20px', '24px', '32px', '48px'],
   fontWeights: {
-    ligher: '300',
+    lighter: '300',
+    normal: '500',
     bold: '600',
     black: '900'
   },

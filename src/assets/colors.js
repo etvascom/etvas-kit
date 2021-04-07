@@ -81,6 +81,7 @@ export default {
   inputIcon: StyleGuide.gray400,
   textInputDisabled: StyleGuide.gray400,
   backgroundDisabled: StyleGuide.gray400,
+  textInputFocused: StyleGuide.gray400,
   textInputPlaceholder: StyleGuide.gray500,
   textLabelDefault: StyleGuide.black400,
   textCardTitle: StyleGuide.black200,
@@ -90,6 +91,7 @@ export default {
   formsInputBorder: StyleGuide.gray200,
   formsPlaceholder: StyleGuide.gray700,
   formsLabel: StyleGuide.gray800,
+  uncheckedCheckbox: StyleGuide.gray800,
   baseGray: StyleGuide.gray900,
   baseBlack: StyleGuide.gray1000,
   textDefault: StyleGuide.black400

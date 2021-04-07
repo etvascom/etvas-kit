@@ -5,6 +5,7 @@ import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
+import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Flex } from '@ivoryio/kogaio'
 
 import { default as variants } from '../Input/Input.variants'
@@ -39,6 +40,7 @@ export const SubdomainInput = forwardRef(
       variant,
       subLabel,
       loading,
+      tinted,
       ...rest
     },
     ref
@@ -73,16 +75,26 @@ export const SubdomainInput = forwardRef(
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
     const getTextWidth = (text, font) => {
-      const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'))
+      const canvas =
+        getTextWidth.canvas ||
+        (getTextWidth.canvas = document.createElement('canvas'))
       const context = canvas.getContext('2d')
       context.font = font
       const metrics = context.measureText(text)
       return metrics.width
     }
 
-    const inputWidth = Math.ceil(getTextWidth(value || placeholder, `${theme.fontSizes[1]} ${theme.fonts.primary}`))
+    const inputWidth = Math.ceil(
+      getTextWidth(
+        value || placeholder,
+        `${theme.fontSizes[1]} ${theme.fonts.primary}`
+      )
+    )
+
+    const focusInput = () => (ref || inputRef).current.focus()
+
     return (
-      <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
@@ -92,16 +104,22 @@ export const SubdomainInput = forwardRef(
             {label} {required ? '*' : ''}
           </Typography>
         ) : null}
-        <Flex alignItems='center' position='relative' width='100%'>
+        <Flex
+          alignItems='center'
+          position='relative'
+          width='100%'
+          onClick={focusInput}>
           <StyledInputWrapper
+            warning={warning}
             error={error}
+            disabled={disabled}
+            tinted={tinted}
             hasLabel={label}
             hasIcLeft={icLeft}
             hasIcRight={icRight}
             variant={inputVariant}
-            {...rest}
-          >
-            <Typography color='formsPlaceholder' variant='labelSmall'>
+            {...rest}>
+            <Typography color='textInputPlaceholder' variant='labelSmall'>
               {prefix}
             </Typography>
             <StyledInput
@@ -112,7 +130,7 @@ export const SubdomainInput = forwardRef(
               name={name}
               onChange={onChange}
               placeholder={readOnly ? '' : placeholder}
-              placeholderColor={value === '' ? 'formsPlaceholder' : 'text'}
+              placeholderColor={value === '' ? 'textInputPlaceholder' : 'text'}
               readOnly={readOnly}
               ref={ref || inputRef}
               required={required}
@@ -120,7 +138,7 @@ export const SubdomainInput = forwardRef(
               type={type}
               value={value}
             />
-            <Typography color='formsPlaceholder' variant='labelSmall'>
+            <Typography color='textInputPlaceholder' variant='labelSmall'>
               {suffix}
             </Typography>
           </StyledInputWrapper>
@@ -151,10 +169,18 @@ export const SubdomainInput = forwardRef(
           variant={inputVariant}
           preserveSpace={!noBottomSpace}
         />
-      </Flex>
+      </StyledFlex>
     )
   }
 )
+
+const StyledFlex = styled(Flex)`
+  &:focus-within {
+    label {
+      color: ${themed('colors.textInputFocused')};
+    }
+  }
+`
 
 const StyledInputWrapper = styled(Flex)(
   css({
@@ -163,7 +189,11 @@ const StyledInputWrapper = styled(Flex)(
     alignItems: 'center',
     backgroundColor: 'white'
   }),
-  variant({ variants })
+  variant({ variants }),
+  ({ tinted, error, warn, disabled }) => ({
+    backgroundColor: tinted && !(error || warn || disabled) && 'white',
+    borderColor: tinted && !(error || warn || disabled) && 'white'
+  })
 )
 
 const StyledInput = styled.input(
@@ -174,14 +204,16 @@ const StyledInput = styled.input(
     border: 'none',
     padding: 0
   }),
-  (({ placeholderColor }) => css({
-    '::placeholder': {
-      color: placeholderColor
-    }
-  })),
-  (({ width }) => css({
-     width
-  }))
+  ({ placeholderColor }) =>
+    css({
+      '::placeholder': {
+        color: placeholderColor
+      }
+    }),
+  ({ width }) =>
+    css({
+      width
+    })
 )
 
 const { icLeft, passwordView, ...rest } = Input.propTypes

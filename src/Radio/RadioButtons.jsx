@@ -21,7 +21,7 @@ const RadioButtons = ({
   return (
     <>
       {label && (
-        <Typography as='label' variant='inputLabel'>
+        <Typography as='label' variant='labelSmall'>
           {label}
         </Typography>
       )}

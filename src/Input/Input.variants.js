@@ -8,7 +8,7 @@ const DEFAULT_DISABLED_STYLE = {
 }
 
 const DEFAULT_STYLE = {
-  ...typography.inputLabel,
+  ...typography.labelSmall,
   height: sizes.inputHeight,
   background: 'backgroundLightGray',
   paddingLeft: 2,
