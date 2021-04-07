@@ -5,6 +5,7 @@ import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
+import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Flex } from '@ivoryio/kogaio'
 
 import { default as variants } from '../Input/Input.variants'
@@ -89,8 +90,11 @@ export const SubdomainInput = forwardRef(
         `${theme.fontSizes[1]} ${theme.fonts.primary}`
       )
     )
+
+    const focusInput = () => (ref || inputRef).current.focus()
+
     return (
-      <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
@@ -100,7 +104,11 @@ export const SubdomainInput = forwardRef(
             {label} {required ? '*' : ''}
           </Typography>
         ) : null}
-        <Flex alignItems='center' position='relative' width='100%'>
+        <Flex
+          alignItems='center'
+          position='relative'
+          width='100%'
+          onClick={focusInput}>
           <StyledInputWrapper
             warning={warning}
             error={error}
@@ -111,7 +119,7 @@ export const SubdomainInput = forwardRef(
             hasIcRight={icRight}
             variant={inputVariant}
             {...rest}>
-            <Typography color='formsPlaceholder' variant='labelSmall'>
+            <Typography color='textInputPlaceholder' variant='labelSmall'>
               {prefix}
             </Typography>
             <StyledInput
@@ -122,7 +130,7 @@ export const SubdomainInput = forwardRef(
               name={name}
               onChange={onChange}
               placeholder={readOnly ? '' : placeholder}
-              placeholderColor={value === '' ? 'formsPlaceholder' : 'text'}
+              placeholderColor={value === '' ? 'textInputPlaceholder' : 'text'}
               readOnly={readOnly}
               ref={ref || inputRef}
               required={required}
@@ -130,7 +138,7 @@ export const SubdomainInput = forwardRef(
               type={type}
               value={value}
             />
-            <Typography color='formsPlaceholder' variant='labelSmall'>
+            <Typography color='textInputPlaceholder' variant='labelSmall'>
               {suffix}
             </Typography>
           </StyledInputWrapper>
@@ -161,10 +169,18 @@ export const SubdomainInput = forwardRef(
           variant={inputVariant}
           preserveSpace={!noBottomSpace}
         />
-      </Flex>
+      </StyledFlex>
     )
   }
 )
+
+const StyledFlex = styled(Flex)`
+  &:focus-within {
+    label {
+      color: ${themed('colors.textInputFocused')};
+    }
+  }
+`
 
 const StyledInputWrapper = styled(Flex)(
   css({
