@@ -21,6 +21,7 @@ import theme from '../assets/theme'
 
 const inputPaddingRight = 6
 const inputPaddingLeft = 2
+
 export const SubdomainInput = forwardRef(
   (
     {
@@ -112,10 +113,7 @@ export const SubdomainInput = forwardRef(
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
     const inputWidth = Math.ceil(
-      getTextWidth(
-        value || placeholder,
-        `${theme.fontWeights.lighter} ${theme.fontSizes[2]} ${theme.fonts.primary}`
-      )
+      getTextWidth(value || placeholder, getFontInfo())
     )
 
     const focusInput = () => (ref || inputRef).current.focus()
@@ -168,7 +166,7 @@ export const SubdomainInput = forwardRef(
               readOnly={readOnly}
               ref={ref || inputRef}
               required={required}
-              width={inputWidth <= maxInputWidth ? inputWidth : maxInputWidth}
+              width={Math.min(inputWidth, maxInputWidth)}
               type={type}
               value={value}
             />
@@ -207,6 +205,9 @@ export const SubdomainInput = forwardRef(
     )
   }
 )
+
+const getFontInfo = () =>
+  `${theme.fontWeights.lighter} ${theme.fontSizes[2]} ${theme.fonts.primary}`
 
 const getTextWidth = (text, font) => {
   const canvas =
