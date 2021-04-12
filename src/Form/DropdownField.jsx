@@ -16,17 +16,43 @@ export const DropdownField = ({
 }) => {
   const [field, meta, helpers] = useField(props)
 
-  const handleChange = useCallback(v => helpers.setValue(v), [helpers])
-
-  const selectedOption = useMemo(
-    () =>
-      options.find(option => field.value === option[optionAttributes.value]),
-    [field, options, optionAttributes]
+  const handleChange = useCallback(
+    (option, v) => {
+      if (multiple) {
+        const value = [...field.value]
+        const idx = value.indexOf(option.id ?? option)
+        if (idx >= 0) {
+          value.splice(idx, 1)
+        } else {
+          value.push(option)
+        }
+        return helpers.setValue(value)
+      }
+      return helpers.setValue(v)
+    },
+    [helpers, field.value, multiple]
   )
-  const selectedLabel = selectedOption
+
+  const selectedOption = useMemo(() => {
+    if (multiple) {
+      const values = field.value ?? []
+      return options.filter(option => values.includes(option.id))
+    }
+
+    return options.find(
+      option => field.value === option[optionAttributes.value]
+    )
+  }, [field, options, optionAttributes, multiple])
+
+  const selectedLabel = multiple
+    ? v => renderValueForMultipleOptions(v)
+    : selectedOption
     ? selectedOption[optionAttributes.label]
     : undefined
-  const selectedValue = selectedOption
+
+  const selectedValue = multiple
+    ? field.value
+    : selectedOption
     ? selectedOption[optionAttributes.value]
     : undefined
 
@@ -64,7 +90,6 @@ export const DropdownField = ({
 
   return (
     <Dropdown
-      {...props}
       onChange={handleChange}
       label={props.label}
       value={selectedValue}
@@ -72,6 +97,7 @@ export const DropdownField = ({
       valueRender={selectedLabel}
       required={required}
       error={errorDisplay}
+      multiple={multiple}
       {...props}>
       {options.map(option => (
         <Dropdown.Option
@@ -84,6 +110,11 @@ export const DropdownField = ({
   )
 }
 
+const renderValueForMultipleOptions = options =>
+  options.length <= 2
+    ? options.slice(0, 2).join(', ')
+    : `${options.slice(0, 2).join(', ')} + ${options.length - 2} more`
+
 DropdownField.propTypes = {
   ...fieldShape,
   options: PropTypes.arrayOf(PropTypes.object),
@@ -92,7 +123,8 @@ DropdownField.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string
   }),
-  itemFilter: PropTypes.func
+  itemFilter: PropTypes.func,
+  multiple: PropTypes.bool
 }
 
 DropdownField.defaultProps = {

@@ -16,6 +16,7 @@ import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
+import sizes from '../assets/sizes'
 
 const Dropdown = ({
   disabled,
@@ -123,14 +124,14 @@ const Dropdown = ({
 
   const onSelectItem = option => {
     if (multiple) {
-      const old = isEmpty ? [] : [...value]
-      const idx = old.indexOf(option)
+      const newOptions = isEmpty ? [] : [...value]
+      const idx = newOptions.indexOf(option)
       if (idx >= 0) {
-        old.splice(idx, 1)
+        newOptions.splice(idx, 1)
       } else {
-        old.push(option)
+        newOptions.push(option)
       }
-      onChange(old)
+      onChange(option, newOptions)
     } else {
       onChange(option)
       setTimeout(() => {
@@ -223,7 +224,8 @@ const Dropdown = ({
               isValidElement(child)
                 ? cloneElement(child, {
                     onSelectItem,
-                    isSelected: isItemSelected(child.props.value)
+                    isSelected: isItemSelected(child.props.value),
+                    multiple
                   })
                 : null
             )}
@@ -241,7 +243,7 @@ const Toggler = styled.button(
     appearance: 'none',
     textAlign: 'left',
     cursor: 'pointer',
-    padding: 3,
+    padding: 2,
     display: 'block',
     width: '100%',
     backgroundColor: 'backgroundLightGray',
@@ -250,6 +252,7 @@ const Toggler = styled.button(
     borderStyle: 'solid',
     borderColor: 'inputBorderGray',
     borderRadius: 3,
+    height: sizes.inputHeight,
     color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,

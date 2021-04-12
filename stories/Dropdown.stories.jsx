@@ -47,9 +47,7 @@ export const Multiple = () => {
   const [selected, setSelected] = useState([])
 
   const valueRender = value => value.join(', ')
-  const itemSelected = (value, item) => !!value.find(found => found === item)
-
-  const onChange = value => {
+  const onChange = (option, value) => {
     setSelected(value)
   }
 
@@ -60,7 +58,6 @@ export const Multiple = () => {
         multiple
         label='Select more than one...'
         valueRender={valueRender}
-        itemSelected={itemSelected}
         onChange={onChange}>
         <Dropdown.Option value='Lannister'>Lannister</Dropdown.Option>
         <Dropdown.Option value='Tyrell'>Tyrell</Dropdown.Option>

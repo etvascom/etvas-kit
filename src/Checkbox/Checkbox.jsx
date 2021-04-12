@@ -35,7 +35,7 @@ export const Checkbox = ({
 
   return (
     <StyledLabel htmlFor={id} {...props}>
-      <StyledIcon
+      <Icon
         color={isChecked ? color : 'uncheckedCheckbox'}
         size={size}
         name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
@@ -57,19 +57,11 @@ export const Checkbox = ({
   )
 }
 
-const StyledLabel = styled.label(
+const StyledLabel = styled.label(({ pointerEvents }) =>
   css({
     display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    minHeight: '40px',
-    userSelect: 'none'
-  })
-)
-
-const StyledIcon = styled(Icon)(
-  css({
-    minWidth: '24px'
+    userSelect: 'none',
+    pointerEvents
   })
 )
 
