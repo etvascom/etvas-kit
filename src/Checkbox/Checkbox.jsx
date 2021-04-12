@@ -34,7 +34,7 @@ export const Checkbox = ({
   )
 
   return (
-    <StyledLabel htmlFor={id}>
+    <StyledLabel htmlFor={id} {...props}>
       <StyledIcon
         color={isChecked ? color : 'uncheckedCheckbox'}
         size={size}
