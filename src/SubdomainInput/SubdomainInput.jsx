@@ -1,4 +1,10 @@
-import React, { forwardRef, useMemo, useRef } from 'react'
+import React, {
+  forwardRef,
+  useMemo,
+  useRef,
+  useState,
+  useLayoutEffect
+} from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
@@ -13,6 +19,8 @@ import { Input } from '../Input'
 import { SubLabel } from '../Input/SubLabel'
 import theme from '../assets/theme'
 
+const inputPaddingRight = 6
+const inputPaddingLeft = 2
 export const SubdomainInput = forwardRef(
   (
     {
@@ -46,6 +54,35 @@ export const SubdomainInput = forwardRef(
     ref
   ) => {
     const inputRef = useRef()
+    const totalWidth = useRef()
+    const [maxInputWidth, setMaxInputWidth] = useState()
+
+    const prefixWidth = useMemo(
+      () =>
+        getTextWidth(
+          prefix,
+          `${theme.fontWeights.lighter} ${theme.fontSizes[2]} ${theme.fonts.primary}`
+        ),
+      [prefix]
+    )
+    const suffixWidth = useMemo(
+      () =>
+        getTextWidth(
+          suffix,
+          `${theme.fontWeights.lighter} ${theme.fontSizes[2]} ${theme.fonts.primary}`
+        ),
+      [suffix]
+    )
+
+    useLayoutEffect(() => {
+      setMaxInputWidth(
+        totalWidth?.current?.offsetWidth -
+          prefixWidth -
+          suffixWidth -
+          (inputPaddingRight + inputPaddingLeft) * 4
+      )
+    }, [prefixWidth, suffixWidth])
+
     const inputVariant = useMemo(() => {
       if (disabled || loading) return 'disabled'
       else if (error) return 'error'
@@ -74,27 +111,22 @@ export const SubdomainInput = forwardRef(
 
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
-    const getTextWidth = (text, font) => {
-      const canvas =
-        getTextWidth.canvas ||
-        (getTextWidth.canvas = document.createElement('canvas'))
-      const context = canvas.getContext('2d')
-      context.font = font
-      const metrics = context.measureText(text)
-      return metrics.width
-    }
-
     const inputWidth = Math.ceil(
       getTextWidth(
         value || placeholder,
-        `${theme.fontSizes[1]} ${theme.fonts.primary}`
+        `${theme.fontWeights.lighter} ${theme.fontSizes[2]} ${theme.fonts.primary}`
       )
     )
 
     const focusInput = () => (ref || inputRef).current.focus()
 
     return (
-      <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <StyledFlex
+        flexDirection='column'
+        hasLabel={label}
+        width={1}
+        {...rest}
+        ref={totalWidth}>
         {label ? (
           <Typography
             as='label'
@@ -118,6 +150,8 @@ export const SubdomainInput = forwardRef(
             hasIcLeft={icLeft}
             hasIcRight={icRight}
             variant={inputVariant}
+            pr={inputPaddingRight}
+            pl={inputPaddingLeft}
             {...rest}>
             <Typography color='textInputPlaceholder' variant='labelSmall'>
               {prefix}
@@ -134,13 +168,13 @@ export const SubdomainInput = forwardRef(
               readOnly={readOnly}
               ref={ref || inputRef}
               required={required}
-              width={inputWidth}
+              width={inputWidth <= maxInputWidth ? inputWidth : maxInputWidth}
               type={type}
               value={value}
             />
-            <Typography color='textInputPlaceholder' variant='labelSmall'>
+            <Suffix color='textInputPlaceholder' variant='labelSmall'>
               {suffix}
-            </Typography>
+            </Suffix>
           </StyledInputWrapper>
           {icLeft ? (
             <Icon
@@ -174,6 +208,20 @@ export const SubdomainInput = forwardRef(
   }
 )
 
+const getTextWidth = (text, font) => {
+  const canvas =
+    getTextWidth.canvas ||
+    (getTextWidth.canvas = document.createElement('canvas'))
+  const context = canvas.getContext('2d')
+  context.font = font
+  const metrics = context.measureText(text)
+  return metrics.width
+}
+
+const Suffix = styled(Typography)`
+  white-space: nowrap;
+`
+
 const StyledFlex = styled(Flex)`
   &:focus-within {
     label {
@@ -193,7 +241,12 @@ const StyledInputWrapper = styled(Flex)(
   ({ tinted, error, warn, disabled }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
     borderColor: tinted && !(error || warn || disabled) && 'white'
-  })
+  }),
+  ({ pr, pl }) =>
+    css({
+      pr,
+      pl
+    })
 )
 
 const StyledInput = styled.input(
