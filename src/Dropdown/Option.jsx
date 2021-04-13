@@ -15,7 +15,7 @@ const DropdownItem = ({
   disabled,
   isSelected,
   value,
-  multiple
+  hasCheckbox
 }) => {
   const _handleClick = () => {
     if (!disabled) {
@@ -34,7 +34,12 @@ const DropdownItem = ({
   const optionWithCheckbox = (
     <Flex alignItems='center'>
       <Box mr={3}>
-        <Checkbox size='small' checked={isSelected} pointerEvents='none' />
+        <Checkbox
+          size='small'
+          checked={isSelected}
+          onChange={_handleClick}
+          onClick={e => e.stopPropagation()}
+        />
       </Box>
       {children}
     </Flex>
@@ -46,8 +51,8 @@ const DropdownItem = ({
       onClick={_handleClick}
       selected={isSelected}
       touch={hasTouch}
-      multiple={multiple}>
-      {multiple ? optionWithCheckbox : children}
+      hasCheckbox={hasCheckbox}>
+      {hasCheckbox ? optionWithCheckbox : children}
     </Option>
   )
 }
@@ -72,8 +77,8 @@ const Option = styled(Flex)(
           }
         })
       : null,
-  ({ selected, multiple }) =>
-    selected && !multiple
+  ({ selected, hasCheckbox }) =>
+    selected && !hasCheckbox
       ? css({
           backgroundColor: 'brand',
           color: 'white',
@@ -88,7 +93,7 @@ DropdownItem.propTypes = {
   children: PropTypes.node,
   isSelected: PropTypes.bool,
   disabled: PropTypes.bool,
-  multiple: PropTypes.bool,
+  hasCheckbox: PropTypes.bool,
   onSelectItem: PropTypes.func,
   value: PropTypes.oneOfType([
     PropTypes.object,

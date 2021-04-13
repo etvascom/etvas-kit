@@ -225,7 +225,7 @@ const Dropdown = ({
                 ? cloneElement(child, {
                     onSelectItem,
                     isSelected: isItemSelected(child.props.value),
-                    multiple
+                    hasCheckbox: multiple
                   })
                 : null
             )}
