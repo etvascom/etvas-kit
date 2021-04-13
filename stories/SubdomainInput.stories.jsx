@@ -6,13 +6,25 @@ export default {
   component: SubdomainInput
 }
 
-const SubdomainInputHelper = (props) => {
+const SubdomainInputHelper = props => {
   const [value, setValue] = useState('')
 
   const handleChange = e => setValue(e.target.value)
-  return <SubdomainInput value={value} onChange={handleChange} {...props}/>
+  return <SubdomainInput value={value} onChange={handleChange} {...props} />
 }
 
-export const Default = () => <SubdomainInputHelper id='default_id' suffix='.etvas.com'/>
-export const Placeholder = () => <SubdomainInputHelper id='default_id' suffix='.etvas.com' placeholder='customplaceholder'/>
-
+export const Default = () => (
+  <SubdomainInputHelper
+    label='Please enter subdomain'
+    id='default_id'
+    suffix='.etvas.com'
+  />
+)
+export const Placeholder = () => (
+  <SubdomainInputHelper
+    id='default_id'
+    suffix='.etvas.com'
+    label='Your custom subdomain'
+    placeholder='my-application'
+  />
+)
