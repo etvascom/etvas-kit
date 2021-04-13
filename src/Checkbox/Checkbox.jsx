@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Flex from '@ivoryio/kogaio/Responsive/Flex'
 
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
@@ -35,11 +36,13 @@ export const Checkbox = ({
 
   return (
     <StyledLabel htmlFor={id} {...props}>
-      <Icon
-        color={isChecked ? color : 'uncheckedCheckbox'}
-        size={size}
-        name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
-      />
+      <Flex alignItems='center' justifyContent='center'>
+        <Icon
+          color={isChecked ? color : 'uncheckedCheckbox'}
+          size={size}
+          name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
+        />
+      </Flex>
       <input
         type='checkbox'
         id={id}
@@ -61,7 +64,8 @@ const StyledLabel = styled.label(({ pointerEvents }) =>
   css({
     display: 'flex',
     userSelect: 'none',
-    pointerEvents
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
   })
 )
 
