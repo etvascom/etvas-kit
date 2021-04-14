@@ -17,7 +17,7 @@ export const ErrorDisplay = ({ name, type }) => {
 
   return (
     <Flex alignItems='center' justifyContent='flex-start'>
-      <Icon name='alertCircle' color='error' size='12px' />
+      <Icon name='alertCircle' color='error' size='small' />
       <Typography variant='textSmall' color='error' ml={2}>
         {meta.error}
       </Typography>

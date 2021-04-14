@@ -16,17 +16,22 @@ export const DropdownField = ({
 }) => {
   const [field, meta, helpers] = useField(props)
 
-  const handleChange = useCallback(v => helpers.setValue(v), [helpers])
+  const handleChange = useCallback(value => helpers.setValue(value), [helpers])
 
-  const selectedOption = useMemo(
-    () =>
-      options.find(option => field.value === option[optionAttributes.value]),
-    [field, options, optionAttributes]
-  )
-  const selectedLabel = selectedOption
-    ? selectedOption[optionAttributes.label]
-    : undefined
-  const selectedValue = selectedOption
+  const selectedOption = useMemo(() => {
+    if (multiple) {
+      const values = field.value ?? []
+      return options.filter(option => values.includes(option.id))
+    }
+
+    return options.find(
+      option => field.value === option[optionAttributes.value]
+    )
+  }, [field, options, optionAttributes, multiple])
+
+  const selectedValue = multiple
+    ? field.value
+    : selectedOption
     ? selectedOption[optionAttributes.value]
     : undefined
 
@@ -64,14 +69,13 @@ export const DropdownField = ({
 
   return (
     <Dropdown
-      {...props}
       onChange={handleChange}
       label={props.label}
       value={selectedValue}
       itemFilter={filterItem}
-      valueRender={selectedLabel}
       required={required}
       error={errorDisplay}
+      multiple={multiple}
       {...props}>
       {options.map(option => (
         <Dropdown.Option
@@ -92,7 +96,8 @@ DropdownField.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string
   }),
-  itemFilter: PropTypes.func
+  itemFilter: PropTypes.func,
+  multiple: PropTypes.bool
 }
 
 DropdownField.defaultProps = {

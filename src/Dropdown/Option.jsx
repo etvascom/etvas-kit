@@ -4,13 +4,18 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { typography } from '../Typography'
+import Flex from '@ivoryio/kogaio/Responsive/Flex'
+import Box from '@ivoryio/kogaio/Responsive/Box'
+import { Checkbox } from '../Checkbox'
+import sizes from '../assets/sizes'
 
 const DropdownItem = ({
   children,
   onSelectItem,
   disabled,
   isSelected,
-  value
+  value,
+  hasCheckbox
 }) => {
   const _handleClick = () => {
     if (!disabled) {
@@ -26,28 +31,43 @@ const DropdownItem = ({
     []
   )
 
+  const optionWithCheckbox = (
+    <Flex alignItems='center'>
+      <Box mr={3}>
+        <Checkbox
+          size='small'
+          checked={isSelected}
+          onChange={_handleClick}
+          onClick={e => e.stopPropagation()}
+        />
+      </Box>
+      {children}
+    </Flex>
+  )
+
   return (
     <Option
       role='option'
       onClick={_handleClick}
       selected={isSelected}
-      touch={hasTouch}>
-      {children}
+      touch={hasTouch}
+      hasCheckbox={hasCheckbox}>
+      {hasCheckbox ? optionWithCheckbox : children}
     </Option>
   )
 }
 
-const Option = styled.div(
+const Option = styled(Flex)(
   css({
     ...typography.labelSmall,
     padding: 3,
     appearance: 'none',
     backgroundColor: 'transparent',
-    display: 'block',
     width: '100%',
     textAlign: 'left',
     border: 'none',
-    outline: 'none'
+    outline: 'none',
+    height: sizes.inputHeight
   }),
   ({ touch }) =>
     !touch
@@ -57,8 +77,8 @@ const Option = styled.div(
           }
         })
       : null,
-  ({ selected }) =>
-    selected
+  ({ selected, hasCheckbox }) =>
+    selected && !hasCheckbox
       ? css({
           backgroundColor: 'brand',
           color: 'white',
@@ -73,6 +93,7 @@ DropdownItem.propTypes = {
   children: PropTypes.node,
   isSelected: PropTypes.bool,
   disabled: PropTypes.bool,
+  hasCheckbox: PropTypes.bool,
   onSelectItem: PropTypes.func,
   value: PropTypes.oneOfType([
     PropTypes.object,
@@ -83,7 +104,8 @@ DropdownItem.propTypes = {
 
 DropdownItem.defaultProps = {
   disabled: false,
-  isSelected: false
+  isSelected: false,
+  checkbox: false
 }
 
 export default DropdownItem
