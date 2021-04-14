@@ -60,7 +60,7 @@ const DropdownItem = ({
 const Option = styled(Flex)(
   css({
     ...typography.labelSmall,
-    paddingLeft: 3,
+    padding: 3,
     appearance: 'none',
     backgroundColor: 'transparent',
     width: '100%',

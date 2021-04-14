@@ -139,6 +139,14 @@ export const SimpleForm = () => (
   </Form>
 )
 
+const renderMultipleSelectLabel = values => {
+  const selected = optionstest.filter(opt => values.includes(opt.value))
+  return `${selected
+    .slice(0, 2)
+    .map(opt => opt.label)
+    .join(', ')}${selected.length > 2 ? ` + ${selected.length - 2} more` : ''}`
+}
+
 export const DropdownForm = () => (
   <Form
     onSubmit={action('submit')}
@@ -146,6 +154,7 @@ export const DropdownForm = () => (
     validate={formValidate}>
     <Typography variant='titleSmall'>Cars</Typography>
     <DropdownField
+      valueRender={renderMultipleSelectLabel}
       multiple
       options={optionstest}
       name='cars'
@@ -262,11 +271,6 @@ const optionstest = [
     value: '4dbc2cb9-9b36-45a9-9f3d-87ff239a73d5'
   },
   {
-    id: 20,
-    label: 'Dodge',
-    value: '4c2dd01e-6c1d-43f4-b7ac-f91cb01a7e11'
-  },
-  {
     id: 21,
     label: 'Hyundai',
     value: '88470a05-d41c-4835-a0f0-38ac5714a870'
@@ -332,19 +336,9 @@ const optionstest = [
     value: '8de1b098-7405-43c8-aceb-04cd7aae638c'
   },
   {
-    id: 34,
-    label: 'Dodge',
-    value: '4ad0dd1a-9aa0-406e-b7f4-85a8c2b3ddb3'
-  },
-  {
     id: 35,
     label: 'Oldsmobile',
     value: 'd20a1cfb-ee5e-4ec4-8470-99a1194acf89'
-  },
-  {
-    id: 36,
-    label: 'Dodge',
-    value: 'c706bb1a-d92e-4af6-899f-80696cd37269'
   },
   {
     id: 37,

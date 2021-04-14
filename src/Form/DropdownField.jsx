@@ -16,22 +16,7 @@ export const DropdownField = ({
 }) => {
   const [field, meta, helpers] = useField(props)
 
-  const handleChange = useCallback(
-    (option, v) => {
-      if (multiple) {
-        const value = [...field.value]
-        const idx = value.indexOf(option)
-        if (idx >= 0) {
-          value.splice(idx, 1)
-        } else {
-          value.push(option)
-        }
-        return helpers.setValue(value)
-      }
-      return helpers.setValue(option)
-    },
-    [helpers, field.value, multiple]
-  )
+  const handleChange = useCallback(value => helpers.setValue(value), [helpers])
 
   const selectedOption = useMemo(() => {
     if (multiple) {
@@ -43,12 +28,6 @@ export const DropdownField = ({
       option => field.value === option[optionAttributes.value]
     )
   }, [field, options, optionAttributes, multiple])
-
-  const selectedLabel = multiple
-    ? v => renderValueForMultipleOptions(v)
-    : selectedOption
-    ? selectedOption[optionAttributes.label]
-    : undefined
 
   const selectedValue = multiple
     ? field.value
@@ -94,7 +73,6 @@ export const DropdownField = ({
       label={props.label}
       value={selectedValue}
       itemFilter={filterItem}
-      valueRender={selectedLabel}
       required={required}
       error={errorDisplay}
       multiple={multiple}
@@ -109,11 +87,6 @@ export const DropdownField = ({
     </Dropdown>
   )
 }
-
-const renderValueForMultipleOptions = options =>
-  options.length <= 2
-    ? options.slice(0, 2).join(', ')
-    : `${options.slice(0, 2).join(', ')} + ${options.length - 2} more`
 
 DropdownField.propTypes = {
   ...fieldShape,

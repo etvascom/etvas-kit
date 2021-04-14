@@ -124,14 +124,14 @@ const Dropdown = ({
 
   const onSelectItem = option => {
     if (multiple) {
-      const newOptions = isEmpty ? [] : [...value]
-      const idx = newOptions.indexOf(option)
+      const newValues = isEmpty ? [] : [...value]
+      const idx = newValues.indexOf(option)
       if (idx >= 0) {
-        newOptions.splice(idx, 1)
+        newValues.splice(idx, 1)
       } else {
-        newOptions.push(option)
+        newValues.push(option)
       }
-      onChange(option, newOptions)
+      onChange(newValues)
     } else {
       onChange(option)
       setTimeout(() => {
@@ -405,7 +405,7 @@ Dropdown.defaultProps = {
   multiple: false,
   required: false,
   value: '',
-  valueRender: v => v,
+  valueRender: v => (Array.isArray(v) ? v.join(', ') : v),
   itemSelected: (value, v) =>
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
   itemFilter: (search, v) =>
