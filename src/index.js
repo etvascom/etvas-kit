@@ -28,5 +28,7 @@ export * from './Steps'
 export * from './Chip'
 export * from './Layout'
 
+export * from './SubdomainInput'
+
 export { styled }
 export * from '@ivoryio/kogaio'

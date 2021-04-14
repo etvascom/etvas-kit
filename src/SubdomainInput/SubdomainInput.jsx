@@ -1,17 +1,14 @@
-import React, { forwardRef, useMemo, useRef } from 'react'
+import React, { useState, forwardRef, useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
-import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Flex } from '@ivoryio/kogaio'
-
-import { default as variants } from '../Input/Input.variants'
+import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { SubLabel } from '../Input/SubLabel'
-import theme from '../assets/theme'
+import { default as variants } from '../Input/Input.variants'
 
 export const SubdomainInput = forwardRef(
   (
@@ -23,8 +20,6 @@ export const SubdomainInput = forwardRef(
       disabled,
       error,
       warning,
-      icLeft,
-      icRight,
       id,
       label,
       name,
@@ -46,6 +41,9 @@ export const SubdomainInput = forwardRef(
     ref
   ) => {
     const inputRef = useRef()
+    const [isFocused, setFocused] = useState(false)
+    const valueRef = useRef(value)
+
     const inputVariant = useMemo(() => {
       if (disabled || loading) return 'disabled'
       else if (error) return 'error'
@@ -54,13 +52,55 @@ export const SubdomainInput = forwardRef(
       return variant
     }, [loading, disabled, error, warning, valid, variant])
 
+    const focusInput = () => (ref || inputRef).current.focus()
+
+    const onInputFocus = e => {
+      setFocused(true)
+    }
+
+    const onInputBlur = e => {
+      setFocused(false)
+    }
+
+    const wrapperStyle = useMemo(() => {
+      const ws = {
+        brd: 'inputBorderGray',
+        bg: 'white',
+        fg: 'textInputActive'
+      }
+      if (disabled) {
+        ws.bg = 'backgroundGray'
+      } else {
+        if (error) {
+          ws.brd = 'error'
+        }
+        if (warning) {
+          ws.brd = 'warning'
+        }
+      }
+      if (tinted && !disabled && !error && !warning) {
+        ws.brd = 'transparent'
+      }
+
+      if (isFocused && !disabled && !error && !warning) {
+        ws.brd = 'brandLight'
+      }
+      return ws
+    }, [disabled, error, tinted, warning, isFocused])
+
+    const hasValue = useMemo(() => !!value, [value])
+
+    const handleInput = event => {
+      event.target.value = event.target.innerText
+      onChange && onChange(event)
+    }
+
     const currentIcRight = useMemo(() => {
       if (loading) return 'loading'
       else if (error || warning) return 'alertCircle'
-      else if (valid || !icRight) return 'check'
-
-      return icRight
-    }, [loading, error, warning, valid, icRight])
+      else if (valid) return 'check'
+      return 'check'
+    }, [loading, error, warning, valid])
 
     const currentIcRightColor = useMemo(() => {
       if (loading) return 'brand'
@@ -72,29 +112,8 @@ export const SubdomainInput = forwardRef(
       return 'inputIcon'
     }, [loading, error, warning, valid, disabled])
 
-    const icStateIsNotIconToggle = () => type !== 'password' || error || loading
-
-    const getTextWidth = (text, font) => {
-      const canvas =
-        getTextWidth.canvas ||
-        (getTextWidth.canvas = document.createElement('canvas'))
-      const context = canvas.getContext('2d')
-      context.font = font
-      const metrics = context.measureText(text)
-      return metrics.width
-    }
-
-    const inputWidth = Math.ceil(
-      getTextWidth(
-        value || placeholder,
-        `${theme.fontSizes[1]} ${theme.fonts.primary}`
-      )
-    )
-
-    const focusInput = () => (ref || inputRef).current.focus()
-
     return (
-      <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <Flex flexDirection='column' width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
@@ -104,56 +123,40 @@ export const SubdomainInput = forwardRef(
             {label} {required ? '*' : ''}
           </Typography>
         ) : null}
-        <Flex
+        <Wrapper
           alignItems='center'
-          position='relative'
-          width='100%'
-          onClick={focusInput}>
-          <StyledInputWrapper
-            warning={warning}
-            error={error}
-            disabled={disabled}
-            tinted={tinted}
-            hasLabel={label}
-            hasIcLeft={icLeft}
-            hasIcRight={icRight}
-            variant={inputVariant}
-            {...rest}>
-            <Typography color='textInputPlaceholder' variant='labelSmall'>
-              {prefix}
-            </Typography>
-            <StyledInput
-              autoComplete={autoComplete}
-              autoFocus={autoFocus}
-              ariaDisabled={readOnly || disabled}
-              id={id}
-              name={name}
-              onChange={onChange}
-              placeholder={readOnly ? '' : placeholder}
-              placeholderColor={value === '' ? 'textInputPlaceholder' : 'text'}
-              readOnly={readOnly}
-              ref={ref || inputRef}
-              required={required}
-              width={inputWidth}
-              type={type}
-              value={value}
-            />
-            <Typography color='textInputPlaceholder' variant='labelSmall'>
-              {suffix}
-            </Typography>
-          </StyledInputWrapper>
-          {icLeft ? (
-            <Icon
-              size='small'
-              left={2}
-              name={icLeft}
-              pointerEvents='none'
-              position='absolute'
-              tabIndex='-1'
-            />
-          ) : null}
-          <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icStateIsNotIconToggle() && currentIcRight && (
+          width={1}
+          onClick={focusInput}
+          variant={variant}
+          {...wrapperStyle}>
+          <Typography color='textInputPlaceholder' variant='labelSmall'>
+            {prefix}
+          </Typography>
+          <StyledInput
+            autoComplete={autoComplete}
+            autoFocus={autoFocus}
+            ariaDisabled={readOnly || disabled}
+            id={id}
+            name={name}
+            tabIndex='0'
+            onInput={handleInput}
+            ref={ref || inputRef}
+            required={required}
+            contentEditable='plaintext-only'
+            onFocus={onInputFocus}
+            onBlur={onInputBlur}
+            suppressContentEditableWarning={true}>
+            {valueRef.current}
+          </StyledInput>
+          <Suffix color='textInputPlaceholder' variant='labelSmall'>
+            {!hasValue && placeholder}
+            {suffix}
+          </Suffix>
+          <StatusIcon
+            position='absolute'
+            alignItems='center'
+            justifyContent='center'>
+            {currentIcRight ? (
               <Icon
                 mr={5}
                 size='small'
@@ -161,64 +164,63 @@ export const SubdomainInput = forwardRef(
                 color={currentIcRightColor}
                 rotate={currentIcRight === 'loading'}
               />
-            )}
-          </Flex>
-        </Flex>
+            ) : null}
+          </StatusIcon>
+        </Wrapper>
         <SubLabel
           content={error || warning || subLabel}
           variant={inputVariant}
           preserveSpace={!noBottomSpace}
         />
-      </StyledFlex>
+      </Flex>
     )
   }
 )
 
-const StyledFlex = styled(Flex)`
-  &:focus-within {
-    label {
-      color: ${themed('colors.textInputFocused')};
-    }
-  }
+const Suffix = styled(Typography)`
+  white-space: nowrap;
 `
 
-const StyledInputWrapper = styled(Flex)(
+const Wrapper = styled(Flex)(
   css({
-    ...typography.labelSmall,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    position: 'relative',
+    cursor: 'text',
     backgroundColor: 'white'
   }),
   variant({ variants }),
-  ({ tinted, error, warn, disabled }) => ({
-    backgroundColor: tinted && !(error || warn || disabled) && 'white',
-    borderColor: tinted && !(error || warn || disabled) && 'white'
-  })
+  ({ brd, bg, fg }) =>
+    css({
+      borderColor: brd,
+      backgroundColor: bg,
+      color: fg
+    })
 )
 
-const StyledInput = styled.input(
+const StyledInput = styled.div(
   css({
     ...typography.labelSmall,
     backgroundColor: 'transparent',
     outline: 'none',
     border: 'none',
-    padding: 0
-  }),
-  ({ placeholderColor }) =>
-    css({
-      '::placeholder': {
-        color: placeholderColor
-      }
-    }),
-  ({ width }) =>
-    css({
-      width
-    })
+    padding: 0,
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    minWidth: '1px',
+    appearance: 'none'
+  })
 )
 
-const { icLeft, passwordView, ...rest } = Input.propTypes
+const StatusIcon = styled(Flex)(
+  css({
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: '36px'
+  })
+)
+
 SubdomainInput.propTypes = {
-  ...rest,
+  ...Input.propTypes,
   prefix: PropTypes.string,
   suffix: PropTypes.string
 }
@@ -227,9 +229,7 @@ SubdomainInput.defaultProps = {
   ...Input.defaultProps,
   variant: 'default',
   prefix: 'https://',
-  suffix: '',
-  placeholder: 'subdomain'
+  suffix: ''
 }
 
 SubdomainInput.displayName = 'SubdomainInput'
-/** @component */
