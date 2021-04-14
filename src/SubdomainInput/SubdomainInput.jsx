@@ -57,7 +57,7 @@ export const SubdomainInput = forwardRef(
     const currentIcRight = useMemo(() => {
       if (loading) return 'loading'
       else if (error || warning) return 'alertCircle'
-      else if (valid || !icRight) return 'checkMark'
+      else if (valid || !icRight) return 'check'
 
       return icRight
     }, [loading, error, warning, valid, icRight])

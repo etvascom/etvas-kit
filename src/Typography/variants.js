@@ -67,7 +67,8 @@ export default {
     fontWeight: '500',
     fontSize: 1,
     letterSpacing: '0.3px',
-    lineHeight: '16px'
+    lineHeight: '16px',
+    marginBottom: '4px'
   },
   labelSmallBold: {
     fontFamily: 'primary',

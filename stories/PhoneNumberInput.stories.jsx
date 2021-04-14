@@ -1,5 +1,6 @@
 import { PhoneNumberInput } from '../src/PhoneNumberInput'
 import React, { useState } from 'react'
+import { Card } from '../src'
 
 export default {
   title: 'Demo/PhoneNumberInput',
@@ -7,7 +8,7 @@ export default {
   decorators: [
     Story => (
       <div style={{ padding: '15rem' }}>
-        <Story/>
+        <Story />
       </div>
     )
   ]
@@ -91,5 +92,47 @@ export const DropUp = () => {
         disabled
       />
     </>
+  )
+}
+
+export const TintedPhoneNumberInput = () => {
+  const [value, setValue] = useState('+37312345678')
+  const onChange = e => setValue(e.target.value)
+
+  return (
+    <Card width='400px' height='504px' variant={'tinted'}>
+      <PhoneNumberInput
+        id='dropdown_id'
+        value={value}
+        onChange={onChange}
+        tinted={true}
+        label='Phone Number Down'
+        valid
+      />
+      <PhoneNumberInput
+        id='dropdown_id'
+        value={value}
+        onChange={onChange}
+        tinted={true}
+        label='Phone Number Down'
+        warning
+      />
+      <PhoneNumberInput
+        id='dropdown_id'
+        value={value}
+        onChange={onChange}
+        tinted={true}
+        label='Phone Number Down'
+        error
+      />
+      <PhoneNumberInput
+        id='dropdown_id'
+        value={value}
+        onChange={onChange}
+        tinted={true}
+        label='Phone Number Down'
+        disabled
+      />
+    </Card>
   )
 }
