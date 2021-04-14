@@ -105,8 +105,7 @@ export const Input = forwardRef(
             as='label'
             htmlFor={id}
             variant='inputLabel'
-            width='fit-content'
-            mb={1}>
+            width='fit-content'>
             {label} {required ? '*' : ''}
           </Typography>
         ) : null}

@@ -10,12 +10,11 @@ export default {
     border: 'none',
     outline: 'none',
     color: 'text',
-    maxHeight:'100%'
+    maxHeight: '100%'
   },
   phoneNumberWrapper: {
     ...typography.labelSmall,
     height: sizes.inputHeight,
-    padding: 3,
     display: 'flex',
     width: '100%',
     backgroundColor: 'backgroundLightGray',
@@ -40,7 +39,8 @@ export default {
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'inputBorderGray',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    zIndex: 10
   },
   dropdownItem: {
     justifyContent: 'flex-start',

@@ -6,10 +6,15 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
+import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Input } from '../Input'
 import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
-import { prefixLengthOrderedStates, statesEu, statesWorld } from './world-states'
+import {
+  prefixLengthOrderedStates,
+  statesEu,
+  statesWorld
+} from './world-states'
 import { md } from '../utils'
 import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
@@ -41,6 +46,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     variant,
     subLabel,
     loading,
+    tinted,
     ...rest
   } = props
   const inputRef = useRef()
@@ -72,7 +78,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   const currentIcRight = useMemo(() => {
     if (loading) return 'loading'
     else if (error || warning) return 'alertCircle'
-    else if (valid || !icRight) return 'checkMark'
+    else if (valid || !icRight) return 'check'
 
     return icRight
   }, [loading, error, warning, valid])
@@ -120,7 +126,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     onChange(event)
   }
   return (
-    <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+    <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
       {label ? (
         <Typography
           as='label'
@@ -131,16 +137,20 @@ const PhoneNumberInput = forwardRef((props, ref) => {
         </Typography>
       ) : null}
       <Flex alignItems='center' position='relative' width='100%'>
-        <StyledPhoneNumberWrapper variant={inputVariant}>
+        <StyledPhoneNumberWrapper
+          tinted={tinted}
+          error={error}
+          disabled={disabled}
+          variant={inputVariant}>
           <PrefixDropdownTrigger
             ref={wrapperRef}
             onClick={handleToggleOpenDropdown}>
-            <Space mr={2}>
+            <Space mr={3}>
               <span
                 className={`flag-icon flag-icon-${country.code.toLowerCase()}`}
               />
-              <Typography variant='labelSmall'>({country.prefix})</Typography>
             </Space>
+            <Typography variant='labelSmall'>({country.prefix})</Typography>
           </PrefixDropdownTrigger>
           <StyledPhoneNumberInput
             autoComplete={autoComplete}
@@ -159,6 +169,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
             value={displayValue}
             variant={inputVariant}
             pattern={pattern}
+            disabled={disabled}
             {...rest}
           />
         </StyledPhoneNumberWrapper>
@@ -177,9 +188,14 @@ const PhoneNumberInput = forwardRef((props, ref) => {
           <StyledDropdown dropdownSize={dropdownSize} dropUp={dropUp}>
             {displayItems(statesEu, 'eu-states', handleSelectCountry, country)}
             <Flex alignItems={'center'} width={'100%'} minHeight={'1em'}>
-              <StyledLine/>
+              <StyledLine />
             </Flex>
-            {displayItems(statesWorld, 'world-states', handleSelectCountry, country)}
+            {displayItems(
+              statesWorld,
+              'world-states',
+              handleSelectCountry,
+              country
+            )}
           </StyledDropdown>
         )}
       </Flex>
@@ -188,7 +204,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
         variant={inputVariant}
         preserveSpace={!noBottomSpace}
       />
-    </Flex>
+    </StyledFlex>
   )
 })
 const displayItems = (states, label, onClick, country) =>
@@ -196,10 +212,9 @@ const displayItems = (states, label, onClick, country) =>
     <StyledDropdownItem
       key={`${label}-${state.code}`}
       isSelected={state.code === country.code}
-      onClick={onClick(state)}
-    >
+      onClick={onClick(state)}>
       <Space mr={2}>
-        <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`}/>
+        <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`} />
       </Space>
       <PrefixTitle>
         {state.prefix} {state.name}
@@ -209,12 +224,17 @@ const displayItems = (states, label, onClick, country) =>
 
 const StyledPhoneNumberWrapper = styled.div(
   css(styles.phoneNumberWrapper),
-  variant({ variants })
+  variant({ variants }),
+  ({ tinted, error, disabled }) => ({
+    backgroundColor: tinted && !(error || disabled) && 'white',
+    borderColor: tinted && !(error || disabled) && 'white'
+  })
 )
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger))
 const StyledPhoneNumberInput = styled.input(
   css(styles.phoneNumberInput),
-  variant({ variants })
+  variant({ variants }),
+  `border: none;`
 )
 
 const calcDropdownHeight = (height, size) => `${parseInt(height, 10) * size}px`
@@ -224,19 +244,19 @@ const StyledDropdown = styled(Flex)(
   ({ dropUp }) =>
     dropUp
       ? css({
-        top: 'auto',
-        bottom: 10,
-        borderTopLeftRadius: RADII[8],
-        borderTopRightRadius: RADII[8],
-        boxShadow: SHADOWS.phoneNumberInputUp
-      })
+          top: 'auto',
+          bottom: 10,
+          borderTopLeftRadius: RADII[8],
+          borderTopRightRadius: RADII[8],
+          boxShadow: SHADOWS.phoneNumberInputUp
+        })
       : css({
-        bottom: 'auto',
-        top: 10,
-        borderBottomRightRadius: RADII[8],
-        borderBottomLeftRadius: RADII[8],
-        boxShadow: SHADOWS.phoneNumberInputDown
-      }),
+          bottom: 'auto',
+          top: 10,
+          borderBottomRightRadius: RADII[8],
+          borderBottomLeftRadius: RADII[8],
+          boxShadow: SHADOWS.phoneNumberInputDown
+        }),
   ({ theme, dropdownSize }) =>
     css({
       height: `${calcDropdownHeight(
@@ -248,20 +268,30 @@ const StyledDropdown = styled(Flex)(
       })
     })
 )
-const StyledDropdownItem = styled(Flex)(css(styles.dropdownItem), ({ theme, isSelected }) =>
-  css({
-    backgroundColor: isSelected ? 'brand' : 'backgroundLightGray',
-    ':hover': {
-      backgroundColor: isSelected ? 'brand' : 'brandLighter'
-    },
-    color: isSelected ? 'white' : 'text',
-    ...md(theme)({
-      minHeight: sizes.dropdownItemHeight
+const StyledDropdownItem = styled(Flex)(
+  css(styles.dropdownItem),
+  ({ theme, isSelected }) =>
+    css({
+      backgroundColor: isSelected ? 'brand' : 'backgroundLightGray',
+      ':hover': {
+        backgroundColor: isSelected ? 'brand' : 'brandLighter'
+      },
+      color: isSelected ? 'white' : 'text',
+      ...md(theme)({
+        minHeight: sizes.dropdownItemHeight
+      })
     })
-  })
 )
 const PrefixTitle = styled.div(css(styles.prefixTitle))
 const StyledLine = styled.div(css(styles.line))
+
+const StyledFlex = styled(Flex)`
+  &:focus-within {
+    label {
+      color: ${themed('colors.textInputFocused')};
+    }
+  }
+`
 
 const { icLeft, icRight, passwordView, ...rest } = Input.propTypes
 PhoneNumberInput.propTypes = {

@@ -10,6 +10,7 @@ import {
   DropdownField,
   ErrorDisplay,
   TextField,
+  PhoneNumberInputField,
   TextAreaField
 } from '../src'
 
@@ -25,7 +26,8 @@ const values = {
   password: '',
   movie: [],
   comments: '',
-  cars: []
+  cars: [],
+  phone: ''
 }
 
 const movieOptions = [
@@ -58,16 +60,25 @@ const formValidate = values => {
   if (!values.maiden) {
     errors.maiden = 'Required'
   }
+  if (!values.phone) {
+    errors.phone = 'Required'
+  }
 
   if (values) return errors
 }
-
 export const SimpleForm = () => (
   <Form
     onSubmit={action('submit')}
     initialValues={values}
     validate={formValidate}>
     <Typography variant='titleSmall'>Basic info</Typography>
+    <PhoneNumberInputField
+      name='phone'
+      id='phone-test'
+      label='Phone Number'
+      placeholder='xxx-xxx-xxx'
+      validate={minLength(5)}
+    />
     <TextField
       name='name-no-validation'
       id='name-no-validation'
