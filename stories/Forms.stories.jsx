@@ -151,7 +151,9 @@ export const SimpleForm = () => (
 )
 
 const renderMultipleSelectLabel = values => {
-  const selected = optionstest.filter(opt => values.includes(opt.value))
+  const selected = values.map(opt =>
+    optionstest.find(opt2 => opt2.value === opt)
+  )
   return `${selected
     .slice(0, 2)
     .map(opt => opt.label)

@@ -81,7 +81,7 @@ const Dropdown = ({
     id
   ])
 
-  const displayValue = useMemo(() => {
+  const displayValue = () => {
     if (!value) {
       return ''
     }
@@ -89,7 +89,7 @@ const Dropdown = ({
       return valueRender
     }
     return valueRender(value)
-  }, [value, valueRender])
+  }
 
   const toggleDropdown = () => {
     if (disabled) {
@@ -197,7 +197,7 @@ const Dropdown = ({
           error={error}
           tinted={tinted}
           onClick={toggleDropdown}>
-          {isEmpty ? placeholder : displayValue}
+          {isEmpty ? placeholder : displayValue()}
         </Toggler>
         <DropdownList
           collapsed={isCollapsed}
