@@ -20,7 +20,7 @@ export const DropdownField = ({
     (option, v) => {
       if (multiple) {
         const value = [...field.value]
-        const idx = value.indexOf(option.id ?? option)
+        const idx = value.indexOf(option)
         if (idx >= 0) {
           value.splice(idx, 1)
         } else {
@@ -28,7 +28,7 @@ export const DropdownField = ({
         }
         return helpers.setValue(value)
       }
-      return helpers.setValue(v)
+      return helpers.setValue(option)
     },
     [helpers, field.value, multiple]
   )
