@@ -78,12 +78,11 @@ export const SubdomainInput = forwardRef(
           ws.brd = 'warning'
         }
       }
-      if (tinted) {
+      if (tinted && !disabled && !error && !warning) {
         ws.brd = 'transparent'
-        ws.bg = 'backgroundGray'
       }
 
-      if (!disabled && isFocused) {
+      if (isFocused && !disabled && !error && !warning) {
         ws.brd = 'brandLight'
       }
       return ws
