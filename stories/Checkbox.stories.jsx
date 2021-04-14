@@ -1,6 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { Checkbox } from '../src'
+import { Checkbox, Box } from '../src'
 
 export default {
   title: 'Demo/Checkbox',
@@ -19,6 +19,12 @@ export const PresetState = () => (
   <Checkbox checked onChange={action('checkbox-change')} />
 )
 
-export const CustomValue = () => (
-  <Checkbox value='human' label='Human' onChange={action('checkbox-change')} />
+export const WrappedLabel = () => (
+  <Box width='250px'>
+    <Checkbox
+      size='large'
+      label='Quisque vitae nisi id massa consectetur feugiat at ac orci. Aliquam volutpat urna in felis maximus viverra. Curabitur congue nunc eros, eu hendrerit nisl sodales sed. Donec ultrices ut lectus at gravida. Nunc id tincidunt nisl. Fusce maximus sapien vel neque ullamcorper scelerisque. Suspendisse potenti. Proin ut lacus nisi. Proin vehicula pharetra massa nec consectetur.'
+      onChange={action('checkbox-change')}
+    />
+  </Box>
 )

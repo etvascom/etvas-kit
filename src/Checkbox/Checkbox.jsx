@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Flex from '@ivoryio/kogaio/Responsive/Flex'
 
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
@@ -11,42 +12,47 @@ export const Checkbox = ({
   label,
   color,
   checked,
-  value,
   name,
   id,
   onChange,
-  size
+  size,
+  variant,
+  ...props
 }) => {
-  const [isChecked, setIsChecked] = useState(!!checked)
+  const [isChecked, setChecked] = useState(!!checked)
+
+  useEffect(() => {
+    setChecked(!!checked)
+  }, [checked])
 
   const handleChange = useCallback(
-    ev => {
-      setIsChecked(ev.target.checked)
-      onChange && onChange(ev)
+    event => {
+      const { checked: nativeChecked } = event.target
+      setChecked(nativeChecked)
+      onChange && onChange(event)
     },
-    [setIsChecked, onChange]
+    [setChecked, onChange]
   )
 
-  useEffect(() => setIsChecked(checked), [checked, setIsChecked])
-
   return (
-    <StyledLabel htmlFor={id}>
-      <Icon
-        color={isChecked ? color : 'uncheckedCheckbox'}
-        size={size}
-        name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
-      />
+    <StyledLabel htmlFor={id} {...props}>
+      <Flex alignItems='center' justifyContent='center'>
+        <Icon
+          color={isChecked ? color : 'uncheckedCheckbox'}
+          size={size}
+          name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
+        />
+      </Flex>
       <input
         type='checkbox'
         id={id}
-        value={value}
         name={name}
         checked={isChecked}
         style={{ display: 'none' }}
         onChange={handleChange}
       />
       {label && (
-        <Typography variant='labelSmall' ml={3}>
+        <Typography variant={variant} ml={2} pt='0.2em'>
           {label}
         </Typography>
       )}
@@ -54,12 +60,12 @@ export const Checkbox = ({
   )
 }
 
-const StyledLabel = styled.label(
+const StyledLabel = styled.label(({ pointerEvents }) =>
   css({
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    minHeight: '40px'
+    userSelect: 'none',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
   })
 )
 
@@ -70,12 +76,12 @@ Checkbox.propTypes = {
   id: PropTypes.string,
   onChange: PropTypes.func,
   checked: PropTypes.bool,
-  value: PropTypes.any,
-  size: PropTypes.string
+  size: PropTypes.string,
+  variant: PropTypes.string
 }
 
 Checkbox.defaultProps = {
-  color: 'accent',
-  value: 'on',
-  size: 'medium'
+  color: 'brand',
+  size: 'medium',
+  variant: 'labelSmall'
 }

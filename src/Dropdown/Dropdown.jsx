@@ -16,6 +16,7 @@ import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
 import Option from './Option'
 import Heading from './Heading'
+import sizes from '../assets/sizes'
 
 const Dropdown = ({
   disabled,
@@ -123,14 +124,14 @@ const Dropdown = ({
 
   const onSelectItem = option => {
     if (multiple) {
-      const old = isEmpty ? [] : [...value]
-      const idx = old.indexOf(option)
+      const newValues = isEmpty ? [] : [...value]
+      const idx = newValues.indexOf(option)
       if (idx >= 0) {
-        old.splice(idx, 1)
+        newValues.splice(idx, 1)
       } else {
-        old.push(option)
+        newValues.push(option)
       }
-      onChange(old)
+      onChange(newValues)
     } else {
       onChange(option)
       setTimeout(() => {
@@ -165,8 +166,7 @@ const Dropdown = ({
           as='label'
           htmlFor={cId}
           variant='inputLabel'
-          width='fit-content'
-          mb={1}>
+          width='fit-content'>
           {label} {required ? '*' : ''}
         </Typography>
       ) : null}
@@ -223,7 +223,8 @@ const Dropdown = ({
               isValidElement(child)
                 ? cloneElement(child, {
                     onSelectItem,
-                    isSelected: isItemSelected(child.props.value)
+                    isSelected: isItemSelected(child.props.value),
+                    hasCheckbox: multiple
                   })
                 : null
             )}
@@ -241,7 +242,7 @@ const Toggler = styled.button(
     appearance: 'none',
     textAlign: 'left',
     cursor: 'pointer',
-    padding: 3,
+    padding: 2,
     display: 'block',
     width: '100%',
     backgroundColor: 'backgroundLightGray',
@@ -250,6 +251,7 @@ const Toggler = styled.button(
     borderStyle: 'solid',
     borderColor: 'inputBorderGray',
     borderRadius: 3,
+    height: sizes.inputHeight,
     color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,
@@ -402,7 +404,7 @@ Dropdown.defaultProps = {
   multiple: false,
   required: false,
   value: '',
-  valueRender: v => v,
+  valueRender: v => (Array.isArray(v) ? v.join(', ') : v),
   itemSelected: (value, v) =>
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
   itemFilter: (search, v) =>
