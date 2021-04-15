@@ -288,7 +288,8 @@ const Toggler = styled.button(
           opacity: 0.5,
           color: 'textInputDisabled',
           cursor: 'forbidden',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          backgroundColor: 'backgroundGray'
         })
       : null,
   ({ isEmpty }) =>
