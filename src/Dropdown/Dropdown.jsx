@@ -159,8 +159,19 @@ const Dropdown = ({
 
   const isItemSelected = item => (!isEmpty ? itemSelected(value, item) : false)
 
+  const dropdownListStyle = useMemo(() => {
+    const ws = {
+      borderClr: 'inputBorderGray'
+    }
+
+    if (!isCollapsed && !disabled && !error) {
+      ws.borderClr = 'brandLight'
+    }
+    return ws
+  }, [disabled, error, isCollapsed])
+
   return (
-    <Flex flexDirection='column' hasLabel={label} width={1} {...props}>
+    <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
       {label ? (
         <Typography
           as='label'
@@ -206,7 +217,8 @@ const Dropdown = ({
           onMouseUp={decide}
           onTouchStart={clicked}
           onTouchMove={inhibit}
-          onTouchEnd={decide}>
+          onTouchEnd={decide}
+          {...dropdownListStyle}>
           {hasSearch ? (
             <SearchInput
               ref={searchField}
@@ -232,9 +244,13 @@ const Dropdown = ({
         </DropdownList>
       </DropdownWrapper>
       <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
-    </Flex>
+    </StyledFlex>
   )
 }
+
+const StyledFlex = styled(Flex)(
+  css({ '&:focus-within': { label: { color: 'textInputFocused' } } })
+)
 
 const Toggler = styled.button(
   css({
@@ -255,7 +271,8 @@ const Toggler = styled.button(
     color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,
-      borderStyle: 'solid'
+      borderStyle: 'solid',
+      borderColor: 'brandLight'
     }
   }),
   ({ error }) =>
@@ -271,24 +288,26 @@ const Toggler = styled.button(
           opacity: 0.5,
           color: 'textInputDisabled',
           cursor: 'forbidden',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          backgroundColor: 'backgroundGray'
         })
       : null,
   ({ isEmpty }) =>
     css({
       color: isEmpty ? 'textInputPlaceholder' : 'textInputActive'
     }),
+  ({ tinted, error, disabled }) => ({
+    backgroundColor: tinted && !(error || disabled) && 'white',
+    borderColor: tinted && !(error || disabled) && 'white'
+  }),
   ({ collapsed }) =>
     !collapsed
       ? css({
           borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0
+          borderBottomRightRadius: 0,
+          borderColor: 'brandLight'
         })
-      : null,
-  ({ tinted, error, disabled }) => ({
-    backgroundColor: tinted && !(error || disabled) && 'white',
-    borderColor: tinted && !(error || disabled) && 'white'
-  })
+      : null
 )
 
 const StyledIndicator = styled.button(
@@ -346,7 +365,13 @@ const DropdownList = styled.div(
     paddingBottom: 3,
     boxShadow: 'etvasCard'
   }),
-  ({ collapsed }) => css({ display: collapsed ? 'none' : 'block' })
+  ({ collapsed }) => css({ display: collapsed ? 'none' : 'block' }),
+  ({ borderClr }) =>
+    css({
+      borderLeftColor: borderClr,
+      borderRightColor: borderClr,
+      borderBottomColor: borderClr
+    })
 )
 
 const ScrollingList = styled.div(
