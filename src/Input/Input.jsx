@@ -45,6 +45,7 @@ export const Input = forwardRef(
       subLabel,
       loading,
       tinted,
+      showValidationCheck,
       ...rest
     },
     ref
@@ -106,7 +107,7 @@ export const Input = forwardRef(
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
-            {label} {required ? '*' : ''}
+            {label}
           </Typography>
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
@@ -144,13 +145,15 @@ export const Input = forwardRef(
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
             {icStateIsNotIconToggle() && currentIcRight ? (
-              <Icon
-                mr={5}
-                size='small'
-                name={currentIcRight}
-                color={currentIcRightColor}
-                rotate={currentIcRight === 'loading'}
-              />
+              currentIcRight === 'check' && !showValidationCheck ? null : (
+                <Icon
+                  mr={5}
+                  size='small'
+                  name={currentIcRight}
+                  color={currentIcRightColor}
+                  rotate={currentIcRight === 'loading'}
+                />
+              )
             ) : (
               <PasswordToggler
                 error={!!error}
@@ -243,7 +246,8 @@ Input.defaultProps = {
   type: 'text',
   value: '',
   tinted: false,
-  variant: 'default'
+  variant: 'default',
+  showValidationCheck: true
 }
 
 Input.displayName = 'Input'

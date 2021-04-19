@@ -90,6 +90,7 @@ export const SimpleForm = () => (
       id='name'
       label='Name'
       placeholder='e.g. John'
+      showValidationCheck={false}
       validate={minLength(3)}
     />
     <TextField

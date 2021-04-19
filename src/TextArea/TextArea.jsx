@@ -52,7 +52,7 @@ export const TextArea = forwardRef(
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
-            {label} {required ? '*' : ''}
+            {label}
           </Typography>
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>

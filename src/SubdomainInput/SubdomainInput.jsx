@@ -120,7 +120,7 @@ export const SubdomainInput = forwardRef(
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
-            {label} {required ? '*' : ''}
+            {label}
           </Typography>
         ) : null}
         <Wrapper
