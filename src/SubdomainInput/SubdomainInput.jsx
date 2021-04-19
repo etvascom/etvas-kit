@@ -192,7 +192,12 @@ const Wrapper = styled(Flex)(
     css({
       borderColor: brd,
       backgroundColor: bg,
-      color: fg
+      color: fg,
+      ':hover': {
+        borderColor: brd,
+        backgroundColor: bg,
+        color: fg
+      }
     })
 )
 
