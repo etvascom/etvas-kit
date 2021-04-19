@@ -13,11 +13,11 @@ import css from '@styled-system/css'
 import { Flex } from '@ivoryio/kogaio'
 
 import { Typography, typography } from '../Typography'
-import { ErrorMessage } from '../Input'
 import { Icon } from '../Icon'
 import Option from './Option'
 import Heading from './Heading'
 import sizes from '../assets/sizes'
+import { SubLabel } from '../Input/SubLabel'
 
 const Dropdown = ({
   disabled,
@@ -245,7 +245,11 @@ const Dropdown = ({
           </ScrollingList>
         </DropdownList>
       </DropdownWrapper>
-      <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+      <SubLabel
+        variant='error'
+        content={error}
+        preserveSpace={!noBottomSpace}
+      />
     </StyledFlex>
   )
 }
