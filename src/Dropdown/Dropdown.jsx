@@ -14,6 +14,7 @@ import { Flex } from '@ivoryio/kogaio'
 
 import { Typography, typography } from '../Typography'
 import { ErrorMessage } from '../Input'
+import { Icon } from '../Icon'
 import Option from './Option'
 import Heading from './Heading'
 import sizes from '../assets/sizes'
@@ -178,7 +179,7 @@ const Dropdown = ({
           htmlFor={cId}
           variant='inputLabel'
           width='fit-content'>
-          {label} {required ? '*' : ''}
+          {label}
         </Typography>
       ) : null}
       <DropdownWrapper
@@ -192,11 +193,12 @@ const Dropdown = ({
         error={error}
         {...props}>
         <StyledIndicator
-          type='button'
-          role='display'
+          size='small'
+          color='inputIcon'
           onClick={toggleDropdown}
           collapsed={isCollapsed}
           disabled={disabled}
+          name='menuDown'
         />
         <Toggler
           collapsed={isCollapsed}
@@ -310,29 +312,25 @@ const Toggler = styled.button(
       : null
 )
 
-const StyledIndicator = styled.button(
+const StyledIndicator = styled(Icon)(
   css({
     display: 'block',
     appearance: 'none',
-    margin: 0,
+    marginTop: 'auto',
+    marginBottom: 'auto',
     padding: 0,
-    backgroundColor: 'transparent',
     width: 0,
     height: 0,
-    borderStyle: 'solid',
-    borderWidth: '0 5px 8px 5px',
-    borderColor: 'transparent',
-    borderBottomColor: 'inputIcon',
     position: 'absolute',
+    top: 0,
+    bottom: 0,
     right: '1em',
-    top: '50%',
-    marginTop: '-5px',
     outline: 'none',
     transition: 'all .2s ease-in-out'
   }),
   ({ collapsed }) =>
     css({
-      transform: collapsed ? 'rotate(180deg)' : 'rotate(360deg)'
+      transform: !collapsed && 'rotate(-180deg)'
     }),
   ({ disabled }) => (disabled ? css({ opacity: 0.5 }) : null)
 )
