@@ -6,7 +6,7 @@ import css from '@styled-system/css'
 import { Typography, typography } from '../Typography'
 import { Flex } from '@ivoryio/kogaio'
 
-import { ErrorMessage } from './ErrorMessage'
+import { SubLabel } from '../Input/SubLabel'
 
 export const TextArea = forwardRef(
   (
@@ -52,7 +52,7 @@ export const TextArea = forwardRef(
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
-            {label} {required ? '*' : ''}
+            {label}
           </Typography>
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
@@ -78,7 +78,12 @@ export const TextArea = forwardRef(
             {...textAreaProps}
           />
         </Flex>
-        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
+
+        <SubLabel
+          variant='error'
+          content={error}
+          preserveSpace={!noBottomSpace}
+        />
       </Flex>
     )
   }

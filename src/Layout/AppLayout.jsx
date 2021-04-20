@@ -140,7 +140,7 @@ const Shadow = styled.div(
         right: 0,
         top: 0,
         bottom: 0,
-        backgroundColor: 'whiteShadow'
+        backgroundColor: 'transparent'
       }
     }
   })

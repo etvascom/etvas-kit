@@ -14,6 +14,6 @@ export default {
   largeButtonWidth: '184px',
   largeButtonHeight: '48px',
   small: '16px',
-  medium: '24px',
+  medium: '20px',
   large: '32px'
 }

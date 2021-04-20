@@ -120,7 +120,7 @@ export const SubdomainInput = forwardRef(
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
-            {label} {required ? '*' : ''}
+            {label}
           </Typography>
         ) : null}
         <Wrapper
@@ -192,7 +192,12 @@ const Wrapper = styled(Flex)(
     css({
       borderColor: brd,
       backgroundColor: bg,
-      color: fg
+      color: fg,
+      ':hover': {
+        borderColor: brd,
+        backgroundColor: bg,
+        color: fg
+      }
     })
 )
 
