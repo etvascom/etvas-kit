@@ -128,6 +128,7 @@ export const SubdomainInput = forwardRef(
           width={1}
           onClick={focusInput}
           variant={variant}
+          isValid={inputVariant === 'valid' || inputVariant === 'default'}
           {...wrapperStyle}>
           <Typography color='textInputPlaceholder' variant='labelSmall'>
             {prefix}
@@ -142,7 +143,7 @@ export const SubdomainInput = forwardRef(
             onInput={handleInput}
             ref={ref || inputRef}
             required={required}
-            contentEditable='plaintext-only'
+            contentEditable={!disabled && 'plaintext-only'}
             onFocus={onInputFocus}
             onBlur={onInputBlur}
             suppressContentEditableWarning={true}>
@@ -188,16 +189,18 @@ const Wrapper = styled(Flex)(
     backgroundColor: 'white'
   }),
   variant({ variants }),
-  ({ brd, bg, fg }) =>
+  ({ brd, bg, fg, isValid }) =>
     css({
       borderColor: brd,
       backgroundColor: bg,
       color: fg,
-      ':hover': {
-        borderColor: brd,
-        backgroundColor: bg,
-        color: fg
-      }
+      ...(!isValid && {
+        ':hover': {
+          borderColor: brd,
+          backgroundColor: bg,
+          color: fg
+        }
+      })
     })
 )
 
