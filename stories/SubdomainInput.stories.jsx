@@ -16,6 +16,18 @@ const SubdomainInputHelper = props => {
 export const Default = () => (
   <Box p={4}>
     <SubdomainInputHelper
+      label='Disabled'
+      id='default_id'
+      suffix='.etvas.com'
+      disabled
+    />
+    <SubdomainInputHelper
+      label='Valid'
+      id='default_id'
+      suffix='.etvas.com'
+      valid
+    />
+    <SubdomainInputHelper
       label='Default status'
       id='default_id'
       suffix='.etvas.com'
