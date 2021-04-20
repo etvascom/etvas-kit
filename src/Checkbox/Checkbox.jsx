@@ -52,7 +52,7 @@ export const Checkbox = ({
         onChange={handleChange}
       />
       {label && (
-        <Typography variant={variant} ml={2} pt='0.2em'>
+        <Typography variant={variant} ml={2}>
           {label}
         </Typography>
       )}
