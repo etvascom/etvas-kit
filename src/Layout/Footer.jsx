@@ -49,7 +49,7 @@ export const Footer = ({ bgImage, children }) => {
           onMouseOut={hide}
           onBlur={hide}
           onFocus={show}>
-          <Icon name='heart' color='white' size='36px' />
+          <Icon name='heart' color='white' size='large' />
         </IconWrapper>
       </Flex>
     </Content>
