@@ -189,7 +189,8 @@ export const DropdownForm = () => (
 const optionstest = [
   {
     id: 1,
-    label: 'Lamborghini',
+    label:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non est repudiandae quia in culpa beatae iure dolores voluptate accusamus fuga at eaque, nostrum placeat debitis incidunt sit perferendis facere. Omnis voluptatem consectetur exercitationem. Error nemo illum inventore totam.',
     value: '0f9a0cea-1cd4-4934-880e-bf204bdfcc66'
   },
   {

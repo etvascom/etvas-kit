@@ -31,7 +31,13 @@ export const Simple = () => {
           `${value.substr(0, 1).toUpperCase()}${value.substr(1)}`
         }
         onChange={setSelected}>
-        <Dropdown.Option value='lannister'>Lannister</Dropdown.Option>
+        <Dropdown.Option value='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non est repudiandae quia in culpa beatae iure dolores voluptate accusamus fuga at eaque, nostrum placeat debitis incidunt sit perferendis facere. Omnis voluptatem consectetur exercitationem. Error nemo illum inventore totam.'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non
+          est repudiandae quia in culpa beatae iure dolores voluptate accusamus
+          fuga at eaque, nostrum placeat debitis incidunt sit perferendis
+          facere. Omnis voluptatem consectetur exercitationem. Error nemo illum
+          inventore totam.
+        </Dropdown.Option>
         <Dropdown.Option value='tyrell'>Tyrell</Dropdown.Option>
         <Dropdown.Option value='arryn'>Arryn</Dropdown.Option>
         <Dropdown.Option value='targaryen'>Targaryen</Dropdown.Option>
