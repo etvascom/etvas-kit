@@ -31,8 +31,10 @@ const DropdownItem = ({
     []
   )
 
+  const optionContent = <TextWrapper>{children}</TextWrapper>
+
   const optionWithCheckbox = (
-    <Flex alignItems='center'>
+    <Flex alignItems='center' minWidth='0'>
       <Box mr={3}>
         <Checkbox
           size='small'
@@ -41,7 +43,7 @@ const DropdownItem = ({
           onClick={e => e.stopPropagation()}
         />
       </Box>
-      {children}
+      {optionContent}
     </Flex>
   )
 
@@ -52,22 +54,32 @@ const DropdownItem = ({
       selected={isSelected}
       touch={hasTouch}
       hasCheckbox={hasCheckbox}>
-      {hasCheckbox ? optionWithCheckbox : children}
+      {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
 }
 
+const TextWrapper = styled.div(
+  css({
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
+  })
+)
+
 const Option = styled(Flex)(
   css({
     ...typography.labelSmall,
-    padding: 3,
+    paddingLeft: 3,
+    paddingRight: 3,
     appearance: 'none',
     backgroundColor: 'transparent',
     width: '100%',
     textAlign: 'left',
     border: 'none',
     outline: 'none',
-    height: sizes.inputHeight
+    height: sizes.dropdownItemHeightMobile,
+    lineHeight: sizes.dropdownItemHeightMobile
   }),
   ({ touch }) =>
     !touch
