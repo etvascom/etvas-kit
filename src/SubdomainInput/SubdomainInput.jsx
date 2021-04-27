@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useMemo, useRef } from 'react'
+import React, { useState, forwardRef, useMemo, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
@@ -9,6 +9,23 @@ import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { SubLabel } from '../Input/SubLabel'
 import { default as variants } from '../Input/Input.variants'
+
+const replaceCaret = el => {
+  const target = document.createTextNode('')
+  el.appendChild(target)
+  const isTargetFocused = document.activeElement === el
+  if (target !== null && target.nodeValue !== null && isTargetFocused) {
+    const sel = window.getSelection()
+    if (sel !== null) {
+      const range = document.createRange()
+      range.setStart(target, target.nodeValue.length)
+      range.collapse(true)
+      sel.removeAllRanges()
+      sel.addRange(range)
+    }
+    if (el instanceof HTMLElement) el.focus()
+  }
+}
 
 export const SubdomainInput = forwardRef(
   (
@@ -56,6 +73,8 @@ export const SubdomainInput = forwardRef(
 
     const onInputFocus = e => {
       setFocused(true)
+      const el = (ref || inputRef).current
+      replaceCaret(el)
     }
 
     const onInputBlur = e => {
@@ -90,9 +109,25 @@ export const SubdomainInput = forwardRef(
 
     const hasValue = useMemo(() => !!value, [value])
 
+    useEffect(() => {
+      const el = (ref || inputRef).current
+      if (!el) {
+        return
+      }
+      if (el.innerText !== value) {
+        valueRef.current = value
+        el.innerText = value
+        replaceCaret(el)
+      }
+    }, [value, ref])
+
     const handleInput = event => {
-      event.target.value = event.target.innerText
-      onChange && onChange(event)
+      const evt = Object.assign({}, event, {
+        target: {
+          value: event.target.innerText
+        }
+      })
+      onChange && onChange(evt)
     }
 
     const currentIcRight = useMemo(() => {
