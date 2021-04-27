@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { action } from '@storybook/addon-actions'
 import {
   Flex,
@@ -10,8 +10,10 @@ import {
   DropdownField,
   ErrorDisplay,
   TextField,
+  Input,
   PhoneNumberInputField,
-  TextAreaField
+  TextAreaField,
+  SubdomainField
 } from '../src'
 
 export default {
@@ -27,7 +29,8 @@ const values = {
   movie: [],
   comments: '',
   cars: [],
-  phone: ''
+  phone: '',
+  subdomain: ''
 }
 
 const movieOptions = [
@@ -62,6 +65,10 @@ const formValidate = values => {
   }
   if (!values.phone) {
     errors.phone = 'Required'
+  }
+
+  if (!values.subdomain) {
+    errors.subdomain = 'Required'
   }
 
   if (values) return errors
@@ -138,6 +145,15 @@ export const SimpleForm = () => (
       label='Comments'
       placeholder='Add a comment...'
       rows={10}
+    />
+    <SubdomainField
+      name='subdomain'
+      id='subdomain'
+      label='Subdomain'
+      placeholder='awesome'
+      prefix='https://'
+      suffix='.helloetvas.com'
+      required
     />
     <Flex alignItems='center' justifyContent='flex-start' mt='140px'>
       <Button type='submit' variant='primary'>
@@ -424,3 +440,66 @@ const optionstest = [
     value: 'b826a214-4b84-4615-823b-fe3b8b7a3b22'
   }
 ]
+
+export const SubdomainAutoCompleteForm = () => {
+  const [orgName, setOrgName] = useState('')
+
+  const sdValues = {
+    name: '',
+    subdomain: ''
+  }
+
+  const sdValidate = values => {
+    const errors = {}
+    if (!values.subdomain) {
+      errors.subdomain = 'Required'
+    }
+    if (values.subdomain === 'taken') {
+      errors.subdomain = 'Already taken'
+    }
+
+    return errors
+  }
+
+  const slugify = str =>
+    str ? str.replace(/[^A-Za-z0-9-_]+/g, '-').toLowerCase() : ''
+
+  const handleOrgNameChange = (event, helpers) => {
+    const { value } = event.target
+    setOrgName(value)
+    helpers.setFieldValue('subdomain', slugify(value))
+  }
+
+  return (
+    <Form
+      onSubmit={action('submit')}
+      initialValues={sdValues}
+      validate={sdValidate}>
+      {props => (
+        <>
+          <Input
+            onChange={e => handleOrgNameChange(e, props)}
+            value={orgName}
+            label='Enter Organization name'
+          />
+          <SubdomainField
+            name='subdomain'
+            id='subdomain'
+            prefix='ftp://'
+            suffix='.nasa.gov'
+          />
+
+          <Flex alignItems='center' justifyContent='flex-start' mt='140px'>
+            <Button type='submit' variant='primary'>
+              Submit
+            </Button>
+
+            <Button type='reset' variant='outline'>
+              Reset
+            </Button>
+          </Flex>
+        </>
+      )}
+    </Form>
+  )
+}
