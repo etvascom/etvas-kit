@@ -81,7 +81,7 @@ const Autocomplete = ({
   const handleInputClick = () => !value && setCollapsed(prev => !prev)
 
   return (
-    <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
+    <StyledFlex flexDirection='column' width={1} {...props}>
       <Flex
         aria-disabled={disabled}
         aria-haspopup={!disabled}
@@ -106,25 +106,23 @@ const Autocomplete = ({
           showValidationCheck={false}
           onInputClick={handleInputClick}
           extension={
-            <>
-              {!isCollapsed && (
-                <ListWrapper>
-                  <ScrollingList
-                    aria-labelledby={id}
-                    role='menu'
-                    id={`drop-${id}`}>
-                    {options.map(child =>
-                      isValidElement(child)
-                        ? cloneElement(child, {
-                            onSelectItem,
-                            isSelected: isItemSelected(child.props.value)
-                          })
-                        : null
-                    )}
-                  </ScrollingList>
-                </ListWrapper>
-              )}
-            </>
+            !isCollapsed && (
+              <ListWrapper>
+                <ScrollingList
+                  aria-labelledby={id}
+                  role='menu'
+                  id={`drop-${id}`}>
+                  {options.map(child =>
+                    isValidElement(child)
+                      ? cloneElement(child, {
+                          onSelectItem,
+                          isSelected: isItemSelected(child.props.value)
+                        })
+                      : null
+                  )}
+                </ScrollingList>
+              </ListWrapper>
+            )
           }
           {...props}
         />

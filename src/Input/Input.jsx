@@ -102,7 +102,7 @@ export const Input = forwardRef(
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
     return (
-      <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <StyledFlex flexDirection='column' width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
