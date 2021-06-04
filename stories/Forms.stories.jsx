@@ -13,7 +13,8 @@ import {
   Input,
   PhoneNumberInputField,
   TextAreaField,
-  SubdomainField
+  SubdomainField,
+  AutocompleteField
 } from '../src'
 
 export default {
@@ -137,6 +138,12 @@ export const SimpleForm = () => (
       options={movieOptions}
       name='movie'
       label='Movie genre'
+      required
+    />
+    <AutocompleteField
+      label='Movie genre autocomplete'
+      options={movieOptions.map(({ value }) => ({ key: value, value }))}
+      name='autocomplete-field'
       required
     />
     <TextAreaField
@@ -500,6 +507,50 @@ export const SubdomainAutoCompleteForm = () => {
           </Flex>
         </>
       )}
+    </Form>
+  )
+}
+
+export const AutocompleteFieldForm = () => {
+  const values = {
+    movieGenre: ''
+  }
+
+  const validate = values => {
+    const errors = {}
+    if (!values.movieGenre) {
+      errors.movieGenre = 'Required'
+    }
+    return errors
+  }
+
+  const handleInputChange = value => {}
+
+  return (
+    <Form
+      onSubmit={action('submit')}
+      initialValues={values}
+      validate={validate}>
+      <>
+        <AutocompleteField
+          handleInputChange={handleInputChange}
+          label='Movie genre autocomplete'
+          options={movieOptions.map(({ value }) => ({ key: value, value }))}
+          name='movieGenre'
+          id='movieGenre'
+          required
+        />
+
+        <Flex alignItems='center' justifyContent='flex-start' mt='140px'>
+          <Button type='submit' variant='primary'>
+            Submit
+          </Button>
+
+          <Button type='reset' variant='outline'>
+            Reset
+          </Button>
+        </Flex>
+      </>
     </Form>
   )
 }
