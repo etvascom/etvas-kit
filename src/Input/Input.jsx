@@ -46,6 +46,8 @@ export const Input = forwardRef(
       loading,
       tinted,
       showValidationCheck,
+      onInputClick,
+      extension,
       ...rest
     },
     ref
@@ -131,8 +133,10 @@ export const Input = forwardRef(
             type={inputType}
             value={value}
             variant={inputVariant}
+            onClick={onInputClick}
             {...rest}
           />
+          {extension}
           {icLeft ? (
             <Icon
               size='small'
@@ -234,7 +238,9 @@ Input.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.object
-  ])
+  ]),
+  onInputClick: PropTypes.func,
+  extension: PropTypes.node
 }
 
 Input.defaultProps = {

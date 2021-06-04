@@ -29,6 +29,7 @@ export * from './Chip'
 export * from './Layout'
 
 export * from './SubdomainInput'
+export * from './Autocomplete'
 
 export { styled }
 export * from '@ivoryio/kogaio'
