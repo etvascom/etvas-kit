@@ -30,7 +30,7 @@
   },
   "peerDependencies": {
     "formik": "^2.1.4",
-    "react": "16.x",
+    "react": "^16.6.0 || ^17",
     "styled-components": "^5.1.0"
   },
   "dependencies": {
