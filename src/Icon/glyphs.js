@@ -74,7 +74,18 @@ import {
   mdiWeb,
   mdiXml,
   mdiBadgeAccountHorizontal,
-  mdiCubeOutline
+  mdiCubeOutline,
+  mdiFolderOutline,
+  mdiFileCodeOutline,
+  mdiContentCopy,
+  mdiUndo,
+  mdiEarth,
+  mdiCellphoneLink,
+  mdiChevronDownCircleOutline,
+  mdiChevronUpCircleOutline,
+  mdiRocket,
+  mdiClipboardText,
+  mdiFolder
 } from '@mdi/js'
 
 export default {
@@ -153,6 +164,17 @@ export default {
   backburger: mdiBackburger,
   badgeAccountHorizontal: mdiBadgeAccountHorizontal,
   cubeOutline: mdiCubeOutline,
+  folder: mdiFolder,
+  folderOutline: mdiFolderOutline,
+  fileCodeOutline: mdiFileCodeOutline,
+  copy: mdiContentCopy,
+  undo: mdiUndo,
+  globe: mdiEarth,
+  devices: mdiCellphoneLink,
+  circleArrowTop: mdiChevronUpCircleOutline,
+  circleArrowBottom: mdiChevronDownCircleOutline,
+  rocket: mdiRocket,
+  clipboardText: mdiClipboardText,
   // 'products': '',
   ...oldGlyphs
 }
