@@ -9,7 +9,7 @@ import { Icon } from '../Icon'
 
 export const AppLayout = ({
   sidebarContent,
-  sidebarContentCss,
+  sidebarCss,
   sidebarFooterContent,
   headerContent,
   footerContent,
@@ -42,7 +42,7 @@ export const AppLayout = ({
         id='sidebar'
         isOpen={isOpen}
         variant={variant}
-        sidebarContentCss={sidebarContentCss}>
+        sidebarCss={sidebarCss}>
         <Menu id='sidebar-menu'>{sidebarContent}</Menu>
         <SidebarFooter id='sidebar-footer'>
           {sidebarFooterContent}
@@ -173,7 +173,7 @@ const Sidebar = styled.div(
         }
       }
     }),
-  ({ sidebarContentCss }) => css({ ...sidebarContentCss })
+  ({ sidebarCss }) => css({ ...sidebarCss })
 )
 const Menu = styled.div(
   css({
@@ -239,7 +239,7 @@ const FooterWrapper = styled.div(
 
 AppLayout.propTypes = {
   sidebarContent: PropTypes.node,
-  sidebarContentCss: PropTypes.object,
+  sidebarCss: PropTypes.object,
   sidebarFooterContent: PropTypes.node,
   headerContent: PropTypes.node,
   footerContent: PropTypes.node,
