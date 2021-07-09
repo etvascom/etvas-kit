@@ -9,6 +9,7 @@ import { Icon } from '../Icon'
 
 export const AppLayout = ({
   sidebarContent,
+  sidebarCss,
   sidebarFooterContent,
   headerContent,
   footerContent,
@@ -37,7 +38,11 @@ export const AppLayout = ({
         headerPadding={headerPadding}>
         {headerContent}
       </Header>
-      <Sidebar id='sidebar' isOpen={isOpen} variant={variant}>
+      <Sidebar
+        id='sidebar'
+        isOpen={isOpen}
+        variant={variant}
+        sidebarCss={sidebarCss}>
         <Menu id='sidebar-menu'>{sidebarContent}</Menu>
         <SidebarFooter id='sidebar-footer'>
           {sidebarFooterContent}
@@ -153,7 +158,6 @@ const Sidebar = styled.div(
     position: 'fixed',
     bottom: 0,
     zIndex: '10',
-    background: 'brand',
     transition: TRANSITION
   }),
   ({ isOpen }) =>
@@ -168,7 +172,8 @@ const Sidebar = styled.div(
           borderRightColor: 'lighterOutline'
         }
       }
-    })
+    }),
+  ({ sidebarCss }) => css({ ...sidebarCss })
 )
 const Menu = styled.div(
   css({
@@ -234,6 +239,7 @@ const FooterWrapper = styled.div(
 
 AppLayout.propTypes = {
   sidebarContent: PropTypes.node,
+  sidebarCss: PropTypes.object,
   sidebarFooterContent: PropTypes.node,
   headerContent: PropTypes.node,
   footerContent: PropTypes.node,
@@ -254,5 +260,6 @@ AppLayout.propTypes = {
 
 AppLayout.defaultProps = {
   variant: ['mobile', null, 'web'],
-  headerPadding: 6
+  headerPadding: 6,
+  sidebarCss: {}
 }
