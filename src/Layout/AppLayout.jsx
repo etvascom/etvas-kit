@@ -260,5 +260,6 @@ AppLayout.propTypes = {
 
 AppLayout.defaultProps = {
   variant: ['mobile', null, 'web'],
-  headerPadding: 6
+  headerPadding: 6,
+  sidebarCss: {}
 }
