@@ -148,12 +148,11 @@ const Shadow = styled.div(
 
 const Sidebar = styled.div(
   css({
-    backgroundColor: 'brand',
+    backgroundColor: 'brandDarkest',
     width: SIDEBAR_WIDTH,
     position: 'fixed',
     bottom: 0,
     zIndex: '10',
-    background: 'brand',
     transition: TRANSITION
   }),
   ({ isOpen }) =>
