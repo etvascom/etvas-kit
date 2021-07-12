@@ -103,7 +103,6 @@ const Autocomplete = ({
           onChange={handleOnChange}
           value={value}
           tinted={tinted}
-          showValidationCheck={false}
           onInputClick={handleInputClick}
           extension={
             !isCollapsed && (

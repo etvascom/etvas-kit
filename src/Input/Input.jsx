@@ -253,7 +253,7 @@ Input.defaultProps = {
   value: '',
   tinted: false,
   variant: 'default',
-  showValidationCheck: true
+  showValidationCheck: false
 }
 
 Input.displayName = 'Input'

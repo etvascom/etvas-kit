@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
+import { variant } from 'styled-system'
+import { default as variants } from './TextArea.variants'
 import { Typography, typography } from '../Typography'
 import { Flex } from '@ivoryio/kogaio'
 
@@ -30,6 +32,8 @@ export const TextArea = forwardRef(
       cols,
       rows,
       maxLength,
+      loading,
+      warning,
       textAreaProps,
       ...rest
     },
@@ -38,11 +42,12 @@ export const TextArea = forwardRef(
     const textAreaRef = useRef()
 
     const textAreaVariant = useMemo(() => {
-      if (disabled) return 'disabled'
+      if (disabled || loading) return 'disabled'
       else if (error) return 'error'
+      else if (warning) return 'warning'
       else if (valid) return 'valid'
       return variant
-    }, [disabled, error, valid, variant])
+    }, [loading, disabled, error, warning, valid, variant])
 
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
@@ -91,39 +96,13 @@ export const TextArea = forwardRef(
 
 const StyledTextArea = styled.textarea(
   css({
-    ...typography.labelSmall,
-    display: 'block',
-    width: '100%',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
-    outline: 'none',
-    color: 'text',
-    padding: 3,
-    ':hover, :focus': {
-      borderWidth: 1,
-      borderStyle: 'solid'
-    }
+    ...typography.labelSmall
   }),
-  ({ allowResize }) =>
-    !allowResize &&
-    css({
-      resize: 'none'
-    }),
-  ({ error }) =>
-    error
-      ? css({
-          color: 'error',
-          borderColor: 'error'
-        })
-      : null,
-  ({ disabled }) =>
-    disabled
-      ? css({
-          opacity: 0.5
-        })
-      : null
+  variant({ variants }),
+  ({ tinted, error, warn, disabled }) => ({
+    backgroundColor: tinted && !(error || warn || disabled) && 'white',
+    borderColor: tinted && !(error || warn || disabled) && 'white'
+  })
 )
 
 TextArea.propTypes = {
@@ -166,7 +145,8 @@ TextArea.defaultProps = {
   noBottomSpace: false,
   readOnly: false,
   value: '',
-  variant: 'default'
+  variant: 'default',
+  tinted: false
 }
 
 TextArea.displayName = 'TextArea'
