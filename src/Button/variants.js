@@ -64,6 +64,8 @@ const LINK_DEFAULT = {
   ...BUTTON_DEFAULT,
   backgroundColor: 'transparent',
   height: 'auto',
+  width: 'auto',
+  minWidth: 'auto',
   padding: 0,
   minHeight: 'max-content',
   ':not([disabled])': {
