@@ -203,7 +203,6 @@ const Dropdown = ({
         <Toggler
           collapsed={isCollapsed}
           disabled={disabled}
-          isEmpty={isEmpty}
           type='button'
           role='switch'
           aria-controls={`drop-${cId}`}
@@ -296,17 +295,12 @@ const Toggler = styled.button(
   ({ disabled }) =>
     disabled
       ? css({
-          opacity: 0.5,
           color: 'textInputDisabled',
           cursor: 'forbidden',
           pointerEvents: 'none',
           backgroundColor: 'backgroundGray'
         })
       : null,
-  ({ isEmpty }) =>
-    css({
-      color: isEmpty ? 'textInputPlaceholder' : 'textInputActive'
-    }),
   ({ tinted, error, disabled }) => ({
     backgroundColor: tinted && !(error || disabled) && 'white',
     borderColor: tinted && !(error || disabled) && 'white'
