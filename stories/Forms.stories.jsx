@@ -28,7 +28,6 @@ const values = {
   maiden: '',
   password: '',
   movie: [],
-  movie2: 'comedy',
   comments: '',
   cars: [],
   phone: '',
@@ -188,8 +187,6 @@ export const SimpleForm = () => (
 )
 
 const renderMultipleSelectLabel = values => {
-  // eslint-disable-next-line no-console
-  console.log('asta merge ok, ', values)
   const selected = optionstest.filter(opt => values.includes(opt.value))
   return `${selected
     .slice(0, 2)
