@@ -12,6 +12,7 @@ export const DropdownField = ({
   required,
   multiple,
   itemFilter,
+  valueRender,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props)
@@ -28,6 +29,12 @@ export const DropdownField = ({
       option => field.value === option[optionAttributes.value]
     )
   }, [field, options, optionAttributes, multiple])
+
+  const selectedLabel = multiple
+    ? valueRender
+    : selectedOption
+    ? selectedOption[optionAttributes.label]
+    : ''
 
   const selectedValue = multiple
     ? field.value
@@ -76,6 +83,7 @@ export const DropdownField = ({
       required={required}
       error={errorDisplay}
       multiple={multiple}
+      valueRender={selectedLabel}
       {...props}>
       {options.map(option => (
         <Dropdown.Option

@@ -28,6 +28,7 @@ const values = {
   maiden: '',
   password: '',
   movie: [],
+  movie2: 'comedy',
   comments: '',
   cars: [],
   phone: '',
@@ -74,6 +75,16 @@ const formValidate = values => {
 
   if (values) return errors
 }
+
+const renderMultipleMovies = values => {
+  const selected = movieOptions.filter(opt => values.includes(opt.value))
+  const res = `${selected
+    .slice(0, 2)
+    .map(opt => opt.label)
+    .join(', ')}${selected.length > 2 ? ` + ${selected.length - 2} more` : ''}`
+  return res
+}
+
 export const SimpleForm = () => (
   <Form
     onSubmit={action('submit')}
@@ -134,12 +145,14 @@ export const SimpleForm = () => (
 
     <Typography variant='titleSmall'>Movie prefference</Typography>
     <DropdownField
+      valueRender={renderMultipleMovies}
       multiple
       options={movieOptions}
       name='movie'
       label='Movie genre'
       required
     />
+
     <AutocompleteField
       label='Movie genre autocomplete'
       options={movieOptions.map(({ value }) => ({ key: value, value }))}
@@ -175,6 +188,8 @@ export const SimpleForm = () => (
 )
 
 const renderMultipleSelectLabel = values => {
+  // eslint-disable-next-line no-console
+  console.log('asta merge ok, ', values)
   const selected = optionstest.filter(opt => values.includes(opt.value))
   return `${selected
     .slice(0, 2)
