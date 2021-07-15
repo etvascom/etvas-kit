@@ -30,11 +30,30 @@ export const DropdownField = ({
     )
   }, [field, options, optionAttributes, multiple])
 
-  const selectedLabel = multiple
-    ? valueRender
-    : selectedOption
-    ? selectedOption[optionAttributes.label]
-    : ''
+  const renderSelectedLabel = value => {
+    if (multiple) {
+      const selectedOptions = options.filter(option =>
+        value.includes(option.value)
+      )
+      const selectedOptionsLabel = `${selectedOptions
+        .slice(0, 3)
+        .map(opt => opt.label)
+        .join(', ')}${
+        selectedOptions.length > 3
+          ? ` + ${selectedOptions.length - 3} moree`
+          : ''
+      }`
+      return selectedOptionsLabel
+    }
+
+    if (selectedOption) {
+      return selectedOption[optionAttributes.label]
+    }
+
+    return ''
+  }
+
+  const selectedLabel = valueRender || renderSelectedLabel
 
   const selectedValue = multiple
     ? field.value
@@ -105,7 +124,8 @@ DropdownField.propTypes = {
     label: PropTypes.string
   }),
   itemFilter: PropTypes.func,
-  multiple: PropTypes.bool
+  multiple: PropTypes.bool,
+  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
 }
 
 DropdownField.defaultProps = {
