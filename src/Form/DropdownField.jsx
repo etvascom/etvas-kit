@@ -40,7 +40,7 @@ export const DropdownField = ({
         .map(opt => opt.label)
         .join(', ')}${
         selectedOptions.length > 3
-          ? ` + ${selectedOptions.length - 3} moree`
+          ? ` + ${selectedOptions.length - 3} more`
           : ''
       }`
       return selectedOptionsLabel
