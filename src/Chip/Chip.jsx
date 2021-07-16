@@ -21,7 +21,7 @@ const ChipContainer = styled(Flex)(({ isRounded, color }) =>
     width: 'fit-content',
     backgroundColor: color,
     color: 'white',
-    borderRadius: isRounded ? '32px' : 0
+    borderRadius: isRounded ? '3px' : 0
   })
 )
 
