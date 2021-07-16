@@ -22,7 +22,8 @@ export const WithImage = () => (
   <CardWithImage
     imageUrl='https://picsum.photos/640/360/?grayscale&blur'
     imageSize={1 / 3}
-    height='300px'>
+    height='300px'
+    direction={['column', 'row']}>
     <Typography variant='titleSmall'>CardWithImage</Typography>
     <Typography variant='textSmall'>This is the content</Typography>
   </CardWithImage>

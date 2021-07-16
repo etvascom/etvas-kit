@@ -24,9 +24,11 @@ export const CardWithImage = ({
   vertical,
   variant,
   children,
+  direction,
   ...props
 }) => {
-  const direction = vertical ? 'column' : ['column', 'row-reverse']
+  const flexDirection =
+    direction || (vertical ? 'column' : ['column', 'row-reverse'])
   const contentPadding = variant === 'hero' ? [4, 8] : [2, 4]
 
   const invImageSize = Array.isArray(imageSize)
@@ -38,7 +40,7 @@ export const CardWithImage = ({
   return (
     <CardWrapper vertical={vertical} {...props}>
       <Flex
-        flexDirection={direction}
+        flexDirection={flexDirection}
         justifyContent='space-between'
         width='100%'
         height='100%'>
@@ -65,7 +67,11 @@ CardWithImage.propTypes = {
     PropTypes.arrayOf(PropTypes.number),
     PropTypes.number
   ]),
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
+  direction: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string
+  ])
 }
 
 CardWithImage.defaultProps = {

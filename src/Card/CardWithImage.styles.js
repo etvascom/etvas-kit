@@ -11,16 +11,11 @@ const _extract = (value, idx, defaultValue) => {
   return value[idx < value.length - 1 ? idx : value.length - 1]
 }
 
-const borderRadius = vertical => ({
-  borderRadius: vertical ? '8px 8px 2px 2px' : '2px 8px 8px 2px'
-})
-
 export default {
-  container: ({ theme, vertical }) => ({
+  container: {
     overflow: 'hidden',
-    ...borderRadius(true),
-    ...sm(theme)(borderRadius(vertical))
-  }),
+    borderRadius: '3px'
+  },
 
   contentBox: ({ theme, ratio }) => ({
     flex: `${1 + _extract(ratio, 0, 0)} 0 ${100 * _extract(ratio, 0, 0)}%`,
