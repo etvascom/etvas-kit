@@ -30,6 +30,7 @@ export * from './Layout'
 
 export * from './SubdomainInput'
 export * from './Autocomplete'
+export * from './PhoneNumberInput'
 
 export { styled }
 export * from '@ivoryio/kogaio'
