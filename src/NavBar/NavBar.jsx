@@ -130,14 +130,12 @@ const Gradient = styled.button(
     top: 0,
     bottom: 0,
     width: `${GRADIENT_SIZE}px`,
-    background:
-      'linear-gradient(90deg, #FBFDFF 0%, rgba(251, 253, 255, 0.75) 50.52%, rgba(251, 253, 255, 0.35) 100%)'
+    background: 'transparent'
   }),
   ({ from }) =>
     from === 'right'
       ? ''
       : css({
-          transform: 'rotate(180deg)',
           right: 0,
           left: 'auto'
         })
@@ -156,8 +154,6 @@ const ItemContainer = styled.button(
       padding: isLastChild ? 0 : '0 32px 0 0'
     })
 )
-
-
 
 NavBar.propTypes = {
   children: PropTypes.node
