@@ -24,11 +24,12 @@ export const CardWithImage = ({
   vertical,
   variant,
   children,
-  direction,
+  imgOnLeft,
   ...props
 }) => {
-  const flexDirection =
-    direction || (vertical ? 'column' : ['column', 'row-reverse'])
+  const flexDirection = vertical
+    ? 'column'
+    : ['column', imgOnLeft ? 'row' : 'row-reverse']
   const contentPadding = variant === 'hero' ? [4, 8] : [2, 4]
 
   const invImageSize = Array.isArray(imageSize)
@@ -68,10 +69,7 @@ CardWithImage.propTypes = {
     PropTypes.number
   ]),
   vertical: PropTypes.bool,
-  direction: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.string
-  ])
+  imgOnLeft: PropTypes.bool
 }
 
 CardWithImage.defaultProps = {
