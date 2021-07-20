@@ -1,10 +1,10 @@
 import React, {
   forwardRef,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
-  useState
+  useState,
+  useLayoutEffect
 } from 'react'
 import { Typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
@@ -81,7 +81,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     return () => document.removeEventListener('click', onClickOutside)
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (ref) {
       ref.current.selectionStart = ref.current.selectionEnd = cursorPosition
     } else {
