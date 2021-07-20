@@ -143,7 +143,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   }
 
   const onNumberChange = event => {
-    if (trimStartingZero(event.target.value) !== event.target.value) {
+    if (event.target.value.startsWith('0')) {
       setCursorPosition(0)
     } else {
       setCursorPosition(event.target.selectionStart)
