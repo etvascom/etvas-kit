@@ -1,4 +1,11 @@
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import { Typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
@@ -122,10 +129,22 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     return value
   }, [value])
 
+  useLayoutEffect(() => {
+    if (dropdownOpen) {
+      const el = document.getElementsByClassName(
+        'dropdown-country-prefix-item-selected'
+      )
+      if (el && el.length > 0) {
+        el[0].scrollIntoView({ behavior: 'auto', block: 'center' })
+      }
+    }
+  }, [dropdownOpen])
+
   const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
   const handleToggleOpenDropdown = () =>
     setDropdownOpen(dropdownOpen => !dropdownOpen)
+
   const handleSelectCountry = country => () => {
     setDropdownOpen(false)
     setCountry(country)
@@ -245,6 +264,11 @@ const displayItems = (states, label, onClick, country) =>
     <StyledDropdownItem
       key={`${label}-${state.code}`}
       isSelected={state.code === country.code}
+      className={
+        state.code === country.code
+          ? 'dropdown-country-prefix-item-selected'
+          : ''
+      }
       onClick={onClick(state)}>
       <Space mr={2}>
         <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`} />
