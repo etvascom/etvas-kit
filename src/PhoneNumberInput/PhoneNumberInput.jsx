@@ -20,6 +20,7 @@ import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
 import 'flag-icon-css/css/flag-icon.css'
 import { RADII, SHADOWS } from '../assets/core'
+import { trimStartingZero } from './trimStartingZero'
 
 const PhoneNumberInput = forwardRef((props, ref) => {
   const {
@@ -55,6 +56,12 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   const [country, setCountry] = useState(statesEu[0])
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
+  const [cursorPosition, setCursorPosition] = useState(0)
+  const [
+    cursorPositionChangedToggler,
+    setCursorPositionChangedToggler
+  ] = useState(false)
+
   useEffect(() => {
     const onClickOutside = event => {
       if (wrapperRef.current.contains(event.target)) {
@@ -66,6 +73,14 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     document.addEventListener('click', onClickOutside)
     return () => document.removeEventListener('click', onClickOutside)
   }, [])
+
+  useEffect(() => {
+    if (ref) {
+      ref.current.selectionStart = ref.current.selectionEnd = cursorPosition
+    } else {
+      inputRef.current.selectionStart = inputRef.current.selectionEnd = cursorPosition
+    }
+  }, [value, ref, inputRef, cursorPosition, cursorPositionChangedToggler])
 
   const inputVariant = useMemo(() => {
     if (disabled || loading) return 'disabled'
@@ -103,6 +118,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
       setCountry(activeCountry)
       return normalizedValue.substr(found.prefix.length)
     }
+
     return value
   }, [value])
 
@@ -116,15 +132,32 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     onCountryNumberChange(country)
   }
 
+  const onCursorPositionChanged = () => {
+    setCursorPositionChangedToggler(!cursorPositionChangedToggler)
+  }
+
   const onCountryNumberChange = country => {
-    const value = `${country.prefix}${displayValue}`
+    const value = `${country.prefix}${trimStartingZero(displayValue)}`
     const event = { target: { value } }
     onChange(event)
   }
+
   const onNumberChange = event => {
-    event.target.value = `${country.prefix}${event.target.value}`
+    if (trimStartingZero(event.target.value) !== event.target.value) {
+      setCursorPosition(0)
+    } else {
+      setCursorPosition(event.target.selectionStart)
+    }
+
+    onCursorPositionChanged()
+
+    event.target.value = `${country.prefix}${trimStartingZero(
+      event.target.value
+    )}`
+
     onChange(event)
   }
+
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
       {label ? (
