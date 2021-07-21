@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { compose, layout, position, space, variant } from 'styled-system'
+import { layout, position, space, variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
 
 import { Typography } from '../Typography'
 import { Flex, Space } from '../'
-import variants, { iconVariants, spinnerVariants } from './variants'
+import variants, { spinnerVariants } from './variants'
 import { Icon } from '../Icon'
-import colors from '../assets/colors'
+import sizes from '../assets/sizes'
 
 const Button = ({
   children,
@@ -22,15 +22,30 @@ const Button = ({
   iconPosition,
   ...rest
 }) => {
-  const iconColor = useMemo(() => {
-    if (!icon || !iconPosition) {
+  // const iconColor = useMemo(() => {
+  //   if (!icon || !iconPosition) {
+  //     return null
+  //   }
+  //   if (disabled && variant === 'link') {
+  //     return colors.disabled
+  //   }
+  //   // eslint-disable-next-line no-console
+  //   console.info('we got so far ', {
+  //     variant,
+  //     iconVariant: iconVariants[variant]
+  //   })
+  //   return iconVariants[variant].color
+  // }, [iconPosition, disabled, icon, variant])
+
+  const hSpacing = useMemo(() => {
+    if (!loading || variant.startsWith('link')) {
       return null
     }
-    if (disabled && variant === 'link') {
-      return colors.disabled
-    }
-    return iconVariants[variant].color
-  }, [iconPosition, disabled, icon, variant])
+    return variant === 'large' ? sizes.spacingNormal : sizes.spacingCompact
+  }, [variant, loading])
+
+  const hasLabel =
+    !!children || (Array.isArray(children) && children.length > 0)
 
   return (
     <StyledButton
@@ -39,6 +54,7 @@ const Button = ({
       onClick={onClick}
       type={type}
       variant={variant}
+      hSpacing={hSpacing}
       {...rest}>
       {loading ? (
         <Icon
@@ -50,27 +66,29 @@ const Button = ({
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
-            <Space mr='10px'>
+            <Space mr={hasLabel ? '10px' : '0'}>
               <Icon
                 name={icon}
-                size={iconVariants[variant].size}
-                color={iconColor}
+                size={variant === 'large' ? 'medium' : 'small'}
+                color='inherit'
               />
             </Space>
           )}
-          <Typography
-            as='label'
-            variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
-            htmlFor={id}
-            color='inherit'>
-            {children}
-          </Typography>
+          {hasLabel && (
+            <Typography
+              as='label'
+              variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
+              htmlFor={id}
+              color='inherit'>
+              {children}
+            </Typography>
+          )}
           {icon && iconPosition === 'right' && (
             <Space ml='10px'>
               <Icon
                 name={icon}
-                size={iconVariants[variant].size}
-                color={iconColor}
+                size={variant === 'large' ? 'medium' : 'small'}
+                color='inherit'
               />
             </Space>
           )}
@@ -80,9 +98,22 @@ const Button = ({
   )
 }
 
-const StyledButton = styled.button(
-  compose(layout, position, space, variant({ variants }))
-)
+/*
+compose(layout, position, space, variant({ variants })),
+  ({loading}) => loading ? css({
+    paddingLeft: '12px',
+    paddingRight: '12px'
+  })
+  */
+
+const StyledButton = styled.button`
+  ${layout}
+  ${position}
+  ${space}
+  ${variant({ variants })}
+  ${({ hSpacing }) =>
+    hSpacing ? `padding-left: ${hSpacing}; padding-right: ${hSpacing};` : ''}
+`
 
 Button.propTypes = {
   ...propTypes.layout,
@@ -108,7 +139,8 @@ Button.defaultProps = {
   icon: null,
   spinnerSize: '1.5rem',
   type: 'button',
-  variant: 'primary'
+  variant: 'primary',
+  iconPosition: 'left'
 }
 
 Button.displayName = 'Button'

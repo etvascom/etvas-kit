@@ -116,7 +116,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   }, [loading, error, warning, valid, disabled])
 
   const displayValue = useMemo(() => {
-    const normalizedValue = value.replace(/[\s]+/g)
+    const normalizedValue = value.replace(/[\s]+/g, '')
     const found = prefixLengthOrderedStates.find(
       ({ prefix }) => normalizedValue.indexOf(prefix) === 0
     )

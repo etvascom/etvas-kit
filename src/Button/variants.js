@@ -3,8 +3,9 @@ import { BORDERS } from '../assets/core'
 
 const BUTTON_DEFAULT = {
   height: sizes.buttonHeight,
-  width: sizes.buttonWidth,
   minWidth: sizes.buttonMinWidth,
+  paddingLeft: sizes.spacingNormal,
+  paddingRight: sizes.spacingNormal,
   alignItems: 'center',
   border: 'none',
   boxSizing: 'border-box',
@@ -45,7 +46,8 @@ const PRIMARY_DEFAULT = {
 const PRIMARY_STYLE = { ...PRIMARY_DEFAULT }
 const LARGE_STYLE = {
   ...PRIMARY_DEFAULT,
-  width: sizes.largeButtonWidth,
+  paddingLeft: sizes.spacingLarge,
+  paddingRight: sizes.spacingLarge,
   height: sizes.largeButtonHeight
 }
 const OUTLINE_DEFAULT = {
@@ -98,11 +100,7 @@ export default {
   linkSecondary: LINK_STYLE,
   linkPositive: LINK_POSITIVE_STYLE
 }
-export const iconVariants = {
-  primary: { color: 'white', size: 'small' },
-  large: { color: 'white', size: 'medium' },
-  link: { color: 'brand', size: 'small' }
-}
+
 const PRIMARY_SPINNER_VARIANT = { primary: 'white' }
 export const spinnerVariants = {
   primary: PRIMARY_SPINNER_VARIANT,
