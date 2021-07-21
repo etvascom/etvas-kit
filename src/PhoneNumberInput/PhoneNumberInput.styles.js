@@ -27,7 +27,8 @@ export default {
   },
   dropdownTrigger: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    cursor: 'pointer'
   },
   dropdown: {
     flexDirection: 'column',

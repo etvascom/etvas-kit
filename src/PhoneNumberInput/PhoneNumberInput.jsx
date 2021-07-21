@@ -1,4 +1,11 @@
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useLayoutEffect
+} from 'react'
 import { Typography } from '../Typography'
 import { Flex, Space } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
@@ -20,6 +27,7 @@ import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
 import 'flag-icon-css/css/flag-icon.css'
 import { RADII, SHADOWS } from '../assets/core'
+import { trimStartingZero } from './trimStartingZero'
 
 const PhoneNumberInput = forwardRef((props, ref) => {
   const {
@@ -55,6 +63,12 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   const [country, setCountry] = useState(statesEu[0])
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
+  const [cursorPosition, setCursorPosition] = useState(0)
+  const [
+    cursorPositionChangedToggler,
+    setCursorPositionChangedToggler
+  ] = useState(false)
+
   useEffect(() => {
     const onClickOutside = event => {
       if (wrapperRef.current.contains(event.target)) {
@@ -66,6 +80,14 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     document.addEventListener('click', onClickOutside)
     return () => document.removeEventListener('click', onClickOutside)
   }, [])
+
+  useLayoutEffect(() => {
+    if (ref) {
+      ref.current.selectionStart = ref.current.selectionEnd = cursorPosition
+    } else {
+      inputRef.current.selectionStart = inputRef.current.selectionEnd = cursorPosition
+    }
+  }, [value, ref, inputRef, cursorPosition, cursorPositionChangedToggler])
 
   const inputVariant = useMemo(() => {
     if (disabled || loading) return 'disabled'
@@ -103,28 +125,58 @@ const PhoneNumberInput = forwardRef((props, ref) => {
       setCountry(activeCountry)
       return normalizedValue.substr(found.prefix.length)
     }
+
     return value
   }, [value])
+
+  useLayoutEffect(() => {
+    if (dropdownOpen) {
+      const el = document.getElementsByClassName(
+        'dropdown-country-prefix-item-selected'
+      )
+      if (el && el.length > 0) {
+        el[0].scrollIntoView({ behavior: 'auto', block: 'center' })
+      }
+    }
+  }, [dropdownOpen])
 
   const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
   const handleToggleOpenDropdown = () =>
     setDropdownOpen(dropdownOpen => !dropdownOpen)
+
   const handleSelectCountry = country => () => {
     setDropdownOpen(false)
     setCountry(country)
     onCountryNumberChange(country)
   }
 
+  const onCursorPositionChanged = () => {
+    setCursorPositionChangedToggler(!cursorPositionChangedToggler)
+  }
+
   const onCountryNumberChange = country => {
-    const value = `${country.prefix}${displayValue}`
+    const value = `${country.prefix}${trimStartingZero(displayValue)}`
     const event = { target: { value } }
     onChange(event)
   }
+
   const onNumberChange = event => {
-    event.target.value = `${country.prefix}${event.target.value}`
+    if (event.target.value.startsWith('0')) {
+      setCursorPosition(0)
+    } else {
+      setCursorPosition(event.target.selectionStart)
+    }
+
+    onCursorPositionChanged()
+
+    event.target.value = `${country.prefix}${trimStartingZero(
+      event.target.value
+    )}`
+
     onChange(event)
   }
+
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
       {label ? (
@@ -212,6 +264,11 @@ const displayItems = (states, label, onClick, country) =>
     <StyledDropdownItem
       key={`${label}-${state.code}`}
       isSelected={state.code === country.code}
+      className={
+        state.code === country.code
+          ? 'dropdown-country-prefix-item-selected'
+          : ''
+      }
       onClick={onClick(state)}>
       <Space mr={2}>
         <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`} />
