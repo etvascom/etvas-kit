@@ -6,8 +6,7 @@ import css from '@styled-system/css'
 
 import glyphs from './glyphs.js'
 import animationSpeeds from '../assets/animationSpeeds'
-import { default as BaseIcon } from '@mdi/react'
-import colors from '../assets/colors'
+import { default as DefaultIcon } from '@mdi/react'
 import sizes from '../assets/sizes'
 
 export const Icon = ({ name, size, color, rotate, ...props }) => {
@@ -26,7 +25,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
       <BaseIcon
         path={glyphs[name]}
         size={sizes[size]}
-        color={colors[color] || 'currentColor'}
+        color={color}
         spin={rotate}
         {...props}
       />
@@ -40,6 +39,14 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
     </StyledI>
   )
 }
+
+const BaseIcon = styled(DefaultIcon)(({ color }) =>
+  css({
+    '& path': {
+      fill: color
+    }
+  })
+)
 
 const StyledI = styled.i(({ color, size, rotate }) =>
   css({
