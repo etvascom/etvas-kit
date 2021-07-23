@@ -34,12 +34,12 @@ const changePerceivedLightnessToHex = (hex, percentage) => {
 const returnIfNotExists = (update, fallback) => (update ? update : fallback)
 
 export const buildBrandColorVariants = (brandColor, existingColors) => {
-  const brandColorLight = changePerceivedLightnessToHex(brandColor, 22)
-  const brandColorLighter = changePerceivedLightnessToHex(brandColor, 50)
-  const brandColorLightest = changePerceivedLightnessToHex(brandColor, 53)
+  const brandColorLight = changePerceivedLightnessToHex(brandColor, 10)
+  const brandColorLighter = changePerceivedLightnessToHex(brandColor, 20)
+  const brandColorLightest = changePerceivedLightnessToHex(brandColor, 30)
 
-  const brandColorDark = changePerceivedLightnessToHex(brandColor, -15)
-  const brandColorDarkest = changePerceivedLightnessToHex(brandColor, -30)
+  const brandColorDark = changePerceivedLightnessToHex(brandColor, -10)
+  const brandColorDarkest = changePerceivedLightnessToHex(brandColor, -20)
 
   return {
     brandColorLight: returnIfNotExists(
