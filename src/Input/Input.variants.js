@@ -81,7 +81,10 @@ const DISABLED_STYLE = {
   ...DEFAULT_DISABLED_STYLE,
   backgroundColor: 'backgroundGray',
   borderColor: 'inputGray',
-  color: 'textInputDisabled'
+  color: 'textInputDisabled',
+  ':hover': {
+    borderColor: 'inputGray'
+  }
 }
 
 export default {
