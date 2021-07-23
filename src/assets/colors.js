@@ -21,6 +21,8 @@ const StyleGuide = {
   black300: '#425179',
   black400: '#536083',
 
+  shadow92: 'rgba(32,37,52, 0.92)',
+
   yellow100: '#F7D935',
   red100: '#F72A2A',
   green100: '#1DC06D',
@@ -65,7 +67,7 @@ export default {
   modalStroke: StyleGuide.gray300,
   skeleton: StyleGuide.gray400,
   dropShadow: StyleGuide.black200,
-  whiteShadow: StyleGuide.white200,
+  whiteShadow: StyleGuide.shadow92,
   dark: StyleGuide.gray900,
   positive: StyleGuide.green200,
   positiveFade: StyleGuide.green200,
