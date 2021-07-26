@@ -1,66 +1,21 @@
-import { hslToHex, hexToHsl } from '../utils'
-
-const changeLightnessToHsl = ([h, s, l], percentage) => [h, s, l + percentage]
-
-const changePerceivedLightnessToHex = (hex, percentage) => {
-  const hsl = hexToHsl(hex)
-  let ret
-
-  if (hsl[2] + percentage > 100) {
-    percentage = 100 - hsl[2]
-  }
-
-  if (hsl[2] + percentage < 0) {
-    percentage = hsl[2] - 100
-  }
-
-  if (percentage < 0) {
-    if (hsl[2] < 60) {
-      ret = changeLightnessToHsl(hsl, percentage)
-    } else {
-      ret = changeLightnessToHsl(hsl, -percentage)
-    }
-  } else {
-    if (hsl[2] < 60) {
-      ret = changeLightnessToHsl(hsl, percentage)
-    } else {
-      ret = changeLightnessToHsl(hsl, -percentage)
-    }
-  }
-
-  return hslToHex(ret)
-}
-
-const returnIfNotExists = (update, fallback) => (update ? update : fallback)
+import { changePerceivedLightnessToHex } from '../utils'
 
 export const buildBrandColorVariants = (brandColor, existingColors) => {
-  const brandColorLight = changePerceivedLightnessToHex(brandColor, 10)
-  const brandColorLighter = changePerceivedLightnessToHex(brandColor, 20)
-  const brandColorLightest = changePerceivedLightnessToHex(brandColor, 30)
-
-  const brandColorDark = changePerceivedLightnessToHex(brandColor, -10)
-  const brandColorDarkest = changePerceivedLightnessToHex(brandColor, -20)
-
-  return {
-    brandColorLight: returnIfNotExists(
-      existingColors.brandColorLight,
-      brandColorLight
-    ),
-    brandColorLighter: returnIfNotExists(
-      existingColors.brandColorLighter,
-      brandColorLighter
-    ),
-    brandColorLightest: returnIfNotExists(
-      existingColors.brandColorLightest,
-      brandColorLightest
-    ),
-    brandColorDark: returnIfNotExists(
-      existingColors.brandColorDark,
-      brandColorDark
-    ),
-    brandColorDarkest: returnIfNotExists(
-      existingColors.brandColorDarkest,
-      brandColorDarkest
-    )
+  const colorVariants = {
+    brandColorLight: 10,
+    brandColorLighter: 20,
+    brandColorLightest: 30,
+    brandColorDark: -10,
+    brandColorDarker: -20
   }
+
+  return Object.keys(colorVariants).reduce((colors, key) => {
+    if (!existingColors[key]) {
+      colors[key] = changePerceivedLightnessToHex(
+        brandColor,
+        colorVariants[key]
+      )
+    }
+    return colors
+  }, {})
 }

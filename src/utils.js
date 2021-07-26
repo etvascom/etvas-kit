@@ -120,3 +120,32 @@ export const hslToHex = ([h, s, l]) => {
   const rgb = hslToRgb(h, s, l)
   return rgbToHex(rgb[0], rgb[1], rgb[2])
 }
+
+export const changePerceivedLightnessToHex = (hex, percentage) => {
+  const [h, s, l] = hexToHsl(hex)
+  let ret
+
+  if (l + percentage > 100) {
+    percentage = 100 - l
+  }
+
+  if (l + percentage < 0) {
+    percentage = l - 100
+  }
+
+  if (percentage < 0) {
+    if (l < 60) {
+      ret = [h, s, l + percentage]
+    } else {
+      ret = [h, s, l - percentage]
+    }
+  } else {
+    if (l < 60) {
+      ret = [h, s, l + percentage]
+    } else {
+      ret = [h, s, l - percentage]
+    }
+  }
+
+  return hslToHex(ret)
+}

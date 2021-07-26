@@ -46,13 +46,13 @@ export class BrandingService extends EventEmitter {
   updateCssVars(updates) {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
-    if (isEqual(newVars, this.cssVars)) {
-      return
-    }
-
     const brandColorVariants = updates.brandColor
       ? buildBrandColorVariants(updates.brandColor, updates)
       : {}
+
+    if (isEqual(newVars, this.cssVars)) {
+      return
+    }
 
     this.cssVars = {
       ...newVars,
