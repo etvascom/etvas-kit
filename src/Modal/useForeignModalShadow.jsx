@@ -4,8 +4,10 @@ import css from '@styled-system/css'
 
 import { InterCom } from '../providers'
 
+const Z_INDEX_BASE = 50
+
 const raiseIframe = iframe => {
-  iframe.style.zIndex = 11
+  iframe.style.zIndex = 1 + Z_INDEX_BASE
   iframe.style.position = 'relative'
 }
 
@@ -69,7 +71,7 @@ const Shadow = styled.div(({ backdrop }) =>
     top: 0,
     bottom: 0,
     right: 0,
-    zIndex: 'modal',
+    zIndex: Z_INDEX_BASE,
     backgroundColor: backdrop
   })
 )
