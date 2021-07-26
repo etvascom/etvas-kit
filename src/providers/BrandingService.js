@@ -2,8 +2,7 @@ import EventEmitter from 'events'
 import { mergeDeep } from '@ivoryio/kogaio/assets/helpers'
 import isEqual from 'lodash/isEqual'
 import { InterCom } from './InterCom'
-import { hexToRgb } from '../utils'
-import { buildBrandColorVariants } from './buildBrandColorVariants'
+import { hexToRgb, changePerceivedLightnessToHex } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',
@@ -18,6 +17,14 @@ const varMapping = {
   logo: 'logo-url',
   logoSmall: 'logo-small-url',
   brandImage: 'brand-image-url'
+}
+
+const colorVariants = {
+  brandColorLight: 10,
+  brandColorLighter: 20,
+  brandColorLightest: 30,
+  brandColorDark: -10,
+  brandColorDarker: -20
 }
 
 export class BrandingService extends EventEmitter {
@@ -47,16 +54,16 @@ export class BrandingService extends EventEmitter {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
     const brandColorVariants = updates.brandColor
-      ? buildBrandColorVariants(updates.brandColor, updates)
+      ? this.buildBrandColorVariants(updates.brandColor, updates)
       : {}
-
-    if (isEqual(newVars, this.cssVars)) {
-      return
-    }
 
     this.cssVars = {
       ...newVars,
       ...brandColorVariants
+    }
+
+    if (isEqual(newVars, this.cssVars)) {
+      return
     }
 
     this.emit('change')
@@ -94,6 +101,18 @@ export class BrandingService extends EventEmitter {
     if (key) {
       return root.style.getPropertyValue(`--${this.prefix}-${key}`)
     }
+  }
+
+  buildBrandColorVariants(brandColor, existingColors) {
+    return Object.keys(colorVariants).reduce((colors, key) => {
+      if (!existingColors[key]) {
+        colors[key] = changePerceivedLightnessToHex(
+          brandColor,
+          colorVariants[key]
+        )
+      }
+      return colors
+    }, {})
   }
 }
 
