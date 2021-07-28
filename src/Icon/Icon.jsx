@@ -24,7 +24,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
     return (
       <BaseIcon
         path={glyphs[name]}
-        size={sizes[size]}
+        size={sizes[size] ?? sizes['small']}
         color={color}
         spin={rotate}
         {...props}
