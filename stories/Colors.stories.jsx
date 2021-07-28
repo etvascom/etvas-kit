@@ -1,98 +1,83 @@
 import React from 'react'
-import {
-  BrandingProvider,
-  Table,
-  Chip,
-  ThemeProvider,
-  BrandingService,
-  InterCom
-} from '../src'
+import { Flex, Box, Chip } from '../src'
 
-const { Row, Header, Body, Cell } = Table
+import { shading } from '../src/utils'
 
-const Layout = ({ brandingService }) => (
-  <BrandingProvider brandingService={brandingService}>
-    <ThemeProvider>
-      <Table breakpoint={400}>
-        <Header>
-          <Row>
-            <Cell>Brand Color</Cell>
-            <Cell>Brand Color Light</Cell>
-            <Cell>Brand Color Lighter</Cell>
-            <Cell>Brand Color Lightest</Cell>
-            <Cell>Brand Color Dark</Cell>
-            <Cell>Brand Color Darker</Cell>
-          </Row>
-        </Header>
-        <Body>
-          <Row>
-            <Cell>
-              <Chip color='brand'>Color test</Chip>
-            </Cell>
-            <Cell>
-              <Chip color='brandLight'>Color test</Chip>
-            </Cell>
-            <Cell>
-              <Chip color='brandLighter'>Color test</Chip>
-            </Cell>
-            <Cell>
-              <Chip color='brandLightest'>Color test</Chip>
-            </Cell>
-            <Cell>
-              <Chip color='brandDark'>Color test</Chip>
-            </Cell>
-            <Cell>
-              <Chip color='brandDarkest'>Color test</Chip>
-            </Cell>
-          </Row>
-        </Body>
-      </Table>
-    </ThemeProvider>
-  </BrandingProvider>
-)
+const variants = [
+  '#000000',
+  '#ffffff',
+  '#ff0000',
+  '#00ff00',
+  '#0000ff',
+  '#ffff00',
+  '#00ffff',
+  '#ff00ff',
+  '#c0c0c0',
+  '#808080',
+  '#800000',
+  '#808000',
+  '#008000',
+  '#800080',
+  '#008080',
+  '#000080',
+  '#d6e6ff',
+  '#330000',
+  '#B22222',
+  '#b8860b',
+  '#fffaf0',
+  '#ff8c00',
+  '#008b8b',
+  '#0040E3'
+]
 
-export default {
-  title: 'Demo/Colors'
+const variations = {
+  Lightest: 70,
+  Lighter: 45,
+  Light: 20,
+  zero: 0,
+  Dark: -33,
+  Darker: -66
 }
 
-const defaultBrandingService = new BrandingService({
-  prefix: 'etvas',
-  defaults: {
-    brandColor: '#0040E3',
-    brandColorLight: '#5585FF',
-    brandColorLighter: '#E6EEFF',
-    brandColorLightest: '#F5F7FD',
-    brandColorDark: '#002B99',
-    brandColorDarkest: '#00154D',
-    accentColor: '#ef6319',
-    textColor: '#000000',
-    lighterTextColor: '#35373b'
-  },
-  intercom: new InterCom()
-})
+const Layout = () => {
+  const processed = variants.map(base =>
+    Object.keys(variations).reduce(
+      (branding, colorName) => ({
+        ...branding,
+        [colorName]: shading(base, variations[colorName])
+      }),
+      { base }
+    )
+  )
 
-const lightBrandingService = new BrandingService({
-  prefix: 'etvas',
-  defaults: {
-    brandColor: '#d6e6ff',
-    accentColor: '#ef6319',
-    textColor: '#000000',
-    lighterTextColor: '#35373b'
-  },
-  intercom: new InterCom()
-})
+  return (
+    <Box>
+      {processed.map(colors => (
+        <Flex key={colors.base} my={2}>
+          <Chip color={colors.base}>BASE {colors.base}</Chip>
+          {Object.keys(variations).map(colorName => (
+            <Chip key={colorName} color={colors[colorName]}>
+              {colorName} {colors[colorName]}
+            </Chip>
+          ))}
+        </Flex>
+      ))}
 
-const darkBrandingService = new BrandingService({
-  prefix: 'etvas',
-  defaults: {
-    brandColor: '#330000',
-    accentColor: '#ef6319',
-    textColor: '#000000',
-    lighterTextColor: '#35373b'
-  },
-  intercom: new InterCom()
-})
+      <Flex>
+        <Chip color='#0040E3'>REF #0040E3</Chip>
+        <Chip color='#F5F7FD'>Lightest #F5F7FD</Chip>
+        <Chip color='#E6EEFF'>Lighter #E6EEFF</Chip>
+        <Chip color='#5585FF'>Light#5585FF</Chip>
+        <Chip color='#0040E3'>ZERO #0040E3</Chip>
+        <Chip color='#002B99'>Dark #002B99</Chip>
+        <Chip color='#00154D'>Darkest #00154D</Chip>
+      </Flex>
+    </Box>
+  )
+}
 
-export const Default = () => <Layout brandingService={defaultBrandingService} />
-export const Light = () => <Layout brandingService={lightBrandingService} />
-export const Dark = () => <Layout brandingService={darkBrandingService} />
+export default {
+  title: 'Guides/Colors'
+}
+
+export const Default = () => <Layout />

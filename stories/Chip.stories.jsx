@@ -1,5 +1,5 @@
 import React from 'react'
-import { Chip, Typography } from '../src'
+import { Chip } from '../src'
 
 export default {
   title: 'Demo/Chip',

@@ -2,7 +2,7 @@ import EventEmitter from 'events'
 import { mergeDeep } from '@ivoryio/kogaio/assets/helpers'
 import isEqual from 'lodash/isEqual'
 import { InterCom } from './InterCom'
-import { hexToRgb, changePerceivedLightnessToHex } from '../utils'
+import { hex2rgb, shading } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',
@@ -20,17 +20,14 @@ const varMapping = {
 }
 
 const colorVariants = {
-  brandColorLight: 10,
-  brandColorLighter: 20,
-  brandColorLightest: 30,
-  brandColorDark: -10,
-  brandColorDarker: -20
+  brandColorLightest: 70,
+  brandColorLighter: 45,
+  brandColorLight: 20,
+  brandColorDark: -33,
+  brandColorDarker: -66
 }
 
 export class BrandingService extends EventEmitter {
-  // this will handle reading cssVars from parent frames
-  // also passing down cssVars to child frames
-  // as instances of the same class will be running on both sides
   constructor({ intercom, defaults, prefix = 'etvas' }) {
     super()
     this.defaults = defaults
@@ -89,7 +86,7 @@ export class BrandingService extends EventEmitter {
 
     if (key) {
       if (key.substr(-5) === 'color') {
-        value = hexToRgb(value).join(',')
+        value = hex2rgb(value).join(',')
       }
       root.style.setProperty(`--${this.prefix}-${key}`, value)
     }
@@ -106,10 +103,7 @@ export class BrandingService extends EventEmitter {
   buildBrandColorVariants(brandColor, existingColors) {
     return Object.keys(colorVariants).reduce((colors, key) => {
       if (!existingColors[key]) {
-        colors[key] = changePerceivedLightnessToHex(
-          brandColor,
-          colorVariants[key]
-        )
+        colors[key] = shading(brandColor, colorVariants[key])
       }
       return colors
     }, {})
