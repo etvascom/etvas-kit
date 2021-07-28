@@ -22,21 +22,6 @@ const Button = ({
   iconPosition,
   ...rest
 }) => {
-  // const iconColor = useMemo(() => {
-  //   if (!icon || !iconPosition) {
-  //     return null
-  //   }
-  //   if (disabled && variant === 'link') {
-  //     return colors.disabled
-  //   }
-  //   // eslint-disable-next-line no-console
-  //   console.info('we got so far ', {
-  //     variant,
-  //     iconVariant: iconVariants[variant]
-  //   })
-  //   return iconVariants[variant].color
-  // }, [iconPosition, disabled, icon, variant])
-
   const hSpacing = useMemo(() => {
     if (!loading || variant.startsWith('link')) {
       return null

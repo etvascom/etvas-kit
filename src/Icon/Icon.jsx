@@ -25,7 +25,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
       <BaseIcon
         path={glyphs[name]}
         size={sizes[size] ?? size}
-        color={color}
+        svgColor={color}
         spin={rotate}
         {...props}
       />
@@ -40,11 +40,9 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
   )
 }
 
-const BaseIcon = styled(DefaultIcon)(({ color }) =>
+const BaseIcon = styled(DefaultIcon)(({ svgColor }) =>
   css({
-    '& path': {
-      fill: color
-    }
+    color: svgColor
   })
 )
 
