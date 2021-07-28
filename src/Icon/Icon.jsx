@@ -24,7 +24,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
     return (
       <BaseIcon
         path={glyphs[name]}
-        size={sizes[size]}
+        size={sizes[size] ?? size}
         svgColor={color}
         spin={rotate}
         {...props}
@@ -76,4 +76,8 @@ Icon.propTypes = {
     PropTypes.string
   ]),
   rotate: PropTypes.bool
+}
+
+Icon.defaultProps = {
+  size: 'small'
 }
