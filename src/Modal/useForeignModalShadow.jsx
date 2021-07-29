@@ -18,11 +18,21 @@ const resetIframe = iframe => {
 export const useForeignModalShadow = () => {
   const intercom = useRef(new InterCom('etvas.modal'))
   const [backdrop, setBackdrop] = useState()
+  const [animated, setAnimated] = useState(true)
   const iframeRef = useRef()
 
-  const handleBackdrop = useCallback(backdrop => setBackdrop(backdrop), [
-    setBackdrop
-  ])
+  const showBackdrop = useCallback(
+    payload => {
+      if (payload && typeof payload === 'object' && payload.backDrop) {
+        setBackdrop(payload.backDrop)
+        setAnimated(payload.animated)
+      } else {
+        setBackdrop(payload)
+        setAnimated(false)
+      }
+    },
+    [setBackdrop, setAnimated]
+  )
 
   const handleBackdropClick = useCallback(() => {
     intercom.current.request('modal.close', true)
@@ -30,11 +40,11 @@ export const useForeignModalShadow = () => {
 
   useLayoutEffect(() => {
     const instance = intercom.current
-    instance.onRequest('modal', handleBackdrop)
+    instance.onRequest('modal', showBackdrop)
     return () => {
-      instance.offRequest('modal', handleBackdrop)
+      instance.offRequest('modal', showBackdrop)
     }
-  }, [intercom, handleBackdrop])
+  }, [intercom, showBackdrop])
 
   useLayoutEffect(() => {
     const iframe = iframeRef.current
@@ -57,6 +67,7 @@ export const useForeignModalShadow = () => {
   return [
     iframeRef,
     <Shadow
+      animated={animated}
       backdrop={backdrop}
       key='backdrop-global'
       onClick={handleBackdropClick}
@@ -64,14 +75,24 @@ export const useForeignModalShadow = () => {
   ]
 }
 
-const Shadow = styled.div(({ backdrop }) =>
-  css({
-    position: 'fixed',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    zIndex: Z_INDEX_BASE,
-    backgroundColor: backdrop
-  })
+const Shadow = styled.div(
+  ({ backdrop }) =>
+    css({
+      position: 'fixed',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      zIndex: Z_INDEX_BASE,
+      backgroundColor: backdrop
+    }),
+  ({ animated }) =>
+    animated &&
+    `@keyframes modal {
+        from { opacity: 0; }
+        to { opacity: 100%; }
+    }
+    animation-fill-mode: forwards;
+    animation-name: modal;
+    animation-duration:0.5s;`
 )

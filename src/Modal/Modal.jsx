@@ -57,23 +57,18 @@ export const Modal = ({
 
   useEffect(() => {
     const instance = intercom.current
-
-    if (backDrop) {
-      instance.request('modal', backDrop)
-      if (onBackDropClick) {
-        instance.onRequest('modal.close', onBackDropClick)
-      }
+    instance.request('modal', { backDrop, animated })
+    if (onBackDropClick) {
+      instance.onRequest('modal.close', onBackDropClick)
     }
 
     return () => {
-      if (backDrop) {
-        instance.request('modal', null)
-        if (onBackDropClick) {
-          instance.offRequest('modal.close', onBackDropClick)
-        }
+      instance.request('modal', null)
+      if (onBackDropClick) {
+        instance.offRequest('modal.close', onBackDropClick)
       }
     }
-  }, [backDrop, intercom, onBackDropClick])
+  }, [backDrop, animated, intercom, onBackDropClick])
 
   useLayoutEffect(() => {
     disableScroll()
