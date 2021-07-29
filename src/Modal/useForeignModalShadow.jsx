@@ -18,24 +18,32 @@ const resetIframe = iframe => {
 export const useForeignModalShadow = () => {
   const intercom = useRef(new InterCom('etvas.modal'))
   const [backdrop, setBackdrop] = useState()
-  const [animated, setAnimated] = useState(true)
+  const [animated, setAnimated] = useState(false)
   const iframeRef = useRef()
+  const tk = useRef(null)
 
   const showBackdrop = useCallback(
     payload => {
       if (payload && typeof payload === 'object' && payload.backDrop) {
+        clearTimeout(tk.current)
         setBackdrop(payload.backDrop)
-        setAnimated(payload.animated)
-      } else {
+        setAnimated(!!payload.animated)
+      } else if (payload) {
+        clearTimeout(tk.current)
         setBackdrop(payload)
         setAnimated(false)
+      } else {
+        setAnimated(false)
+        tk.current = setTimeout(() => {
+          setBackdrop(null)
+        }, 0)
       }
     },
     [setBackdrop, setAnimated]
   )
 
   const handleBackdropClick = useCallback(() => {
-    intercom.current.request('modal.close', true)
+    intercom.current.request('modal.close', null)
   }, [intercom])
 
   useLayoutEffect(() => {
