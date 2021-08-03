@@ -13,8 +13,7 @@ let currentGlyphs = { ...glyphs }
 
 export const addIcon = (name, icon) => {
   if (currentGlyphs[name]) {
-    console.warn(`trying to redefine icon ${name}`)
-    return
+    console.warn(`Warning: existing icon ${name} is overwritten`)
   }
 
   currentGlyphs[name] = icon
