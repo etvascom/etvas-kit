@@ -9,21 +9,43 @@ import animationSpeeds from '../assets/animationSpeeds'
 import { default as DefaultIcon } from '@mdi/react'
 import sizes from '../assets/sizes'
 
-export const Icon = ({ name, size, color, rotate, ...props }) => {
-  const glyph = useMemo(() => {
+let currentGlyphs = { ...glyphs }
+
+export const addIcon = (name, icon) => {
+  if (currentGlyphs[name]) {
+    console.warn(`trying to redefine icon ${name}`)
+    return
+  }
+
+  currentGlyphs[name] = icon
+}
+
+export const addIcons = icons => {
+  Object.keys(icons).forEach(key => addIcon(key, icons[key]))
+}
+
+export const Icon = ({ name, size, color, rotate, face, ...props }) => {
+  const [glyph, isOldVersion] = useMemo(() => {
     if (typeof name === 'number') {
-      return String.fromCharCode(name)
+      return [String.fromCharCode(name), true]
     }
-    if (typeof name === 'string' && typeof glyphs[name] === 'number') {
-      return String.fromCharCode(glyphs[name])
+
+    if (typeof name === 'string' && typeof currentGlyphs[name] === 'number') {
+      return [String.fromCharCode(currentGlyphs[name]), true]
     }
-    return name
+
+    return [name, false]
   }, [name])
 
-  if (typeof name === 'string' && typeof glyphs[name] === 'string') {
+  const path = useMemo(() => {
+    if (name) return currentGlyphs[name]
+    return face
+  }, [name, face])
+
+  if (!isOldVersion) {
     return (
       <BaseIcon
-        path={glyphs[name]}
+        path={path}
         size={sizes[size] ?? size}
         svgColor={color}
         spin={rotate}
@@ -31,6 +53,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => {
       />
     )
   }
+
   console.warn('You are using the old version of icons', glyph)
 
   return (
@@ -75,7 +98,8 @@ Icon.propTypes = {
     PropTypes.object,
     PropTypes.string
   ]),
-  rotate: PropTypes.bool
+  rotate: PropTypes.bool,
+  face: PropTypes.string
 }
 
 Icon.defaultProps = {

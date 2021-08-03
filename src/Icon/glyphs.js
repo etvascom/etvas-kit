@@ -85,7 +85,8 @@ import {
   mdiChevronUpCircleOutline,
   mdiRocket,
   mdiClipboardText,
-  mdiFolder
+  mdiFolder,
+  mdiMagnify
 } from '@mdi/js'
 
 export default {
@@ -175,6 +176,7 @@ export default {
   circleArrowBottom: mdiChevronDownCircleOutline,
   rocket: mdiRocket,
   clipboardText: mdiClipboardText,
+  search: mdiMagnify,
   // 'products': '',
   ...oldGlyphs
 }
