@@ -36,15 +36,10 @@ export const Icon = ({ name, size, color, rotate, face, ...props }) => {
     return [name, false]
   }, [name])
 
-  const path = useMemo(() => {
-    if (face) return face
-    return currentGlyphs[name]
-  }, [name, face])
-
   if (!isOldVersion) {
     return (
       <BaseIcon
-        path={path}
+        path={face ? face : currentGlyphs[name]}
         size={sizes[size] ?? size}
         svgColor={color}
         spin={rotate}

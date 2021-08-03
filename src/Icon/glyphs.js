@@ -90,6 +90,7 @@ import {
 } from '@mdi/js'
 
 export default {
+  ...oldGlyphs,
   eye: mdiEye,
   eyeNo: mdiEyeOff,
   menuUp: mdiMenuUp,
@@ -176,7 +177,6 @@ export default {
   circleArrowBottom: mdiChevronDownCircleOutline,
   rocket: mdiRocket,
   clipboardText: mdiClipboardText,
-  search: mdiMagnify,
+  search: mdiMagnify
   // 'products': '',
-  ...oldGlyphs
 }
