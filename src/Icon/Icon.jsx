@@ -38,8 +38,8 @@ export const Icon = ({ name, size, color, rotate, face, ...props }) => {
   }, [name])
 
   const path = useMemo(() => {
-    if (name) return currentGlyphs[name]
-    return face
+    if (face) return face
+    return currentGlyphs[name]
   }, [name, face])
 
   if (!isOldVersion) {
