@@ -10,7 +10,7 @@ export default {
 export const Default = () => <Icon name='circleArrowLeft' />
 export const Color = () => <Icon name='circleArrowLeft' color='brand' />
 export const Size = () => (
-  <Flex justifyContent='start'>
+  <Flex alignItems='start'>
     <Flex
       m={4}
       flexDirection='column'
