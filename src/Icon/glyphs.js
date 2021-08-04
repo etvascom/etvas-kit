@@ -131,8 +131,7 @@ import {
   mdiTabRemove
 } from '@mdi/js'
 
-export default {
-  ...oldGlyphs,
+const baseIcons = {
   eye: mdiEye,
   eyeNo: mdiEyeOff,
   menuUp: mdiMenuUp,
@@ -264,8 +263,32 @@ export default {
   iphone: mdiCellphone,
   laptop: mdiLaptop,
   route: mdiMapMarkerPath,
-  pos: mdiCashRegister,
-  browser: mdiTab,
-  browserNo: mdiTabRemove,
-  form: mdiViewDayOutline
+  cashRegister: mdiCashRegister,
+  tab: mdiTab,
+  tabRemove: mdiTabRemove,
+  viewDayOutline: mdiViewDayOutline
 }
+
+const oldIconNames = {
+  viewDayOutline: ['form'],
+  tabRemove: ['browserNo'],
+  tab: ['browser'],
+  cashRegister: ['pos']
+}
+
+const populateIcons = () => {
+  let backwardsCompatibilityIcons = {}
+
+  Object.keys(oldIconNames).forEach(iconName =>
+    oldIconNames[iconName].forEach(alias => {
+      backwardsCompatibilityIcons[alias] = baseIcons[iconName]
+    })
+  )
+
+  return {
+    ...baseIcons,
+    ...backwardsCompatibilityIcons
+  }
+}
+
+export default populateIcons()
