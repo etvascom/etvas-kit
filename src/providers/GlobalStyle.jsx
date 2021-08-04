@@ -1,9 +1,6 @@
 import { themed } from '@ivoryio/kogaio/utils'
 import { createGlobalStyle } from 'styled-components'
 
-import EtvasIconsWoff from '../assets/icon-font/etvas-icons.woff'
-import EtvasIconsWoff2 from '../assets/icon-font/etvas-icons.woff2'
-
 import LightFont from '../assets/webfont/light.woff'
 import LightFont2 from '../assets/webfont/light.woff2'
 
@@ -58,14 +55,6 @@ html {
 
 a { 
   text-decoration: none;
-}
-@font-face {
-  font-family: 'EtvasIcons';
-  src: local('EtvasIcons'), local('EtvasIcons'),
-  url(${EtvasIconsWoff2}) format('woff2'),
-  url(${EtvasIconsWoff}) format('woff');
-  font-weight: 300;
-  font-style: normal;
 }
 
 /* FONTS */
