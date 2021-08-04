@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -9,61 +9,51 @@ import animationSpeeds from '../assets/animationSpeeds'
 import { default as DefaultIcon } from '@mdi/react'
 import sizes from '../assets/sizes'
 
-export const Icon = ({ name, size, color, rotate, ...props }) => {
-  const glyph = useMemo(() => {
-    if (typeof name === 'number') {
-      return String.fromCharCode(name)
-    }
-    if (typeof name === 'string' && typeof glyphs[name] === 'number') {
-      return String.fromCharCode(glyphs[name])
-    }
-    return name
-  }, [name])
+const externalGlyphs = {}
 
-  if (typeof name === 'string' && typeof glyphs[name] === 'string') {
-    return (
-      <BaseIcon
-        path={glyphs[name]}
-        size={sizes[size] ?? size}
-        svgColor={color}
-        spin={rotate}
-        {...props}
-      />
-    )
+const addIcon = (name, icon) => {
+  if (externalGlyphs[name] && externalGlyphs[name] !== icon) {
+    console.warn('* Warning: overwriting injected icon', name)
   }
-  console.warn('You are using the old version of icons', glyph)
-
-  return (
-    <StyledI color={color} size={size} rotate={rotate} {...props}>
-      {glyph || 'undefined'}
-    </StyledI>
-  )
+  externalGlyphs[name] = icon
 }
 
-const BaseIcon = styled(DefaultIcon)(({ svgColor }) =>
-  css({
-    color: svgColor
-  })
+export const addIcons = icons => {
+  Object.keys(icons).forEach(key => addIcon(key, icons[key]))
+}
+
+const validate = name => {
+  if (/^[acglmqstvz][ 0-9.]+/gi.test(name)) {
+    return name
+  }
+
+  return 'M0 0L24 0L24 24 L0 24Z'
+}
+
+export const Icon = ({ name, size, color, rotate, ...props }) => (
+  <BaseIcon
+    path={externalGlyphs[name] || glyphs[name] || validate(name)}
+    size={sizes[size] ?? size}
+    svgColor={color}
+    spin={rotate}
+    {...props}
+  />
 )
 
-const StyledI = styled.i(({ color, size, rotate }) =>
+const BaseIcon = styled(DefaultIcon)(({ svgColor, spin }) =>
   css({
-    fontFamily: 'EtvasIcons',
-    fontStyle: 'unset',
-    fontWeight: 'normal',
-    fontSize: size,
-    lineHeight: size,
-    color,
-    animation: rotate
+    color: svgColor,
+    animation: spin
       ? `rotation ${animationSpeeds.rotation} infinite linear`
       : ''
   })
 )
 
 Icon.glyphs = glyphs
+Icon.externalGlyphs = externalGlyphs
 
 Icon.propTypes = {
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string,
   size: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,
