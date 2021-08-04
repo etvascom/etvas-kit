@@ -128,11 +128,10 @@ import {
   mdiViewDayOutline,
   mdiTab,
   mdiTabRemove,
-  mdiMagnify,
-  mdiMapMarkerPaths
+  mdiMagnify
 } from '@mdi/js'
 
-const baseIcons = {
+export const baseIcons = {
   accountGroup: mdiAccountGroup,
   accountStar: mdiAccountStar,
   alertCircle: mdiAlertCircle,
@@ -261,8 +260,7 @@ const baseIcons = {
   viewDayOutline: mdiViewDayOutline,
   tab: mdiTab,
   tabRemove: mdiTabRemove,
-  magnify: mdiMagnify,
-  mapMarkerPaths: mdiMapMarkerPaths
+  magnify: mdiMagnify
 }
 
 /**
@@ -270,7 +268,7 @@ const baseIcons = {
  *  - key is the alternate (old name)
  *  - value is our actual
  */
-const alternates = {
+export const alternates = {
   // old icons = backwards compatibility
   form: mdiViewDayOutline,
   browserNo: mdiTabRemove,
@@ -325,7 +323,7 @@ const alternates = {
   shieldNo: mdiShieldOffOutline,
   trash: mdiDelete,
   iphone: mdiCellphone,
-  route: mdiMapMarkerPaths
+  route: mdiMapMarkerPath
 }
 
 export default {
