@@ -42,7 +42,7 @@ export const Icon = ({ name, size, color, rotate, ...props }) => (
   </Wrapper>
 )
 
-const Wrapper = styled.span(({ color }) => css({ color }))
+const Wrapper = styled.span(({ color }) => css({ color, fontSize: '1px' }))
 
 const BaseIcon = styled(DefaultIcon)(({ spin }) =>
   css({
