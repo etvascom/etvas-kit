@@ -49,7 +49,11 @@ const Dropdown = ({
 
   useLayoutEffect(() => {
     const clickOutside = event => {
-      if (!wrapper.current.contains(event.target)) {
+      if (
+        !wrapper ||
+        !wrapper.current ||
+        !wrapper.current.contains(event.target)
+      ) {
         setCollapsed(true)
       }
     }
