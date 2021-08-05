@@ -1,6 +1,5 @@
 import React, {
   forwardRef,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -69,16 +68,16 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     setCursorPositionChangedToggler
   ] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onClickOutside = event => {
-      if (wrapperRef.current.contains(event.target)) {
+      if (wrapperRef.current && wrapperRef.current.contains(event.target)) {
         return
       }
       setDropdownOpen(false)
     }
 
-    document.addEventListener('click', onClickOutside)
-    return () => document.removeEventListener('click', onClickOutside)
+    window.addEventListener('click', onClickOutside)
+    return () => window.removeEventListener('click', onClickOutside)
   }, [])
 
   useLayoutEffect(() => {
@@ -100,9 +99,9 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   const currentIcRight = useMemo(() => {
     if (loading) return 'loading'
     else if (error || warning) return 'alertCircle'
-    else if (valid || !icRight) return 'check'
+    else if (valid) return 'check'
 
-    return icRight
+    return null
   }, [loading, error, warning, valid])
 
   const currentIcRightColor = useMemo(() => {
