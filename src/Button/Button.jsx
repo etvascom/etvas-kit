@@ -6,7 +6,7 @@ import propTypes from '@styled-system/prop-types'
 
 import { Typography } from '../Typography'
 import { Flex, Space } from '../'
-import variants, { spinnerVariants } from './variants'
+import variants from './variants'
 import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
 
@@ -45,7 +45,7 @@ const Button = ({
         <Icon
           size='medium'
           name='loading'
-          color={spinnerVariants[variant].primary}
+          color={variant.color || 'brand'}
           rotate={true}
         />
       ) : (

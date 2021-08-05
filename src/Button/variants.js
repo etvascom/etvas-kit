@@ -100,15 +100,3 @@ export default {
   linkSecondary: LINK_STYLE,
   linkPositive: LINK_POSITIVE_STYLE
 }
-
-const PRIMARY_SPINNER_VARIANT = { primary: 'white' }
-export const spinnerVariants = {
-  primary: PRIMARY_SPINNER_VARIANT,
-  large: PRIMARY_SPINNER_VARIANT,
-  link: PRIMARY_SPINNER_VARIANT,
-  outline: PRIMARY_SPINNER_VARIANT,
-  outlineAlt: PRIMARY_SPINNER_VARIANT,
-  positive: PRIMARY_SPINNER_VARIANT,
-  linkSecondary: PRIMARY_SPINNER_VARIANT,
-  linkPositive: PRIMARY_SPINNER_VARIANT
-}
