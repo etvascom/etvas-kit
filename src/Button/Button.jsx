@@ -6,7 +6,7 @@ import propTypes from '@styled-system/prop-types'
 
 import { Typography } from '../Typography'
 import { Flex, Space } from '../'
-import variants, { spinnerVariants } from './variants'
+import variants from './variants'
 import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
 
@@ -42,12 +42,7 @@ const Button = ({
       hSpacing={hSpacing}
       {...rest}>
       {loading ? (
-        <Icon
-          size='medium'
-          name='loading'
-          color={spinnerVariants[variant].primary}
-          rotate={true}
-        />
+        <Icon size='medium' name='loading' rotate={true} />
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
@@ -73,7 +68,6 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
-                color='inherit'
               />
             </Space>
           )}
