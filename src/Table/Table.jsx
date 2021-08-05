@@ -11,9 +11,16 @@ import { Row } from './Row'
 import { Body } from './Body'
 import { Header } from './Header'
 
+const useResizeObserverRaf = () => {
+  const [size, setSize] = useState({ width: undefined, height: undefined })
+  const onResize = size => requestAnimationFrame(() => setSize(size))
+  const { ref } = useResizeObserver({ onResize })
+  return { ref, ...size }
+}
+
 export const Table = ({ mode, breakpoint, ...props }) => {
   const [cells, setCells] = useState([])
-  const { ref, width = 1 } = useResizeObserver()
+  const { ref, width = 1 } = useResizeObserverRaf()
 
   const actualMode = useMemo(() => {
     if (mode) {

@@ -35,6 +35,7 @@ export const TextArea = forwardRef(
       loading,
       warning,
       textAreaProps,
+      tinted,
       ...rest
     },
     ref
@@ -80,6 +81,7 @@ export const TextArea = forwardRef(
             maxLength={maxLength}
             cols={cols}
             rows={rows}
+            tinted={tinted}
             {...textAreaProps}
           />
         </Flex>
@@ -122,6 +124,7 @@ TextArea.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.node,
   name: PropTypes.string,
+  tinted: PropTypes.bool,
   /** dummy space added for consistent spacing with validated inputs.
    *
    * remove space by setting this to true */

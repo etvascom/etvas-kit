@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import { useField } from 'formik'
 import { Input } from '../Input'
@@ -6,7 +6,7 @@ import { Input } from '../Input'
 import { fieldShape } from './shapes'
 import { makeId } from './utils'
 
-export const TextField = props => {
+export const TextField = forwardRef((props, ref) => {
   const [field, meta] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
 
@@ -17,10 +17,10 @@ export const TextField = props => {
       id={id}
       error={meta.touched && meta.error}
       valid={hasValidation(props) && !meta.error && meta.touched}
-      tinted={props.tinted}
+      ref={ref}
     />
   )
-}
+})
 
 const hasValidation = props => props.validate || props.required
 
@@ -28,8 +28,7 @@ TextField.propTypes = {
   ...fieldShape,
   type: PropTypes.string,
   placeholder: PropTypes.node,
-  required: PropTypes.bool,
-  tinted: PropTypes.bool
+  required: PropTypes.bool
 }
 
 TextField.defaultProps = {
