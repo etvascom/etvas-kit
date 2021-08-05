@@ -71,7 +71,11 @@ const PhoneNumberInput = forwardRef((props, ref) => {
 
   useEffect(() => {
     const onClickOutside = event => {
-      if (wrapperRef.current.contains(event.target)) {
+      if (
+        wrapperRef &&
+        wrapperRef.current &&
+        wrapperRef.current.contains(event.target)
+      ) {
         return
       }
       setDropdownOpen(false)
