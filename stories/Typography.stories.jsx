@@ -10,11 +10,13 @@ export default {
 
 export const Variants = () => {
   const variants = [
+    'textSmallest',
     'textSmall',
     'textLarge',
-    'titleLargest',
-    'labelLarge',
     'titleSmall',
+    'labelLarge',
+    'titleLarge',
+    'titleLargest',
     'labelSmall',
     'labelSmallBold',
     'labelButton'
@@ -65,5 +67,20 @@ export const ResponsiveVariant = () => (
     <Typography variant={['labelButton', 'textSmall', 'titleLargest']}>
       Typography that changes variant across device sizes
     </Typography>
+  </Card>
+)
+
+const weights = [100, 200, 300, 400, 500, 600, 700, 800, 900]
+
+export const NoStyling = () => (
+  <Card width='100%' p={2} m={1} fontFamily='"Helvetica Now"'>
+    {weights.map(weight => (
+      <>
+        <b style={{ color: 'gray' }}>FONT WEIGHT: {weight}</b>
+        <p style={{ fontWeight: weight }}>
+          The quick brown fox jumps over the lazy dog.
+        </p>
+      </>
+    ))}
   </Card>
 )

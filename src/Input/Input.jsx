@@ -9,12 +9,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
+import { variant } from 'styled-system'
+import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Icon } from '../Icon'
 import { Typography, typography } from '../Typography'
-import { Flex, Space } from '@ivoryio/kogaio'
+import { Flex } from '@ivoryio/kogaio'
 
 import { PasswordToggler } from './PasswordToggler'
-import { ErrorMessage } from './ErrorMessage'
+import { default as variants } from './Input.variants'
+import { SubLabel } from './SubLabel'
 
 export const Input = forwardRef(
   (
@@ -23,6 +26,7 @@ export const Input = forwardRef(
       autoFocus,
       disabled,
       error,
+      warning,
       icLeft,
       icRight,
       id,
@@ -38,6 +42,12 @@ export const Input = forwardRef(
       valid,
       value,
       variant,
+      subLabel,
+      loading,
+      tinted,
+      showValidationCheck,
+      onInputClick,
+      extension,
       ...rest
     },
     ref
@@ -46,11 +56,30 @@ export const Input = forwardRef(
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
-      if (disabled) return 'disabled'
+      if (disabled || loading) return 'disabled'
       else if (error) return 'error'
+      else if (warning) return 'warning'
       else if (valid) return 'valid'
       return variant
-    }, [disabled, error, valid, variant])
+    }, [loading, disabled, error, warning, valid, variant])
+
+    const currentIcRight = useMemo(() => {
+      if (loading) return 'loading'
+      else if (error || warning) return 'alertCircle'
+      else if (valid || !icRight) return 'check'
+
+      return icRight
+    }, [loading, error, warning, valid, icRight])
+
+    const currentIcRightColor = useMemo(() => {
+      if (loading) return 'brand'
+      else if (disabled) return 'inputBorderGray'
+      else if (error) return 'error'
+      else if (warning) return 'warning'
+      else if (valid) return 'success'
+
+      return 'inputIcon'
+    }, [loading, error, warning, valid, disabled])
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 
@@ -70,22 +99,26 @@ export const Input = forwardRef(
       [inputType, ref, inputRef, resetInputType]
     )
 
+    const icStateIsNotIconToggle = () => type !== 'password' || error || loading
+
     return (
-      <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <StyledFlex flexDirection='column' width={1} {...rest}>
         {label ? (
           <Typography
             as='label'
             htmlFor={id}
             variant='inputLabel'
             width='fit-content'>
-            {label} {required ? '*' : ''}
+            {label}
           </Typography>
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
+            tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            disabled={readOnly || disabled}
+            ariaDisabled={readOnly || disabled}
+            disabled={disabled}
             error={error}
             hasLabel={label}
             hasIcLeft={icLeft}
@@ -100,11 +133,13 @@ export const Input = forwardRef(
             type={inputType}
             value={value}
             variant={inputVariant}
+            onClick={onInputClick}
             {...rest}
           />
+          {extension}
           {icLeft ? (
             <Icon
-              fontSize={3}
+              size='small'
               left={2}
               name={icLeft}
               pointerEvents='none'
@@ -113,12 +148,17 @@ export const Input = forwardRef(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icRight ? (
-              <Space mr={1}>
-                <Icon fontSize={3} name={icRight} />
-              </Space>
-            ) : null}
-            {type === 'password' && value ? (
+            {icStateIsNotIconToggle() && currentIcRight ? (
+              currentIcRight === 'check' && !showValidationCheck ? null : (
+                <Icon
+                  mr={5}
+                  size='small'
+                  name={currentIcRight}
+                  color={currentIcRightColor}
+                  rotate={currentIcRight === 'loading'}
+                />
+              )
+            ) : (
               <PasswordToggler
                 error={!!error}
                 inputType={inputType}
@@ -127,52 +167,51 @@ export const Input = forwardRef(
                 onToggle={togglePassword}
                 viewOption={passwordView}
               />
-            ) : null}
+            )}
           </Flex>
         </Flex>
-        <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
-      </Flex>
+        <SubLabel
+          content={error || warning || subLabel}
+          variant={inputVariant}
+          preserveSpace={!noBottomSpace}
+        />
+      </StyledFlex>
     )
   }
 )
 
+const StyledFlex = styled(Flex)`
+  &:focus-within {
+    label {
+      color: ${themed('colors.textInputFocused')};
+    }
+  }
+`
+
 const StyledInput = styled.input(
   css({
-    ...typography.labelSmall,
-    display: 'block',
-    width: '100%',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
-    outline: 'none',
-    color: 'text',
-    padding: 3,
-    ':hover, :focus': {
-      borderWidth: 1,
-      borderStyle: 'solid'
-    }
+    ...typography.labelSmall
   }),
-  ({ error }) =>
-    error
-      ? css({
-          color: 'error',
-          borderColor: 'error'
-        })
-      : null,
-  ({ disabled }) =>
-    disabled
-      ? css({
-          opacity: 0.5
-        })
-      : null
+  variant({ variants }),
+  ({ tinted, error, warn, disabled }) => ({
+    backgroundColor: tinted && !(error || warn || disabled) && 'white',
+    borderColor: tinted && !(error || warn || disabled) && 'white'
+  })
 )
 
 Input.propTypes = {
   ...propTypes.inputStyle,
+  tinted: PropTypes.bool,
+  loading: PropTypes.bool,
+  subLabel: PropTypes.string,
   autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   disabled: PropTypes.bool,
+  warning: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
   error: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.node,
@@ -199,7 +238,9 @@ Input.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.object
-  ])
+  ]),
+  onInputClick: PropTypes.func,
+  extension: PropTypes.node
 }
 
 Input.defaultProps = {
@@ -210,7 +251,9 @@ Input.defaultProps = {
   readOnly: false,
   type: 'text',
   value: '',
-  variant: 'default'
+  tinted: false,
+  variant: 'default',
+  showValidationCheck: false
 }
 
 Input.displayName = 'Input'

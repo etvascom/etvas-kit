@@ -12,21 +12,52 @@ export const DropdownField = ({
   required,
   multiple,
   itemFilter,
+  valueRender,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props)
 
-  const handleChange = useCallback(v => helpers.setValue(v), [helpers])
+  const handleChange = useCallback(value => helpers.setValue(value), [helpers])
 
-  const selectedOption = useMemo(
-    () =>
-      options.find(option => field.value === option[optionAttributes.value]),
-    [field, options, optionAttributes]
-  )
-  const selectedLabel = selectedOption
-    ? selectedOption[optionAttributes.label]
-    : undefined
-  const selectedValue = selectedOption
+  const selectedOption = useMemo(() => {
+    if (multiple) {
+      const values = field.value ?? []
+      return options.filter(option => values.includes(option.id))
+    }
+
+    return options.find(
+      option => field.value === option[optionAttributes.value]
+    )
+  }, [field, options, optionAttributes, multiple])
+
+  const renderSelectedLabel = value => {
+    if (multiple) {
+      const selectedOptions = options.filter(option =>
+        value.includes(option.value)
+      )
+      const selectedOptionsLabel = `${selectedOptions
+        .slice(0, 3)
+        .map(opt => opt.label)
+        .join(', ')}${
+        selectedOptions.length > 3
+          ? ` + ${selectedOptions.length - 3} more`
+          : ''
+      }`
+      return selectedOptionsLabel
+    }
+
+    if (selectedOption) {
+      return selectedOption[optionAttributes.label]
+    }
+
+    return ''
+  }
+
+  const selectedLabel = valueRender || renderSelectedLabel
+
+  const selectedValue = multiple
+    ? field.value
+    : selectedOption
     ? selectedOption[optionAttributes.value]
     : undefined
 
@@ -64,14 +95,14 @@ export const DropdownField = ({
 
   return (
     <Dropdown
-      {...props}
       onChange={handleChange}
       label={props.label}
       value={selectedValue}
       itemFilter={filterItem}
-      valueRender={selectedLabel}
       required={required}
       error={errorDisplay}
+      multiple={multiple}
+      valueRender={selectedLabel}
       {...props}>
       {options.map(option => (
         <Dropdown.Option
@@ -92,7 +123,9 @@ DropdownField.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string
   }),
-  itemFilter: PropTypes.func
+  itemFilter: PropTypes.func,
+  multiple: PropTypes.bool,
+  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
 }
 
 DropdownField.defaultProps = {

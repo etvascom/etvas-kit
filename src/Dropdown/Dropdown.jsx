@@ -13,9 +13,11 @@ import css from '@styled-system/css'
 import { Flex } from '@ivoryio/kogaio'
 
 import { Typography, typography } from '../Typography'
-import { ErrorMessage } from '../Input'
+import { Icon } from '../Icon'
 import Option from './Option'
 import Heading from './Heading'
+import sizes from '../assets/sizes'
+import { SubLabel } from '../Input/SubLabel'
 
 const Dropdown = ({
   disabled,
@@ -34,6 +36,7 @@ const Dropdown = ({
   itemFilter,
   searchPlaceholder,
   onChange,
+  tinted,
   children,
   ...props
 }) => {
@@ -122,14 +125,14 @@ const Dropdown = ({
 
   const onSelectItem = option => {
     if (multiple) {
-      const old = isEmpty ? [] : [...value]
-      const idx = old.indexOf(option)
+      const newValues = isEmpty ? [] : [...value]
+      const idx = newValues.indexOf(option)
       if (idx >= 0) {
-        old.splice(idx, 1)
+        newValues.splice(idx, 1)
       } else {
-        old.push(option)
+        newValues.push(option)
       }
-      onChange(old)
+      onChange(newValues)
     } else {
       onChange(option)
       setTimeout(() => {
@@ -157,15 +160,21 @@ const Dropdown = ({
 
   const isItemSelected = item => (!isEmpty ? itemSelected(value, item) : false)
 
+  const dropdownBorderClr = useMemo(
+    () =>
+      !isCollapsed && !disabled && !error ? 'brandLight' : 'inputBorderGray',
+    [disabled, error, isCollapsed]
+  )
+
   return (
-    <Flex flexDirection='column' hasLabel={label} width={1} {...props}>
+    <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
       {label ? (
         <Typography
           as='label'
           htmlFor={cId}
           variant='inputLabel'
           width='fit-content'>
-          {label} {required ? '*' : ''}
+          {label}
         </Typography>
       ) : null}
       <DropdownWrapper
@@ -174,24 +183,24 @@ const Dropdown = ({
         aria-haspopup={!disabled}
         aria-expanded={!isCollapsed}
         ref={wrapper}
-        disabled={disabled}
-        collapsed={isCollapsed}
         error={error}
         {...props}>
         <StyledIndicator
-          type='button'
-          role='display'
+          size='small'
+          color='inputIcon'
           onClick={toggleDropdown}
-          collapsed={isCollapsed}
-          disabled={disabled}
+          aria-expanded={!isCollapsed}
+          aria-disabled={disabled}
+          name='menuDown'
         />
         <Toggler
-          collapsed={isCollapsed}
+          dataCollapsed={isCollapsed}
           disabled={disabled}
-          isEmpty={isEmpty}
           type='button'
           role='switch'
           aria-controls={`drop-${cId}`}
+          error={error}
+          tinted={tinted}
           onClick={toggleDropdown}>
           {isEmpty ? placeholder : displayValue}
         </Toggler>
@@ -202,7 +211,8 @@ const Dropdown = ({
           onMouseUp={decide}
           onTouchStart={clicked}
           onTouchMove={inhibit}
-          onTouchEnd={decide}>
+          onTouchEnd={decide}
+          borderClr={dropdownBorderClr}>
           {hasSearch ? (
             <SearchInput
               ref={searchField}
@@ -210,7 +220,7 @@ const Dropdown = ({
               id={`search-${cId}`}
               type='search'
               role='searchbox'
-              autocomplete='off'
+              autocomplete='false'
               onChange={setSearchText}
             />
           ) : null}
@@ -219,17 +229,26 @@ const Dropdown = ({
               isValidElement(child)
                 ? cloneElement(child, {
                     onSelectItem,
-                    isSelected: isItemSelected(child.props.value)
+                    isSelected: isItemSelected(child.props.value),
+                    hasCheckbox: multiple
                   })
                 : null
             )}
           </ScrollingList>
         </DropdownList>
       </DropdownWrapper>
-      <ErrorMessage error={error} preserveSpace={!noBottomSpace} />
-    </Flex>
+      <SubLabel
+        variant='error'
+        content={error}
+        preserveSpace={!noBottomSpace}
+      />
+    </StyledFlex>
   )
 }
+
+const StyledFlex = styled(Flex)(
+  css({ '&:focus-within': { label: { color: 'textInputFocused' } } })
+)
 
 const Toggler = styled.button(
   css({
@@ -237,19 +256,26 @@ const Toggler = styled.button(
     appearance: 'none',
     textAlign: 'left',
     cursor: 'pointer',
-    padding: 3,
+    paddingY: 2,
+    paddingLeft: 2,
+    paddingRight: 9,
     display: 'block',
     width: '100%',
-    background: 'transparent',
-    border: 'none',
+    backgroundColor: 'backgroundLightGray',
     outline: 'none',
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'outline',
-    borderRadius: 8,
+    borderColor: 'inputBorderGray',
+    borderRadius: 3,
+    height: sizes.inputHeight,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    color: 'textInputActive',
     ':hover, :focus': {
       borderWidth: 1,
-      borderStyle: 'solid'
+      borderStyle: 'solid',
+      borderColor: 'brandLight'
     }
   }),
   ({ error }) =>
@@ -262,49 +288,58 @@ const Toggler = styled.button(
   ({ disabled }) =>
     disabled
       ? css({
-          opacity: 0.5,
+          color: 'textInputDisabled',
           cursor: 'forbidden',
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          backgroundColor: 'backgroundGray'
         })
       : null,
-  ({ isEmpty }) =>
-    css({
-      color: isEmpty ? '#757575' : 'text'
-    }),
+  ({ tinted, error, disabled }) => ({
+    backgroundColor: tinted && !(error || disabled) && 'white',
+    borderColor: tinted && !(error || disabled) && 'white'
+  }),
   ({ collapsed }) =>
     !collapsed
       ? css({
           borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0
+          borderBottomRightRadius: 0,
+          borderColor: 'brandLight'
         })
       : null
 )
 
-const StyledIndicator = styled.button(
+Toggler.propTypes = {
+  collapsed: PropTypes.bool,
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
+  onClick: PropTypes.func
+}
+
+const StyledIndicator = styled(Icon)(
   css({
     display: 'block',
     appearance: 'none',
-    margin: 0,
+    marginTop: 'auto',
+    marginBottom: 'auto',
     padding: 0,
-    background: 'transparent',
     width: 0,
     height: 0,
-    borderStyle: 'solid',
-    borderWidth: '0 5px 8px 5px',
-    borderColor: 'transparent transparent #303a45 transparent',
-    borderBottomColor: 'brand',
     position: 'absolute',
+    top: 0,
+    bottom: 0,
     right: '1em',
-    top: '50%',
-    marginTop: '-5px',
     outline: 'none',
-    transition: 'all .2s ease-in-out'
-  }),
-  ({ collapsed }) =>
-    css({
-      transform: collapsed ? 'rotate(180deg)' : 'rotate(360deg)'
-    }),
-  ({ disabled }) => (disabled ? css({ opacity: 0.5 }) : null)
+    transition: 'all .2s ease-in-out',
+    '&[aria-expanded="true"]': {
+      transform: 'rotate(-180deg)'
+    },
+    '&[aria-disabled="true"]': {
+      opacity: 0.5
+    }
+  })
 )
 
 const DropdownWrapper = styled.div(
@@ -324,19 +359,36 @@ const DropdownList = styled.div(
     appearance: 'none',
     textAlign: 'left',
     width: '100%',
-    background: 'white',
+    backgroundColor: 'white',
     borderWidth: 1,
     marginTop: '-3px',
     borderStyle: 'solid',
-    borderColor: 'outline',
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderColor: 'inputBorderGray',
+    borderBottomLeftRadius: 3,
+    borderBottomRightRadius: 3,
     color: 'text',
     paddingBottom: 3,
     boxShadow: 'etvasCard'
   }),
-  ({ collapsed }) => css({ display: collapsed ? 'none' : 'block' })
+  ({ collapsed }) => css({ display: collapsed ? 'none' : 'block' }),
+  ({ borderClr }) =>
+    css({
+      borderLeftColor: borderClr,
+      borderRightColor: borderClr,
+      borderBottomColor: borderClr
+    })
 )
+
+DropdownList.propTypes = {
+  collapsed: PropTypes.bool,
+  borderClr: PropTypes.string,
+  onMouseDown: PropTypes.func,
+  onMouseMove: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  onTouchStart: PropTypes.func,
+  onTouchMove: PropTypes.func,
+  onTouchEnd: PropTypes.func
+}
 
 const ScrollingList = styled.div(
   css({
@@ -357,7 +409,7 @@ const SearchInput = styled.input(
     border: 'none',
     outline: 'none',
     borderBottom: '1px solid',
-    borderBottomColor: 'outline',
+    borderBottomColor: 'inputBorderGray',
     borderBottomStyle: 'solid',
     borderRadius: 0
   })
@@ -384,6 +436,7 @@ Dropdown.propTypes = {
   itemFilter: PropTypes.func,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   searchPlaceholder: PropTypes.string,
+  tinted: PropTypes.bool,
   children: PropTypes.arrayOf(PropTypes.element)
 }
 
@@ -392,7 +445,7 @@ Dropdown.defaultProps = {
   multiple: false,
   required: false,
   value: '',
-  valueRender: v => v,
+  valueRender: v => (Array.isArray(v) ? v.join(', ') : v),
   itemSelected: (value, v) =>
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
   itemFilter: (search, v) =>

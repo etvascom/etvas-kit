@@ -1,6 +1,6 @@
 {
   "name": "@etvas/etvaskit",
-  "version": "0.14.5",
+  "version": "1.0.22",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,13 +29,16 @@
     "build-storybook": "build-storybook -o build/ --quiet"
   },
   "peerDependencies": {
-    "react": "16.x",
     "formik": "^2.1.4",
+    "react": "^16.6.0 || ^17",
     "styled-components": "^5.1.0"
   },
   "dependencies": {
     "@ivoryio/kogaio": "^0.7.93",
+    "@mdi/js": "^5.8.55",
+    "@mdi/react": "^1.4.0",
     "@styled-system/theme-get": "^5.1.2",
+    "flag-icon-css": "^3.5.0",
     "hyperid": "^2.0.5",
     "lodash": "^4.17.20",
     "use-resize-observer": "^6.1.0"

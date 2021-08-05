@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
-import { compose, layout, position, space, variant } from 'styled-system'
+import { layout, position, space, variant } from 'styled-system'
 import propTypes from '@styled-system/prop-types'
 
-import { ActivityIndicator } from '@ivoryio/kogaio'
 import { Typography } from '../Typography'
-
-import variants, { spinnerVariants } from './variants'
+import { Flex, Space } from '../'
+import variants from './variants'
+import { Icon } from '../Icon'
+import sizes from '../assets/sizes'
 
 const Button = ({
   children,
@@ -19,76 +19,88 @@ const Button = ({
   onClick,
   type,
   variant,
+  iconPosition,
   ...rest
-}) => (
-  <StyledButton
-    disabled={disabled}
-    id={id}
-    onClick={onClick}
-    type={type}
-    variant={variant}
-    {...rest}>
-    {loading ? (
-      <ActivityIndicator
-        colors={spinnerVariants[variant]}
-        size='1.1rem'
-        variant='spinner'
-      />
-    ) : (
-      <Typography
-        as='label'
-        variant='labelButton'
-        htmlFor={id}
-        px={3}
-        color='inherit'>
-        {children}
-      </Typography>
-    )}
-  </StyledButton>
-)
-
-const StyledButton = styled.button(
-  css({
-    alignItems: 'center',
-    border: 'none',
-    boxSizing: 'border-box',
-    cursor: 'pointer',
-    borderRadius: '8px',
-    display: 'flex',
-    justifyContent: 'center',
-    minHeight: '40px',
-    minWidth: '160px',
-    width: 'fit-content',
-    label: {
-      cursor: 'pointer',
-      pointerEvents: 'none'
-    },
-    ':hover': {
-      opacity: 0.75
-    },
-    ':active ': {
-      transform: 'scale(0.965)'
-    },
-    ':focus': {
-      opacity: 0.75,
-      outlineStyle: 'none',
-      outlineColor: 'transparent'
-    },
-    ':disabled': {
-      opacity: 0.3,
-      transform: 'scale(1)',
-      cursor: 'not-allowed'
+}) => {
+  const hSpacing = useMemo(() => {
+    if (!loading || variant.startsWith('link')) {
+      return null
     }
-  }),
+    return variant === 'large' ? sizes.spacingNormal : sizes.spacingCompact
+  }, [variant, loading])
 
-  compose(layout, position, space, variant({ variants }))
-)
+  const hasLabel =
+    !!children || (Array.isArray(children) && children.length > 0)
+
+  return (
+    <StyledButton
+      disabled={disabled}
+      id={id}
+      onClick={onClick}
+      type={type}
+      variant={variant}
+      hSpacing={hSpacing}
+      {...rest}>
+      {loading ? (
+        <Icon size='medium' name='loading' rotate={true} />
+      ) : (
+        <Flex flexDirection='row' alignItems='center'>
+          {icon && iconPosition === 'left' && (
+            <Space mr={hasLabel ? '10px' : '0'}>
+              <Icon
+                name={icon}
+                size={variant === 'large' ? 'medium' : 'small'}
+                color='inherit'
+              />
+            </Space>
+          )}
+          {hasLabel && (
+            <Typography
+              as='label'
+              variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
+              htmlFor={id}
+              color='inherit'>
+              {children}
+            </Typography>
+          )}
+          {icon && iconPosition === 'right' && (
+            <Space ml='10px'>
+              <Icon
+                name={icon}
+                size={variant === 'large' ? 'medium' : 'small'}
+              />
+            </Space>
+          )}
+        </Flex>
+      )}
+    </StyledButton>
+  )
+}
+
+/*
+compose(layout, position, space, variant({ variants })),
+  ({loading}) => loading ? css({
+    paddingLeft: '12px',
+    paddingRight: '12px'
+  })
+  */
+
+const StyledButton = styled.button`
+  ${layout}
+  ${position}
+  ${space}
+  ${variant({ variants })}
+  ${({ hSpacing }) =>
+    hSpacing ? `padding-left: ${hSpacing}; padding-right: ${hSpacing};` : ''}
+`
 
 Button.propTypes = {
   ...propTypes.layout,
   ...propTypes.position,
   ...propTypes.space,
   children: PropTypes.node,
+  icon: PropTypes.string,
+  iconPosition: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   onClick: PropTypes.func,
@@ -103,9 +115,11 @@ Button.propTypes = {
 Button.defaultProps = {
   disabled: false,
   loading: false,
+  icon: null,
   spinnerSize: '1.5rem',
   type: 'button',
-  variant: 'primary'
+  variant: 'primary',
+  iconPosition: 'left'
 }
 
 Button.displayName = 'Button'

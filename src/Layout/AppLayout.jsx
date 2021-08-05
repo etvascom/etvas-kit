@@ -9,6 +9,7 @@ import { Icon } from '../Icon'
 
 export const AppLayout = ({
   sidebarContent,
+  sidebarCss,
   sidebarFooterContent,
   headerContent,
   footerContent,
@@ -24,7 +25,11 @@ export const AppLayout = ({
   return (
     <Container id='page-container'>
       <SidebarToggler isOpen={isOpen} variant={variant} onClick={toggle}>
-        <Icon name={isOpen ? 'circleX' : 'menu'} color='white' size='24px' />
+        <Icon
+          name={isOpen ? 'backburger' : 'forwardburger'}
+          color='white'
+          size='medium'
+        />
       </SidebarToggler>
       <Header
         variant={variant}
@@ -33,7 +38,11 @@ export const AppLayout = ({
         headerPadding={headerPadding}>
         {headerContent}
       </Header>
-      <Sidebar id='sidebar' isOpen={isOpen} variant={variant}>
+      <Sidebar
+        id='sidebar'
+        isOpen={isOpen}
+        variant={variant}
+        sidebarCss={sidebarCss}>
         <Menu id='sidebar-menu'>{sidebarContent}</Menu>
         <SidebarFooter id='sidebar-footer'>
           {sidebarFooterContent}
@@ -136,7 +145,7 @@ const Shadow = styled.div(
         right: 0,
         top: 0,
         bottom: 0,
-        backgroundColor: 'whiteShadow'
+        backgroundColor: 'transparent'
       }
     }
   })
@@ -149,7 +158,6 @@ const Sidebar = styled.div(
     position: 'fixed',
     bottom: 0,
     zIndex: '10',
-    background: 'brand',
     transition: TRANSITION
   }),
   ({ isOpen }) =>
@@ -164,7 +172,8 @@ const Sidebar = styled.div(
           borderRightColor: 'lighterOutline'
         }
       }
-    })
+    }),
+  ({ sidebarCss }) => css({ ...sidebarCss })
 )
 const Menu = styled.div(
   css({
@@ -213,7 +222,7 @@ const LayoutBody = styled.div(
   variant({
     variants: {
       mobile: { paddingLeft: '8px', paddingRight: '8px' },
-      web: { paddingLeft: '64px', paddingRight: '64px', maxWidth: '1200px' }
+      web: { paddingLeft: '24px', paddingRight: '24px', maxWidth: '1200px' }
     }
   })
 )
@@ -230,6 +239,7 @@ const FooterWrapper = styled.div(
 
 AppLayout.propTypes = {
   sidebarContent: PropTypes.node,
+  sidebarCss: PropTypes.object,
   sidebarFooterContent: PropTypes.node,
   headerContent: PropTypes.node,
   footerContent: PropTypes.node,
@@ -250,5 +260,6 @@ AppLayout.propTypes = {
 
 AppLayout.defaultProps = {
   variant: ['mobile', null, 'web'],
-  headerPadding: 6
+  headerPadding: 6,
+  sidebarCss: {}
 }

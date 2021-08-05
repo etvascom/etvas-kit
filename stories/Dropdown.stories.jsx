@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dropdown } from '../src'
+import { Dropdown, Card } from '../src'
 
 export default {
   title: 'Demo/Dropdown',
@@ -31,7 +31,13 @@ export const Simple = () => {
           `${value.substr(0, 1).toUpperCase()}${value.substr(1)}`
         }
         onChange={setSelected}>
-        <Dropdown.Option value='lannister'>Lannister</Dropdown.Option>
+        <Dropdown.Option value='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non est repudiandae quia in culpa beatae iure dolores voluptate accusamus fuga at eaque, nostrum placeat debitis incidunt sit perferendis facere. Omnis voluptatem consectetur exercitationem. Error nemo illum inventore totam.'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non
+          est repudiandae quia in culpa beatae iure dolores voluptate accusamus
+          fuga at eaque, nostrum placeat debitis incidunt sit perferendis
+          facere. Omnis voluptatem consectetur exercitationem. Error nemo illum
+          inventore totam.
+        </Dropdown.Option>
         <Dropdown.Option value='tyrell'>Tyrell</Dropdown.Option>
         <Dropdown.Option value='arryn'>Arryn</Dropdown.Option>
         <Dropdown.Option value='targaryen'>Targaryen</Dropdown.Option>
@@ -47,11 +53,6 @@ export const Multiple = () => {
   const [selected, setSelected] = useState([])
 
   const valueRender = value => value.join(', ')
-  const itemSelected = (value, item) => !!value.find(found => found === item)
-
-  const onChange = value => {
-    setSelected(value)
-  }
 
   return (
     <>
@@ -60,8 +61,7 @@ export const Multiple = () => {
         multiple
         label='Select more than one...'
         valueRender={valueRender}
-        itemSelected={itemSelected}
-        onChange={onChange}>
+        onChange={setSelected}>
         <Dropdown.Option value='Lannister'>Lannister</Dropdown.Option>
         <Dropdown.Option value='Tyrell'>Tyrell</Dropdown.Option>
         <Dropdown.Option value='Arryn'>Arryn</Dropdown.Option>
@@ -71,6 +71,30 @@ export const Multiple = () => {
       </Dropdown>
       <DummySpace />
     </>
+  )
+}
+
+export const TintedDropdown = () => {
+  const [selected, setSelected] = useState([])
+  const valueRender = value => value.join(', ')
+
+  return (
+    <Card width='304px' height='504px' variant='tinted'>
+      <Dropdown
+        value={selected}
+        multiple
+        tinted
+        label='Select more than one...'
+        valueRender={valueRender}
+        onChange={setSelected}>
+        <Dropdown.Option value='Lannister'>Lannister</Dropdown.Option>
+        <Dropdown.Option value='Tyrell'>Tyrell</Dropdown.Option>
+        <Dropdown.Option value='Arryn'>Arryn</Dropdown.Option>
+        <Dropdown.Option value='Targaryen'>Targaryen</Dropdown.Option>
+        <Dropdown.Option value='Martell'>Martell</Dropdown.Option>
+        <Dropdown.Option value='Baratheon'>Baratheon</Dropdown.Option>
+      </Dropdown>
+    </Card>
   )
 }
 

@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import { Touchable } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
+import sizes from '../assets/sizes'
 
 export const PasswordToggler = ({
   error,
@@ -23,7 +25,7 @@ export const PasswordToggler = ({
   }, [viewOption, handleDown])
 
   return (
-    <Touchable
+    <StyledTouchable
       effect='no-feedback'
       // onClick={handleDown}
       onMouseDown={handleDown}
@@ -32,14 +34,22 @@ export const PasswordToggler = ({
       onTouchEnd={handleUp}
       tabIndex={tabIndex}>
       <Icon
-        color={error ? 'error' : 'outline'}
-        size={3}
+        color='inputIcon'
+        size='small'
         name={inputType === 'password' ? 'eye' : 'eyeNo'}
         {...props}
       />
-    </Touchable>
+    </StyledTouchable>
   )
 }
+
+const StyledTouchable = styled(Touchable)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: ${sizes.buttonMinWidth};
+  height: ${sizes.buttonMinWidth};
+`
 
 const toggleOptions = ['peek', 'toggle']
 PasswordToggler.propTypes = {

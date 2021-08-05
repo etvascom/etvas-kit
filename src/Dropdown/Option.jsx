@@ -4,13 +4,18 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { typography } from '../Typography'
+import Flex from '@ivoryio/kogaio/Responsive/Flex'
+import Box from '@ivoryio/kogaio/Responsive/Box'
+import { Checkbox } from '../Checkbox'
+import sizes from '../assets/sizes'
 
 const DropdownItem = ({
   children,
   onSelectItem,
   disabled,
   isSelected,
-  value
+  value,
+  hasCheckbox
 }) => {
   const _handleClick = () => {
     if (!disabled) {
@@ -26,39 +31,66 @@ const DropdownItem = ({
     []
   )
 
+  const optionContent = <TextWrapper>{children}</TextWrapper>
+
+  const optionWithCheckbox = (
+    <Flex alignItems='center' minWidth='0'>
+      <Box mr={3}>
+        <Checkbox
+          size='small'
+          checked={isSelected}
+          onChange={_handleClick}
+          onClick={e => e.stopPropagation()}
+        />
+      </Box>
+      {optionContent}
+    </Flex>
+  )
+
   return (
     <Option
       role='option'
       onClick={_handleClick}
       selected={isSelected}
-      touch={hasTouch}>
-      {children}
+      touch={hasTouch}
+      hasCheckbox={hasCheckbox}>
+      {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
 }
 
-const Option = styled.div(
+const TextWrapper = styled.div(
+  css({
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap'
+  })
+)
+
+const Option = styled(Flex)(
   css({
     ...typography.labelSmall,
-    padding: 3,
+    paddingLeft: 3,
+    paddingRight: 3,
     appearance: 'none',
-    background: 'transparent',
-    display: 'block',
+    backgroundColor: 'transparent',
     width: '100%',
     textAlign: 'left',
     border: 'none',
-    outline: 'none'
+    outline: 'none',
+    height: sizes.dropdownItemHeightMobile,
+    lineHeight: sizes.dropdownItemHeightMobile
   }),
   ({ touch }) =>
     !touch
       ? css({
           ':hover': {
-            backgroundColor: 'brandFade'
+            backgroundColor: 'brandLighter'
           }
         })
       : null,
-  ({ selected }) =>
-    selected
+  ({ selected, hasCheckbox }) =>
+    selected && !hasCheckbox
       ? css({
           backgroundColor: 'brand',
           color: 'white',
@@ -73,6 +105,7 @@ DropdownItem.propTypes = {
   children: PropTypes.node,
   isSelected: PropTypes.bool,
   disabled: PropTypes.bool,
+  hasCheckbox: PropTypes.bool,
   onSelectItem: PropTypes.func,
   value: PropTypes.oneOfType([
     PropTypes.object,
@@ -83,7 +116,8 @@ DropdownItem.propTypes = {
 
 DropdownItem.defaultProps = {
   disabled: false,
-  isSelected: false
+  isSelected: false,
+  checkbox: false
 }
 
 export default DropdownItem

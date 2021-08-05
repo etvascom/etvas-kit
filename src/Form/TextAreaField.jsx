@@ -16,13 +16,20 @@ export const TextAreaField = forwardRef((props, ref) => {
       {...field}
       id={id}
       error={meta.touched && meta.error}
+      valid={hasValidation(props) && !meta.error && meta.touched}
       ref={ref}
     />
   )
 })
 
+const hasValidation = props => props.validate || props.required
+
 TextAreaField.propTypes = {
   ...fieldShape,
   placeholder: PropTypes.node,
   required: PropTypes.bool
+}
+
+TextAreaField.defaultProps = {
+  tinted: false
 }

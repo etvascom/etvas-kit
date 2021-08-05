@@ -4,38 +4,59 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 
-import glyphs from './glyphs.json'
+import glyphs from './glyphs.js'
+import animationSpeeds from '../assets/animationSpeeds'
+import { default as DefaultIcon } from '@mdi/react'
+import sizes from '../assets/sizes'
 
-export const Icon = ({ name, size, color }) => {
-  const glyph =
-    typeof name === 'number'
-      ? String.fromCharCode(name)
-      : glyphs[name]
-      ? String.fromCharCode(glyphs[name])
-      : name
+const externalGlyphs = {}
 
-  return (
-    <StyledI color={color} size={size}>
-      {glyph}
-    </StyledI>
-  )
+const addIcon = (name, icon) => {
+  if (externalGlyphs[name] && externalGlyphs[name] !== icon) {
+    console.warn('* Warning: overwriting injected icon', name)
+  }
+  externalGlyphs[name] = icon
 }
 
-const StyledI = styled.i(({ color, size }) =>
+export const addIcons = icons => {
+  Object.keys(icons).forEach(key => addIcon(key, icons[key]))
+}
+
+const validate = name => {
+  if (/^[acglmqstvz][ 0-9.]+/gi.test(name)) {
+    return name
+  }
+
+  return 'M0 0L24 0L24 24 L0 24Z'
+}
+
+export const Icon = ({ name, size, color, rotate, ...props }) => (
+  <Wrapper color={color}>
+    <BaseIcon
+      path={externalGlyphs[name] || glyphs[name] || validate(name)}
+      size={sizes[size] ?? size}
+      color='currentColor'
+      spin={rotate}
+      {...props}
+    />
+  </Wrapper>
+)
+
+const Wrapper = styled.span(({ color }) => css({ color, fontSize: '1px' }))
+
+const BaseIcon = styled(DefaultIcon)(({ spin }) =>
   css({
-    fontFamily: 'EtvasIcons',
-    fontStyle: 'unset',
-    fontWeight: 'normal',
-    fontSize: size,
-    lineHeight: size,
-    color
+    animation: spin
+      ? `rotation ${animationSpeeds.rotation} infinite linear`
+      : ''
   })
 )
 
 Icon.glyphs = glyphs
+Icon.externalGlyphs = externalGlyphs
 
 Icon.propTypes = {
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string,
   size: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,
@@ -46,5 +67,10 @@ Icon.propTypes = {
     PropTypes.array,
     PropTypes.object,
     PropTypes.string
-  ])
+  ]),
+  rotate: PropTypes.bool
+}
+
+Icon.defaultProps = {
+  size: 'small'
 }
