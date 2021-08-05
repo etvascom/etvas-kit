@@ -42,12 +42,7 @@ const Button = ({
       hSpacing={hSpacing}
       {...rest}>
       {loading ? (
-        <Icon
-          size='medium'
-          name='loading'
-          color={variant.color || 'brand'}
-          rotate={true}
-        />
+        <Icon size='medium' name='loading' rotate={true} />
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
@@ -73,7 +68,6 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
-                color='inherit'
               />
             </Space>
           )}

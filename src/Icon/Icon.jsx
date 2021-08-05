@@ -31,18 +31,21 @@ const validate = name => {
 }
 
 export const Icon = ({ name, size, color, rotate, ...props }) => (
-  <BaseIcon
-    path={externalGlyphs[name] || glyphs[name] || validate(name)}
-    size={sizes[size] ?? size}
-    svgColor={color}
-    spin={rotate}
-    {...props}
-  />
+  <Wrapper color={color}>
+    <BaseIcon
+      path={externalGlyphs[name] || glyphs[name] || validate(name)}
+      size={sizes[size] ?? size}
+      color='currentColor'
+      spin={rotate}
+      {...props}
+    />
+  </Wrapper>
 )
 
-const BaseIcon = styled(DefaultIcon)(({ svgColor, spin }) =>
+const Wrapper = styled.span(({ color }) => css({ color }))
+
+const BaseIcon = styled(DefaultIcon)(({ spin }) =>
   css({
-    color: svgColor,
     animation: spin
       ? `rotation ${animationSpeeds.rotation} infinite linear`
       : ''
