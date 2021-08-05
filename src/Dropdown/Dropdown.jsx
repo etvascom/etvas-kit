@@ -160,16 +160,11 @@ const Dropdown = ({
 
   const isItemSelected = item => (!isEmpty ? itemSelected(value, item) : false)
 
-  const dropdownListStyle = useMemo(() => {
-    const ws = {
-      borderClr: 'inputBorderGray'
-    }
-
-    if (!isCollapsed && !disabled && !error) {
-      ws.borderClr = 'brandLight'
-    }
-    return ws
-  }, [disabled, error, isCollapsed])
+  const dropdownBorderClr = useMemo(
+    () =>
+      !isCollapsed && !disabled && !error ? 'brandLight' : 'inputBorderGray',
+    [disabled, error, isCollapsed]
+  )
 
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
@@ -188,20 +183,18 @@ const Dropdown = ({
         aria-haspopup={!disabled}
         aria-expanded={!isCollapsed}
         ref={wrapper}
-        disabled={disabled}
-        collapsed={isCollapsed}
         error={error}
         {...props}>
         <StyledIndicator
           size='small'
           color='inputIcon'
           onClick={toggleDropdown}
-          collapsed={isCollapsed}
-          disabled={disabled}
+          aria-expanded={!isCollapsed}
+          aria-disabled={disabled}
           name='menuDown'
         />
         <Toggler
-          collapsed={isCollapsed}
+          dataCollapsed={isCollapsed}
           disabled={disabled}
           type='button'
           role='switch'
@@ -219,7 +212,7 @@ const Dropdown = ({
           onTouchStart={clicked}
           onTouchMove={inhibit}
           onTouchEnd={decide}
-          {...dropdownListStyle}>
+          borderClr={dropdownBorderClr}>
           {hasSearch ? (
             <SearchInput
               ref={searchField}
@@ -315,6 +308,16 @@ const Toggler = styled.button(
       : null
 )
 
+Toggler.propTypes = {
+  collapsed: PropTypes.bool,
+  error: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
+    PropTypes.string
+  ]),
+  onClick: PropTypes.func
+}
+
 const StyledIndicator = styled(Icon)(
   css({
     display: 'block',
@@ -329,13 +332,14 @@ const StyledIndicator = styled(Icon)(
     bottom: 0,
     right: '1em',
     outline: 'none',
-    transition: 'all .2s ease-in-out'
-  }),
-  ({ collapsed }) =>
-    css({
-      transform: !collapsed && 'rotate(-180deg)'
-    }),
-  ({ disabled }) => (disabled ? css({ opacity: 0.5 }) : null)
+    transition: 'all .2s ease-in-out',
+    '&[aria-expanded="true"]': {
+      transform: 'rotate(-180deg)'
+    },
+    '&[aria-disabled="true"]': {
+      opacity: 0.5
+    }
+  })
 )
 
 const DropdownWrapper = styled.div(
@@ -374,6 +378,17 @@ const DropdownList = styled.div(
       borderBottomColor: borderClr
     })
 )
+
+DropdownList.propTypes = {
+  collapsed: PropTypes.bool,
+  borderClr: PropTypes.string,
+  onMouseDown: PropTypes.func,
+  onMouseMove: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  onTouchStart: PropTypes.func,
+  onTouchMove: PropTypes.func,
+  onTouchEnd: PropTypes.func
+}
 
 const ScrollingList = styled.div(
   css({
