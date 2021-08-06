@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { Modal, Button, PhoneNumberInputField, Card, Form, Flex } from '../src'
+import {
+  Modal,
+  Button,
+  PhoneNumberInputField,
+  Card,
+  Form,
+  Flex,
+  Input
+} from '../src'
 
 export default {
   title: 'Demo/Modal',
@@ -75,6 +83,40 @@ export const Default = () => {
                 </Card>
               )}
             </Form>
+          </Modal.Content>
+        </Modal>
+      )}
+    </Card>
+  )
+}
+
+export const BigModal = () => {
+  const [isModalShown, setModalShown] = useState(false)
+
+  const showModal = () => setModalShown(true)
+  const hideModal = () => setModalShown(false)
+
+  return (
+    <Card p={6}>
+      <Button variant='primary' onClick={showModal}>
+        Show big modal
+      </Button>
+      {isModalShown && (
+        <Modal
+          backDrop='whiteShadow'
+          onBackDropClick={hideModal}
+          onEscape={hideModal}>
+          <Modal.Content>
+            <Card p={6}>
+              {Array.from({ length: 20 }).map(i => (
+                <Input key={i} />
+              ))}
+              <Flex mt={6}>
+                <Button type='submit' variant='primary'>
+                  Save
+                </Button>
+              </Flex>
+            </Card>
           </Modal.Content>
         </Modal>
       )}
