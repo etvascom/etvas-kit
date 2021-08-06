@@ -298,8 +298,8 @@ const Toggler = styled.button(
     backgroundColor: tinted && !(error || disabled) && 'white',
     borderColor: tinted && !(error || disabled) && 'white'
   }),
-  ({ collapsed }) =>
-    !collapsed
+  ({ dataCollapsed }) =>
+    !dataCollapsed
       ? css({
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
