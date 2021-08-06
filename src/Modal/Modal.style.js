@@ -3,12 +3,14 @@ export default {
     top: '0',
     left: '0',
     width: '100vw',
-    height: '100vh',
+    minHeight: '100vh',
     position: 'fixed',
-    zIndex: 'modal'
+    zIndex: 'modal',
+    overflow: 'scroll'
   },
   content: {
     position: 'relative',
-    display: 'flex'
+    display: 'flex',
+    paddingBottom: [3, 9]
   }
 }
