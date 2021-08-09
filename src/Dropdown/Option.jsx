@@ -34,8 +34,8 @@ const DropdownItem = ({
   const optionContent = <TextWrapper>{children}</TextWrapper>
 
   const optionWithCheckbox = (
-    <Flex justifyContent='center' minWidth='0'>
-      <Box mr={3} mt={2}>
+    <Flex alignItems='center' minWidth='0'>
+      <Box mr={3}>
         <Checkbox
           size='small'
           checked={isSelected}
