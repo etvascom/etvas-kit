@@ -43,7 +43,7 @@ const Button = ({
       hSpacing={hSpacing}
       {...rest}>
       {loading ? (
-        <Icon size='medium' name='loading' rotate={true} />
+        <Icon size='medium' name='loading' rotate={true} color={color} />
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
@@ -69,6 +69,7 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
+                color={color}
               />
             </Space>
           )}
