@@ -50,13 +50,6 @@ const LARGE_STYLE = {
   paddingRight: sizes.spacingLarge,
   height: sizes.largeButtonHeight
 }
-const OUTLINE_DEFAULT = {
-  ...BUTTON_DEFAULT,
-  color: 'text',
-  backgroundColor: 'transparent',
-  border: `${BORDERS[1]}`
-}
-const OUTLINE_STYLE = { ...OUTLINE_DEFAULT, borderColor: 'accent' }
 const POSITIVE_STYLE = {
   ...BUTTON_DEFAULT,
   backgroundColor: 'positive',
@@ -94,8 +87,6 @@ export default {
   primary: PRIMARY_STYLE,
   large: LARGE_STYLE,
   link: LINK_STYLE,
-  outline: OUTLINE_STYLE,
-  outlineAlt: OUTLINE_STYLE,
   positive: POSITIVE_STYLE,
   linkSecondary: LINK_STYLE,
   linkPositive: LINK_POSITIVE_STYLE

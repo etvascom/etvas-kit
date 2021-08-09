@@ -199,8 +199,6 @@ export const Variants = () => {
     'link',
     'linkSecondary',
     'linkPositive',
-    'outline',
-    'outlineAlt',
     'positive'
   ]
 
