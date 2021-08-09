@@ -11,7 +11,7 @@ import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
 
 const Button = ({
-  color,
+  iconColor,
   children,
   disabled,
   icon,
@@ -43,7 +43,7 @@ const Button = ({
       hSpacing={hSpacing}
       {...rest}>
       {loading ? (
-        <Icon size='medium' name='loading' rotate={true} color={color} />
+        <Icon size='medium' name='loading' rotate={true} color={iconColor} />
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
@@ -51,7 +51,7 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
-                color={color}
+                color={iconColor}
               />
             </Space>
           )}
@@ -60,7 +60,7 @@ const Button = ({
               as='label'
               variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
               htmlFor={id}
-              color={color}>
+              color='inherit'>
               {children}
             </Typography>
           )}
@@ -69,7 +69,7 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
-                color={color}
+                color={iconColor}
               />
             </Space>
           )}
@@ -93,7 +93,7 @@ Button.propTypes = {
   ...propTypes.position,
   ...propTypes.space,
   children: PropTypes.node,
-  color: PropTypes.string,
+  iconColor: PropTypes.string,
   icon: PropTypes.string,
   iconPosition: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
@@ -108,7 +108,7 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
-  color: 'currentColor',
+  iconColor: 'currentColor',
   disabled: false,
   loading: false,
   icon: null,
