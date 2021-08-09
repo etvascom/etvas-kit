@@ -30,11 +30,11 @@ const BUTTON_DEFAULT = {
 }
 const PRIMARY_DEFAULT = {
   ...BUTTON_DEFAULT,
-  backgroundColor: 'brand',
+  backgroundColor: 'accent',
   color: 'white',
   ':not([disabled])': {
-    ':hover': { backgroundColor: 'brandDark' },
-    ':active': { backgroundColor: 'brandDarkest' }
+    ':hover': { backgroundColor: 'accentColorDark' },
+    ':active': { backgroundColor: 'accentColorDarkest' }
   },
   ':hover': { opacity: 1 },
   ':disabled': {
@@ -71,8 +71,8 @@ const LINK_DEFAULT = {
   padding: 0,
   minHeight: 'max-content',
   ':not([disabled])': {
-    ':hover': { color: 'brandDark' },
-    ':active': { color: 'brandDarkest' }
+    ':hover': { color: 'accentColorDark' },
+    ':active': { color: 'accentColorDarkest' }
   },
   ':hover': { opacity: 1 },
   ':disabled': {
@@ -81,7 +81,7 @@ const LINK_DEFAULT = {
     cursor: 'not-allowed'
   }
 }
-const LINK_STYLE = { ...LINK_DEFAULT, color: 'brand' }
+const LINK_STYLE = { ...LINK_DEFAULT, color: 'accent' }
 const LINK_POSITIVE_STYLE = {
   ...LINK_DEFAULT,
   color: 'positive',

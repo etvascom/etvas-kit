@@ -19,12 +19,20 @@ const varMapping = {
   brandImage: 'brand-image-url'
 }
 
-const colorVariants = {
+const brandColorVariations = {
   brandColorLightest: 70,
   brandColorLighter: 45,
   brandColorLight: 20,
   brandColorDark: -33,
   brandColorDarker: -66
+}
+
+const accentColorVariations = {
+  accentColorLightest: 70,
+  accentColorLighter: 45,
+  accentColorLight: 20,
+  accentColorDark: -33,
+  accentColorDarker: -66
 }
 
 export class BrandingService extends EventEmitter {
@@ -51,13 +59,28 @@ export class BrandingService extends EventEmitter {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
     const brandColorVariants = updates.brandColor
-      ? this.buildBrandColorVariants(updates.brandColor, updates)
+      ? this.buildColorVariants(
+          updates.brandColor,
+          brandColorVariations,
+          updates
+        )
+      : {}
+
+    const accentColorVariants = updates.accentColor
+      ? this.buildColorVariants(
+          updates.accentColor,
+          accentColorVariations,
+          updates
+        )
       : {}
 
     this.cssVars = {
       ...newVars,
-      ...brandColorVariants
+      ...brandColorVariants,
+      ...accentColorVariants
     }
+
+    console.warn('colors', this.cssVars)
 
     if (isEqual(newVars, this.cssVars)) {
       return
@@ -100,10 +123,10 @@ export class BrandingService extends EventEmitter {
     }
   }
 
-  buildBrandColorVariants(brandColor, existingColors) {
-    return Object.keys(colorVariants).reduce((colors, key) => {
+  buildColorVariants(color, variations, existingColors) {
+    return Object.keys(variations).reduce((colors, key) => {
       if (!existingColors[key]) {
-        colors[key] = shading(brandColor, colorVariants[key])
+        colors[key] = shading(color, variations[key])
       }
       return colors
     }, {})
