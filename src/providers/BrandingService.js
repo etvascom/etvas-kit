@@ -80,8 +80,6 @@ export class BrandingService extends EventEmitter {
       ...accentColorVariants
     }
 
-    console.warn('colors', this.cssVars)
-
     if (isEqual(newVars, this.cssVars)) {
       return
     }
