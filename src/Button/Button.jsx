@@ -11,6 +11,7 @@ import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
 
 const Button = ({
+  color,
   children,
   disabled,
   icon,
@@ -50,7 +51,7 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
-                color='inherit'
+                color={color}
               />
             </Space>
           )}
@@ -59,7 +60,7 @@ const Button = ({
               as='label'
               variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
               htmlFor={id}
-              color='inherit'>
+              color={color}>
               {children}
             </Typography>
           )}
@@ -77,14 +78,6 @@ const Button = ({
   )
 }
 
-/*
-compose(layout, position, space, variant({ variants })),
-  ({loading}) => loading ? css({
-    paddingLeft: '12px',
-    paddingRight: '12px'
-  })
-  */
-
 const StyledButton = styled.button`
   ${layout}
   ${position}
@@ -99,6 +92,7 @@ Button.propTypes = {
   ...propTypes.position,
   ...propTypes.space,
   children: PropTypes.node,
+  color: PropTypes.string,
   icon: PropTypes.string,
   iconPosition: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
@@ -113,6 +107,7 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
+  color: 'currentColor',
   disabled: false,
   loading: false,
   icon: null,
