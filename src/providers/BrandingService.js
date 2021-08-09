@@ -12,6 +12,11 @@ const varMapping = {
   brandColorDark: 'brand-color-dark',
   brandColorDarkest: 'brand-color-darkest',
   accentColor: 'accent-color',
+  accentColorLightest: 'accent-color-lightest',
+  accentColorLighter: 'accent-color-lighter',
+  accentColorLight: 'accent-color-light',
+  accentColorDark: 'accent-color-dark',
+  accentColorDarker: 'accent-color-darker',
   textColor: 'text-color',
   lighterTextColor: 'lighter-text-color',
   logo: 'logo-url',
@@ -19,15 +24,12 @@ const varMapping = {
   brandImage: 'brand-image-url'
 }
 
-const brandColorVariations = {
+const colorVariations = {
   brandColorLightest: 70,
   brandColorLighter: 45,
   brandColorLight: 20,
   brandColorDark: -33,
-  brandColorDarker: -66
-}
-
-const accentColorVariations = {
+  brandColorDarker: -66,
   accentColorLightest: 70,
   accentColorLighter: 45,
   accentColorLight: 20,
@@ -59,19 +61,11 @@ export class BrandingService extends EventEmitter {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
     const brandColorVariants = updates.brandColor
-      ? this.buildColorVariants(
-          updates.brandColor,
-          brandColorVariations,
-          updates
-        )
+      ? this.buildColorVariants({ brandColor: updates.brandColor }, updates)
       : {}
 
     const accentColorVariants = updates.accentColor
-      ? this.buildColorVariants(
-          updates.accentColor,
-          accentColorVariations,
-          updates
-        )
+      ? this.buildColorVariants({ accentColor: updates.accentColor }, updates)
       : {}
 
     this.cssVars = {
@@ -121,13 +115,19 @@ export class BrandingService extends EventEmitter {
     }
   }
 
-  buildColorVariants(color, variations, existingColors) {
-    return Object.keys(variations).reduce((colors, key) => {
-      if (!existingColors[key]) {
-        colors[key] = shading(color, variations[key])
-      }
-      return colors
-    }, {})
+  buildColorVariants(colorArray, existingColors) {
+    return Object.keys(colorArray).reduce(
+      (accumulator, colorName) => ({
+        ...accumulator,
+        ...Object.keys(colorVariations).reduce((colors, key) => {
+          if (!existingColors[key] && key.includes(colorName)) {
+            colors[key] = shading(colorArray[colorName], colorVariations[key])
+          }
+          return colors
+        }, {})
+      }),
+      {}
+    )
   }
 }
 
