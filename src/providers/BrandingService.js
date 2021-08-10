@@ -118,7 +118,6 @@ export class BrandingService extends EventEmitter {
         ...accumulator,
         ...Object.keys(colorVariations).reduce((colors, key) => {
           if (!existingColors[computeKeyName(colorName, key)]) {
-            console.warn(computeKeyName(colorName, key))
             colors[computeKeyName(colorName, key)] = shading(
               colorArray[colorName],
               colorVariations[key]
