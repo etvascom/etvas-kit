@@ -25,11 +25,11 @@ const varMapping = {
 }
 
 const colorVariations = {
-  colorLightest: 70,
-  colorLighter: 45,
-  colorLight: 20,
-  colorDark: -33,
-  colorDarker: -66
+  ColorLightest: 70,
+  ColorLighter: 45,
+  ColorLight: 20,
+  ColorDark: -33,
+  ColorDarker: -66
 }
 
 export class BrandingService extends EventEmitter {
@@ -56,11 +56,11 @@ export class BrandingService extends EventEmitter {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
     const brandColorVariants = updates.brandColor
-      ? this.buildColorVariants({ brandColor: updates.brandColor }, updates)
+      ? this.buildColorVariants('brand', updates.brandColor, updates)
       : {}
 
     const accentColorVariants = updates.accentColor
-      ? this.buildColorVariants({ accentColor: updates.accentColor }, updates)
+      ? this.buildColorVariants('accent', updates.accentColor, updates)
       : {}
 
     this.cssVars = {
@@ -110,21 +110,15 @@ export class BrandingService extends EventEmitter {
     }
   }
 
-  buildColorVariants(colorArray, existingColors) {
-    const computeKeyName = (color, key) => color + key.substr(5)
-
-    return Object.keys(colorArray).reduce(
-      (accumulator, colorName) => ({
-        ...accumulator,
-        ...Object.keys(colorVariations).reduce((colors, key) => {
-          if (!existingColors[computeKeyName(colorName, key)]) {
-            colors[computeKeyName(colorName, key)] = shading(
-              colorArray[colorName],
-              colorVariations[key]
-            )
-          }
-          return colors
-        }, {})
+  buildColorVariants(prefix, source, existing) {
+    return Object.keys(colorVariations).reduce(
+      (colors, key) => ({
+        ...colors,
+        ...(existing[`${prefix}${key}`]
+          ? {}
+          : {
+              [`${prefix}${key}`]: shading(source, colorVariations[key])
+            })
       }),
       {}
     )
