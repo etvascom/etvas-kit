@@ -12,6 +12,11 @@ const varMapping = {
   brandColorDark: 'brand-color-dark',
   brandColorDarkest: 'brand-color-darkest',
   accentColor: 'accent-color',
+  accentColorLightest: 'accent-color-lightest',
+  accentColorLighter: 'accent-color-lighter',
+  accentColorLight: 'accent-color-light',
+  accentColorDark: 'accent-color-dark',
+  accentColorDarker: 'accent-color-darker',
   textColor: 'text-color',
   lighterTextColor: 'lighter-text-color',
   logo: 'logo-url',
@@ -19,12 +24,12 @@ const varMapping = {
   brandImage: 'brand-image-url'
 }
 
-const colorVariants = {
-  brandColorLightest: 70,
-  brandColorLighter: 45,
-  brandColorLight: 20,
-  brandColorDark: -33,
-  brandColorDarker: -66
+const colorVariations = {
+  ColorLightest: 70,
+  ColorLighter: 45,
+  ColorLight: 20,
+  ColorDark: -33,
+  ColorDarker: -66
 }
 
 export class BrandingService extends EventEmitter {
@@ -51,12 +56,17 @@ export class BrandingService extends EventEmitter {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
     const brandColorVariants = updates.brandColor
-      ? this.buildBrandColorVariants(updates.brandColor, updates)
+      ? this.buildColorVariants('brand', updates.brandColor, updates)
+      : {}
+
+    const accentColorVariants = updates.accentColor
+      ? this.buildColorVariants('accent', updates.accentColor, updates)
       : {}
 
     this.cssVars = {
       ...newVars,
-      ...brandColorVariants
+      ...brandColorVariants,
+      ...accentColorVariants
     }
 
     if (isEqual(newVars, this.cssVars)) {
@@ -100,13 +110,18 @@ export class BrandingService extends EventEmitter {
     }
   }
 
-  buildBrandColorVariants(brandColor, existingColors) {
-    return Object.keys(colorVariants).reduce((colors, key) => {
-      if (!existingColors[key]) {
-        colors[key] = shading(brandColor, colorVariants[key])
-      }
-      return colors
-    }, {})
+  buildColorVariants(prefix, source, existing) {
+    return Object.keys(colorVariations).reduce(
+      (colors, key) => ({
+        ...colors,
+        ...(existing[`${prefix}${key}`]
+          ? {}
+          : {
+              [`${prefix}${key}`]: shading(source, colorVariations[key])
+            })
+      }),
+      {}
+    )
   }
 }
 
