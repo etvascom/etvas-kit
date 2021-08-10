@@ -43,7 +43,7 @@ const Button = ({
       hSpacing={hSpacing}
       {...rest}>
       {loading ? (
-        <Icon size='medium' name='loading' rotate={true} color={iconColor} />
+        <Icon size='medium' name='loading' spin={true} color={iconColor} />
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (

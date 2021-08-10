@@ -155,7 +155,7 @@ export const Input = forwardRef(
                   size='small'
                   name={currentIcRight}
                   color={currentIcRightColor}
-                  rotate={currentIcRight === 'loading'}
+                  spin={currentIcRight === 'loading'}
                 />
               )
             ) : (

@@ -198,7 +198,7 @@ export const SubdomainInput = forwardRef(
                 size='small'
                 name={currentIcRight}
                 color={currentIcRightColor}
-                rotate={currentIcRight === 'loading'}
+                spin={currentIcRight === 'loading'}
               />
             ) : null}
           </StatusIcon>
