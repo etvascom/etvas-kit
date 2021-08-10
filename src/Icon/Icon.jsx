@@ -30,25 +30,23 @@ const validate = name => {
   return 'M0 0L24 0L24 24 L0 24Z'
 }
 
-export const Icon = ({ name, size, color, rotate, ...props }) => (
-  <Wrapper color={color}>
-    <BaseIcon
-      path={externalGlyphs[name] || glyphs[name] || validate(name)}
-      size={sizes[size] ?? size}
-      color='currentColor'
-      spin={rotate}
-      {...props}
-    />
-  </Wrapper>
+export const Icon = ({ name, size, color, rotate, spin, ...props }) => (
+  <BaseIcon
+    path={externalGlyphs[name] || glyphs[name] || validate(name)}
+    size={sizes[size] ?? size}
+    color={color}
+    spin={spin}
+    rotate={rotate}
+    {...props}
+  />
 )
 
-const Wrapper = styled.span(({ color }) => css({ color, fontSize: '1px' }))
-
-const BaseIcon = styled(DefaultIcon)(({ spin }) =>
+const BaseIcon = styled(DefaultIcon)(({ spin, color }) =>
   css({
     animation: spin
       ? `rotation ${animationSpeeds.rotation} infinite linear`
-      : ''
+      : '',
+    fill: color
   })
 )
 
@@ -68,7 +66,8 @@ Icon.propTypes = {
     PropTypes.object,
     PropTypes.string
   ]),
-  rotate: PropTypes.bool
+  rotate: PropTypes.number,
+  spin: PropTypes.bool
 }
 
 Icon.defaultProps = {

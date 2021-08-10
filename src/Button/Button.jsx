@@ -11,6 +11,7 @@ import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
 
 const Button = ({
+  iconColor,
   children,
   disabled,
   icon,
@@ -42,7 +43,7 @@ const Button = ({
       hSpacing={hSpacing}
       {...rest}>
       {loading ? (
-        <Icon size='medium' name='loading' rotate={true} />
+        <Icon size='medium' name='loading' spin color={iconColor} />
       ) : (
         <Flex flexDirection='row' alignItems='center'>
           {icon && iconPosition === 'left' && (
@@ -50,7 +51,7 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
-                color='inherit'
+                color={iconColor}
               />
             </Space>
           )}
@@ -68,6 +69,7 @@ const Button = ({
               <Icon
                 name={icon}
                 size={variant === 'large' ? 'medium' : 'small'}
+                color={iconColor}
               />
             </Space>
           )}
@@ -76,14 +78,6 @@ const Button = ({
     </StyledButton>
   )
 }
-
-/*
-compose(layout, position, space, variant({ variants })),
-  ({loading}) => loading ? css({
-    paddingLeft: '12px',
-    paddingRight: '12px'
-  })
-  */
 
 const StyledButton = styled.button`
   ${layout}
@@ -99,6 +93,7 @@ Button.propTypes = {
   ...propTypes.position,
   ...propTypes.space,
   children: PropTypes.node,
+  iconColor: PropTypes.string,
   icon: PropTypes.string,
   iconPosition: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
@@ -113,6 +108,7 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
+  iconColor: 'currentColor',
   disabled: false,
   loading: false,
   icon: null,

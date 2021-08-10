@@ -231,7 +231,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
               size='small'
               name={currentIcRight}
               color={currentIcRightColor}
-              rotate={currentIcRight === 'loading'}
+              spin={currentIcRight === 'loading'}
             />
           )}
         </Flex>
