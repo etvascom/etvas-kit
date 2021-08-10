@@ -25,16 +25,11 @@ const varMapping = {
 }
 
 const colorVariations = {
-  brandColorLightest: 70,
-  brandColorLighter: 45,
-  brandColorLight: 20,
-  brandColorDark: -33,
-  brandColorDarker: -66,
-  accentColorLightest: 70,
-  accentColorLighter: 45,
-  accentColorLight: 20,
-  accentColorDark: -33,
-  accentColorDarker: -66
+  colorLightest: 70,
+  colorLighter: 45,
+  colorLight: 20,
+  colorDark: -33,
+  colorDarker: -66
 }
 
 export class BrandingService extends EventEmitter {
@@ -116,12 +111,18 @@ export class BrandingService extends EventEmitter {
   }
 
   buildColorVariants(colorArray, existingColors) {
+    const computeKeyName = (color, key) => color + key.substr(5)
+
     return Object.keys(colorArray).reduce(
       (accumulator, colorName) => ({
         ...accumulator,
         ...Object.keys(colorVariations).reduce((colors, key) => {
-          if (!existingColors[key] && key.includes(colorName)) {
-            colors[key] = shading(colorArray[colorName], colorVariations[key])
+          if (!existingColors[computeKeyName(colorName, key)]) {
+            console.warn(computeKeyName(colorName, key))
+            colors[computeKeyName(colorName, key)] = shading(
+              colorArray[colorName],
+              colorVariations[key]
+            )
           }
           return colors
         }, {})
