@@ -30,12 +30,13 @@ const validate = name => {
   return 'M0 0L24 0L24 24 L0 24Z'
 }
 
-export const Icon = ({ name, size, color, rotate, ...props }) => (
+export const Icon = ({ name, size, color, rotate, spin, ...props }) => (
   <BaseIcon
     path={externalGlyphs[name] || glyphs[name] || validate(name)}
     size={sizes[size] ?? size}
     color={color}
-    spin={rotate}
+    spin={spin}
+    rotate={rotate}
     {...props}
   />
 )
@@ -65,7 +66,8 @@ Icon.propTypes = {
     PropTypes.object,
     PropTypes.string
   ]),
-  rotate: PropTypes.bool
+  rotate: PropTypes.number,
+  spin: PropTypes.bool
 }
 
 Icon.defaultProps = {
