@@ -72,7 +72,7 @@ export const AppLayout = ({
 const SIDEBAR_WIDTH = '240px'
 const TOPBAR_SIZE = '58px'
 const LOGO_HEIGHT = '100px'
-const FOOTER_HEIGHT = '300px'
+const FOOTER_HEIGHT = '288px'
 const SIDEBAR_FOOTER_HEIGHT = '80px'
 const TRANSITION = 'all 250ms ease-in-out'
 
