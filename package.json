@@ -37,10 +37,12 @@
     "@ivoryio/kogaio": "^0.7.93",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
+    "@styled-system/prop-types": "^5.1.5",
     "@styled-system/theme-get": "^5.1.2",
     "flag-icon-css": "^3.5.0",
     "hyperid": "^2.0.5",
     "lodash": "^4.17.20",
+    "styled-system": "^5.1.5",
     "use-resize-observer": "^6.1.0"
   },
   "devDependencies": {

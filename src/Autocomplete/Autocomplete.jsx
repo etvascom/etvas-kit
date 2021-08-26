@@ -10,13 +10,13 @@ import React, {
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-import { Flex } from '@ivoryio/kogaio'
 
 import Option from '../Dropdown/Option'
 import Heading from '../Dropdown/Heading'
 
 import { Input } from '../Input'
 import { Icon } from '../Icon'
+import { Flex } from '../Flex'
 import sizes from '../assets/sizes'
 
 const Autocomplete = ({

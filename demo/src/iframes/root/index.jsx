@@ -2,8 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { EmbededAppParent } from '../embededApp'
 import { ModalParent } from '../modals'
-import { Flex, Box } from '@ivoryio/kogaio'
-import { Typography, Button, Card } from '../../../../src'
+import { Typography, Button, Card, Flex, Box } from '../../../../src'
 
 const demos = {
   embededApp: {

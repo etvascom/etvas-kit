@@ -32,5 +32,7 @@ export * from './SubdomainInput'
 export * from './Autocomplete'
 export * from './PhoneNumberInput'
 
+export * from './Box'
+export * from './Flex'
+
 export { styled }
-export * from '@ivoryio/kogaio'

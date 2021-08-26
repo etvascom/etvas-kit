@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 
-import { Flex } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 

@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { typography } from '../Typography'
-import Flex from '@ivoryio/kogaio/Responsive/Flex'
-import Box from '@ivoryio/kogaio/Responsive/Box'
+import { Flex } from '../Flex'
+import { Box } from '../Box'
 import { Checkbox } from '../Checkbox'
 import sizes from '../assets/sizes'
 

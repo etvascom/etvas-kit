@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-import { Flex, Box } from '@ivoryio/kogaio'
 import {
   EmbededAppReporter,
   EmbededAppContainer,
@@ -10,7 +9,9 @@ import {
   Card,
   Checkbox,
   Icon,
-  Typography
+  Typography,
+  Flex,
+  Box
 } from '../../../../src'
 
 export const EmbededAppChild = () => {

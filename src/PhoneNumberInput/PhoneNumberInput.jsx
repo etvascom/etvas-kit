@@ -6,8 +6,9 @@ import React, {
   useLayoutEffect
 } from 'react'
 import { Typography } from '../Typography'
-import { Flex, Space } from '@ivoryio/kogaio'
+import { Space } from '@ivoryio/kogaio'
 import { Icon } from '../Icon'
+import { Flex } from '../Flex'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import css from '@styled-system/css'

@@ -10,8 +10,8 @@ import React, {
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-import { Flex } from '@ivoryio/kogaio'
 
+import { Flex } from '../Flex'
 import { Typography, typography } from '../Typography'
 import { Icon } from '../Icon'
 import Option from './Option'

@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { Box, Flex } from '@ivoryio/kogaio'
 import { Card } from './Card'
+import { Box } from './Box'
+import { Flex } from './Flex'
 
 import styles from './CardWithImage.styles'
 
