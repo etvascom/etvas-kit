@@ -25,12 +25,13 @@ export const CardWithImage = ({
   variant,
   children,
   imgOnLeft,
+  contentPadding,
   ...props
 }) => {
   const flexDirection = vertical
     ? 'column'
     : ['column', imgOnLeft ? 'row' : 'row-reverse']
-  const contentPadding = variant === 'hero' ? [4, 8] : [2, 4]
+  const defaultContentPadding = variant === 'hero' ? [4, 8] : [2, 4]
 
   const invImageSize = Array.isArray(imageSize)
     ? imageSize.map(size => 1 - size)
@@ -48,7 +49,10 @@ export const CardWithImage = ({
         <ContentBox vertical={vertical} ratio={imageSize}>
           <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
-        <ContentBox vertical={vertical} p={contentPadding} ratio={invImageSize}>
+        <ContentBox
+          vertical={vertical}
+          p={contentPadding ?? defaultContentPadding}
+          ratio={invImageSize}>
           {children}
         </ContentBox>
       </Flex>
