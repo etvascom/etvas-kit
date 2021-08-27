@@ -9,6 +9,56 @@ const hex2rgb = color =>
     .slice(1)
     .map(c => parseInt(c, 16))
 
+const hex2Rgba = (hex, alpha) => {
+  let r,
+    g,
+    b,
+    a = alpha
+  hex = hex.replace('#', '')
+  switch (hex.length) {
+    case 3:
+      r = hex.charAt(0)
+      g = hex.charAt(1)
+      b = hex.charAt(2)
+      break
+    case 4:
+      r = hex.charAt(0)
+      g = hex.charAt(1)
+      b = hex.charAt(2)
+      a = hex.charAt(3)
+      break
+    case 6:
+      r = hex.substring(0, 2)
+      g = hex.substring(2, 4)
+      b = hex.substring(4, 6)
+      break
+    case 8:
+      r = hex.substring(0, 2)
+      g = hex.substring(2, 4)
+      b = hex.substring(4, 6)
+      a = hex.substring(6, 8)
+      break
+    default:
+      console.error(`* Unexpected ${hex} hex string format passed.`)
+      return ''
+  }
+  if (typeof a === 'undefined') {
+    a = 'ff'
+  }
+  ;[r, g, b, a].forEach(item =>
+    item.length === 1 ? selfIncrement(item) : null
+  )
+  r = parseInt(r, 16)
+  g = parseInt(g, 16)
+  b = parseInt(b, 16)
+  a = typeof a === 'number' ? a : parseInt(a, 16) / 255
+  return `rgba(${r},${g},${b},${a})`
+
+  function selfIncrement(item) {
+    item += item
+  }
+}
+
 const rgb2hex = rgb =>
   rgb
     .map(c => c.toString(16))
@@ -180,6 +230,7 @@ const hsl2hex = hsl => rgb2hex(hsl2rgb(hsl))
 
 export default {
   hex2rgb,
+  hex2Rgba,
   rgb2hex,
   rgb2hsv,
   hsv2rgb,
