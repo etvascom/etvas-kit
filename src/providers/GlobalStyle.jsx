@@ -1,4 +1,4 @@
-import { themed } from '@ivoryio/kogaio/utils'
+import { themed } from '../utils'
 import { createGlobalStyle } from 'styled-components'
 
 import LightFont from '../assets/webfont/light.woff'

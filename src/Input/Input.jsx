@@ -10,9 +10,10 @@ import styled from 'styled-components'
 import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { themed } from '@ivoryio/kogaio/utils/helpers'
+
+import { themed } from '../utils'
 import { Icon } from '../Icon'
-import { Flex } from '../flex'
+import { Flex } from '../Flex'
 import { Typography, typography } from '../Typography'
 
 import { PasswordToggler } from './PasswordToggler'

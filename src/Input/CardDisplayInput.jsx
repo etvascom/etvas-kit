@@ -7,7 +7,7 @@ import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Flex } from '../Flex'
 import { Typography, typography } from '../Typography'
-import { Touchable } from '@ivoryio/kogaio'
+import { Touchable } from '../Touchable'
 import { v4 } from 'uuid'
 
 import { default as variants } from './CardDisplayInput.variants'
