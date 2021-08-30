@@ -1,13 +1,18 @@
-/* eslint-disable no-console */
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { themed } from '../utils'
+
+import { themed, hex2Rgba } from '../utils'
 
 const backgroundColour = (() => ({ colors: { background } }) =>
   themed(`colors.${background}`, background))()
 
 const primaryColour = (() => ({ colors: { primary } }) =>
   themed(`colors.${primary}`, primary))()
+
+const complementaryColour = (() => ({ colors: { background }, ...props }) => {
+  const hex = themed(`colors.${background}`, background)(props)
+  return hex.charAt(0) === '#' ? hex2Rgba(hex, 0) : hex
+})()
 
 const spinnerSize = ({ size }) => {
   const validSize = ['number', 'string']
@@ -33,15 +38,31 @@ export const Spinner = styled.div`
   border-radius: 50%;
   background: ${primaryColour};
   /* stylelint-disable */
-  background: -moz-linear-gradient(left, ${primaryColour} 10%, transparent 42%);
+  background: -moz-linear-gradient(
+    left,
+    ${primaryColour} 10%,
+    ${complementaryColour} 42%
+  );
   background: -webkit-linear-gradient(
     left,
     ${primaryColour} 10%,
-    transparent 42%
+    ${complementaryColour} 42%
   );
-  background: -o-linear-gradient(left, ${primaryColour} 10%, transparent 42%);
-  background: -ms-linear-gradient(left, ${primaryColour} 10%, transparent 42%);
-  background: linear-gradient(to right, ${primaryColour} 10%, transparent 42%);
+  background: -o-linear-gradient(
+    left,
+    ${primaryColour} 10%,
+    ${complementaryColour} 42%
+  );
+  background: -ms-linear-gradient(
+    left,
+    ${primaryColour} 10%,
+    ${complementaryColour} 42%
+  );
+  background: linear-gradient(
+    to right,
+    ${primaryColour} 10%,
+    ${complementaryColour} 42%
+  );
   /* stylelint-enable */
   position: relative;
   -webkit-animation: spin 1.4s infinite linear;

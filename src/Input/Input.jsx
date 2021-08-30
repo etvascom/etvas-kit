@@ -11,7 +11,7 @@ import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
 
-import { themed } from '../utils'
+import { themeGet as themed } from '@styled-system/theme-get'
 import { Icon } from '../Icon'
 import { Flex } from '../Flex'
 import { Typography, typography } from '../Typography'

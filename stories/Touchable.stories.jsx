@@ -28,7 +28,7 @@ export const TouchableExamples = () => (
         effect='highlight'
         onClick={() => {}}
         p='12px'
-        underlayColor='info'>
+        underlayColor='brand'>
         Touchable Highlight
       </Touchable>
     </Box>
