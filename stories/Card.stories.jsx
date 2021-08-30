@@ -29,6 +29,20 @@ export const WithImage = () => (
   </CardWithImage>
 )
 
+export const WithImageAndNoContentPadding = () => (
+  <CardWithImage
+    imageUrl='https://picsum.photos/640/360/?grayscale&blur'
+    imageSize={1 / 3}
+    height='300px'
+    imgOnLeft={true}
+    contentPadding={0}>
+    <Typography variant='titleSmall'>CardWithImage</Typography>
+    <Typography variant='textSmall'>
+      This is the content with no padding
+    </Typography>
+  </CardWithImage>
+)
+
 export const WithImageHero = () => (
   <CardWithImage
     variant='hero'
