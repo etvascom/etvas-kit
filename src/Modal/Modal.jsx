@@ -5,7 +5,7 @@ import { flexbox, color } from 'styled-system'
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
 
-import { Flex } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
 import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 import { InterCom } from '../providers'

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Touchable } from '@ivoryio/kogaio'
+import { Touchable } from '../Touchable'
 import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
 

@@ -1,8 +1,7 @@
 import EventEmitter from 'events'
-import { mergeDeep } from '@ivoryio/kogaio/assets/helpers'
 import isEqual from 'lodash/isEqual'
 import { InterCom } from './InterCom'
-import { hex2rgb, shading } from '../utils'
+import { hex2rgb, shading, mergeDeep } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',

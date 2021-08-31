@@ -6,13 +6,13 @@ import React, {
   useLayoutEffect
 } from 'react'
 import { Typography } from '../Typography'
-import { Flex, Space } from '@ivoryio/kogaio'
+import { Space } from '../Space'
 import { Icon } from '../Icon'
+import { Flex } from '../Flex'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { themed } from '@ivoryio/kogaio/utils/helpers'
 import { Input } from '../Input'
 import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
@@ -21,7 +21,7 @@ import {
   statesEu,
   statesWorld
 } from './world-states'
-import { md } from '../utils'
+import { md, themed } from '../utils'
 import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
 import 'flag-icon-css/css/flag-icon.css'

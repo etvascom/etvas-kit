@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from '@ivoryio/kogaio'
+import { Icon } from '../Icon'
 
 export const Rating = ({ rating, max, size, color }) => {
   const icons = useMemo(() => {
@@ -8,7 +8,7 @@ export const Rating = ({ rating, max, size, color }) => {
     for (let i = 0; i < max; i++) {
       i < rating
         ? icons.push('star')
-        : (i >= rating || !rating) && icons.push('star_outline')
+        : (i >= rating || !rating) && icons.push('starOutline')
     }
     return icons
   }, [rating, max])
@@ -20,7 +20,7 @@ export const Rating = ({ rating, max, size, color }) => {
           key={`rating-icon-${String(idx)}`}
           name={iconName}
           color={color}
-          fontSize={size}
+          size={size}
         />
       ))}
     </>
@@ -41,6 +41,6 @@ Rating.propTypes = {
 Rating.defaultProps = {
   max: 5,
   rating: 0,
-  size: 'inherit',
+  size: 'small',
   color: 'accent'
 }

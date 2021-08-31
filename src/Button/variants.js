@@ -1,5 +1,4 @@
 import sizes from '../assets/sizes'
-import { BORDERS } from '../assets/core'
 
 const BUTTON_DEFAULT = {
   height: sizes.buttonHeight,
@@ -52,7 +51,7 @@ const LARGE_STYLE = {
 }
 const POSITIVE_STYLE = {
   ...BUTTON_DEFAULT,
-  backgroundColor: 'positive',
+  backgroundColor: 'statusSuccess',
   color: 'white'
 }
 const LINK_DEFAULT = {
@@ -77,10 +76,10 @@ const LINK_DEFAULT = {
 const LINK_STYLE = { ...LINK_DEFAULT, color: 'accent' }
 const LINK_POSITIVE_STYLE = {
   ...LINK_DEFAULT,
-  color: 'positive',
+  color: 'statusSuccess',
   ':not([disabled])': {
-    ':hover': { opacity: 0.75, color: 'positive' },
-    ':active': { color: 'positive' }
+    ':hover': { opacity: 0.75, color: 'statusSuccess' },
+    ':active': { color: 'statusSuccess' }
   }
 }
 export default {

@@ -32,5 +32,11 @@ export * from './SubdomainInput'
 export * from './Autocomplete'
 export * from './PhoneNumberInput'
 
+export * from './Box'
+export * from './Flex'
+export * from './Space'
+export * from './ActivityIndicator'
+export * from './Image'
+export * from './Touchable'
+
 export { styled }
-export * from '@ivoryio/kogaio'

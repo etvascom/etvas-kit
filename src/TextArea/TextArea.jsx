@@ -6,7 +6,7 @@ import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { default as variants } from './TextArea.variants'
 import { Typography, typography } from '../Typography'
-import { Flex } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
 
 import { SubLabel } from '../Input/SubLabel'
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 
-import { Flex } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
 import { Typography } from '../Typography'
 
 export const Chip = ({ color, isRounded, children, label }) => (

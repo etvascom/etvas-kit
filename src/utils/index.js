@@ -1,6 +1,5 @@
 import { themeGet as libThemeGet } from '@styled-system/theme-get'
-import { buildTheme as kogaioBuildTheme } from '@ivoryio/kogaio/utils'
-import { mergeDeep } from '@ivoryio/kogaio/assets/helpers'
+import { mergeDeep } from '../utils/mergeDeep'
 import { etvasTheme } from '../assets'
 import colorUtilities from './colorUtilities'
 
@@ -20,9 +19,7 @@ export const themed = libThemeGet
 export { etvasTheme, mergeDeep }
 
 export const buildTheme = customTheme => {
-  const initTheme = mergeDeep(etvasTheme, customTheme)
-  const updatedTheme = kogaioBuildTheme(initTheme)
-
+  const updatedTheme = mergeDeep(etvasTheme, customTheme)
   return updatedTheme
 }
 
@@ -36,6 +33,7 @@ export const lg = theme => rules => media(theme.breakpoints[2], rules)
 
 export const {
   rgb2hex,
+  hex2Rgba,
   hex2rgb,
   hsl2hex,
   hex2hsl,

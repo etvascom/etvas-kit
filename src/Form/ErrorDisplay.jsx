@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useField } from 'formik'
 import { Typography } from '../Typography'
 import { Icon } from '../Icon'
-import { Flex } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
 
 export const ErrorDisplay = ({ name, type }) => {
   const [, meta] = useField({

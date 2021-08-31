@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 import { Icon } from '../Icon'
 import { Tooltip } from '../Tooltip'
-import { Flex } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
 
 const Content = styled.div(({ bgImage }) =>
   css({

@@ -8,7 +8,7 @@ import { compose, color, flexbox, layout, border } from 'styled-system'
 
 import style from './Modal.style'
 
-import { Box } from '@ivoryio/kogaio'
+import { Box } from '../Box'
 
 const inIframe = () => window.self !== window.top
 

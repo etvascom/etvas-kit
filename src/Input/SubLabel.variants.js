@@ -1,21 +1,18 @@
-import { FONTS, LINE_HEIGHTS } from '../assets/core'
+import { typographyVariants } from '../Typography/variants'
 
 const DEFAULT_STYLE = {
   color: 'textDefault',
-  fontSize: '11px',
-  fontWeight: '300',
-  lineHeight: LINE_HEIGHTS.inputLabel,
-  fontFamily: FONTS.primary
+  ...typographyVariants.base12Light
 }
 
 const ERROR_STYLE = {
   ...DEFAULT_STYLE,
-  color: 'error'
+  color: 'statusError'
 }
 
 const WARNING_STYLE = {
   ...DEFAULT_STYLE,
-  color: 'warning'
+  color: 'statusWarning'
 }
 
 const VALID_STYLE = {

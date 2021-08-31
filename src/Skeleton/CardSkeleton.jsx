@@ -6,7 +6,8 @@ import css from '@styled-system/css'
 import { compose, layout, space } from 'styled-system'
 
 import { BlockSkeleton } from './BlockSkeleton'
-import { Flex, Box } from '@ivoryio/kogaio'
+import { Flex } from '../Flex'
+import { Box } from '../Box'
 
 const dimensions = (position, size) => ({
   width:

@@ -1,4 +1,98 @@
-//   fontSizes: ['11px','12px', '14px', '16px', '20px', '24px', '32px','48px']
+import {
+  FONT_SIZES,
+  FONT_WEIGHTS,
+  LETTER_SPACINGS,
+  LINE_HEIGHTS,
+  FONTS
+} from '../assets/core'
+
+export const typographyVariants = {
+  base12Light: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.lighter,
+    fontSize: FONT_SIZES[0],
+    lineHeight: LINE_HEIGHTS.base,
+    letterSpacing: LETTER_SPACINGS.base
+  },
+  base14Light: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.lighter,
+    fontSize: FONT_SIZES[1],
+    lineHeight: LINE_HEIGHTS.base,
+    letterSpacing: LETTER_SPACINGS.normal
+  },
+  base16Light: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.lighter,
+    fontSize: FONT_SIZES[2],
+    lineHeight: LINE_HEIGHTS.paragraph,
+    letterSpacing: LETTER_SPACINGS.base
+  },
+  title20Light: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.lighter,
+    fontSize: FONT_SIZES[3],
+    lineHeight: LINE_HEIGHTS.title,
+    letterSpacing: LETTER_SPACINGS.tight
+  },
+  title24Light: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.lighter,
+    fontSize: FONT_SIZES[4],
+    lineHeight: LINE_HEIGHTS.title,
+    letterSpacing: LETTER_SPACINGS.tighter
+  },
+  title32Light: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.lighter,
+    fontSize: FONT_SIZES[5],
+    lineHeight: LINE_HEIGHTS.largeTitle,
+    letterSpacing: LETTER_SPACINGS.tightest
+  },
+  base12Bold: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: FONT_SIZES[0],
+    lineHeight: LINE_HEIGHTS.base,
+    letterSpacing: LETTER_SPACINGS.base
+  },
+  base14Bold: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: FONT_SIZES[1],
+    lineHeight: LINE_HEIGHTS.base,
+    letterSpacing: LETTER_SPACINGS.base
+  },
+  base16Bold: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: FONT_SIZES[2],
+    lineHeight: LINE_HEIGHTS.paragraph,
+    letterSpacing: LETTER_SPACINGS.base
+  },
+  title20Bold: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: FONT_SIZES[3],
+    lineHeight: LINE_HEIGHTS.title,
+    letterSpacing: LETTER_SPACINGS.tight
+  },
+  title24Bold: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: FONT_SIZES[4],
+    lineHeight: LINE_HEIGHTS.title,
+    letterSpacing: LETTER_SPACINGS.tighter
+  },
+  title32Bold: {
+    fontFamily: FONTS.primary,
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: FONT_SIZES[5],
+    lineHeight: LINE_HEIGHTS.largeTitle,
+    letterSpacing: LETTER_SPACINGS.tightest
+  }
+}
+
 export default {
   default: {
     fontFamily: 'primary',
@@ -99,5 +193,6 @@ export default {
     lineHeight: '16px',
     textTransform: 'uppercase',
     letterSpacing: '0.2px'
-  }
+  },
+  ...typographyVariants
 }
