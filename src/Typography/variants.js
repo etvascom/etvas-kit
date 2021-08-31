@@ -1,5 +1,3 @@
-//    fontSizes: ['11px', '12px', '14px', '16px', '20px', '24px', '32px', '48px'],
-
 import {
   FONT_SIZES,
   FONT_WEIGHTS,

@@ -10,15 +10,15 @@ export const Spinner = () => (
   <Flex alignItems='center' flexWrap='wrap'>
     <Flex justifyContent='space-evenly' width={1}>
       <ActivityIndicator
-        colors={{ background: 'white', primary: 'statusWarning' }}
+        colors={{ background: 'baseWhite', primary: 'statusWarning' }}
         size='64px'
       />
       <ActivityIndicator
-        colors={{ background: 'white', primary: 'statusSuccess' }}
+        colors={{ background: 'baseWhite', primary: 'statusSuccess' }}
         size='3rem'
       />
       <ActivityIndicator
-        colors={{ background: 'white', primary: 'statusError' }}
+        colors={{ background: 'baseWhite', primary: 'statusError' }}
         size={24}
       />
     </Flex>
@@ -27,9 +27,9 @@ export const Spinner = () => (
 
 export const RunningBar = () => (
   <Box py={8} mx='auto'>
-    <Card width={1 / 2} variant='white' position='relative'>
+    <Card width={1 / 2} variant='baseWhite' position='relative'>
       <ActivityIndicator
-        colors={{ background: 'white', primary: 'brand' }}
+        colors={{ background: 'baseWhite', primary: 'brand' }}
         position='absolute'
         bottom={0}
         variant='runningbar'
@@ -40,7 +40,7 @@ export const RunningBar = () => (
 
 export const LoadBar = () => (
   <Box py={8} mx='auto'>
-    <Card width={1 / 2} variant='white' position='relative'>
+    <Card width={1 / 2} position='relative'>
       <ActivityIndicator
         colors={['statusWarning', 'statusSuccess', 'statusError']}
         position='absolute'

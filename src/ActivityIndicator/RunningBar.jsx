@@ -57,10 +57,7 @@ RunningBar.propTypes = {
 }
 RunningBar.defaultProps = {
   colors: {
-    background: 'pale-white',
-    primary: 'info'
+    background: 'baseWhite',
+    primary: 'brand'
   }
 }
-
-RunningBar.displayName = 'RunningBar'
-export default RunningBar

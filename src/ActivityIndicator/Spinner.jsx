@@ -122,7 +122,7 @@ Spinner.propTypes = {
 
 Spinner.defaultProps = {
   colors: {
-    background: 'white',
+    background: 'baseWhite',
     primary: 'brand'
   },
   size: '2rem'

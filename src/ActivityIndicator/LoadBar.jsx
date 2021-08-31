@@ -4,7 +4,7 @@ import styled, { css, keyframes } from 'styled-components'
 import { Box } from '../Box'
 
 export const LoadBar = ({ colors, ...props }) => (
-  <Box bg='pastel-blue' height='4px' position='relative' width={1} {...props}>
+  <Box bg='brand' height='4px' position='relative' width={1} {...props}>
     {colors.map(color => (
       <Bar bg={color} colourList={colors} key={color} />
     ))}
@@ -53,5 +53,5 @@ LoadBar.propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string)
 }
 LoadBar.defaultProps = {
-  colors: ['info', 'alert', 'error']
+  colors: ['statusWarning', 'statusSuccess', 'statusError']
 }

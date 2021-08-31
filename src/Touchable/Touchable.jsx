@@ -94,10 +94,10 @@ const touchableWithEffect = ({ effect, activeOpacity, underlayColor }) => {
       return css`
         :hover {
           background-color: ${themed(`colors.${underlayColor}`, underlayColor)};
-          color: ${themed('colors.white')};
+          color: ${themed('colors.baseWhite')};
         }
         :active {
-          color: ${themed('colors.pale-white')};
+          color: ${themed('colors.baseWhite')};
           background-color: ${themed(`colors.${underlayColor}`, underlayColor)};
         }
       `
