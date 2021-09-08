@@ -25,12 +25,12 @@ export const FONT_WEIGHTS = {
 export const FONT_SIZES = ['12px', '14px', '16px', '20px', '24px', '32px']
 
 export const LINE_HEIGHTS = {
-  base: 1,
-  title: 2,
-  largeTitle: 2.5,
-  paragraph: 1.5,
-  tooltip: 1.6,
-  button: 2
+  base: '16px',
+  largeBase: '20px',
+  title: '32px',
+  largeTitle: '40px',
+  paragraph: '24px',
+  largeParagraph: '26px'
 }
 
 export const LETTER_SPACINGS = {
