@@ -18,14 +18,14 @@ export const typographyVariants = {
     fontFamily: FONTS.primary,
     fontWeight: FONT_WEIGHTS.lighter,
     fontSize: FONT_SIZES[1],
-    lineHeight: LINE_HEIGHTS.base,
+    lineHeight: LINE_HEIGHTS.paragraph,
     letterSpacing: LETTER_SPACINGS.normal
   },
   base16Light: {
     fontFamily: FONTS.primary,
     fontWeight: FONT_WEIGHTS.lighter,
     fontSize: FONT_SIZES[2],
-    lineHeight: LINE_HEIGHTS.paragraph,
+    lineHeight: LINE_HEIGHTS.largeParagraph,
     letterSpacing: LETTER_SPACINGS.base
   },
   title20Light: {
@@ -60,7 +60,7 @@ export const typographyVariants = {
     fontFamily: FONTS.primary,
     fontWeight: FONT_WEIGHTS.bold,
     fontSize: FONT_SIZES[1],
-    lineHeight: LINE_HEIGHTS.base,
+    lineHeight: LINE_HEIGHTS.largeBase,
     letterSpacing: LETTER_SPACINGS.base
   },
   base16Bold: {
