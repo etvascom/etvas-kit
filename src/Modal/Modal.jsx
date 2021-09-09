@@ -86,7 +86,7 @@ export const Modal = ({
       {...props}
       bg={backDrop}
       animated={animated}
-      onClick={modalClickHandler}>
+      onMouseDown={modalClickHandler}>
       {children}
     </StyledModal>
   )
