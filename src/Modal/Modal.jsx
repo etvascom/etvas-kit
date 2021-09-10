@@ -37,7 +37,6 @@ export const Modal = ({
   children,
   ...props
 }) => {
-  const modalRef = useRef()
   const intercom = useRef(new InterCom('etvas.modal'))
 
   const modalBackdropClickHandler = useCallback(() => {
@@ -78,12 +77,8 @@ export const Modal = ({
   }, [handleKeyPress])
 
   return (
-    <StyledModal ref={modalRef} {...props}>
-      <ModalBackdrop
-        bg={backDrop}
-        animated={animated}
-        onClick={modalBackdropClickHandler}
-      />
+    <StyledModal animated={animated} {...props}>
+      <ModalBackdrop bg={backDrop} onClick={modalBackdropClickHandler} />
       {children}
     </StyledModal>
   )
