@@ -27,6 +27,8 @@ const StyledModal = styled(Flex)(
     animation-duration:0.5s;`
 )
 
+const ModalBackdrop = styled(Flex)(css(style.backdrop))
+
 export const Modal = ({
   backDrop,
   onBackDropClick,
@@ -35,17 +37,11 @@ export const Modal = ({
   children,
   ...props
 }) => {
-  const modalRef = useRef()
   const intercom = useRef(new InterCom('etvas.modal'))
 
-  const modalClickHandler = useCallback(
-    event => {
-      if (event.target === modalRef.current) {
-        onBackDropClick && onBackDropClick()
-      }
-    },
-    [onBackDropClick]
-  )
+  const modalBackdropClickHandler = useCallback(() => {
+    onBackDropClick && onBackDropClick()
+  }, [onBackDropClick])
   const handleKeyPress = useCallback(
     event => {
       if (event.keyCode === 27) {
@@ -81,12 +77,8 @@ export const Modal = ({
   }, [handleKeyPress])
 
   return (
-    <StyledModal
-      ref={modalRef}
-      {...props}
-      bg={backDrop}
-      animated={animated}
-      onClick={modalClickHandler}>
+    <StyledModal animated={animated} {...props}>
+      <ModalBackdrop bg={backDrop} onClick={modalBackdropClickHandler} />
       {children}
     </StyledModal>
   )

@@ -66,5 +66,6 @@ export const SPACE = range(0, 100, GUTTER)
 
 export const Z_INDICES = {
   menu: 5,
-  modal: 10
+  modal: 10,
+  modalContent: 11
 }

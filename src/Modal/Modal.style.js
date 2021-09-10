@@ -5,12 +5,17 @@ export default {
     width: '100vw',
     minHeight: '100vh',
     position: 'fixed',
-    zIndex: 'modal',
     overflow: 'scroll'
+  },
+  backdrop: {
+    width: '100vw',
+    minHeight: '100vh',
+    zIndex: 'modal'
   },
   content: {
     position: 'relative',
     display: 'flex',
-    paddingBottom: [3, 9]
+    paddingBottom: [3, 9],
+    zIndex: 'modalContent'
   }
 }
