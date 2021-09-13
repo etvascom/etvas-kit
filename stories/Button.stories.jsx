@@ -342,3 +342,67 @@ export const LinkIcon = () => {
     </Table>
   )
 }
+
+export const CustomColor = () => {
+  const variants = [
+    'primary',
+    'large',
+    'link',
+    'linkSecondary',
+    'linkPositive',
+    'positive'
+  ]
+
+  return (
+    <Table breakpoint={400}>
+      <Header>
+        <Row>
+          <Cell>Variant</Cell>
+          <Cell>Normal</Cell>
+          <Cell>Icon only</Cell>
+          <Cell>Disabled</Cell>
+          <Cell>Loading</Cell>
+          <Cell>Disabled & Loading</Cell>
+        </Row>
+      </Header>
+      <Body>
+        {variants.map(variant => (
+          <Row key={variant}>
+            <Cell leader>{variant}</Cell>
+            <Cell>
+              <Button
+                color='statusWarning'
+                variant={variant}
+                onClick={action(variant)}>
+                Warning Button
+              </Button>
+            </Cell>
+            <Cell>
+              <Button
+                color='statusWarning'
+                variant={variant}
+                icon={_rndIconName()}
+                onClick={action(variant)}
+              />
+            </Cell>
+            <Cell>
+              <Button color='statusWarning' disabled variant={variant}>
+                Warning Button
+              </Button>
+            </Cell>
+            <Cell>
+              <Button color='statusWarning' loading variant={variant}>
+                Warning Button
+              </Button>
+            </Cell>
+            <Cell>
+              <Button color='statusWarning' disabled loading variant={variant}>
+                Warning Button
+              </Button>
+            </Cell>
+          </Row>
+        ))}
+      </Body>
+    </Table>
+  )
+}

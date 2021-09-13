@@ -9,9 +9,12 @@ import { Flex, Space } from '../'
 import variants from './variants'
 import { Icon } from '../Icon'
 import sizes from '../assets/sizes'
+import colors from '../assets/colors'
+import { brandingService } from '../providers/BrandingService'
 
 const Button = ({
   iconColor,
+  color,
   children,
   disabled,
   icon,
@@ -33,6 +36,21 @@ const Button = ({
   const hasLabel =
     !!children || (Array.isArray(children) && children.length > 0)
 
+  const colorVariants = useMemo(
+    () =>
+      color
+        ? {
+            ...brandingService.buildColorVariants(
+              'button',
+              colors[color] ?? color,
+              {}
+            ),
+            buttonColor: color
+          }
+        : {},
+    [color]
+  )
+
   return (
     <StyledButton
       disabled={disabled}
@@ -41,6 +59,7 @@ const Button = ({
       type={type}
       variant={variant}
       hSpacing={hSpacing}
+      colorVariants={colorVariants}
       {...rest}>
       {loading ? (
         <Icon size='medium' name='loading' spin color={iconColor} />
@@ -83,7 +102,7 @@ const StyledButton = styled.button`
   ${layout}
   ${position}
   ${space}
-  ${variant({ variants })}
+  ${props => variant({ variants: variants(props) })(props)}
   ${({ hSpacing }) =>
     hSpacing ? `padding-left: ${hSpacing}; padding-right: ${hSpacing};` : ''}
 `
@@ -94,6 +113,7 @@ Button.propTypes = {
   ...propTypes.space,
   children: PropTypes.node,
   iconColor: PropTypes.string,
+  color: PropTypes.string,
   icon: PropTypes.string,
   iconPosition: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
