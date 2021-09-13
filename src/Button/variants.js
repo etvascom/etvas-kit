@@ -27,13 +27,18 @@ const BUTTON_DEFAULT = {
     cursor: 'not-allowed'
   }
 }
-const PRIMARY_DEFAULT = {
+
+const PRIMARY_DEFAULT = ({ colorVariants }) => ({
   ...BUTTON_DEFAULT,
-  backgroundColor: 'accent',
+  backgroundColor: colorVariants.buttonColor ?? 'accent',
   color: 'white',
   ':not([disabled])': {
-    ':hover': { backgroundColor: 'accentColorDark' },
-    ':active': { backgroundColor: 'accentColorDarkest' }
+    ':hover': {
+      backgroundColor: colorVariants.buttonColorDark ?? 'accentColorDark'
+    },
+    ':active': {
+      backgroundColor: colorVariants.buttonColorDarkest ?? 'accentColorDarkest'
+    }
   },
   ':hover': { opacity: 1 },
   ':disabled': {
@@ -41,20 +46,24 @@ const PRIMARY_DEFAULT = {
     transform: 'scale(1)',
     cursor: 'not-allowed'
   }
-}
-const PRIMARY_STYLE = { ...PRIMARY_DEFAULT }
-const LARGE_STYLE = {
-  ...PRIMARY_DEFAULT,
+})
+
+const PRIMARY_STYLE = props => ({ ...PRIMARY_DEFAULT(props) })
+
+const LARGE_STYLE = props => ({
+  ...PRIMARY_DEFAULT(props),
   paddingLeft: sizes.spacingLarge,
   paddingRight: sizes.spacingLarge,
   height: sizes.largeButtonHeight
-}
-const POSITIVE_STYLE = {
+})
+
+const POSITIVE_STYLE = ({ colorVariants }) => ({
   ...BUTTON_DEFAULT,
-  backgroundColor: 'statusSuccess',
+  backgroundColor: colorVariants.buttonColor ?? 'statusSuccess',
   color: 'white'
-}
-const LINK_DEFAULT = {
+})
+
+const LINK_DEFAULT = ({ colorVariants }) => ({
   ...BUTTON_DEFAULT,
   backgroundColor: 'transparent',
   height: 'auto',
@@ -63,8 +72,10 @@ const LINK_DEFAULT = {
   padding: 0,
   minHeight: 'max-content',
   ':not([disabled])': {
-    ':hover': { color: 'accentColorDark' },
-    ':active': { color: 'accentColorDarkest' }
+    ':hover': { color: colorVariants.buttonColorDark ?? 'accentColorDark' },
+    ':active': {
+      color: colorVariants.buttonColorDarkest ?? 'accentColorDarkest'
+    }
   },
   ':hover': { opacity: 1 },
   ':disabled': {
@@ -72,21 +83,30 @@ const LINK_DEFAULT = {
     transform: 'scale(1)',
     cursor: 'not-allowed'
   }
-}
-const LINK_STYLE = { ...LINK_DEFAULT, color: 'accent' }
-const LINK_POSITIVE_STYLE = {
-  ...LINK_DEFAULT,
-  color: 'statusSuccess',
+})
+
+const LINK_STYLE = props => ({
+  ...LINK_DEFAULT(props),
+  color: props.colorVariants.buttonColor ?? 'accent'
+})
+
+const LINK_POSITIVE_STYLE = props => ({
+  ...LINK_DEFAULT(props),
+  color: props.colorVariants.buttonColor ?? 'statusSuccess',
   ':not([disabled])': {
-    ':hover': { opacity: 0.75, color: 'statusSuccess' },
-    ':active': { color: 'statusSuccess' }
+    ':hover': {
+      opacity: 0.75,
+      color: props.colorVariants.buttonColor ?? 'statusSuccess'
+    },
+    ':active': { color: props.colorVariants.buttonColor ?? 'statusSuccess' }
   }
-}
-export default {
-  primary: PRIMARY_STYLE,
-  large: LARGE_STYLE,
-  link: LINK_STYLE,
-  positive: POSITIVE_STYLE,
-  linkSecondary: LINK_STYLE,
-  linkPositive: LINK_POSITIVE_STYLE
-}
+})
+
+export default props => ({
+  primary: PRIMARY_STYLE(props),
+  large: LARGE_STYLE(props),
+  link: LINK_STYLE(props),
+  positive: POSITIVE_STYLE(props),
+  linkSecondary: LINK_STYLE(props),
+  linkPositive: LINK_POSITIVE_STYLE(props)
+})
