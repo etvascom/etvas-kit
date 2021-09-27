@@ -267,7 +267,8 @@ const StatusIcon = styled(Flex)(
 SubdomainInput.propTypes = {
   ...Input.propTypes,
   prefix: PropTypes.string,
-  suffix: PropTypes.string
+  suffix: PropTypes.string,
+  icRight: PropTypes.string
 }
 
 SubdomainInput.defaultProps = {
