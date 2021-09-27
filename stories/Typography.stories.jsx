@@ -54,6 +54,12 @@ export const Truncated = () => (
       </Typography>
     </Card>
     <Card width='250px' height='100px' p={2} m={1}>
+      <Typography variant='textLarge' truncate={false}>
+        Some very long text that has a false truncate prop and will not get
+        truncated
+      </Typography>
+    </Card>
+    <Card width='250px' height='100px' p={2} m={1}>
       <Typography variant='textLarge' truncate={2}>
         Some very long text that gets truncated to the number of lines that is
         specified

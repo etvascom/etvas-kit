@@ -32,7 +32,8 @@ const Typography = styled.div(
   ),
   ({ truncate }) =>
     typeof truncate === 'boolean'
-      ? css({
+      ? truncate &&
+        css({
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap'
