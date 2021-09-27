@@ -37,6 +37,7 @@ export const SubdomainInput = forwardRef(
       disabled,
       error,
       warning,
+      icRight,
       id,
       label,
       name,
@@ -134,8 +135,9 @@ export const SubdomainInput = forwardRef(
       if (loading) return 'loading'
       else if (error || warning) return 'alertCircle'
       else if (valid) return 'check'
-      return 'check'
-    }, [loading, error, warning, valid])
+
+      return icRight
+    }, [loading, error, warning, valid, icRight])
 
     const currentIcRightColor = useMemo(() => {
       if (loading) return 'brand'
