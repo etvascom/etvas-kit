@@ -6,13 +6,15 @@ import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
 
 import { Flex } from '../Flex'
+import { Box } from '../Box'
 import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 import { InterCom } from '../providers'
 
 import { enableScroll, disableScroll } from './utils'
+import { useOnClickOutside } from '../utils/hooks'
 
-const StyledModal = styled(Flex)(
+const StyledModal = styled(Box)(
   css(style.wrapper),
   color,
   flexbox,
@@ -37,11 +39,14 @@ export const Modal = ({
   children,
   ...props
 }) => {
+  const ref = useRef()
   const intercom = useRef(new InterCom('etvas.modal'))
 
   const modalBackdropClickHandler = useCallback(() => {
     onBackDropClick && onBackDropClick()
   }, [onBackDropClick])
+  useOnClickOutside(ref, modalBackdropClickHandler)
+
   const handleKeyPress = useCallback(
     event => {
       if (event.keyCode === 27) {
@@ -77,12 +82,24 @@ export const Modal = ({
   }, [handleKeyPress])
 
   return (
-    <StyledModal animated={animated} {...props}>
-      <ModalBackdrop bg={backDrop} onClick={modalBackdropClickHandler} />
-      {children}
-    </StyledModal>
+    <>
+      <ModalBackdrop bg={backDrop} />
+      <StyledModal animated={animated} {...props}>
+        <ContentWrapper>
+          <Box ref={ref}>{children}</Box>
+        </ContentWrapper>
+      </StyledModal>
+    </>
   )
 }
+
+const ContentWrapper = styled(Flex)`
+  --verticalSpacing: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin: var(--verticalSpacing) auto;
+  min-height: calc(100% - 2 * var(--verticalSpacing));
+`
 
 Modal.propTypes = {
   ...propTypes.color,
