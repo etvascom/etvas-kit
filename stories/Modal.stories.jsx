@@ -1,13 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Modal,
-  Button,
-  PhoneNumberInputField,
-  Card,
-  Form,
-  Flex,
-  Input
-} from '../src'
+import { Modal, Button, PhoneNumberInputField, Card, Form, Flex } from '../src'
 
 export default {
   title: 'Demo/Modal',
@@ -106,10 +98,15 @@ export const BigModal = () => {
           backDrop='whiteShadow'
           onBackDropClick={hideModal}
           onEscape={hideModal}>
-          <Modal.Content>
+          <Modal.Content width='400px'>
             <Card p={6}>
-              {Array.from({ length: 20 }).map(i => (
-                <Input key={i} />
+              TITLE
+              <br />
+              {Array.from({ length: 40 }).map(i => (
+                <>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Delectus, explicabo.
+                </>
               ))}
               <Flex mt={6}>
                 <Button type='submit' variant='primary'>
