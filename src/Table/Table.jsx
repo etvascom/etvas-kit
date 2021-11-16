@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
-import useResizeObserver from 'use-resize-observer'
+import useResizeObserver from 'use-resize-observer/polyfilled'
 
 import styles from './Table.styles'
 import { TableContext } from './base'

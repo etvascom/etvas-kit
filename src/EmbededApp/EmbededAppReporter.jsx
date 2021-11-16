@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import useResizeObserver from 'use-resize-observer'
+import useResizeObserver from 'use-resize-observer/polyfilled'
 import { InterCom } from '../providers'
 
 export const EmbededAppReporter = ({ children }) => {
