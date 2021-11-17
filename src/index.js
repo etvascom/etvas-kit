@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import useResizeObserver from 'use-resize-observer/polyfilled'
 
 export * from './providers'
 export * from './utils'
@@ -40,4 +39,4 @@ export * from './ActivityIndicator'
 export * from './Image'
 export * from './Touchable'
 
-export { styled, useResizeObserver }
+export { styled }

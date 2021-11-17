@@ -2,6 +2,7 @@ import { themeGet as libThemeGet } from '@styled-system/theme-get'
 import { mergeDeep } from '../utils/mergeDeep'
 import { etvasTheme } from '../assets'
 import colorUtilities from './colorUtilities'
+import useResizeObserver from '../utils/hooks/useResizeObserver'
 
 /**
  * @deprecated
@@ -16,7 +17,7 @@ export const themeGet = (...args) => {
 
 export * from './border'
 export const themed = libThemeGet
-export { etvasTheme, mergeDeep }
+export { etvasTheme, mergeDeep, useResizeObserver }
 
 export const buildTheme = customTheme => {
   const updatedTheme = mergeDeep(etvasTheme, customTheme)
