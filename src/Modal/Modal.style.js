@@ -17,7 +17,7 @@ export default {
     zIndex: 'modal'
   },
   content: {
-    display: 'flex',
+    margin: '0 auto',
     position: 'relative',
     zIndex: 'modalContent'
   }

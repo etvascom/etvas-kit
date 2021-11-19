@@ -85,8 +85,10 @@ export const Modal = ({
     <>
       <ModalBackdrop bg={backDrop} />
       <StyledModal animated={animated} {...props}>
-        <ContentWrapper>
-          <Box ref={ref}>{children}</Box>
+        <ContentWrapper justifyContent={['unset', 'center']}>
+          <Box width={1} ref={ref}>
+            {children}
+          </Box>
         </ContentWrapper>
       </StyledModal>
     </>
@@ -96,7 +98,6 @@ export const Modal = ({
 const ContentWrapper = styled(Flex)`
   --verticalSpacing: 2rem;
   align-items: center;
-  justify-content: center;
   margin: var(--verticalSpacing) auto;
   min-height: calc(100% - 2 * var(--verticalSpacing));
 `
