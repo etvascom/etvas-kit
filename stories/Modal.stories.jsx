@@ -42,9 +42,9 @@ export const Default = () => {
       {isModalShown && (
         <Modal
           backDrop='whiteShadow'
-          onBackDropClick={hideModal}
-          onEscape={hideModal}>
-          <Modal.Content>
+          onEscape={hideModal}
+          onBackDropClick={hideModal}>
+          <Modal.Content onClose={hideModal} width={['90%', '400px']}>
             <Form
               name='user-create'
               validate={_handleValidation}
