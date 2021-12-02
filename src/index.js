@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export * from './providers'
 export * from './utils'
+export * from './i18n'
 
 export * from './Button'
 export * from './Card'
