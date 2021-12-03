@@ -7,7 +7,7 @@ export default {
   component: PhoneNumberInput,
   decorators: [
     Story => (
-      <div style={{ padding: '15rem' }}>
+      <div style={{ padding: '1rem' }}>
         <Story />
       </div>
     )

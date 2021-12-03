@@ -40,7 +40,6 @@ export default {
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'inputBorderGray',
-    overflowY: 'scroll',
     zIndex: 10
   },
   dropdownItem: {
@@ -61,10 +60,5 @@ export default {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis'
-  },
-  line: {
-    minHeight: '1px',
-    width: '100%',
-    backgroundColor: 'inputBorderGray'
   }
 }
