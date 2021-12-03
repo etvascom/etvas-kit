@@ -3,9 +3,10 @@ import React, {
   useMemo,
   useRef,
   useState,
-  useLayoutEffect
+  useLayoutEffect,
+  useEffect
 } from 'react'
-import { Typography } from '../Typography'
+import { Typography, typography } from '../Typography'
 import { Space } from '../Space'
 import { Icon } from '../Icon'
 import { Flex } from '../Flex'
@@ -16,17 +17,14 @@ import { variant } from 'styled-system'
 import { Input } from '../Input'
 import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
-import {
-  prefixLengthOrderedStates,
-  statesEu,
-  statesWorld
-} from './world-states'
-import { md, themed } from '../utils'
+import { prefixLengthOrderedStates, orderedStates } from './world-states'
+import { themed } from '../utils'
 import styles from './PhoneNumberInput.styles'
 import sizes from '../assets/sizes'
 import 'flag-icon-css/css/flag-icon.css'
 import { RADII, SHADOWS } from '../assets/core'
 import { trimStartingZero } from './trimStartingZero'
+import { displayCountries } from './displayCountries'
 
 const PhoneNumberInput = forwardRef((props, ref) => {
   const {
@@ -54,23 +52,36 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     subLabel,
     loading,
     tinted,
+    searchPlaceholder,
+    itemFilter,
     ...rest
   } = props
   const inputRef = useRef()
+  const searchRef = useRef()
   const wrapperRef = useRef()
+  const [search, setSearch] = useState('')
+  const [areFlagsLoaded, setFlagsLoaded] = useState(false)
 
-  const [country, setCountry] = useState(statesEu[0])
+  const [country, setCountry] = useState(orderedStates[0])
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const [cursorPosition, setCursorPosition] = useState(0)
-  const [
-    cursorPositionChangedToggler,
-    setCursorPositionChangedToggler
-  ] = useState(false)
+  const [cursorPositionChangedToggler, setCursorPositionChangedToggler] =
+    useState(false)
+
+  useEffect(() => {
+    const flagsTimeout = setTimeout(() => {
+      dropdownOpen && setFlagsLoaded(true)
+    }, 400)
+    return () => clearTimeout(flagsTimeout)
+  }, [dropdownOpen])
 
   useLayoutEffect(() => {
     const onClickOutside = event => {
-      if (wrapperRef.current && wrapperRef.current.contains(event.target)) {
+      if (
+        (wrapperRef.current && wrapperRef.current.contains(event.target)) ||
+        (searchRef.current && searchRef.current.contains(event.target))
+      ) {
         return
       }
       setDropdownOpen(false)
@@ -84,7 +95,8 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     if (ref) {
       ref.current.selectionStart = ref.current.selectionEnd = cursorPosition
     } else {
-      inputRef.current.selectionStart = inputRef.current.selectionEnd = cursorPosition
+      inputRef.current.selectionStart = inputRef.current.selectionEnd =
+        cursorPosition
     }
   }, [value, ref, inputRef, cursorPosition, cursorPositionChangedToggler])
 
@@ -120,7 +132,9 @@ const PhoneNumberInput = forwardRef((props, ref) => {
       ({ prefix }) => normalizedValue.indexOf(prefix) === 0
     )
     if (found) {
-      const activeCountry = statesWorld.find(({ code }) => code === found.code)
+      const activeCountry = orderedStates.find(
+        ({ code }) => code === found.code
+      )
       setCountry(activeCountry)
       return normalizedValue.substr(found.prefix.length)
     }
@@ -141,8 +155,18 @@ const PhoneNumberInput = forwardRef((props, ref) => {
 
   const icStateIsNotIconToggle = () => type !== 'password' || error || loading
 
-  const handleToggleOpenDropdown = () =>
+  const handleToggleOpenDropdown = () => {
     setDropdownOpen(dropdownOpen => !dropdownOpen)
+  }
+  const setSearchText = event => {
+    setSearch(event.target.value)
+  }
+
+  useEffect(() => {
+    if (dropdownOpen && searchRef.current) {
+      searchRef.current.focus()
+    }
+  }, [dropdownOpen])
 
   const handleSelectCountry = country => () => {
     setDropdownOpen(false)
@@ -236,18 +260,28 @@ const PhoneNumberInput = forwardRef((props, ref) => {
           )}
         </Flex>
         {dropdownOpen && (
-          <StyledDropdown dropdownSize={dropdownSize} dropUp={dropUp}>
-            {displayItems(statesEu, 'eu-states', handleSelectCountry, country)}
-            <Flex alignItems={'center'} width={'100%'} minHeight={'1em'}>
-              <StyledLine />
-            </Flex>
-            {displayItems(
-              statesWorld,
-              'world-states',
-              handleSelectCountry,
-              country
-            )}
-          </StyledDropdown>
+          <StyledDropdownWrapper dropUp={dropUp}>
+            <SearchInput
+              ref={searchRef}
+              placeholder={searchPlaceholder}
+              id='search-country'
+              value={search}
+              type='search'
+              role='searchbox'
+              autoComplete='off'
+              onChange={setSearchText}
+            />
+            <StyledDropdown dropdownSize={dropdownSize}>
+              {displayCountries({
+                orderedStates,
+                handleSelectCountry,
+                country,
+                itemFilter,
+                search,
+                areFlagsLoaded
+              })}
+            </StyledDropdown>
+          </StyledDropdownWrapper>
         )}
       </Flex>
       <SubLabel
@@ -258,25 +292,23 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     </StyledFlex>
   )
 })
-const displayItems = (states, label, onClick, country) =>
-  states.map(state => (
-    <StyledDropdownItem
-      key={`${label}-${state.code}`}
-      isSelected={state.code === country.code}
-      className={
-        state.code === country.code
-          ? 'dropdown-country-prefix-item-selected'
-          : ''
-      }
-      onClick={onClick(state)}>
-      <Space mr={2}>
-        <span className={`flag-icon flag-icon-${state.code.toLowerCase()}`} />
-      </Space>
-      <PrefixTitle>
-        {state.prefix} {state.name}
-      </PrefixTitle>
-    </StyledDropdownItem>
-  ))
+
+const SearchInput = styled.input(
+  css({
+    ...typography.base14Light,
+    appearance: 'none',
+    padding: 3,
+    display: 'block',
+    width: '100%',
+    background: 'white',
+    border: 'none',
+    outline: 'none',
+    borderBottom: '1px solid',
+    borderBottomColor: 'inputBorderGray',
+    borderBottomStyle: 'solid',
+    borderRadius: 0
+  })
+)
 
 const StyledPhoneNumberWrapper = styled.div(
   css(styles.phoneNumberWrapper),
@@ -295,51 +327,35 @@ const StyledPhoneNumberInput = styled.input(
 
 const calcDropdownHeight = (height, size) => `${parseInt(height, 10) * size}px`
 
-const StyledDropdown = styled(Flex)(
-  css(styles.dropdown),
-  ({ dropUp }) =>
-    dropUp
-      ? css({
-          top: 'auto',
-          bottom: 10,
-          borderTopLeftRadius: RADII[8],
-          borderTopRightRadius: RADII[8],
-          boxShadow: SHADOWS.phoneNumberInputUp
-        })
-      : css({
-          bottom: 'auto',
-          top: 10,
-          borderBottomRightRadius: RADII[8],
-          borderBottomLeftRadius: RADII[8],
-          boxShadow: SHADOWS.phoneNumberInputDown
-        }),
-  ({ theme, dropdownSize }) =>
-    css({
-      height: `${calcDropdownHeight(
-        sizes.dropdownItemHeightMobile,
-        dropdownSize
-      )}`,
-      ...md(theme)({
-        height: `${calcDropdownHeight(sizes.dropdownItemHeight, dropdownSize)}`
-      })
-    })
+const StyledDropdown = styled(Flex)(({ theme, dropdownSize }) =>
+  css({
+    overflowY: 'scroll',
+    flexDirection: 'column',
+    width: '100%',
+    maxHeight: `${calcDropdownHeight(
+      sizes.dropdownItemHeightMobile,
+      dropdownSize
+    )}`
+  })
 )
-const StyledDropdownItem = styled(Flex)(
-  css(styles.dropdownItem),
-  ({ theme, isSelected }) =>
-    css({
-      backgroundColor: isSelected ? 'brand' : 'backgroundLightGray',
-      ':hover': {
-        backgroundColor: isSelected ? 'brand' : 'brandLighter'
-      },
-      color: isSelected ? 'white' : 'text',
-      ...md(theme)({
-        minHeight: sizes.dropdownItemHeight
+
+const StyledDropdownWrapper = styled(Flex)(css(styles.dropdown), ({ dropUp }) =>
+  dropUp
+    ? css({
+        top: 'auto',
+        bottom: 10,
+        borderTopLeftRadius: RADII[8],
+        borderTopRightRadius: RADII[8],
+        boxShadow: SHADOWS.phoneNumberInputUp
       })
-    })
+    : css({
+        bottom: 'auto',
+        top: 10,
+        borderBottomRightRadius: RADII[8],
+        borderBottomLeftRadius: RADII[8],
+        boxShadow: SHADOWS.phoneNumberInputDown
+      })
 )
-const PrefixTitle = styled.div(css(styles.prefixTitle))
-const StyledLine = styled.div(css(styles.line))
 
 const StyledFlex = styled(Flex)`
   &:focus-within {
@@ -355,13 +371,28 @@ PhoneNumberInput.propTypes = {
   dropdownSize: PropTypes.number,
   dropUp: PropTypes.bool,
   international: PropTypes.bool,
-  pattern: PropTypes.string
+  pattern: PropTypes.string,
+  itemFilter: PropTypes.func,
+  searchPlaceholder: PropTypes.string
 }
+
 PhoneNumberInput.defaultProps = {
   ...Input.defaultProps,
   type: 'tel',
-  dropdownSize: 8,
-  dropUp: false
+  dropdownSize: 5,
+  dropUp: false,
+  searchPlaceholder: 'Search country',
+  itemFilter: (search, v) =>
+    typeof v === 'string'
+      ? v.toLocaleLowerCase().includes(search)
+      : typeof v === 'object'
+      ? Object.keys(v).some(
+          key =>
+            v[key] &&
+            typeof v[key] === 'string' &&
+            v[key].toLocaleLowerCase().includes(search)
+        )
+      : false
 }
 PhoneNumberInput.displayName = 'PhoneNumberInput'
 
