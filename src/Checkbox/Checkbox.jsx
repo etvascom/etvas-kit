@@ -34,7 +34,7 @@ export const Checkbox = ({
         onChange && onChange(event)
       }
     },
-    [setChecked, onChange]
+    [setChecked, onChange, disabled]
   )
 
   return (
