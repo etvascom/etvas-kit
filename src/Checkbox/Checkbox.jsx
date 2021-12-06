@@ -28,9 +28,11 @@ export const Checkbox = ({
 
   const handleChange = useCallback(
     event => {
-      const { checked: nativeChecked } = event.target
-      setChecked(nativeChecked)
-      onChange && onChange(event)
+      if (!disabled) {
+        const { checked: nativeChecked } = event.target
+        setChecked(nativeChecked)
+        onChange && onChange(event)
+      }
     },
     [setChecked, onChange]
   )
@@ -50,7 +52,7 @@ export const Checkbox = ({
         name={name}
         checked={isChecked}
         style={{ display: 'none' }}
-        onChange={disabled ? () => {} : handleChange}
+        onChange={handleChange}
       />
       {label && (
         <Typography
@@ -88,6 +90,6 @@ Checkbox.propTypes = {
 Checkbox.defaultProps = {
   color: 'brand',
   size: 'medium',
-  variant: 'labelSmall',
+  variant: 'base14Light',
   disabled: false
 }
