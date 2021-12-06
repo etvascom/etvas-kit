@@ -19,6 +19,19 @@ export const PresetState = () => (
   <Checkbox checked onChange={action('checkbox-change')} />
 )
 
+export const DisabledState = () => (
+  <Checkbox label='Free pizza' disabled onChange={action('checkbox-change')} />
+)
+
+export const DisabledCheckedState = () => (
+  <Checkbox
+    label='Free pizza'
+    disabled
+    checked
+    onChange={action('checkbox-change')}
+  />
+)
+
 export const WrappedLabel = () => (
   <Box width='250px'>
     <Checkbox

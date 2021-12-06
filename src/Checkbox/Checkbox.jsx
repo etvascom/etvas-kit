@@ -17,6 +17,7 @@ export const Checkbox = ({
   onChange,
   size,
   variant,
+  disabled,
   ...props
 }) => {
   const [isChecked, setChecked] = useState(!!checked)
@@ -38,7 +39,7 @@ export const Checkbox = ({
     <StyledLabel htmlFor={id} {...props}>
       <Flex alignItems='center' justifyContent='center'>
         <Icon
-          color={isChecked ? color : 'uncheckedCheckbox'}
+          color={isChecked && !disabled ? color : 'uncheckedCheckbox'}
           size={size}
           name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
         />
@@ -49,10 +50,13 @@ export const Checkbox = ({
         name={name}
         checked={isChecked}
         style={{ display: 'none' }}
-        onChange={handleChange}
+        onChange={disabled ? () => {} : handleChange}
       />
       {label && (
-        <Typography variant={variant} ml={2}>
+        <Typography
+          variant={variant}
+          color={disabled ? 'baseGray' : 'text'}
+          ml={2}>
           {label}
         </Typography>
       )}
@@ -77,11 +81,13 @@ Checkbox.propTypes = {
   onChange: PropTypes.func,
   checked: PropTypes.bool,
   size: PropTypes.string,
-  variant: PropTypes.string
+  variant: PropTypes.string,
+  disabled: PropTypes.bool
 }
 
 Checkbox.defaultProps = {
   color: 'brand',
   size: 'medium',
-  variant: 'labelSmall'
+  variant: 'labelSmall',
+  disabled: false
 }
