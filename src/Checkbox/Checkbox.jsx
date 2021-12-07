@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
-import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Flex } from '../Flex'
@@ -28,13 +27,11 @@ export const Checkbox = ({
 
   const handleChange = useCallback(
     event => {
-      if (!disabled) {
-        const { checked: nativeChecked } = event.target
-        setChecked(nativeChecked)
-        onChange && onChange(event)
-      }
+      const { checked: nativeChecked } = event.target
+      setChecked(nativeChecked)
+      onChange && onChange(event)
     },
-    [setChecked, onChange, disabled]
+    [setChecked, onChange]
   )
 
   return (
@@ -51,6 +48,7 @@ export const Checkbox = ({
         id={id}
         name={name}
         checked={isChecked}
+        disabled={disabled}
         style={{ display: 'none' }}
         onChange={handleChange}
       />
@@ -66,14 +64,12 @@ export const Checkbox = ({
   )
 }
 
-const StyledLabel = styled.label(({ pointerEvents }) =>
-  css({
-    display: 'flex',
-    userSelect: 'none',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start'
-  })
-)
+const StyledLabel = styled.label`
+  display: flex;
+  user-select: none;
+  align-items: flex-start;
+  justify-content: flex-start;
+`
 
 Checkbox.propTypes = {
   label: PropTypes.node,
