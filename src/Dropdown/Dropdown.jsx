@@ -220,7 +220,7 @@ const Dropdown = ({
               id={`search-${cId}`}
               type='search'
               role='searchbox'
-              autocomplete='false'
+              autoComplete='off'
               onChange={setSearchText}
             />
           ) : null}
