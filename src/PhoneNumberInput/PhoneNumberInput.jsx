@@ -66,8 +66,10 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const [cursorPosition, setCursorPosition] = useState(0)
-  const [cursorPositionChangedToggler, setCursorPositionChangedToggler] =
-    useState(false)
+  const [
+    cursorPositionChangedToggler,
+    setCursorPositionChangedToggler
+  ] = useState(false)
 
   useEffect(() => {
     const flagsTimeout = setTimeout(() => {
@@ -95,8 +97,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     if (ref) {
       ref.current.selectionStart = ref.current.selectionEnd = cursorPosition
     } else {
-      inputRef.current.selectionStart = inputRef.current.selectionEnd =
-        cursorPosition
+      inputRef.current.selectionStart = inputRef.current.selectionEnd = cursorPosition
     }
   }, [value, ref, inputRef, cursorPosition, cursorPositionChangedToggler])
 
@@ -208,7 +209,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
           htmlFor={id}
           variant='inputLabel'
           width='fit-content'>
-          {label} {required ? '*' : ''}
+          {label}
         </Typography>
       ) : null}
       <Flex alignItems='center' position='relative' width='100%'>
