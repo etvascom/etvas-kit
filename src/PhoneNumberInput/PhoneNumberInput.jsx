@@ -201,6 +201,11 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     onChange(event)
   }
 
+  const searchId = useMemo(
+    () => `search-${Math.floor(1000000 * Math.random())}`,
+    []
+  )
+
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
       {label ? (
@@ -265,7 +270,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
             <SearchInput
               ref={searchRef}
               placeholder={searchPlaceholder}
-              id='search-country'
+              id={searchId}
               value={search}
               type='search'
               role='searchbox'
