@@ -82,6 +82,11 @@ const Dropdown = ({
     id
   ])
 
+  const searchId = useMemo(
+    () => `search-${Math.floor(1000000 * Math.random())}`,
+    []
+  )
+
   const displayValue = useMemo(() => {
     if (!value) {
       return ''
@@ -217,6 +222,7 @@ const Dropdown = ({
             <SearchInput
               ref={searchField}
               placeholder={searchPh}
+              id={searchId}
               type='search'
               role='searchbox'
               autoComplete='off'
