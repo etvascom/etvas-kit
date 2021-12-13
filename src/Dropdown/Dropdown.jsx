@@ -217,7 +217,6 @@ const Dropdown = ({
             <SearchInput
               ref={searchField}
               placeholder={searchPh}
-              id={`search-${cId}`}
               type='search'
               role='searchbox'
               autoComplete='off'
