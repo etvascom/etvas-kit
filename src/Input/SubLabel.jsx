@@ -5,16 +5,19 @@ import { variant as variantBuilder } from 'styled-system'
 
 import { Typography } from '../Typography'
 import { default as variants } from './SubLabel.variants'
-
 export const SubLabel = ({ variant, content, preserveSpace }) => (
   <Wrapper preserveSpace={preserveSpace} variant={variant} mt={1}>
-    {content}
+    {content && <Span>{content}</Span>}
   </Wrapper>
 )
 
 const Wrapper = styled(Typography)`
   min-height: ${props => (props.preserveSpace ? '16px' : 0)};
   ${variantBuilder({ variants })}
+`
+
+const Span = styled.span`
+  letter-spacing: inherit;
 `
 
 SubLabel.propTypes = {
