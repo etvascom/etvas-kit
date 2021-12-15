@@ -207,7 +207,8 @@ const Dropdown = ({
           error={error}
           tinted={tinted}
           onClick={toggleDropdown}>
-          {isEmpty ? placeholder : displayValue}
+          {isEmpty && placeholder && <Span>{placeholder}</Span>}
+          {displayValue && <Span>{displayValue}</Span>}
         </Toggler>
         <DropdownList
           collapsed={isCollapsed}
@@ -419,6 +420,10 @@ const SearchInput = styled.input(
     borderRadius: 0
   })
 )
+
+const Span = styled.span`
+  letter-spacing: inherit;
+`
 
 Dropdown.propTypes = {
   disabled: PropTypes.bool,
