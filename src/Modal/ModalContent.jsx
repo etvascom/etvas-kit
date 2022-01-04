@@ -10,14 +10,9 @@ import style from './Modal.style'
 
 import { Box } from '../Box'
 
-const inIframe = () => window.self !== window.top
-
-const isModalInIframe = inIframe()
-
 const StyledModalContent = styled(Box)(
   compose(layout, color, flexbox, border),
-  css(style.content),
-  isModalInIframe && css({ position: 'absolute', top: [3, 9] })
+  css(style.content)
 )
 
 export const ModalContent = ({ children, onClose, ...props }) => (

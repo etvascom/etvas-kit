@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { flexbox, color } from 'styled-system'
+import { color, flexbox } from 'styled-system'
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
 
@@ -11,7 +11,7 @@ import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 import { InterCom } from '../providers'
 
-import { enableScroll, disableScroll } from './utils'
+import { enableScroll, disableScroll, isInsideIframe } from './utils'
 import { useOnClickOutside } from '../utils/hooks'
 
 const StyledModal = styled(Box)(
@@ -30,7 +30,7 @@ const StyledModal = styled(Box)(
 )
 
 const ModalBackdrop = styled(Flex)(css(style.backdrop))
-
+const isModalInIframe = isInsideIframe()
 export const Modal = ({
   backDrop,
   onBackDropClick,
@@ -85,10 +85,10 @@ export const Modal = ({
     <>
       <ModalBackdrop bg={backDrop} />
       <StyledModal animated={animated} {...props}>
-        <ContentWrapper justifyContent={['unset', 'center']}>
-          <Box width={1} ref={ref}>
-            {children}
-          </Box>
+        <ContentWrapper
+          justifyContent={['unset', 'center']}
+          alignItems={!isModalInIframe && 'center'}>
+          <Box ref={ref}>{children}</Box>
         </ContentWrapper>
       </StyledModal>
     </>
@@ -97,7 +97,6 @@ export const Modal = ({
 
 const ContentWrapper = styled(Flex)`
   --verticalSpacing: 2rem;
-  align-items: center;
   margin: var(--verticalSpacing) auto;
   min-height: calc(100% - 2 * var(--verticalSpacing));
 `
@@ -110,11 +109,6 @@ Modal.propTypes = {
   onEscape: PropTypes.func,
   animated: PropTypes.bool,
   children: PropTypes.node
-}
-
-Modal.defaultProps = {
-  alignItems: 'center',
-  justifyContent: 'center'
 }
 
 Modal.Content = ModalContent
