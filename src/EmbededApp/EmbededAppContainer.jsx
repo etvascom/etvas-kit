@@ -40,6 +40,7 @@ export const EmbededAppContainer = ({ defaultHeight, ...props }) => {
 
 const StyledIframe = styled.iframe(({ height }) =>
   css({
+    position: 'relative',
     width: '100%',
     display: 'block',
     border: 'none',
