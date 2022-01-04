@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useField } from 'formik'
+import { useField, useFormikContext } from 'formik'
 
 import { fieldShape } from './shapes'
 import { makeId } from './utils'
 import { PhoneNumberInput } from '../PhoneNumberInput'
 
 export const PhoneNumberInputField = props => {
+  const { submitCount } = useFormikContext()
   const [field, meta, helpers] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
   const handleChange = useCallback(
@@ -16,12 +17,14 @@ export const PhoneNumberInputField = props => {
     },
     [helpers]
   )
+  const error = meta.touched && meta.error
+  const displayedError = submitCount > 0 ? error : field.value && error
   return (
     <PhoneNumberInput
       {...field}
       {...props}
       id={id}
-      error={meta.touched && meta.error}
+      error={displayedError}
       valid={hasValidation(props) && !meta.error && meta.touched}
       tinted={props.tinted}
       onChange={handleChange}
