@@ -31,7 +31,8 @@ const values = {
   comments: '',
   cars: [],
   phone: '',
-  subdomain: ''
+  subdomain: '',
+  movie2: ''
 }
 
 const movieOptions = [
@@ -43,7 +44,7 @@ const movieOptions = [
   { label: 'Sci-Fi', value: 'scifi' }
 ]
 
-const minLength = l => s => (s.length < l ? `Min length: ${l}` : undefined)
+const minLength = l => s => (s?.length < l ? `Min length: ${l}` : undefined)
 
 const formValidate = values => {
   const errors = {}
@@ -56,6 +57,9 @@ const formValidate = values => {
 
   if (!values.movie) {
     errors.movie = 'Required'
+  }
+  if (!values.movie2) {
+    errors.movie2 = 'Required'
   }
   if (!values.comments) {
     errors.comments = 'Required'
@@ -155,7 +159,7 @@ export const SimpleForm = () => (
     <AutocompleteField
       label='Movie genre autocomplete'
       options={movieOptions.map(({ value }) => ({ key: value, value }))}
-      name='autocomplete-field'
+      name='movie2'
       required
     />
     <TextAreaField

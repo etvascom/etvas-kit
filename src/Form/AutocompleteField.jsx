@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useField } from 'formik'
+import { useField, useFormikContext } from 'formik'
 import { Autocomplete } from '../Autocomplete'
 import { fieldShape } from './shapes'
 import { makeId } from './utils'
@@ -11,18 +11,20 @@ export const AutocompleteField = ({
   onChange,
   ...props
 }) => {
+  const { submitCount } = useFormikContext()
   const [field, meta, helpers] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
   const handleItemChange = useCallback(value => helpers.setValue(value), [
     helpers
   ])
-
+  const error = meta.touched && meta.error
+  const displayedError = submitCount > 0 ? error : field.value && error
   return (
     <Autocomplete
       {...props}
       {...field}
       id={id}
-      error={meta.touched && meta.error}
+      error={displayedError}
       valid={hasValidation(props) && !meta.error && meta.touched}
       tinted={props.tinted}
       onSelectItemChange={handleItemChange}>
