@@ -100,7 +100,7 @@ export const BigModal = () => {
           backDrop='whiteShadow'
           onBackDropClick={hideModal}
           onEscape={hideModal}>
-          <Modal.Content width='400px'>
+          <Modal.Content width={['90%', '400px']}>
             <Card p={6}>
               TITLE
               <br />

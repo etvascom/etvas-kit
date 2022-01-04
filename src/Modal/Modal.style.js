@@ -1,4 +1,4 @@
-export default {
+const modalStyles = {
   wrapper: {
     top: '0',
     left: '0',
@@ -19,5 +19,18 @@ export default {
   content: {
     position: 'relative',
     zIndex: 'modalContent'
+  },
+  closeButton: {
+    position: 'absolute',
+    border: 'none',
+    background: 'transparent',
+    right: 4,
+    top: 4,
+    fontSize: '24px',
+    cursor: 'pointer',
+    outline: 'none',
+    color: 'black'
   }
 }
+
+export default modalStyles
