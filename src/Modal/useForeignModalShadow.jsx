@@ -8,7 +8,6 @@ const Z_INDEX_BASE = 50
 
 const raiseIframe = iframe => {
   iframe.style.zIndex = 1 + Z_INDEX_BASE
-  iframe.style.position = 'relative'
 }
 
 const resetIframe = iframe => {
