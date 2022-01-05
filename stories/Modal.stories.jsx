@@ -41,6 +41,7 @@ export const Default = () => {
       </Button>
       {isModalShown && (
         <Modal
+          animated
           backDrop='whiteShadow'
           onEscape={hideModal}
           onBackDropClick={hideModal}>
@@ -95,10 +96,11 @@ export const BigModal = () => {
       </Button>
       {isModalShown && (
         <Modal
+          animated
           backDrop='whiteShadow'
           onBackDropClick={hideModal}
           onEscape={hideModal}>
-          <Modal.Content width='400px'>
+          <Modal.Content width={['90%', '400px']}>
             <Card p={6}>
               TITLE
               <br />

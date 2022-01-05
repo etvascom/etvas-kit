@@ -1,7 +1,15 @@
-import React, { useLayoutEffect, useEffect, useRef, useCallback } from 'react'
+import React, {
+  useLayoutEffect,
+  useEffect,
+  useRef,
+  useCallback,
+  Children,
+  cloneElement,
+  isValidElement
+} from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { flexbox, color } from 'styled-system'
+import { flexbox } from 'styled-system'
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
 
@@ -11,12 +19,12 @@ import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 import { InterCom } from '../providers'
 
-import { enableScroll, disableScroll } from './utils'
+import { enableScroll, disableScroll, isInsideIframe } from './utils'
 import { useOnClickOutside } from '../utils/hooks'
 
+const ModalBackdrop = styled(Box)(css(style.backdrop))
 const StyledModal = styled(Box)(
   css(style.wrapper),
-  color,
   flexbox,
   ({ animated }) =>
     animated &&
@@ -28,8 +36,7 @@ const StyledModal = styled(Box)(
     animation-name: modal;
     animation-duration:0.5s;`
 )
-
-const ModalBackdrop = styled(Flex)(css(style.backdrop))
+const isModalInIframe = isInsideIframe()
 
 export const Modal = ({
   backDrop,
@@ -39,13 +46,13 @@ export const Modal = ({
   children,
   ...props
 }) => {
-  const ref = useRef()
+  const contentWrapperRef = useRef()
   const intercom = useRef(new InterCom('etvas.modal'))
 
   const modalBackdropClickHandler = useCallback(() => {
     onBackDropClick && onBackDropClick()
   }, [onBackDropClick])
-  useOnClickOutside(ref, modalBackdropClickHandler)
+  useOnClickOutside(contentWrapperRef, modalBackdropClickHandler)
 
   const handleKeyPress = useCallback(
     event => {
@@ -81,23 +88,29 @@ export const Modal = ({
     }
   }, [handleKeyPress])
 
+  const childrenWithProps = Children.map(children, child => {
+    if (isValidElement(child)) {
+      return cloneElement(child, { ref: contentWrapperRef })
+    }
+    return child
+  })
+
   return (
     <>
       <ModalBackdrop bg={backDrop} />
       <StyledModal animated={animated} {...props}>
-        <ContentWrapper justifyContent={['unset', 'center']}>
-          <Box width={1} ref={ref}>
-            {children}
-          </Box>
-        </ContentWrapper>
+        <Container
+          justifyContent='center'
+          alignItems={isModalInIframe ? 'flex-start' : 'center'}>
+          {childrenWithProps}
+        </Container>
       </StyledModal>
     </>
   )
 }
 
-const ContentWrapper = styled(Flex)`
+const Container = styled(Flex)`
   --verticalSpacing: 2rem;
-  align-items: center;
   margin: var(--verticalSpacing) auto;
   min-height: calc(100% - 2 * var(--verticalSpacing));
 `
@@ -110,11 +123,6 @@ Modal.propTypes = {
   onEscape: PropTypes.func,
   animated: PropTypes.bool,
   children: PropTypes.node
-}
-
-Modal.defaultProps = {
-  alignItems: 'center',
-  justifyContent: 'center'
 }
 
 Modal.Content = ModalContent
