@@ -22,7 +22,17 @@ import { InterCom } from '../providers'
 import { enableScroll, disableScroll, isInsideIframe } from './utils'
 import { useOnClickOutside } from '../utils/hooks'
 
-const ModalBackdrop = styled(Box)(css(style.backdrop))
+const ModalBackdrop = styled(Box)(
+  css(style.backdrop),
+  ({ blurredBg }) =>
+    blurredBg &&
+    `
+  @supports (backdrop-filter: blur(0)) {
+      background-color: transparent;
+      backdrop-filter: blur(7px);
+  }
+`
+)
 const StyledModal = styled(Box)(
   css(style.wrapper),
   flexbox,
@@ -43,6 +53,7 @@ export const Modal = ({
   onBackDropClick,
   onEscape,
   animated,
+  blurredBg,
   children,
   ...props
 }) => {
@@ -97,7 +108,7 @@ export const Modal = ({
 
   return (
     <>
-      <ModalBackdrop bg={backDrop} />
+      <ModalBackdrop bg={backDrop} blurredBg={blurredBg} />
       <StyledModal animated={animated} {...props}>
         <Container
           justifyContent='center'
@@ -122,6 +133,7 @@ Modal.propTypes = {
   onBackDropClick: PropTypes.func,
   onEscape: PropTypes.func,
   animated: PropTypes.bool,
+  blurredBg: PropTypes.bool,
   children: PropTypes.node
 }
 
