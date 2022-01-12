@@ -121,7 +121,7 @@ export const Modal = ({
 }
 
 const Container = styled(Flex)`
-  --verticalSpacing: 2rem;
+  --verticalSpacing: ${props => props.theme.space[8]}px;
   margin: var(--verticalSpacing) auto;
   min-height: calc(100% - 2 * var(--verticalSpacing));
 `
