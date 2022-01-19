@@ -45,7 +45,7 @@ const Dropdown = ({
   const [isCollapsed, setCollapsed] = useState(true)
   const [isSwipe, setSwipe] = useState(false)
   const [search, setSearch] = useState('')
-  const [currentHover, setCurrentHover] = useState(-1)
+  const [currentKeyboardFocus, setCurrentKeyboardFocus] = useState(-1)
 
   const wrapper = useRef()
   const searchField = useRef()
@@ -192,7 +192,7 @@ const Dropdown = ({
       if (e.code === 'ArrowDown') {
         e.preventDefault()
 
-        setCurrentHover(hover =>
+        setCurrentKeyboardFocus(hover =>
           Math.min(options.length - 1, Math.max(-1, hover + 1))
         )
       }
@@ -200,7 +200,7 @@ const Dropdown = ({
       if (e.code === 'ArrowUp') {
         e.preventDefault()
 
-        setCurrentHover(hover =>
+        setCurrentKeyboardFocus(hover =>
           Math.min(options.length - 1, Math.max(-1, hover - 1))
         )
       }
@@ -208,20 +208,31 @@ const Dropdown = ({
       if (e.code === 'Enter') {
         e.preventDefault()
 
-        if (currentHover !== -1 && !options[currentHover].props.disabled) {
-          onSelectItem(options[currentHover].props.value)
+        if (
+          currentKeyboardFocus !== -1 &&
+          !options[currentKeyboardFocus].props.disabled
+        ) {
+          onSelectItem(options[currentKeyboardFocus].props.value)
         }
       }
     }
 
+    const removeCurrentHover = () => {
+      setCurrentKeyboardFocus(-1)
+    }
+
     const element = wrapper.current
     element.addEventListener('keydown', handleKeyDownEvent)
-    return () => element.removeEventListener('keydown', handleKeyDownEvent)
-  }, [options, currentHover, onSelectItem, isCollapsed])
+    element.addEventListener('mousemove', removeCurrentHover)
+    return () => {
+      element.removeEventListener('keydown', handleKeyDownEvent)
+      element.removeEventListener('mousemove', removeCurrentHover)
+    }
+  }, [options, currentKeyboardFocus, onSelectItem, isCollapsed])
 
   useEffect(() => {
     if (isCollapsed) {
-      setCurrentHover(-1)
+      setCurrentKeyboardFocus(-1)
       return
     }
 
@@ -233,7 +244,7 @@ const Dropdown = ({
       isEqual(option.props.value, value)
     )
 
-    setCurrentHover(optionIndex)
+    setCurrentKeyboardFocus(optionIndex)
   }, [isCollapsed, options, value, multiple])
 
   return (
@@ -300,7 +311,7 @@ const Dropdown = ({
                 ? cloneElement(child, {
                     onSelectItem,
                     isSelected: isItemSelected(child.props.value),
-                    isHovering: currentHover === idx,
+                    hasKeyboardFocus: currentKeyboardFocus === idx,
                     hasCheckbox: multiple
                   })
                 : null

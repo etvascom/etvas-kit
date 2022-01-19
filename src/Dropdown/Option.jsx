@@ -14,7 +14,7 @@ const DropdownItem = ({
   onSelectItem,
   disabled,
   isSelected,
-  isHovering,
+  hasKeyboardFocus,
   value,
   hasCheckbox
 }) => {
@@ -34,14 +34,17 @@ const DropdownItem = ({
     []
   )
 
-  const optionContent = <TextWrapper>{children}</TextWrapper>
+  const optionContent = (
+    <TextWrapper aria-selected={hasKeyboardFocus}>{children}</TextWrapper>
+  )
 
   const optionWithCheckbox = (
-    <Flex alignItems='center' minWidth='0'>
+    <Flex alignItems='center' minWidth='0' aria-selected={hasKeyboardFocus}>
       <Box mr={3}>
         <Checkbox
           size='small'
           checked={isSelected}
+          aria-checked={isSelected}
           onChange={_handleClick}
           onClick={e => e.stopPropagation()}
         />
@@ -51,17 +54,17 @@ const DropdownItem = ({
   )
 
   useLayoutEffect(() => {
-    if (isHovering) {
+    if (hasKeyboardFocus) {
       optionRef.current.scrollIntoView({ block: 'nearest', inline: 'nearest' })
     }
-  }, [isHovering])
+  }, [hasKeyboardFocus])
 
   return (
     <Option
       role='option'
       onClick={_handleClick}
       selected={isSelected}
-      hovering={isHovering}
+      hovering={hasKeyboardFocus}
       touch={hasTouch}
       hasCheckbox={hasCheckbox}
       ref={optionRef}>
@@ -121,7 +124,7 @@ const Option = styled(Flex)(
 DropdownItem.propTypes = {
   children: PropTypes.node,
   isSelected: PropTypes.bool,
-  isHovering: PropTypes.bool,
+  hasKeyboardFocus: PropTypes.bool,
   disabled: PropTypes.bool,
   hasCheckbox: PropTypes.bool,
   onSelectItem: PropTypes.func,
@@ -135,7 +138,7 @@ DropdownItem.propTypes = {
 DropdownItem.defaultProps = {
   disabled: false,
   isSelected: false,
-  isHovering: false,
+  hasKeyboardFocus: false,
   checkbox: false
 }
 
