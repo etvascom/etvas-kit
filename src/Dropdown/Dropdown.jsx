@@ -3,7 +3,9 @@ import React, {
   cloneElement,
   isValidElement,
   useState,
+  useEffect,
   useLayoutEffect,
+  useCallback,
   useRef,
   useMemo
 } from 'react'
@@ -43,6 +45,7 @@ const Dropdown = ({
   const [isCollapsed, setCollapsed] = useState(true)
   const [isSwipe, setSwipe] = useState(false)
   const [search, setSearch] = useState('')
+  const [currentHover, setCurrentHover] = useState(-1)
 
   const wrapper = useRef()
   const searchField = useRef()
@@ -128,23 +131,26 @@ const Dropdown = ({
     setSwipe(false)
   }
 
-  const onSelectItem = option => {
-    if (multiple) {
-      const newValues = isEmpty ? [] : [...value]
-      const idx = newValues.indexOf(option)
-      if (idx >= 0) {
-        newValues.splice(idx, 1)
+  const onSelectItem = useCallback(
+    option => {
+      if (multiple) {
+        const newValues = isEmpty ? [] : [...value]
+        const idx = newValues.indexOf(option)
+        if (idx >= 0) {
+          newValues.splice(idx, 1)
+        } else {
+          newValues.push(option)
+        }
+        onChange(newValues)
       } else {
-        newValues.push(option)
+        onChange(option)
+        setTimeout(() => {
+          setCollapsed(true)
+        }, 60)
       }
-      onChange(newValues)
-    } else {
-      onChange(option)
-      setTimeout(() => {
-        setCollapsed(true)
-      }, 60)
-    }
-  }
+    },
+    [isEmpty, multiple, onChange, value]
+  )
 
   const setSearchText = event => {
     setSearch(event.target.value)
@@ -170,6 +176,65 @@ const Dropdown = ({
       !isCollapsed && !disabled && !error ? 'brandLight' : 'inputBorderGray',
     [disabled, error, isCollapsed]
   )
+
+  useLayoutEffect(() => {
+    const handleKeyDownEvent = e => {
+      if (isCollapsed) {
+        return
+      }
+
+      if (e.code === 'Escape') {
+        e.preventDefault()
+
+        setCollapsed(true)
+      }
+
+      if (e.code === 'ArrowDown') {
+        e.preventDefault()
+
+        setCurrentHover(hover =>
+          Math.min(options.length - 1, Math.max(-1, hover + 1))
+        )
+      }
+
+      if (e.code === 'ArrowUp') {
+        e.preventDefault()
+
+        setCurrentHover(hover =>
+          Math.min(options.length - 1, Math.max(-1, hover - 1))
+        )
+      }
+
+      if (e.code === 'Enter') {
+        e.preventDefault()
+
+        if (currentHover !== -1 && !options[currentHover].props.disabled) {
+          onSelectItem(options[currentHover].props.value)
+        }
+      }
+    }
+
+    const element = wrapper.current
+    element.addEventListener('keydown', handleKeyDownEvent)
+    return () => element.removeEventListener('keydown', handleKeyDownEvent)
+  }, [options, currentHover, onSelectItem, isCollapsed])
+
+  useEffect(() => {
+    if (isCollapsed) {
+      setCurrentHover(-1)
+      return
+    }
+
+    if (multiple) {
+      return
+    }
+
+    const optionIndex = options.findIndex(option =>
+      isEqual(option.props.value, value)
+    )
+
+    setCurrentHover(optionIndex)
+  }, [isCollapsed, options, value, multiple])
 
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
@@ -230,11 +295,12 @@ const Dropdown = ({
             />
           ) : null}
           <ScrollingList aria-labelledby={cId} role='menu' id={`drop-${cId}`}>
-            {options.map(child =>
+            {options.map((child, idx) =>
               isValidElement(child)
                 ? cloneElement(child, {
                     onSelectItem,
                     isSelected: isItemSelected(child.props.value),
+                    isHovering: currentHover === idx,
                     hasCheckbox: multiple
                   })
                 : null
@@ -249,6 +315,31 @@ const Dropdown = ({
       />
     </StyledFlex>
   )
+}
+
+const isEqual = (object1, object2) => {
+  if (typeof object1 !== typeof object2) {
+    return false
+  }
+
+  if (typeof object1 !== 'object') {
+    return object1 === object2
+  }
+
+  const keys1 = Object.keys(object1 ?? {})
+  const keys2 = Object.keys(object2 ?? {})
+
+  if (keys1.length !== keys2.length) {
+    return false
+  }
+
+  for (let key of keys1) {
+    if (object1[key] !== object2[key]) {
+      return false
+    }
+  }
+
+  return true
 }
 
 const StyledFlex = styled(Flex)(

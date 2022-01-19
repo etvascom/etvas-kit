@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
@@ -14,9 +14,12 @@ const DropdownItem = ({
   onSelectItem,
   disabled,
   isSelected,
+  isHovering,
   value,
   hasCheckbox
 }) => {
+  const optionRef = useRef()
+
   const _handleClick = () => {
     if (!disabled) {
       onSelectItem(value)
@@ -47,13 +50,21 @@ const DropdownItem = ({
     </Flex>
   )
 
+  useLayoutEffect(() => {
+    if (isHovering) {
+      optionRef.current.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    }
+  }, [isHovering])
+
   return (
     <Option
       role='option'
       onClick={_handleClick}
       selected={isSelected}
+      hovering={isHovering}
       touch={hasTouch}
-      hasCheckbox={hasCheckbox}>
+      hasCheckbox={hasCheckbox}
+      ref={optionRef}>
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
@@ -81,6 +92,12 @@ const Option = styled(Flex)(
     height: sizes.dropdownItemHeightMobile,
     lineHeight: sizes.dropdownItemHeightMobile
   }),
+  ({ hovering }) =>
+    hovering
+      ? css({
+          backgroundColor: 'brandLighter'
+        })
+      : null,
   ({ touch }) =>
     !touch
       ? css({
@@ -104,6 +121,7 @@ const Option = styled(Flex)(
 DropdownItem.propTypes = {
   children: PropTypes.node,
   isSelected: PropTypes.bool,
+  isHovering: PropTypes.bool,
   disabled: PropTypes.bool,
   hasCheckbox: PropTypes.bool,
   onSelectItem: PropTypes.func,
@@ -117,6 +135,7 @@ DropdownItem.propTypes = {
 DropdownItem.defaultProps = {
   disabled: false,
   isSelected: false,
+  isHovering: false,
   checkbox: false
 }
 
