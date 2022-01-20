@@ -181,7 +181,7 @@ const Dropdown = ({
     setCurrentKeyboardFocus(-1)
   }, [])
 
-  const handleDropdownKeyDown = e => {
+  const handleKeyDown = e => {
     if (isCollapsed) {
       return
     }
@@ -254,7 +254,7 @@ const Dropdown = ({
         aria-disabled={disabled}
         aria-haspopup={!disabled}
         aria-expanded={!isCollapsed}
-        onKeyDown={handleDropdownKeyDown}
+        onKeyDown={handleKeyDown}
         onMouseMove={removeCurrentKeyboardFocus}
         tabIndex='0'
         ref={wrapper}
