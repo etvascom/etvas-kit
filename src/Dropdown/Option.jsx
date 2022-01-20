@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
@@ -14,9 +14,12 @@ const DropdownItem = ({
   onSelectItem,
   disabled,
   isSelected,
+  hasKeyboardFocus,
   value,
   hasCheckbox
 }) => {
+  const optionRef = useRef()
+
   const _handleClick = () => {
     if (!disabled) {
       onSelectItem(value)
@@ -31,14 +34,17 @@ const DropdownItem = ({
     []
   )
 
-  const optionContent = <TextWrapper>{children}</TextWrapper>
+  const optionContent = (
+    <TextWrapper aria-selected={hasKeyboardFocus}>{children}</TextWrapper>
+  )
 
   const optionWithCheckbox = (
-    <Flex alignItems='center' minWidth='0'>
+    <Flex alignItems='center' minWidth='0' aria-selected={hasKeyboardFocus}>
       <Box mr={3}>
         <Checkbox
           size='small'
           checked={isSelected}
+          aria-checked={isSelected}
           onChange={_handleClick}
           onClick={e => e.stopPropagation()}
         />
@@ -47,13 +53,21 @@ const DropdownItem = ({
     </Flex>
   )
 
+  useLayoutEffect(() => {
+    if (hasKeyboardFocus) {
+      optionRef.current.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    }
+  }, [hasKeyboardFocus])
+
   return (
     <Option
       role='option'
       onClick={_handleClick}
       selected={isSelected}
+      hovering={hasKeyboardFocus}
       touch={hasTouch}
-      hasCheckbox={hasCheckbox}>
+      hasCheckbox={hasCheckbox}
+      ref={optionRef}>
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
@@ -81,6 +95,12 @@ const Option = styled(Flex)(
     height: sizes.dropdownItemHeightMobile,
     lineHeight: sizes.dropdownItemHeightMobile
   }),
+  ({ hovering }) =>
+    hovering
+      ? css({
+          backgroundColor: 'brandLighter'
+        })
+      : null,
   ({ touch }) =>
     !touch
       ? css({
@@ -104,6 +124,7 @@ const Option = styled(Flex)(
 DropdownItem.propTypes = {
   children: PropTypes.node,
   isSelected: PropTypes.bool,
+  hasKeyboardFocus: PropTypes.bool,
   disabled: PropTypes.bool,
   hasCheckbox: PropTypes.bool,
   onSelectItem: PropTypes.func,
@@ -117,6 +138,7 @@ DropdownItem.propTypes = {
 DropdownItem.defaultProps = {
   disabled: false,
   isSelected: false,
+  hasKeyboardFocus: false,
   checkbox: false
 }
 

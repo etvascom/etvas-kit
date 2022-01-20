@@ -3,7 +3,9 @@ import React, {
   cloneElement,
   isValidElement,
   useState,
+  useEffect,
   useLayoutEffect,
+  useCallback,
   useRef,
   useMemo
 } from 'react'
@@ -18,6 +20,7 @@ import Option from './Option'
 import Heading from './Heading'
 import sizes from '../assets/sizes'
 import { SubLabel } from '../Input/SubLabel'
+import { isEqual } from '../utils/isEqual'
 
 const Dropdown = ({
   disabled,
@@ -43,6 +46,7 @@ const Dropdown = ({
   const [isCollapsed, setCollapsed] = useState(true)
   const [isSwipe, setSwipe] = useState(false)
   const [search, setSearch] = useState('')
+  const [currentKeyboardFocus, setCurrentKeyboardFocus] = useState(-1)
 
   const wrapper = useRef()
   const searchField = useRef()
@@ -128,23 +132,26 @@ const Dropdown = ({
     setSwipe(false)
   }
 
-  const onSelectItem = option => {
-    if (multiple) {
-      const newValues = isEmpty ? [] : [...value]
-      const idx = newValues.indexOf(option)
-      if (idx >= 0) {
-        newValues.splice(idx, 1)
+  const onSelectItem = useCallback(
+    option => {
+      if (multiple) {
+        const newValues = isEmpty ? [] : [...value]
+        const idx = newValues.indexOf(option)
+        if (idx >= 0) {
+          newValues.splice(idx, 1)
+        } else {
+          newValues.push(option)
+        }
+        onChange(newValues)
       } else {
-        newValues.push(option)
+        onChange(option)
+        setTimeout(() => {
+          setCollapsed(true)
+        }, 60)
       }
-      onChange(newValues)
-    } else {
-      onChange(option)
-      setTimeout(() => {
-        setCollapsed(true)
-      }, 60)
-    }
-  }
+    },
+    [isEmpty, multiple, onChange, value]
+  )
 
   const setSearchText = event => {
     setSearch(event.target.value)
@@ -171,6 +178,67 @@ const Dropdown = ({
     [disabled, error, isCollapsed]
   )
 
+  const removeCurrentKeyboardFocus = useCallback(() => {
+    setCurrentKeyboardFocus(-1)
+  }, [])
+
+  const handleKeyDown = e => {
+    if (isCollapsed) {
+      return
+    }
+
+    switch (e.code) {
+      case 'Escape':
+        e.preventDefault()
+        setCollapsed(true)
+        break
+
+      case 'ArrowDown':
+        e.preventDefault()
+        setCurrentKeyboardFocus(hover =>
+          Math.min(options.length - 1, Math.max(-1, hover + 1))
+        )
+        break
+
+      case 'ArrowUp':
+        e.preventDefault()
+        setCurrentKeyboardFocus(hover =>
+          Math.min(options.length - 1, Math.max(-1, hover - 1))
+        )
+        break
+
+      case 'Enter':
+        e.preventDefault()
+        if (
+          currentKeyboardFocus !== -1 &&
+          !options[currentKeyboardFocus].props.disabled
+        ) {
+          onSelectItem(options[currentKeyboardFocus].props.value)
+        }
+        break
+
+      default:
+        break
+    }
+  }
+
+  useEffect(() => {
+    if (isCollapsed) {
+      setCurrentKeyboardFocus(-1)
+      return
+    }
+
+    if (multiple) {
+      return
+    }
+
+    const optionIndex = options.findIndex(option =>
+      isEqual(option.props.value, value)
+    )
+
+    setCurrentKeyboardFocus(optionIndex)
+  }, [isCollapsed, options, value, multiple])
+
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
       {label ? (
@@ -187,6 +255,9 @@ const Dropdown = ({
         aria-disabled={disabled}
         aria-haspopup={!disabled}
         aria-expanded={!isCollapsed}
+        onKeyDown={handleKeyDown}
+        onMouseMove={removeCurrentKeyboardFocus}
+        tabIndex='0'
         ref={wrapper}
         error={error}
         {...props}>
@@ -230,11 +301,12 @@ const Dropdown = ({
             />
           ) : null}
           <ScrollingList aria-labelledby={cId} role='menu' id={`drop-${cId}`}>
-            {options.map(child =>
+            {options.map((child, idx) =>
               isValidElement(child)
                 ? cloneElement(child, {
                     onSelectItem,
                     isSelected: isItemSelected(child.props.value),
+                    hasKeyboardFocus: currentKeyboardFocus === idx,
                     hasCheckbox: multiple
                   })
                 : null
@@ -351,7 +423,8 @@ const DropdownWrapper = styled.div(
   css({
     display: 'block',
     position: 'relative',
-    width: '100%'
+    width: '100%',
+    outline: 'none'
   })
 )
 
