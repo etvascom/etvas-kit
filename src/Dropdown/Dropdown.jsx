@@ -177,58 +177,52 @@ const Dropdown = ({
     [disabled, error, isCollapsed]
   )
 
-  useLayoutEffect(() => {
-    const handleKeyDownEvent = e => {
+  const removeCurrentKeyboardFocus = useCallback(() => {
+    setCurrentKeyboardFocus(-1)
+  }, [])
+
+  const handleDropdownKeyDown = useCallback(
+    e => {
       if (isCollapsed) {
         return
       }
 
-      if (e.code === 'Escape') {
-        e.preventDefault()
+      switch (e.code) {
+        case 'Escape':
+          e.preventDefault()
+          setCollapsed(true)
+          break
 
-        setCollapsed(true)
+        case 'ArrowDown':
+          e.preventDefault()
+          setCurrentKeyboardFocus(hover =>
+            Math.min(options.length - 1, Math.max(-1, hover + 1))
+          )
+          break
+
+        case 'ArrowUp':
+          e.preventDefault()
+          setCurrentKeyboardFocus(hover =>
+            Math.min(options.length - 1, Math.max(-1, hover - 1))
+          )
+          break
+
+        case 'Enter':
+          e.preventDefault()
+          if (
+            currentKeyboardFocus !== -1 &&
+            !options[currentKeyboardFocus].props.disabled
+          ) {
+            onSelectItem(options[currentKeyboardFocus].props.value)
+          }
+          break
+
+        default:
+          break
       }
-
-      if (e.code === 'ArrowDown') {
-        e.preventDefault()
-
-        setCurrentKeyboardFocus(hover =>
-          Math.min(options.length - 1, Math.max(-1, hover + 1))
-        )
-      }
-
-      if (e.code === 'ArrowUp') {
-        e.preventDefault()
-
-        setCurrentKeyboardFocus(hover =>
-          Math.min(options.length - 1, Math.max(-1, hover - 1))
-        )
-      }
-
-      if (e.code === 'Enter') {
-        e.preventDefault()
-
-        if (
-          currentKeyboardFocus !== -1 &&
-          !options[currentKeyboardFocus].props.disabled
-        ) {
-          onSelectItem(options[currentKeyboardFocus].props.value)
-        }
-      }
-    }
-
-    const removeCurrentHover = () => {
-      setCurrentKeyboardFocus(-1)
-    }
-
-    const element = wrapper.current
-    element.addEventListener('keydown', handleKeyDownEvent)
-    element.addEventListener('mousemove', removeCurrentHover)
-    return () => {
-      element.removeEventListener('keydown', handleKeyDownEvent)
-      element.removeEventListener('mousemove', removeCurrentHover)
-    }
-  }, [options, currentKeyboardFocus, onSelectItem, isCollapsed])
+    },
+    [options, currentKeyboardFocus, onSelectItem, isCollapsed]
+  )
 
   useEffect(() => {
     if (isCollapsed) {
@@ -264,6 +258,8 @@ const Dropdown = ({
         aria-haspopup={!disabled}
         aria-expanded={!isCollapsed}
         ref={wrapper}
+        onKeyDown={handleDropdownKeyDown}
+        onMouseMove={removeCurrentKeyboardFocus}
         error={error}
         {...props}>
         <StyledIndicator
