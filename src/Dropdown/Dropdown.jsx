@@ -181,48 +181,45 @@ const Dropdown = ({
     setCurrentKeyboardFocus(-1)
   }, [])
 
-  const handleDropdownKeyDown = useCallback(
-    e => {
-      if (isCollapsed) {
-        return
-      }
+  const handleDropdownKeyDown = e => {
+    if (isCollapsed) {
+      return
+    }
 
-      switch (e.code) {
-        case 'Escape':
-          e.preventDefault()
-          setCollapsed(true)
-          break
+    switch (e.code) {
+      case 'Escape':
+        e.preventDefault()
+        setCollapsed(true)
+        break
 
-        case 'ArrowDown':
-          e.preventDefault()
-          setCurrentKeyboardFocus(hover =>
-            Math.min(options.length - 1, Math.max(-1, hover + 1))
-          )
-          break
+      case 'ArrowDown':
+        e.preventDefault()
+        setCurrentKeyboardFocus(hover =>
+          Math.min(options.length - 1, Math.max(-1, hover + 1))
+        )
+        break
 
-        case 'ArrowUp':
-          e.preventDefault()
-          setCurrentKeyboardFocus(hover =>
-            Math.min(options.length - 1, Math.max(-1, hover - 1))
-          )
-          break
+      case 'ArrowUp':
+        e.preventDefault()
+        setCurrentKeyboardFocus(hover =>
+          Math.min(options.length - 1, Math.max(-1, hover - 1))
+        )
+        break
 
-        case 'Enter':
-          e.preventDefault()
-          if (
-            currentKeyboardFocus !== -1 &&
-            !options[currentKeyboardFocus].props.disabled
-          ) {
-            onSelectItem(options[currentKeyboardFocus].props.value)
-          }
-          break
+      case 'Enter':
+        e.preventDefault()
+        if (
+          currentKeyboardFocus !== -1 &&
+          !options[currentKeyboardFocus].props.disabled
+        ) {
+          onSelectItem(options[currentKeyboardFocus].props.value)
+        }
+        break
 
-        default:
-          break
-      }
-    },
-    [options, currentKeyboardFocus, onSelectItem, isCollapsed]
-  )
+      default:
+        break
+    }
+  }
 
   useEffect(() => {
     if (isCollapsed) {
@@ -257,9 +254,10 @@ const Dropdown = ({
         aria-disabled={disabled}
         aria-haspopup={!disabled}
         aria-expanded={!isCollapsed}
-        ref={wrapper}
         onKeyDown={handleDropdownKeyDown}
         onMouseMove={removeCurrentKeyboardFocus}
+        tabIndex='0'
+        ref={wrapper}
         error={error}
         {...props}>
         <StyledIndicator
@@ -449,7 +447,8 @@ const DropdownWrapper = styled.div(
   css({
     display: 'block',
     position: 'relative',
-    width: '100%'
+    width: '100%',
+    outline: 'none'
   })
 )
 
