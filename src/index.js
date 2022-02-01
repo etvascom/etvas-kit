@@ -27,7 +27,6 @@ export * from './EmbededApp'
 export * from './IntegrationHeader'
 export * from './Steps'
 export * from './Chip'
-export * from './Layout'
 
 export * from './SubdomainInput'
 export * from './Autocomplete'
