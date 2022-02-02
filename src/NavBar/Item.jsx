@@ -8,7 +8,7 @@ import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
 export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => (
-  <Container as={as} onClick={onClick} alignItems='center' {...props}>
+  <Container as={as} onClick={onClick} {...props}>
     <Icon name={icon} color={isActive ? 'accent' : 'outline'} size='small' />
     <Typography
       variant='labelButton'
@@ -24,6 +24,7 @@ const Container = styled(Flex)(
   css({
     display: 'flex',
     cursor: 'pointer',
+    alignItems: 'center',
     justifyContent: 'flex-start'
   })
 )

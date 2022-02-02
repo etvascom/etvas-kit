@@ -22,24 +22,28 @@ export const SimpleNavBar = () => {
     <Flex flexDirection='column'>
       <NavBar>
         <NavBar.Item
+          as='a'
           icon='eye'
           label='Overview'
           isActive={activeItem === 'overview'}
           onClick={() => setAction('overview')}
         />
         <NavBar.Item
+          as='a'
           icon='alertOctagon'
           label='VeryLongItemNameWithoutSpace'
           isActive={activeItem === 'long'}
           onClick={() => setAction('long')}
         />
         <NavBar.Item
+          as='a'
           icon='rocket'
           label='Space'
           isActive={activeItem === 'shopping'}
           onClick={() => setAction('shopping')}
         />
         <NavBar.Item
+          as='a'
           icon='cart'
           label='Shopping Is Fun'
           isActive={activeItem === 'cart'}
