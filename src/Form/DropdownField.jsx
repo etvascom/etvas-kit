@@ -13,11 +13,18 @@ export const DropdownField = ({
   multiple,
   itemFilter,
   valueRender,
+  onFieldValueChange,
   ...props
 }) => {
   const [field, meta, helpers] = useField(props)
 
-  const handleChange = useCallback(value => helpers.setValue(value), [helpers])
+  const handleChange = useCallback(
+    value => {
+      helpers.setValue(value)
+      onFieldValueChange && onFieldValueChange(value)
+    },
+    [helpers, onFieldValueChange]
+  )
 
   const selectedOption = useMemo(() => {
     if (multiple) {
@@ -128,7 +135,8 @@ DropdownField.propTypes = {
   }),
   itemFilter: PropTypes.func,
   multiple: PropTypes.bool,
-  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node])
+  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  onFieldValueChange: PropTypes.func
 }
 
 DropdownField.defaultProps = {
