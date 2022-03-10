@@ -64,7 +64,8 @@ const Dropdown = ({
   }, [])
 
   const isEmpty = useMemo(
-    () => (value ? (multiple ? value.length === 0 : !value) : true),
+    () =>
+      multiple ? value.length === 0 : typeof value !== 'boolean' && !value,
     [value, multiple]
   )
 
@@ -92,7 +93,7 @@ const Dropdown = ({
   )
 
   const displayValue = useMemo(() => {
-    if (!value) {
+    if (typeof value !== 'boolean' && !value) {
       return ''
     }
     if (typeof valueRender === 'string') {
