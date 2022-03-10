@@ -79,10 +79,13 @@ export const DropdownField = ({
 
   const mappedOptions = useMemo(
     () =>
-      options.reduce((mapped, option) => ({
-        ...mapped,
-        [option[optionAttributes.value]]: option[optionAttributes.label]
-      })),
+      options.reduce(
+        (mapped, option) => ({
+          ...mapped,
+          [option[optionAttributes.value]]: option[optionAttributes.label]
+        }),
+        []
+      ),
     [options, optionAttributes]
   )
 
