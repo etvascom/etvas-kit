@@ -1,5 +1,5 @@
 import React from 'react'
-import { Chip } from '../src'
+import { Chip, Card } from '../src'
 
 export default {
   title: 'Demo/Chip',
@@ -7,5 +7,28 @@ export default {
 }
 
 export const Default = () => <Chip>Hello</Chip>
-export const Colored = () => <Chip color='accent'>Hello</Chip>
+export const Colored = () => (
+  <>
+    <Chip color='statusError' isRounded>
+      Chip text
+    </Chip>
+    <Chip color='statusSuccess' isRounded>
+      Chip text
+    </Chip>
+  </>
+)
+
 export const Rounded = () => <Chip isRounded>Hello</Chip>
+
+export const NeutralChip = () => (
+  <Card p={3}>
+    <Chip isNeutral>Chip text</Chip>
+  </Card>
+)
+export const CustomChip = () => (
+  <Card p={3}>
+    <Chip color='statusWarning' contentColor='etvasDark'>
+      Chip text
+    </Chip>
+  </Card>
+)
