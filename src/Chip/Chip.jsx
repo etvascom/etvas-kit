@@ -6,22 +6,42 @@ import css from '@styled-system/css'
 import { Flex } from '../Flex'
 import { Typography } from '../Typography'
 
-export const Chip = ({ color, isRounded, children, label }) => (
-  <ChipContainer color={color} isRounded={isRounded} px={2} py={1}>
-    <Typography variant='labelButton' color='inherit'>
+export const Chip = ({
+  color,
+  isRounded,
+  children,
+  label,
+  isNeutral,
+  contentColor
+}) => (
+  <ChipContainer
+    color={isNeutral ? 'baseGrayLightest' : color}
+    contentColor={isNeutral ? 'baseBlack' : contentColor}
+    borderRadius={isNeutral ? '40px' : isRounded ? '3px' : 0}>
+    <ChipText
+      color='inherit'
+      isNeutral={isNeutral}
+      variant={isNeutral ? 'base14Light' : 'base12Bold'}>
       {label || children}
-    </Typography>
+    </ChipText>
   </ChipContainer>
 )
 
-const ChipContainer = styled(Flex)(({ isRounded, color }) =>
+const ChipContainer = styled(Flex)(({ color, contentColor }) =>
   css({
+    py: 1,
+    px: 2,
     whiteSpace: 'nowrap',
     alignItems: 'center',
     width: 'fit-content',
-    backgroundColor: color,
-    color: 'white',
-    borderRadius: isRounded ? '3px' : 0
+    color: contentColor,
+    backgroundColor: color
+  })
+)
+
+const ChipText = styled(Typography)(({ isNeutral }) =>
+  css({
+    textTransform: !isNeutral && 'uppercase'
   })
 )
 
@@ -29,11 +49,15 @@ Chip.propTypes = {
   color: PropTypes.string,
   isRounded: PropTypes.bool,
   children: PropTypes.node,
-  label: PropTypes.node
+  label: PropTypes.node,
+  contentColor: PropTypes.string,
+  isNeutral: PropTypes.bool
 }
 
 Chip.defaultProps = {
-  color: 'brand'
+  color: 'etvasLight',
+  contentColor: 'baseWhite',
+  isNeutral: false
 }
 
 Chip.displayName = 'Chip'
