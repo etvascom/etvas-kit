@@ -224,3 +224,10 @@ export const PasswordInput = () => (
     />
   </>
 )
+
+export const OptionalInput = () => (
+  <>
+    <StorybookInput label='Optional input' notRequiredText='Optional' id='id' />
+    <StorybookInput label='Required input' id='id' required />
+  </>
+)

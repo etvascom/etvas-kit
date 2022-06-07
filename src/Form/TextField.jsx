@@ -30,7 +30,8 @@ TextField.propTypes = {
   ...fieldShape,
   type: PropTypes.string,
   placeholder: PropTypes.node,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  notRequiredText: PropTypes.node
 }
 
 TextField.defaultProps = {
