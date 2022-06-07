@@ -111,7 +111,8 @@ export const Input = forwardRef(
             <Typography
               as='label'
               htmlFor={id}
-              variant='inputLabel'
+              variant='base12Bold'
+              color='baseMetal'
               width='fit-content'>
               {label}
             </Typography>
@@ -120,7 +121,7 @@ export const Input = forwardRef(
                 ml={1}
                 as='label'
                 htmlFor={id}
-                variant='inputLabel'
+                variant='base12Bold'
                 color='formsLabel'
                 width='fit-content'>
                 - {notRequiredText}
