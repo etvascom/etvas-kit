@@ -117,7 +117,7 @@ export const Input = forwardRef(
             </Typography>
             {!required && notRequiredText && (
               <Typography
-                ml={2}
+                ml={1}
                 as='label'
                 htmlFor={id}
                 variant='inputLabel'
@@ -270,7 +270,8 @@ Input.defaultProps = {
   value: '',
   tinted: false,
   variant: 'default',
-  showValidationCheck: false
+  showValidationCheck: false,
+  notRequiredText: 'Optional'
 }
 
 Input.displayName = 'Input'
