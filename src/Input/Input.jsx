@@ -19,6 +19,7 @@ import { Typography, typography } from '../Typography'
 import { PasswordToggler } from './PasswordToggler'
 import { default as variants } from './Input.variants'
 import { SubLabel } from './SubLabel'
+import { Box } from '../Box'
 
 export const Input = forwardRef(
   (
@@ -32,6 +33,7 @@ export const Input = forwardRef(
       icRight,
       id,
       label,
+      notRequiredText,
       name,
       noBottomSpace,
       onChange,
@@ -105,13 +107,27 @@ export const Input = forwardRef(
     return (
       <StyledFlex flexDirection='column' width={1} {...rest}>
         {label ? (
-          <Typography
-            as='label'
-            htmlFor={id}
-            variant='inputLabel'
-            width='fit-content'>
-            {label}
-          </Typography>
+          <Box>
+            <Typography
+              as='label'
+              htmlFor={id}
+              variant='base12Bold'
+              color='baseMetal'
+              width='fit-content'>
+              {label}
+            </Typography>
+            {!required && notRequiredText && (
+              <Typography
+                ml={1}
+                as='label'
+                htmlFor={id}
+                variant='base12Bold'
+                color='formsLabel'
+                width='fit-content'>
+                - {notRequiredText}
+              </Typography>
+            )}
+          </Box>
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
@@ -222,6 +238,7 @@ Input.propTypes = {
   icRight: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.node,
+  notRequiredText: PropTypes.node,
   name: PropTypes.string,
   /** dummy space added for consistent spacing with validated inputs.
    *
@@ -254,7 +271,8 @@ Input.defaultProps = {
   value: '',
   tinted: false,
   variant: 'default',
-  showValidationCheck: false
+  showValidationCheck: false,
+  notRequiredText: 'Optional'
 }
 
 Input.displayName = 'Input'
