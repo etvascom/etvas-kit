@@ -5,7 +5,7 @@ import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { Typography, typography } from '../Typography'
 import { Flex } from '../Flex'
-import { Box } from '../Box'
+import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { SubLabel } from '../Input/SubLabel'
@@ -153,29 +153,14 @@ export const SubdomainInput = forwardRef(
 
     return (
       <Flex flexDirection='column' width={1} {...rest}>
-        {label ? (
-          <Box mb={1}>
-            <Typography
-              as='label'
-              htmlFor={id}
-              variant='base12Bold'
-              color='baseMetal'
-              width='fit-content'>
-              {label}
-            </Typography>
-            {!required && optionalText && (
-              <Typography
-                ml={1}
-                as='label'
-                htmlFor={id}
-                variant='base12Bold'
-                color='baseGray'
-                width='fit-content'>
-                - {optionalText}
-              </Typography>
-            )}
-          </Box>
-        ) : null}
+        {!!label && (
+          <Label
+            label={label}
+            inputId={id}
+            showOptionalText={!required}
+            optionalText={optionalText}
+          />
+        )}
         <Wrapper
           alignItems='center'
           width={1}

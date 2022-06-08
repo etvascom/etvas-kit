@@ -10,7 +10,7 @@ import { Typography, typography } from '../Typography'
 import { Space } from '../Space'
 import { Icon } from '../Icon'
 import { Flex } from '../Flex'
-import { Box } from '../Box'
+import { Label } from '../Label'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import css from '@styled-system/css'
@@ -210,29 +210,14 @@ const PhoneNumberInput = forwardRef((props, ref) => {
 
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...rest}>
-      {label ? (
-        <Box mb={1}>
-          <Typography
-            as='label'
-            htmlFor={id}
-            variant='base12Bold'
-            color='baseMetal'
-            width='fit-content'>
-            {label}
-          </Typography>
-          {!required && optionalText && (
-            <Typography
-              ml={1}
-              as='label'
-              htmlFor={id}
-              variant='base12Bold'
-              color='baseGray'
-              width='fit-content'>
-              - {optionalText}
-            </Typography>
-          )}
-        </Box>
-      ) : null}
+      {!!label && (
+        <Label
+          label={label}
+          inputId={id}
+          showOptionalText={!required}
+          optionalText={optionalText}
+        />
+      )}
       <Flex alignItems='center' position='relative' width='100%'>
         <StyledPhoneNumberWrapper
           tinted={tinted}

@@ -5,9 +5,9 @@ import propTypes from '@styled-system/prop-types'
 import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { default as variants } from './TextArea.variants'
-import { Typography, typography } from '../Typography'
+import { typography } from '../Typography'
 import { Flex } from '../Flex'
-import { Box } from '../Box'
+import { Label } from '../Label'
 
 import { SubLabel } from '../Input/SubLabel'
 
@@ -54,29 +54,14 @@ export const TextArea = forwardRef(
 
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
-        {label ? (
-          <Box mb={1}>
-            <Typography
-              as='label'
-              htmlFor={id}
-              variant='base12Bold'
-              color='baseMetal'
-              width='fit-content'>
-              {label}
-            </Typography>
-            {!required && optionalText && (
-              <Typography
-                ml={1}
-                as='label'
-                htmlFor={id}
-                variant='base12Bold'
-                color='baseGray'
-                width='fit-content'>
-                - {optionalText}
-              </Typography>
-            )}
-          </Box>
-        ) : null}
+        {!!label && (
+          <Label
+            label={label}
+            inputId={id}
+            showOptionalText={!required}
+            optionalText={optionalText}
+          />
+        )}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledTextArea
             autoComplete={autoComplete}
@@ -166,8 +151,7 @@ TextArea.defaultProps = {
   readOnly: false,
   value: '',
   variant: 'default',
-  tinted: false,
-  optionalText: 'Optional'
+  tinted: false
 }
 
 TextArea.displayName = 'TextArea'

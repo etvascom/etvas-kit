@@ -196,8 +196,7 @@ Autocomplete.defaultProps = {
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
   onChange: () => console.warn('Autocomplete.onChange should be a function'),
   placeholder: 'Please select an option',
-  searchMaxResults: 30,
-  optionalText: 'Optional'
+  searchMaxResults: 30
 }
 
 Autocomplete.Option = Option
