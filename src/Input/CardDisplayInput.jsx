@@ -6,7 +6,8 @@ import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { Icon } from '../Icon'
 import { Flex } from '../Flex'
-import { Typography, typography } from '../Typography'
+import { Label } from '../Label'
+import { typography } from '../Typography'
 import { Touchable } from '../Touchable'
 import { v4 } from 'uuid'
 
@@ -41,15 +42,7 @@ export const CardDisplayInput = ({
 
   return (
     <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
-      {label ? (
-        <Typography
-          as='label'
-          htmlFor={id}
-          variant='inputLabel'
-          width='fit-content'>
-          {label}
-        </Typography>
-      ) : null}
+      {!!label && <Label label={label} inputId={id} />}
       <Flex alignItems='center' position='relative' width='100%'>
         <StyledInput
           ariaDisabled={disabled}
