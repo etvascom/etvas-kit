@@ -107,6 +107,7 @@ export const DropdownField = ({
     <Dropdown
       onChange={handleChange}
       label={props.label}
+      optionalText={props.optionalText}
       value={selectedValue}
       itemFilter={filterItem}
       required={required}
@@ -140,6 +141,7 @@ DropdownField.propTypes = {
 }
 
 DropdownField.defaultProps = {
+  optionalText: 'Optional',
   optionAttributes: {
     key: 'value',
     value: 'value',

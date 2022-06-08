@@ -43,5 +43,6 @@ PhoneNumberInputField.propTypes = {
 }
 
 PhoneNumberInputField.defaultProps = {
-  tinted: false
+  tinted: false,
+  optionalText: 'Optional'
 }

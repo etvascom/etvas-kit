@@ -43,5 +43,6 @@ SubdomainField.propTypes = {
 }
 
 SubdomainField.defaultProps = {
-  tinted: false
+  tinted: false,
+  optionalText: 'Optional'
 }

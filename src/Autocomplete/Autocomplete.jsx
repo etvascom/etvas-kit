@@ -24,6 +24,7 @@ const Autocomplete = ({
   error,
   label,
   value,
+  optionalText,
   id,
   searchMaxResults,
   placeholder,
@@ -96,6 +97,7 @@ const Autocomplete = ({
           id={`search-${id}`}
           type='search'
           label={label}
+          optionalText={optionalText}
           role='searchbox'
           disabled={disabled}
           collapsed={isCollapsed}
@@ -173,6 +175,7 @@ Autocomplete.propTypes = {
   ]),
   id: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  optionalText: PropTypes.node,
   searchMaxResults: PropTypes.number,
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   itemSelected: PropTypes.func,
@@ -193,7 +196,8 @@ Autocomplete.defaultProps = {
     value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
   onChange: () => console.warn('Autocomplete.onChange should be a function'),
   placeholder: 'Please select an option',
-  searchMaxResults: 30
+  searchMaxResults: 30,
+  optionalText: 'Optional'
 }
 
 Autocomplete.Option = Option

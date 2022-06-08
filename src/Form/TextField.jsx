@@ -30,11 +30,11 @@ TextField.propTypes = {
   ...fieldShape,
   type: PropTypes.string,
   placeholder: PropTypes.node,
-  required: PropTypes.bool,
-  notRequiredText: PropTypes.node
+  required: PropTypes.bool
 }
 
 TextField.defaultProps = {
   type: 'text',
-  tinted: false
+  tinted: false,
+  optionalText: 'Optional'
 }

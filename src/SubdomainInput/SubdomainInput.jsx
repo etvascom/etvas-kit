@@ -5,6 +5,7 @@ import css from '@styled-system/css'
 import { variant } from 'styled-system'
 import { Typography, typography } from '../Typography'
 import { Flex } from '../Flex'
+import { Box } from '../Box'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { SubLabel } from '../Input/SubLabel'
@@ -40,6 +41,7 @@ export const SubdomainInput = forwardRef(
       icRight,
       id,
       label,
+      optionalText,
       name,
       noBottomSpace,
       onChange,
@@ -152,13 +154,27 @@ export const SubdomainInput = forwardRef(
     return (
       <Flex flexDirection='column' width={1} {...rest}>
         {label ? (
-          <Typography
-            as='label'
-            htmlFor={id}
-            variant='inputLabel'
-            width='fit-content'>
-            {label}
-          </Typography>
+          <Box mb={1}>
+            <Typography
+              as='label'
+              htmlFor={id}
+              variant='base12Bold'
+              color='baseMetal'
+              width='fit-content'>
+              {label}
+            </Typography>
+            {!required && optionalText && (
+              <Typography
+                ml={1}
+                as='label'
+                htmlFor={id}
+                variant='base12Bold'
+                color='baseGray'
+                width='fit-content'>
+                - {optionalText}
+              </Typography>
+            )}
+          </Box>
         ) : null}
         <Wrapper
           alignItems='center'

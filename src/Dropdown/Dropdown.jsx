@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import css from '@styled-system/css'
 
 import { Flex } from '../Flex'
+import { Box } from '../Box'
 import { Typography, typography } from '../Typography'
 import { Icon } from '../Icon'
 import Option from './Option'
@@ -27,6 +28,7 @@ const Dropdown = ({
   multiple,
   error,
   label,
+  optionalText,
   value,
   id,
   required,
@@ -243,13 +245,27 @@ const Dropdown = ({
   return (
     <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
       {label ? (
-        <Typography
-          as='label'
-          htmlFor={cId}
-          variant='inputLabel'
-          width='fit-content'>
-          {label}
-        </Typography>
+        <Box mb={1}>
+          <Typography
+            as='label'
+            htmlFor={id}
+            variant='base12Bold'
+            color='baseMetal'
+            width='fit-content'>
+            {label}
+          </Typography>
+          {!required && optionalText && (
+            <Typography
+              ml={1}
+              as='label'
+              htmlFor={id}
+              variant='base12Bold'
+              color='baseGray'
+              width='fit-content'>
+              - {optionalText}
+            </Typography>
+          )}
+        </Box>
       ) : null}
       <DropdownWrapper
         role='combobox'
@@ -503,6 +519,7 @@ Dropdown.propTypes = {
     PropTypes.string
   ]),
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  optionalText: PropTypes.node,
   id: PropTypes.string,
   required: PropTypes.bool,
   noBottomSpace: PropTypes.bool,
@@ -542,7 +559,8 @@ Dropdown.defaultProps = {
   placeholder: 'Please select an option',
   searchPlaceholder: 'Type to search in #len items. Max 30 items shown.',
   searchMaxResults: 30,
-  searchThreshold: 20
+  searchThreshold: 20,
+  optionalText: 'Optional'
 }
 
 Dropdown.Option = Option

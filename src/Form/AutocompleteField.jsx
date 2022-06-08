@@ -52,6 +52,7 @@ AutocompleteField.propTypes = {
 AutocompleteField.defaultProps = {
   type: 'text',
   tinted: false,
+  optionalText: 'Optional',
   optionAttributes: {
     key: 'value',
     value: 'value'

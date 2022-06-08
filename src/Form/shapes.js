@@ -7,5 +7,6 @@ export const fieldShape = {
   disabled: PropTypes.bool,
   validate: PropTypes.func,
   label: PropTypes.node,
+  optionalText: PropTypes.node,
   tinted: PropTypes.bool
 }
