@@ -33,7 +33,7 @@ export const Input = forwardRef(
       icRight,
       id,
       label,
-      notRequiredText,
+      optionalText,
       name,
       noBottomSpace,
       onChange,
@@ -107,7 +107,7 @@ export const Input = forwardRef(
     return (
       <StyledFlex flexDirection='column' width={1} {...rest}>
         {label ? (
-          <Box>
+          <Box mb={1}>
             <Typography
               as='label'
               htmlFor={id}
@@ -116,15 +116,15 @@ export const Input = forwardRef(
               width='fit-content'>
               {label}
             </Typography>
-            {!required && notRequiredText && (
+            {!required && optionalText && (
               <Typography
                 ml={1}
                 as='label'
                 htmlFor={id}
                 variant='base12Bold'
-                color='formsLabel'
+                color='baseGray'
                 width='fit-content'>
-                - {notRequiredText}
+                - {optionalText}
               </Typography>
             )}
           </Box>
@@ -238,7 +238,7 @@ Input.propTypes = {
   icRight: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.node,
-  notRequiredText: PropTypes.node,
+  optionalText: PropTypes.node,
   name: PropTypes.string,
   /** dummy space added for consistent spacing with validated inputs.
    *
@@ -272,7 +272,7 @@ Input.defaultProps = {
   tinted: false,
   variant: 'default',
   showValidationCheck: false,
-  notRequiredText: 'Optional'
+  optionalText: 'Optional'
 }
 
 Input.displayName = 'Input'

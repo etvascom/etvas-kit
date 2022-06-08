@@ -7,6 +7,7 @@ import { variant } from 'styled-system'
 import { default as variants } from './TextArea.variants'
 import { Typography, typography } from '../Typography'
 import { Flex } from '../Flex'
+import { Box } from '../Box'
 
 import { SubLabel } from '../Input/SubLabel'
 
@@ -19,6 +20,7 @@ export const TextArea = forwardRef(
       error,
       id,
       label,
+      optionalText,
       name,
       onChange,
       placeholder,
@@ -53,13 +55,27 @@ export const TextArea = forwardRef(
     return (
       <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
         {label ? (
-          <Typography
-            as='label'
-            htmlFor={id}
-            variant='inputLabel'
-            width='fit-content'>
-            {label}
-          </Typography>
+          <Box mb={1}>
+            <Typography
+              as='label'
+              htmlFor={id}
+              variant='base12Bold'
+              color='baseMetal'
+              width='fit-content'>
+              {label}
+            </Typography>
+            {!required && optionalText && (
+              <Typography
+                ml={1}
+                as='label'
+                htmlFor={id}
+                variant='base12Bold'
+                color='baseGray'
+                width='fit-content'>
+                - {optionalText}
+              </Typography>
+            )}
+          </Box>
         ) : null}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledTextArea
@@ -123,6 +139,7 @@ TextArea.propTypes = {
   ]),
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.node,
+  optionalText: PropTypes.node,
   name: PropTypes.string,
   tinted: PropTypes.bool,
   /** dummy space added for consistent spacing with validated inputs.
@@ -149,7 +166,8 @@ TextArea.defaultProps = {
   readOnly: false,
   value: '',
   variant: 'default',
-  tinted: false
+  tinted: false,
+  optionalText: 'Optional'
 }
 
 TextArea.displayName = 'TextArea'

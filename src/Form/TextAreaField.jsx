@@ -29,9 +29,11 @@ const hasValidation = props => props.validate || props.required
 TextAreaField.propTypes = {
   ...fieldShape,
   placeholder: PropTypes.node,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  optionalText: PropTypes.node
 }
 
 TextAreaField.defaultProps = {
-  tinted: false
+  tinted: false,
+  optionalText: 'Optional'
 }
