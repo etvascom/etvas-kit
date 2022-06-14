@@ -108,6 +108,8 @@ export default {
   etvasDark: '#002B99',
   etvas: '#0040E3',
   etvasLight: '#5585FF',
-  etvasLigher: '#E6EEFF',
-  etvasLightest: '#F5F7FD'
+  etvasLighter: '#E6EEFF',
+  etvasLightest: '#F5F7FD',
+  //To remove
+  etvasLigher: '#E6EEFF'
 }
