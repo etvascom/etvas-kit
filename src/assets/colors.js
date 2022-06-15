@@ -110,6 +110,4 @@ export default {
   etvasLight: '#5585FF',
   etvasLighter: '#E6EEFF',
   etvasLightest: '#F5F7FD',
-  //To remove
-  etvasLigher: '#E6EEFF'
 }
