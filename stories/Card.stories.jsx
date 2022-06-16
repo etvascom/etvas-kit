@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Typography, CardWithImage } from '../src'
+import { Card, Typography, CardWithImage, Box } from '../src'
 
 export default {
   title: 'Demo/Card',
@@ -10,6 +10,24 @@ export const Simple = () => (
   <Card p={2}>
     <Typography variant='titleSmall'>This is a card</Typography>
   </Card>
+)
+
+export const ColouredCard = () => (
+  <>
+    <Card p={2} backgroundColor='blue'>
+      <Typography variant='titleSmall'>This is a coloured card</Typography>
+    </Card>
+    <Card
+      mt={4}
+      p={2}
+      bg='etvasLighter'
+      boxShadow='0 0 2px'
+      borderRadius='10px'>
+      <Typography variant='titleSmall'>
+        This is an overriden coloured card
+      </Typography>
+    </Card>
+  </>
 )
 
 export const Popup = () => (
