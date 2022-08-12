@@ -33,6 +33,8 @@ export const SubdomainInput = forwardRef(
     {
       prefix,
       suffix,
+      suffixSpace,
+      prefixSpace,
       autoComplete,
       autoFocus,
       disabled,
@@ -168,13 +170,19 @@ export const SubdomainInput = forwardRef(
           variant={variant}
           isValid={inputVariant === 'valid' || inputVariant === 'default'}
           {...wrapperStyle}>
-          <Typography color='textInputPlaceholder' variant='labelSmall'>
+          <Typography
+            mr={!value ? prefixSpace : 0}
+            color='textInputPlaceholder'
+            variant='labelSmall'>
             {prefix}
           </Typography>
           <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             ariaDisabled={readOnly || disabled}
+            disabled={disabled}
+            suffixSpace={value ? suffixSpace : 0}
+            prefixSpace={value ? prefixSpace : 0}
             id={id}
             name={name}
             tabIndex='0'
@@ -187,8 +195,13 @@ export const SubdomainInput = forwardRef(
             suppressContentEditableWarning={true}>
             {valueRef.current}
           </StyledInput>
-          <Suffix color='textInputPlaceholder' variant='labelSmall'>
+          <Suffix
+            mr={!value ? suffixSpace : 0}
+            color='textInputPlaceholder'
+            variant='labelSmall'>
             {!hasValue && placeholder}
+          </Suffix>
+          <Suffix color='textInputPlaceholder' variant='labelSmall'>
             {suffix}
           </Suffix>
           <StatusIcon
@@ -242,9 +255,12 @@ const Wrapper = styled(Flex)(
     })
 )
 
-const StyledInput = styled.div(
+const StyledInput = styled.div(({ disabled, suffixSpace, prefixSpace }) =>
   css({
     ...typography.labelSmall,
+    color: disabled ? 'textInputPlaceholder' : 'textInputActive',
+    marginRight: suffixSpace,
+    marginLeft: prefixSpace,
     backgroundColor: 'transparent',
     outline: 'none',
     border: 'none',
