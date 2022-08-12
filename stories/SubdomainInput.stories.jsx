@@ -64,6 +64,18 @@ export const Placeholder = () => (
   />
 )
 
+export const Disabled = () => (
+  <SubdomainInputHelper
+    id='default_id'
+    prefix=''
+    suffix='transactions'
+    label='Transaction number'
+    placeholder='5'
+    disabled
+    suffixSpace={1}
+  />
+)
+
 export const Tinted = () => (
   <Card m={4} p={4} variant='tinted'>
     <SubdomainInputHelper
