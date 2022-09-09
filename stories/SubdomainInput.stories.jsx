@@ -28,6 +28,15 @@ export const Default = () => (
       valid
     />
     <SubdomainInputHelper
+      label='Valid Number'
+      id='default_id'
+      prefix=''
+      suffix='$'
+      type='number'
+      suffixSpace={1}
+      valid
+    />
+    <SubdomainInputHelper
       label='Default status'
       id='default_id'
       suffix='.etvas.com'
