@@ -133,12 +133,6 @@ export const SubdomainInput = forwardRef(
       el.innerText = innerText.trim()
       replaceCaret(el)
 
-      if (type === 'number' && isNaN(innerText)) {
-        el.innerText = innerText.replace(/\D/g, '')
-        replaceCaret(el)
-        return
-      }
-
       const evt = Object.assign({}, event, {
         target: {
           value: event.target.innerText
