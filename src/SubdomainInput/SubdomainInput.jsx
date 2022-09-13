@@ -129,8 +129,7 @@ export const SubdomainInput = forwardRef(
     const handleInput = event => {
       const { innerText } = event.target
       const el = (ref || inputRef).current
-
-      el.innerText = innerText.trim()
+      el.innerText = innerText.replace(/\s+/g, '')
       replaceCaret(el)
 
       const evt = Object.assign({}, event, {
