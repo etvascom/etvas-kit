@@ -14,7 +14,7 @@ jobs:
 
       - name: build
         run: |
-          npm install --legacy-peer-deps
+          npm install
           npm run build-storybook
 
       - name: publish
