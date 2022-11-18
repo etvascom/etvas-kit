@@ -91,8 +91,5 @@
     "etvas ui",
     "react-component"
   ],
-  "browserslist": "> 0.2%, not dead, not op_mini all",
-  "engines": {
-    "node": ">= 12"
-  }
+  "browserslist": "> 0.2%, not dead, not op_mini all"
 }
