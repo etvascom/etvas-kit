@@ -3,6 +3,7 @@
   "version": "1.1.34",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
+  "module": "es/index.js",
   "source": "src/index.js",
   "files": [
     "css",
@@ -89,5 +90,9 @@
     "etvas",
     "etvas ui",
     "react-component"
-  ]
+  ],
+  "browserslist": "> 0.2%, not dead",
+  "engines": {
+    "node": ">= 12"
+  }
 }
