@@ -1,12 +1,7 @@
 import assert from 'assert'
-import {
-  rgb2hex,
-  hex2rgb,
-  rgb2hsv,
-  hsv2rgb,
-  hex2hsv,
-  hsv2hex
-} from '../src/colorUtilities'
+import colorUtils from '../src/utils/colorUtilities'
+
+const { rgb2hex, hex2rgb, rgb2hsv, hsv2rgb, hex2hsv, hsv2hex } = colorUtils
 
 const colors = [
   { name: 'black', hex: '#000000', rgb: [0, 0, 0], hsv: [0, 0, 0] },

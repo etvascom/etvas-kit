@@ -14,11 +14,12 @@
           families: ['Open+Sans:300,600', 'Roboto:300,900', 'Material+Icons']
         },
         timeout: 3000
-      });
+      })
     </script>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Etvas Kit Demo</title>
   </head>
   <body>
-    <div id="<%= htmlWebpackPlugin.options.mountId %>"></div>
+    <div id="demo"></div>
+    <script type="module" src="src/index.js"></script>
   </body>
 </html>
