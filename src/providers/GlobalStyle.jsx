@@ -42,7 +42,7 @@ a {
 
 @font-face {
   font-family: 'Helvetica Now';
-  src: local('Helvetica Now'), local('HelveticaNow')
+  src: local('Helvetica Now'), local('HelveticaNow'),
     url(${LightFont2}) format('woff2'),
     url(${LightFont}) format('woff');
   font-weight: lighter;
