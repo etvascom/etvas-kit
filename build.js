@@ -1,4 +1,5 @@
 const esbuild = require('esbuild')
+const { nodeExternalsPlugin } = require('esbuild-node-externals')
 
 const loader = {
   '.js': 'jsx',
@@ -8,7 +9,7 @@ const loader = {
   '.svg': 'text'
 }
 
-const external = ['./node_modules/*']
+const plugins = [nodeExternalsPlugin()]
 
 esbuild.build({
   logLevel: 'info',
@@ -17,8 +18,8 @@ esbuild.build({
   format: 'esm',
   outfile: 'es/index.js',
   loader,
-  external,
-  minify: true
+  minify: true,
+  plugins
 })
 
 esbuild.build({
@@ -28,6 +29,6 @@ esbuild.build({
   format: 'cjs',
   outfile: 'lib/index.js',
   loader,
-  external,
-  minify: true
+  minify: true,
+  plugins
 })
