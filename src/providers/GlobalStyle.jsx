@@ -45,6 +45,7 @@ a {
   src: local('Helvetica Now'), local('HelveticaNow')
     url(${LightFont2}) format('woff2'),
     url(${LightFont}) format('woff');
+  font-weight: lighter;
   font-weight: 100;
   font-weight: 200;
   font-weight: 300;
