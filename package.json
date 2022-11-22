@@ -14,7 +14,7 @@
   "scripts": {
     "build": "node build",
     "clean": "rm -rf lib es",
-    "start": "BROWSER=none parcel demo/index.html",
+    "start": "BROWSER=none node build --serve",
     "format": "prettier-eslint \"$PWD/src/**/*.{js,jsx}\" --write",
     "lint:js": "eslint 'src/**/*.{js,jsx}'",
     "lint:style": "stylelint 'src/**/*.{css,jsx}'",
@@ -74,7 +74,6 @@
     "lint-staged": "^10.2.7",
     "mocha": "^10.1.0",
     "nyc": "^15.1.0",
-    "parcel": "^2.7.0",
     "prettier-eslint": "^9.0.2",
     "prettier-eslint-cli": "^5.0.0",
     "react": "^17.0.0",
@@ -93,6 +92,5 @@
     "etvas",
     "etvas ui",
     "react-component"
-  ],
-  "browserslist": "> 0.2%, not dead, not op_mini all"
+  ]
 }
