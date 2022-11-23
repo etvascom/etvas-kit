@@ -1,5 +1,7 @@
 const esbuild = require('esbuild')
 const { nodeExternalsPlugin } = require('esbuild-node-externals')
+const browserslist = require('browserslist')
+const { esbuildPluginBrowserslist } = require('esbuild-plugin-browserslist')
 
 const build = () => {
   const config = {
@@ -14,7 +16,12 @@ const build = () => {
       '.woff2': 'copy',
       '.svg': 'text'
     },
-    plugins: [nodeExternalsPlugin()]
+    plugins: [
+      nodeExternalsPlugin(),
+      esbuildPluginBrowserslist(browserslist(), {
+        printUnknownTargets: false
+      })
+    ]
   }
 
   esbuild.build({
