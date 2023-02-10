@@ -90,3 +90,26 @@ export const NoStyling = () => (
     ))}
   </Card>
 )
+
+const customFonts = ['Arial', 'Times', 'Times New Roman']
+
+export const CustomFontTypography = () => {
+  const themeWithCustomFonts = customFonts.map(font => ({
+    fonts: { primary: font }
+  }))
+
+  return (
+    <>
+      {themeWithCustomFonts.map(customTheme => (
+        <Card mb={4}>
+          <Typography theme={customTheme} variant='title24Light'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+            suscipit inventore molestias mollitia quaerat, dolore, consectetur
+            dolorem, voluptatum reprehenderit eveniet consequuntur dicta hic
+            soluta aliquid at ad impedit quod aliquam.
+          </Typography>
+        </Card>
+      ))}
+    </>
+  )
+}
