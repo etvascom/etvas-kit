@@ -27,6 +27,7 @@ export const CardWithImage = ({
   children,
   imgOnLeft,
   contentPadding,
+  imagePadding,
   ...props
 }) => {
   const flexDirection = vertical
@@ -47,7 +48,7 @@ export const CardWithImage = ({
         justifyContent='space-between'
         width='100%'
         height='100%'>
-        <ContentBox vertical={vertical} ratio={imageSize}>
+        <ContentBox vertical={vertical} ratio={imageSize} p={imagePadding}>
           <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
         <ContentBox
@@ -80,6 +81,7 @@ CardWithImage.propTypes = {
 CardWithImage.defaultProps = {
   imageSize: 1 / 3,
   variant: 'default',
-  imageContain: 'cover'
+  imageContain: 'cover',
+  imagePadding: 0
 }
 CardWithImage.displayName = 'CardWithImage'
