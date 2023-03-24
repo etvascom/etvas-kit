@@ -85,9 +85,10 @@ const Dropdown = ({
     [searchPlaceholder, children]
   )
 
-  const cId = useMemo(() => id || `dd-${Math.floor(1000000 * Math.random())}`, [
-    id
-  ])
+  const cId = useMemo(
+    () => id || `dd-${Math.floor(1000000 * Math.random())}`,
+    [id]
+  )
 
   const searchId = useMemo(
     () => `search-${Math.floor(1000000 * Math.random())}`,
@@ -326,7 +327,11 @@ const Dropdown = ({
 }
 
 const StyledFlex = styled(Flex)(
-  css({ '&:focus-within': { label: { color: 'textInputFocused' } } })
+  css({
+    '&:focus-within > div > label': {
+      color: 'textInputFocused'
+    }
+  })
 )
 
 const Toggler = styled.button(
