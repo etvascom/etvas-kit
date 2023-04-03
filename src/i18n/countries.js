@@ -1,4 +1,5 @@
 import { rawCountriesData } from './rawCountriesData'
+import { rawTimezonesData } from './rawTimezonesData'
 
 const Currency = (code, defaultValue = '') =>
   rawCountriesData[code.trim().toUpperCase()]?.currency || defaultValue
@@ -14,11 +15,15 @@ const asArray = func =>
     func({ code, ...rawCountriesData[code] })
   )
 
+const fromTimezeone = timezone => rawTimezonesData[timezone] || ''
+
 const Countries = {
   raw: rawCountriesData,
+  timezones: rawTimezonesData,
   Name,
   Prefix,
   Currency,
+  fromTimezeone,
   asArray
 }
 
