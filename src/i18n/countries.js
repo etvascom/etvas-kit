@@ -15,7 +15,7 @@ const asArray = func =>
     func({ code, ...rawCountriesData[code] })
   )
 
-const fromTimezeone = timezone => rawTimezonesData[timezone] || ''
+const fromTimezone = timezone => rawTimezonesData[timezone] || ''
 
 const Countries = {
   raw: rawCountriesData,
@@ -23,7 +23,7 @@ const Countries = {
   Name,
   Prefix,
   Currency,
-  fromTimezeone,
+  fromTimezone,
   asArray
 }
 
