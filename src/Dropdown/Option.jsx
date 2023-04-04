@@ -77,7 +77,8 @@ const TextWrapper = styled.div(
   css({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
+    width: '100%'
   })
 )
 
