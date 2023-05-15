@@ -12,10 +12,10 @@ import styles from './Card.styles'
 export const Card = ({ leader, children }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleToggle = useCallback(() => setIsOpen(!isOpen), [
-    isOpen,
-    setIsOpen
-  ])
+  const handleToggle = useCallback(
+    () => setIsOpen(!isOpen),
+    [isOpen, setIsOpen]
+  )
 
   return (
     <StyledCardWrapper>
@@ -23,7 +23,7 @@ export const Card = ({ leader, children }) => {
         <Typography variant='labelButton' color='outline'>
           {leader ? leader.props.children : ''}
         </Typography>
-        <Icon name={isOpen ? 'expand_less' : 'expand_more'} />
+        <Icon name={isOpen ? 'menuUp' : 'menuDown'} />
       </Flex>
       {isOpen && <StyledContent px={4}>{children}</StyledContent>}
     </StyledCardWrapper>
