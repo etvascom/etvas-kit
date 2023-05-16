@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import { NavItem } from './Item'
+import { Icon } from '../Icon'
+import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
-const GRADIENT_SIZE = 24
+const GRADIENT_SIZE = 32
 
 export const NavBar = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0)
-
+  const [isScrollable, setIsScrollable] = useState(false)
   const main = useRef(null)
 
   const items = useMemo(
@@ -16,14 +19,26 @@ export const NavBar = ({ children }) => {
       children
         ? children.map((child, idx) => ({
             key: `nav-item-${idx}`,
-            idx: idx,
-            component: child
+            component: child,
+            idx
           }))
         : [],
     [children]
   )
 
-  const _scrollToItem = idx => () => {
+  useLayoutEffect(() => {
+    const windowResizeHandler = () => {
+      const div = document.getElementById('nav-bar-items-container')
+      const hasHorizontalScrollbar = div.scrollWidth > div.clientWidth
+      setIsScrollable(hasHorizontalScrollbar)
+    }
+
+    windowResizeHandler()
+    window.addEventListener('resize', windowResizeHandler, false)
+    return () => window.removeEventListener('resize', windowResizeHandler)
+  }, [])
+
+  const updateActiveIndex = idx => () => {
     if (!children || !children.length || idx <= 0) {
       return setActiveIndex(0)
     }
@@ -34,69 +49,38 @@ export const NavBar = ({ children }) => {
     setActiveIndex(idx)
   }
 
-  const itemsContainerPosition = useMemo(() => {
-    if (!children || !children.length) {
-      return GRADIENT_SIZE
-    }
-
-    const getInnerWidth = () => {
-      if (!main.current) {
-        return 0
-      }
-
-      const items = main.current.getElementsByClassName('nav-bar-item')
-      let innerWidth = 0
-      const elementWidths = []
-      for (let i = 0; i < items.length; i++) {
-        const rect = items[i].getBoundingClientRect()
-        innerWidth += rect.width
-        elementWidths.push(rect.width)
-      }
-      return { innerWidth, elementWidths }
-    }
-
-    const { innerWidth, elementWidths } = getInnerWidth()
-
-    const { width } = main.current?.getBoundingClientRect() || {}
-    if (
-      (width && width > innerWidth + 2 * GRADIENT_SIZE) ||
-      !width ||
-      !innerWidth
-    ) {
-      return GRADIENT_SIZE
-    }
-
-    const priorElementWidth = elementWidths
-      .slice(0, activeIndex)
-      .reduce((total, w) => total + w, 0)
-
-    let pos = width / 2 - elementWidths[activeIndex] / 2 - priorElementWidth
-    if (pos > GRADIENT_SIZE) {
-      pos = GRADIENT_SIZE
-    }
-    if (width - innerWidth > pos) {
-      pos = width - innerWidth - GRADIENT_SIZE
-    }
-    return pos
-
-    // return GRADIENT_SIZE
-  }, [activeIndex, children, main])
+  useEffect(() => {
+    document.getElementById(`nav-bar-item-${activeIndex}`).scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    })
+  }, [activeIndex])
 
   return (
-    <NavContainer ref={main}>
-      <NavItemsContainer style={{ left: `${itemsContainerPosition}px` }}>
+    <NavContainer ref={main} hasPaddingY={isScrollable}>
+      <NavItemsContainer id='nav-bar-items-container'>
         {items.map((item, idx) => (
           <ItemContainer
+            id={`nav-bar-item-${idx}`}
             className='nav-bar-item'
             key={item.key}
             isLastChild={idx === items.length - 1}
-            onClick={_scrollToItem(item.idx)}>
+            onClick={updateActiveIndex(item.idx)}>
             {item.component}
           </ItemContainer>
         ))}
       </NavItemsContainer>
-      <Gradient from='left' onClick={_scrollToItem(activeIndex + 1)} />
-      <Gradient from='right' onClick={_scrollToItem(activeIndex - 1)} />
+      {isScrollable && (
+        <>
+          <Gradient from='left' onClick={updateActiveIndex(activeIndex + 1)}>
+            <Icon name='chevronRight' size='medium' color='outline' />
+          </Gradient>
+          <Gradient from='right' onClick={updateActiveIndex(activeIndex - 1)}>
+            <Icon name='chevronLeft' size='medium' color='outline' />
+          </Gradient>
+        </>
+      )}
     </NavContainer>
   )
 }
@@ -107,22 +91,31 @@ const NavContainer = styled.div`
   overflow: hidden;
   height: 2rem;
   margin: 1rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 ${({ hasPaddingY }) => (hasPaddingY ? `${GRADIENT_SIZE}px` : '0')};
 `
 const NavItemsContainer = styled.div(
   css({
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
     width: 'auto',
     display: 'flex',
     alignItems: 'center',
-    transition: 'left .5s ease-in-out'
+    transition: 'left .5s ease-in-out',
+    overflowY: 'auto',
+    '::-webkit-scrollbar': {
+      display: 'none'
+    },
+    '-ms-overflow-style': 'none' /* IE and Edge */,
+    'scrollbar-width': 'none' /* Firefox */
   })
 )
 
 const Gradient = styled.button(
   css({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     outline: 'none',
     border: 'none',
