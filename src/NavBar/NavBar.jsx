@@ -12,7 +12,7 @@ const GRADIENT_SIZE = 32
 export const NavBar = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isScrollable, setIsScrollable] = useState(false)
-  const main = useRef(null)
+  const itemsContainer = useRef(null)
 
   const items = useMemo(
     () =>
@@ -28,8 +28,8 @@ export const NavBar = ({ children }) => {
 
   useLayoutEffect(() => {
     const windowResizeHandler = () => {
-      const div = document.getElementById('nav-bar-items-container')
-      const hasHorizontalScrollbar = div.scrollWidth > div.clientWidth
+      const { current } = itemsContainer || {}
+      const hasHorizontalScrollbar = current?.scrollWidth > current?.clientWidth
       setIsScrollable(hasHorizontalScrollbar)
     }
 
@@ -58,8 +58,8 @@ export const NavBar = ({ children }) => {
   }, [activeIndex])
 
   return (
-    <NavContainer ref={main} hasPaddingY={isScrollable}>
-      <NavItemsContainer id='nav-bar-items-container'>
+    <NavContainer hasPaddingY={isScrollable}>
+      <NavItemsContainer ref={itemsContainer}>
         {items.map((item, idx) => (
           <ItemContainer
             id={`nav-bar-item-${idx}`}
