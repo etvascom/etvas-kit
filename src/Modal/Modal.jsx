@@ -54,6 +54,7 @@ export const Modal = ({
   onEscape,
   animated,
   blurredBg,
+  forceCenter,
   children,
   ...props
 }) => {
@@ -113,7 +114,7 @@ export const Modal = ({
         <Container
           justifyContent='center'
           alignItems={
-            isModalInIframe && !props.forceCenter ? 'flex-start' : 'center'
+            isModalInIframe && !forceCenter ? 'flex-start' : 'center'
           }>
           {childrenWithProps}
         </Container>
