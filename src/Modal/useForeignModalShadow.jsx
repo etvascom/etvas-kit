@@ -41,17 +41,29 @@ export const useForeignModalShadow = () => {
     [setBackdrop, setAnimated]
   )
 
+  const scrollPageToTop = () => {
+    window.scrollTo(0, 0)
+  }
+
   const handleBackdropClick = useCallback(() => {
     intercom.current.request('modal.close', null)
   }, [intercom])
 
+  const openModal = useCallback(
+    payload => {
+      showBackdrop(payload)
+      scrollPageToTop()
+    },
+    [showBackdrop]
+  )
+
   useLayoutEffect(() => {
     const instance = intercom.current
-    instance.onRequest('modal', showBackdrop)
+    instance.onRequest('modal', openModal)
     return () => {
-      instance.offRequest('modal', showBackdrop)
+      instance.offRequest('modal', openModal)
     }
-  }, [intercom, showBackdrop])
+  }, [intercom, openModal])
 
   useLayoutEffect(() => {
     const iframe = iframeRef.current
