@@ -54,7 +54,6 @@ export const Modal = ({
   onEscape,
   animated,
   blurredBg,
-  forceCenter,
   children,
   ...props
 }) => {
@@ -113,9 +112,7 @@ export const Modal = ({
       <StyledModal animated={animated} {...props}>
         <Container
           justifyContent='center'
-          alignItems={
-            isModalInIframe && !forceCenter ? 'flex-start' : 'center'
-          }>
+          alignItems={isModalInIframe ? 'flex-start' : 'center'}>
           {childrenWithProps}
         </Container>
       </StyledModal>
@@ -137,7 +134,6 @@ Modal.propTypes = {
   onEscape: PropTypes.func,
   animated: PropTypes.bool,
   blurredBg: PropTypes.bool,
-  forceCenter: PropTypes.bool,
   children: PropTypes.node
 }
 
