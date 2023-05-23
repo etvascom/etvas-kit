@@ -18,7 +18,12 @@ const useResizeObserverRaf = () => {
   return { ref, ...size }
 }
 
-export const Table = ({ mode, breakpoint, ...props }) => {
+export const Table = ({
+  mode,
+  breakpoint,
+  verticalBreakpointDisplay,
+  ...props
+}) => {
   const [cells, setCells] = useState([])
   const { ref, width = 1 } = useResizeObserverRaf()
 
@@ -38,6 +43,7 @@ export const Table = ({ mode, breakpoint, ...props }) => {
     () => ({
       cells,
       mode: actualMode,
+      verticalBreakpointDisplay,
       setHeaderCell: (idx, content) => {
         if (!cells || cells[idx] !== content) {
           const newCells = [...cells]
@@ -60,7 +66,8 @@ export const Table = ({ mode, breakpoint, ...props }) => {
 
 Table.propTypes = {
   breakpoint: PropTypes.number,
-  mode: PropTypes.oneOf(['web', 'mobile'])
+  mode: PropTypes.oneOf(['web', 'mobile']),
+  verticalBreakpointDisplay: PropTypes.bool
 }
 
 const Wrapper = styled.div(css(styles.wrapper))
