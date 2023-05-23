@@ -9,7 +9,7 @@ import styles from './Row.styles'
 
 export const Row = ({ children }) => {
   const headerCtx = useContext(HeaderContext)
-  const { mode, cells } = useContext(TableContext)
+  const { mode, cells, verticalBreakpointDisplay } = useContext(TableContext)
 
   const type = useMemo(() => (headerCtx ? 'header' : 'body'), [headerCtx])
 
@@ -34,7 +34,12 @@ export const Row = ({ children }) => {
         <Card leader={leader}>
           {remainingCells.map(({ cell, header }, idx) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Card.Item key={idx} header={header} cell={cell} />
+            <Card.Item
+              key={idx}
+              header={header}
+              cell={cell}
+              vertical={verticalBreakpointDisplay}
+            />
           ))}
         </Card>
       </PseudoRow>

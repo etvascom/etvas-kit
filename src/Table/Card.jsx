@@ -39,8 +39,8 @@ const StyledContent = styled(Box)(css(styles.content))
 
 const StyledCardWrapper = styled.td(css(styles.card))
 
-export const CardItem = ({ header, cell }) => (
-  <Flex my={4}>
+export const CardItem = ({ header, cell, vertical }) => (
+  <Flex my={4} flexDirection={vertical ? 'column' : 'row'}>
     <Box width={1 / 3} pr={1}>
       <Typography truncate variant='labelSmallBold'>
         {header}
@@ -52,7 +52,8 @@ export const CardItem = ({ header, cell }) => (
 
 CardItem.propTypes = {
   header: PropTypes.node,
-  cell: PropTypes.node
+  cell: PropTypes.node,
+  vertical: PropTypes.bool
 }
 
 Card.Item = CardItem
