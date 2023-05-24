@@ -1,11 +1,9 @@
-import React, { useMemo, useState, useRef } from 'react'
+import React, { useMemo, useState, useRef, useLayoutEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import { NavItem } from './Item'
 import { Icon } from '../Icon'
-import { useLayoutEffect } from 'react'
-import { useEffect } from 'react'
 
 const GRADIENT_SIZE = 32
 
@@ -49,7 +47,7 @@ export const NavBar = ({ children }) => {
     setActiveIndex(idx)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.getElementById(`nav-bar-item-${activeIndex}`).scrollIntoView({
       behavior: 'smooth',
       block: 'center',
