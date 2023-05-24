@@ -49,7 +49,7 @@ export const NavBar = ({ children }) => {
     setActiveIndex(idx)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.getElementById(`nav-bar-item-${activeIndex}`).scrollIntoView({
       behavior: 'smooth',
       block: 'center',
