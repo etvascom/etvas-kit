@@ -47,26 +47,16 @@ export const NavBar = ({ children }) => {
     setActiveIndex(idx)
   }
 
-  useLayoutEffect(() => {
-    document.getElementById(`nav-bar-item-${activeIndex}`).scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-      inline: 'center'
-    })
-  }, [activeIndex])
-
   return (
     <NavContainer hasPaddingY={isScrollable}>
       <NavItemsContainer ref={itemsContainer}>
         {items.map(item => (
-          <ItemContainer
-            id={`nav-bar-item-${item.idx}`}
-            className='nav-bar-item'
-            key={item.key}
+          <ItemScrollableContainer
             isLastChild={item.idx === items.length - 1}
-            onClick={updateActiveIndex(item.idx)}>
-            {item.component}
-          </ItemContainer>
+            isActive={activeIndex === item.idx}
+            item={item}
+            onClick={updateActiveIndex(item.idx)}
+          />
         ))}
       </NavItemsContainer>
       {isScrollable && (
@@ -81,6 +71,39 @@ export const NavBar = ({ children }) => {
       )}
     </NavContainer>
   )
+}
+
+const ItemScrollableContainer = ({ isActive, item, onClick, isLastChild }) => {
+  const ref = useRef()
+
+  useLayoutEffect(() => {
+    if (isActive && ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
+      })
+    }
+  }, [isActive])
+
+  return (
+    <ItemContainer
+      id={`nav-bar-item-${item.idx}`}
+      isLastChild={isLastChild}
+      className='nav-bar-item'
+      key={item.key}
+      ref={ref}
+      onClick={onClick}>
+      {item.component}
+    </ItemContainer>
+  )
+}
+
+ItemScrollableContainer.propTypes = {
+  isActive: PropTypes.bool,
+  item: PropTypes.object,
+  onClick: PropTypes.func,
+  isLastChild: PropTypes.bool
 }
 
 const NavContainer = styled.div`
