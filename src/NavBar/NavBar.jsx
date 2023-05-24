@@ -58,12 +58,12 @@ export const NavBar = ({ children }) => {
   return (
     <NavContainer hasPaddingY={isScrollable}>
       <NavItemsContainer ref={itemsContainer}>
-        {items.map((item, idx) => (
+        {items.map(item => (
           <ItemContainer
-            id={`nav-bar-item-${idx}`}
+            id={`nav-bar-item-${item.idx}`}
             className='nav-bar-item'
             key={item.key}
-            isLastChild={idx === items.length - 1}
+            isLastChild={item.idx === items.length - 1}
             onClick={updateActiveIndex(item.idx)}>
             {item.component}
           </ItemContainer>
