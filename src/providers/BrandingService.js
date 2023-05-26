@@ -62,13 +62,15 @@ export class BrandingService extends EventEmitter {
       ? this.buildColorVariants('accent', updates.accentColor, updates)
       : {}
 
+    const previousCssVars = { ...this.cssVars }
+
     this.cssVars = {
       ...newVars,
       ...brandColorVariants,
       ...accentColorVariants
     }
 
-    if (isEqual(newVars, this.cssVars)) {
+    if (isEqual(previousCssVars, this.cssVars)) {
       return
     }
 
