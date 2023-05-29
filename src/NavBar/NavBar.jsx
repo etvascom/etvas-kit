@@ -55,6 +55,7 @@ export const NavBar = ({ children }) => {
             isLastChild={item.idx === items.length - 1}
             isActive={activeIndex === item.idx}
             item={item}
+            key={item.key}
             onClick={updateActiveIndex(item.idx)}
           />
         ))}
