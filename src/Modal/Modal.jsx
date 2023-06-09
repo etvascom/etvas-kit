@@ -46,7 +46,6 @@ const StyledModal = styled(Box)(
     animation-name: modal;
     animation-duration:0.5s;`
 )
-const isModalInIframe = isInsideIframe()
 
 export const Modal = ({
   backDrop,
@@ -59,6 +58,8 @@ export const Modal = ({
 }) => {
   const contentWrapperRef = useRef()
   const intercom = useRef(new InterCom('etvas.modal'))
+
+  const isModalInIframe = useMemo(isInsideIframe, [])
 
   const modalBackdropClickHandler = useCallback(() => {
     onBackDropClick && onBackDropClick()
