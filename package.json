@@ -1,6 +1,6 @@
 {
   "name": "@etvas/etvaskit-2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
