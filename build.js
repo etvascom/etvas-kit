@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const esbuild = require('esbuild')
 const { nodeExternalsPlugin } = require('esbuild-node-externals')
 const browserslist = require('browserslist')
@@ -6,7 +7,7 @@ const { esbuildPluginBrowserslist } = require('esbuild-plugin-browserslist')
 const build = () => {
   const config = {
     logLevel: 'info',
-    entryPoints: ['src/index.js'],
+    entryPoints: ['src/index.ts'],
     minify: true,
     bundle: true,
     loader: {
