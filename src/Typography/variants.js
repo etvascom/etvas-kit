@@ -6,6 +6,13 @@ import {
 } from '../assets/core'
 
 export const typographyVariants = {
+  base8Bold: {
+    fontFamily: 'primary',
+    fontWeight: FONT_WEIGHTS.bold,
+    fontSize: '8px',
+    lineHeight: LINE_HEIGHTS.base,
+    letterSpacing: LETTER_SPACINGS.base
+  },
   base12Light: {
     fontFamily: 'primary',
     fontWeight: FONT_WEIGHTS.lighter,

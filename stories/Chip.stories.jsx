@@ -32,3 +32,15 @@ export const CustomChip = () => (
     </Chip>
   </Card>
 )
+
+export const SmallChip = () => (
+  <Card p={3}>
+    <Chip
+      color='statusWarning'
+      contentColor='etvasDark'
+      typographyVariant='base8Bold'
+      isRounded>
+      Chip text
+    </Chip>
+  </Card>
+)
