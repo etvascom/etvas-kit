@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card, Typography, CardWithImage, Box } from '../src'
+
+import { Box, Card, CardWithImage, Typography } from '../src'
 
 export default {
   title: 'Demo/Card',

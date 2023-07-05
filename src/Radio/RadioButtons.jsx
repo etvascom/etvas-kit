@@ -1,9 +1,10 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
-import { Flex } from '../Flex'
-import RadioButton from './RadioButton'
 
 import { Typography } from '../'
+import { Flex } from '../Flex'
+import RadioButton from './RadioButton'
 
 const RadioButtons = ({
   name,

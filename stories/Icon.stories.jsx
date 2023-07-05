@@ -1,5 +1,6 @@
 import React from 'react'
-import { Flex, Grid, Icon, Card, Typography } from '../src'
+
+import { Card, Flex, Grid, Icon, Typography } from '../src'
 import { alternates } from '../src/Icon/glyphs'
 
 export default {

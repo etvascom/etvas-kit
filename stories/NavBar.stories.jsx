@@ -1,6 +1,8 @@
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
+
 import { action } from '@storybook/addon-actions'
-import { Box, Flex, TextSkeleton, BlockSkeleton, NavBar } from '../src'
+
+import { BlockSkeleton, Box, Flex, NavBar, TextSkeleton } from '../src'
 
 export default {
   title: 'Demo/NavBar',

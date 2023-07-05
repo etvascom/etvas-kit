@@ -1,19 +1,20 @@
 import React, { useMemo } from 'react'
+
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import propTypes from '@styled-system/prop-types'
-import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { Icon } from '../Icon'
-import { Flex } from '../Flex'
-import { Label } from '../Label'
-import { typography } from '../Typography'
-import { Touchable } from '../Touchable'
 import { v4 } from 'uuid'
 
+import { Flex } from '../Flex'
+import { Icon } from '../Icon'
+import { Label } from '../Label'
+import { Touchable } from '../Touchable'
+import { typography } from '../Typography'
+import sizes from '../assets/sizes'
 import { default as variants } from './CardDisplayInput.variants'
 import { SubLabel } from './SubLabel'
-import sizes from '../assets/sizes'
 
 export const CardDisplayInput = ({
   disabled,

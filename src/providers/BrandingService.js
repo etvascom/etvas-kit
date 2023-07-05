@@ -1,7 +1,8 @@
 import EventEmitter from 'events'
 import isEqual from 'lodash/isEqual'
+
+import { hex2rgb, mergeDeep, shading } from '../utils'
 import { InterCom } from './InterCom'
-import { hex2rgb, shading, mergeDeep } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',

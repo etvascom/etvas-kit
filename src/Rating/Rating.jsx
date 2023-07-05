@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react'
+
 import PropTypes from 'prop-types'
+
 import { Icon } from '../Icon'
 
 export const Rating = ({ rating, max, size, color }) => {

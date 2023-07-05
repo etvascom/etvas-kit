@@ -1,16 +1,17 @@
 import React, { useMemo } from 'react'
+
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { layout, position, space, variant } from 'styled-system'
-import propTypes from '@styled-system/prop-types'
 
-import { Typography } from '../Typography'
 import { Flex, Space } from '../'
-import variants from './variants'
 import { Icon } from '../Icon'
-import sizes from '../assets/sizes'
+import { Typography } from '../Typography'
 import colors from '../assets/colors'
+import sizes from '../assets/sizes'
 import { brandingService } from '../providers/BrandingService'
+import variants from './variants'
 
 const Button = ({
   iconColor,

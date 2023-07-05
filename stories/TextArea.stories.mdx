@@ -1,12 +1,11 @@
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
-import { Table, TextArea, Typography, Icon } from '../src'
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks'
+import { Icon, Table, TextArea, Typography } from '../src'
 
-<Meta title="Guides/TextArea" component={TextArea} />
+<Meta title='Guides/TextArea' component={TextArea} />
 
 # TextArea
 
 The `TextArea` component has a couple of options:
-
 
 ## Placeholder
 
@@ -15,7 +14,6 @@ The `TextArea` component has a couple of options:
     <TextArea name='test1' id='test' placeholder='a placeholder' />
   </Story>
 </Preview>
-
 
 ## Error
 
@@ -27,11 +25,18 @@ The textarea will display errors underneath. The error can be a string or a Reac
       <Typography variant='titleSmall'>Simple error</Typography>
       <TextArea id='test2' name='test' error='Needs value' />
       <Typography variant='titleSmall'>Component error</Typography>
-      <TextArea id='test3' name='test' error={<span><Icon name='alertCircle' /> Required</span>} />
+      <TextArea
+        id='test3'
+        name='test'
+        error={
+          <span>
+            <Icon name='alertCircle' /> Required
+          </span>
+        }
+      />
     </>
   </Story>
 </Preview>
-
 
 ## Label
 
@@ -39,9 +44,15 @@ The textarea will display errors underneath. The error can be a string or a Reac
   <Story name='Label'>
     <>
       <TextArea id='test4' name='test' label='Name' />
-      <TextArea id='test5' name='test1' label={<span><Icon name='alertCircle' /> Name</span>} />
+      <TextArea
+        id='test5'
+        name='test1'
+        label={
+          <span>
+            <Icon name='alertCircle' /> Name
+          </span>
+        }
+      />
     </>
   </Story>
 </Preview>
-
-

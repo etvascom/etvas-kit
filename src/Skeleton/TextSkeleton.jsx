@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
+
+import propTypes from '@styled-system/prop-types'
+import random from 'lodash/random'
+import range from 'lodash/range'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import propTypes from '@styled-system/prop-types'
 import { compose, layout, space } from 'styled-system'
-import range from 'lodash/range'
-import random from 'lodash/random'
 
 import { BlockSkeleton } from './BlockSkeleton'
 

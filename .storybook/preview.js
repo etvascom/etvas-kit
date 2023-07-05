@@ -1,6 +1,8 @@
 import React from 'react'
+
 import { addDecorator } from '@storybook/react'
-import { BrandingProvider, ThemeProvider, GlobalStyle } from '../src'
+
+import { BrandingProvider, GlobalStyle, ThemeProvider } from '../src'
 
 addDecorator(storyFn => (
   <BrandingProvider>

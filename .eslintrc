@@ -87,9 +87,12 @@
     "react/prefer-es6-class": ["error", "always"],
     "react/require-render-return": 2,
     "semi": ["error", "never"],
-    "space-before-function-paren": ["error", {
-      "named": "never",
-    }],
+    "space-before-function-paren": [
+      "error",
+      {
+        "named": "never"
+      }
+    ],
     "strict": ["error", "global"],
     "wrap-iife": "warn"
   },

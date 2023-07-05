@@ -1,5 +1,7 @@
-import React, { useState, useMemo, useEffect, createContext } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
+
 import PropTypes from 'prop-types'
+
 import { BrandingService, brandingService } from './BrandingService'
 
 export const BrandingContext = createContext()
@@ -14,10 +16,10 @@ export const BrandingProvider = ({ brandingService, children }) => {
     return () => brandingService.removeListener('change', handler)
   }, [setCssVars, brandingService])
 
-  const ctx = useMemo(() => ({ cssVars, brandingService }), [
-    cssVars,
-    brandingService
-  ])
+  const ctx = useMemo(
+    () => ({ cssVars, brandingService }),
+    [cssVars, brandingService]
+  )
 
   return (
     <BrandingContext.Provider value={ctx}>{children}</BrandingContext.Provider>

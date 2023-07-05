@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
-import { Card } from './Card'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
 import { Box } from '../Box'
 import { Flex } from '../Flex'
-
+import { Card } from './Card'
 import styles from './CardWithImage.styles'
 
 const CardWrapper = styled(Card)(styles.container)

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-import styled from 'styled-components'
+
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
-import { TableContext } from './base'
+import styled from 'styled-components'
+
 import styles from './Cell.styles'
+import { TableContext } from './base'
 
 export const Cell = ({ idx, type, children, leader }) => {
   const { mode, setHeaderCell } = useContext(TableContext)

@@ -1,15 +1,17 @@
-import React, { useState, forwardRef, useMemo, useRef, useEffect } from 'react'
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { Typography, typography } from '../Typography'
+
 import { Flex } from '../Flex'
-import { Label } from '../Label'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
-import { SubLabel } from '../Input/SubLabel'
 import { default as variants } from '../Input/Input.variants'
+import { SubLabel } from '../Input/SubLabel'
+import { Label } from '../Label'
+import { Typography, typography } from '../Typography'
 
 const replaceCaret = el => {
   const target = document.createTextNode('')

@@ -1,8 +1,9 @@
 import React from 'react'
+
 import { render } from 'react-dom'
 
-import { GlobalStyle, ThemeProvider, BrandingProvider } from '../../src'
-import { Root, EmbededAppChild, ModalChild } from './iframes'
+import { BrandingProvider, GlobalStyle, ThemeProvider } from '../../src'
+import { EmbededAppChild, ModalChild, Root } from './iframes'
 
 const urlParams = new URLSearchParams(window.location.search)
 const demo = urlParams.get('demo') || 'root'

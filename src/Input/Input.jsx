@@ -5,21 +5,21 @@ import React, {
   useRef,
   useState
 } from 'react'
+
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
+import { themeGet as themed } from '@styled-system/theme-get'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import propTypes from '@styled-system/prop-types'
-import css from '@styled-system/css'
 import { variant } from 'styled-system'
 
-import { themeGet as themed } from '@styled-system/theme-get'
-import { Icon } from '../Icon'
 import { Flex } from '../Flex'
-import { typography } from '../Typography'
-
-import { PasswordToggler } from './PasswordToggler'
-import { default as variants } from './Input.variants'
-import { SubLabel } from './SubLabel'
+import { Icon } from '../Icon'
 import { Label } from '../Label'
+import { typography } from '../Typography'
+import { default as variants } from './Input.variants'
+import { PasswordToggler } from './PasswordToggler'
+import { SubLabel } from './SubLabel'
 
 export const Input = forwardRef(
   (

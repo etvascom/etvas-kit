@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo } from 'react'
-import PropTypes from 'prop-types'
-import { useField } from 'formik'
 
-import { fieldShape } from './shapes'
+import { useField } from 'formik'
+import PropTypes from 'prop-types'
+
 import { Dropdown } from '../Dropdown'
+import { fieldShape } from './shapes'
 
 export const DropdownField = ({
   options,

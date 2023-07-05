@@ -1,5 +1,6 @@
 import React from 'react'
-import { TextSkeleton, CardSkeleton, Flex } from '../src'
+
+import { CardSkeleton, Flex, TextSkeleton } from '../src'
 
 export default {
   title: 'Demo/Skeletons/Card',

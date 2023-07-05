@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Dropdown, Card } from '../src'
+
+import { Card, Dropdown } from '../src'
 
 export default {
   title: 'Demo/Dropdown',

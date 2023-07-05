@@ -1,15 +1,16 @@
 import React, { forwardRef, useMemo, useRef } from 'react'
+
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import propTypes from '@styled-system/prop-types'
-import css from '@styled-system/css'
 import { variant } from 'styled-system'
-import { default as variants } from './TextArea.variants'
-import { typography } from '../Typography'
-import { Flex } from '../Flex'
-import { Label } from '../Label'
 
+import { Flex } from '../Flex'
 import { SubLabel } from '../Input/SubLabel'
+import { Label } from '../Label'
+import { typography } from '../Typography'
+import { default as variants } from './TextArea.variants'
 
 export const TextArea = forwardRef(
   (

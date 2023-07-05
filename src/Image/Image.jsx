@@ -1,6 +1,6 @@
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import propTypes from '@styled-system/prop-types'
 import { border, compose, layout, position, space } from 'styled-system'
 
 export const Image = styled.img`

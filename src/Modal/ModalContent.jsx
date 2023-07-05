@@ -1,13 +1,13 @@
 import React, { forwardRef } from 'react'
 
-import PropTypes from 'prop-types'
-import propTypes from '@styled-system/prop-types'
-import styled from 'styled-components'
 import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { compose, flexbox } from 'styled-system'
 
-import style from './Modal.style'
 import { Box } from '../Box'
+import style from './Modal.style'
 
 export const ModalContent = forwardRef(
   ({ children, onClose, ...props }, ref) => (

@@ -1,13 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import styled from 'styled-components'
-import css from '@styled-system/css'
-
-import glyphs from './glyphs.js'
-import animationSpeeds from '../assets/animationSpeeds'
 import { default as DefaultIcon } from '@mdi/react'
+import css from '@styled-system/css'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
+import glyphs from './glyphs.js'
 
 const externalGlyphs = {}
 

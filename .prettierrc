@@ -8,5 +8,8 @@
   "singleQuote": true,
   "tabWidth": 2,
   "useTabs": false,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "importOrder": ["^react$", "<THIRD_PARTY_MODULES>", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

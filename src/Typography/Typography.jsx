@@ -1,6 +1,7 @@
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 import {
   color,
   colorStyle,
@@ -11,7 +12,6 @@ import {
   typography,
   variant
 } from 'styled-system'
-import propTypes from '@styled-system/prop-types'
 
 import variants from './variants'
 

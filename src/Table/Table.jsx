@@ -1,15 +1,16 @@
 import React, { useMemo, useState } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
-import { useResizeObserver } from '../utils/hooks'
 
+import { useResizeObserver } from '../utils/hooks'
+import { Body } from './Body'
+import { Cell } from './Cell'
+import { Header } from './Header'
+import { Row } from './Row'
 import styles from './Table.styles'
 import { TableContext } from './base'
-import { Cell } from './Cell'
-import { Row } from './Row'
-import { Body } from './Body'
-import { Header } from './Header'
 
 const useResizeObserverRaf = () => {
   const [size, setSize] = useState({ width: undefined, height: undefined })

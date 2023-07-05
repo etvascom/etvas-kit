@@ -1,4 +1,3 @@
-import { themed } from '../utils'
 import { createGlobalStyle } from 'styled-components'
 
 import LightFont from '../assets/webfont/light.woff'
@@ -7,6 +6,7 @@ import MediumFont from '../assets/webfont/medium.woff'
 import MediumFont2 from '../assets/webfont/medium.woff2'
 import BoldFont from '../assets/webfont/xbold.woff'
 import BoldFont2 from '../assets/webfont/xbold.woff2'
+import { themed } from '../utils'
 
 export const GlobalStyle = createGlobalStyle`
 :root {

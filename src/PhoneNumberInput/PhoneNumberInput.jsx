@@ -1,31 +1,33 @@
 import React, {
   forwardRef,
+  useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
-  useState,
-  useLayoutEffect,
-  useEffect
+  useState
 } from 'react'
-import { Typography, typography } from '../Typography'
-import { Space } from '../Space'
-import { Icon } from '../Icon'
-import { Flex } from '../Flex'
-import { Label } from '../Label'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+
 import css from '@styled-system/css'
+import 'flag-icon-css/css/flag-icon.css'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { variant } from 'styled-system'
+
+import { Flex } from '../Flex'
+import { Icon } from '../Icon'
 import { Input } from '../Input'
 import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
-import { prefixLengthOrderedStates, orderedStates } from './world-states'
+import { Label } from '../Label'
+import { Space } from '../Space'
+import { Typography, typography } from '../Typography'
+import { RADII, SHADOWS } from '../assets/core'
+import sizes from '../assets/sizes'
 import { themed } from '../utils'
 import styles from './PhoneNumberInput.styles'
-import sizes from '../assets/sizes'
-import 'flag-icon-css/css/flag-icon.css'
-import { RADII, SHADOWS } from '../assets/core'
-import { trimStartingZero } from './trimStartingZero'
 import { displayCountries } from './displayCountries'
+import { trimStartingZero } from './trimStartingZero'
+import { orderedStates, prefixLengthOrderedStates } from './world-states'
 
 const PhoneNumberInput = forwardRef((props, ref) => {
   const {
@@ -68,10 +70,8 @@ const PhoneNumberInput = forwardRef((props, ref) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const [cursorPosition, setCursorPosition] = useState(0)
-  const [
-    cursorPositionChangedToggler,
-    setCursorPositionChangedToggler
-  ] = useState(false)
+  const [cursorPositionChangedToggler, setCursorPositionChangedToggler] =
+    useState(false)
 
   useEffect(() => {
     const flagsTimeout = setTimeout(() => {
@@ -99,7 +99,8 @@ const PhoneNumberInput = forwardRef((props, ref) => {
     if (ref) {
       ref.current.selectionStart = ref.current.selectionEnd = cursorPosition
     } else {
-      inputRef.current.selectionStart = inputRef.current.selectionEnd = cursorPosition
+      inputRef.current.selectionStart = inputRef.current.selectionEnd =
+        cursorPosition
     }
   }, [value, ref, inputRef, cursorPosition, cursorPositionChangedToggler])
 

@@ -1,6 +1,7 @@
 import React, { createContext } from 'react'
-import PropTypes from 'prop-types'
+
 import { Formik, Form as FormikForm } from 'formik'
+import PropTypes from 'prop-types'
 
 import { makeId } from './utils'
 

@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react'
-import PropTypes from 'prop-types'
-import { useField, useFormikContext } from 'formik'
 
+import { useField, useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
+
+import { SubdomainInput } from '../SubdomainInput'
 import { fieldShape } from './shapes'
 import { makeId } from './utils'
-import { SubdomainInput } from '../SubdomainInput'
 
 export const SubdomainField = props => {
   const { submitCount } = useFormikContext()

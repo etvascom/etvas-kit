@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import PropTypes from 'prop-types'
+
 import css from '@styled-system/css'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { InterCom } from '../providers'
+
 import { useForeignModalShadow } from '../Modal'
+import { InterCom } from '../providers'
 
 export const EmbededAppContainer = ({ defaultHeight, ...props }) => {
   const intercom = useRef(new InterCom('etvas.embededApp'))

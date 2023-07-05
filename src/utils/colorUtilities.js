@@ -99,12 +99,12 @@ const hsv2rgb = ([h, s, v]) => {
   const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
   const m = v - c
   const cases = {
-    '0': [c, x, 0],
-    '1': [x, c, 0],
-    '2': [0, c, x],
-    '3': [0, x, c],
-    '4': [x, 0, c],
-    '5': [c, 0, x]
+    0: [c, x, 0],
+    1: [x, c, 0],
+    2: [0, c, x],
+    3: [0, x, c],
+    4: [x, 0, c],
+    5: [c, 0, x]
   }
   return cases[`${Math.floor(h / 60)}`]
     .map(c => c + m)

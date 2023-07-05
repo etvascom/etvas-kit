@@ -1,8 +1,9 @@
 import { themeGet as libThemeGet } from '@styled-system/theme-get'
-import { mergeDeep } from '../utils/mergeDeep'
+
 import { etvasTheme } from '../assets'
-import colorUtilities from './colorUtilities'
 import useResizeObserver from '../utils/hooks/useResizeObserver'
+import { mergeDeep } from '../utils/mergeDeep'
+import colorUtilities from './colorUtilities'
 
 /**
  * @deprecated

@@ -1,6 +1,6 @@
-import { BORDERS, RADII, SPACE } from '../assets/core'
-import colors from '../assets/colors'
 import typography from '../Typography/variants'
+import colors from '../assets/colors'
+import { BORDERS, RADII, SPACE } from '../assets/core'
 
 const DEFAULT_STYLE = {
   ...typography.inputLabel,

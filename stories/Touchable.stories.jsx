@@ -1,5 +1,6 @@
 import React from 'react'
-import { Touchable, Icon, Box, Flex } from '../src'
+
+import { Box, Flex, Icon, Touchable } from '../src'
 
 export default {
   title: 'Demo/Touchable',

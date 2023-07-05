@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
+
 import css from '@styled-system/css'
+import styled from 'styled-components'
 
 import styles from './Body.styles'
 import { TableContext } from './base'

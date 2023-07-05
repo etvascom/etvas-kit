@@ -1,5 +1,6 @@
 import React from 'react'
-import { Chip, Card } from '../src'
+
+import { Card, Chip } from '../src'
 
 export default {
   title: 'Demo/Chip',

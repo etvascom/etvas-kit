@@ -1,6 +1,6 @@
 import React from 'react'
-import { Flex, Box, Chip } from '../src'
 
+import { Box, Chip, Flex } from '../src'
 import { shading } from '../src/utils'
 
 const variants = [

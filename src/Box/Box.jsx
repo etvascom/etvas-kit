@@ -1,17 +1,17 @@
+import propTypes from '@styled-system/prop-types'
 import styled from 'styled-components'
 import {
   background,
   border,
-  compose,
-  shadow,
   color,
   colorStyle,
+  compose,
   layout,
   position,
+  shadow,
   space,
   typography
 } from 'styled-system'
-import propTypes from '@styled-system/prop-types'
 
 import { pointerEvents, visibility } from '../utils/customProps'
 

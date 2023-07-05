@@ -1,5 +1,6 @@
 import React from 'react'
-import { ActivityIndicator, Card, Box, Flex } from '../src'
+
+import { ActivityIndicator, Box, Card, Flex } from '../src'
 
 export default {
   title: 'Demo/ActivityIndicator',

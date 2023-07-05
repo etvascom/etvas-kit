@@ -1,4 +1,4 @@
-import { sm, md, lg } from '../utils'
+import { lg, md, sm } from '../utils'
 
 const _extract = (value, idx, defaultValue) => {
   if (!value) {

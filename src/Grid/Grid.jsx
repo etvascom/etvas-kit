@@ -1,8 +1,9 @@
 import React, { createContext, useContext } from 'react'
+
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Box } from '../Box'
 
+import { Box } from '../Box'
 import styles from './Grid.styles'
 
 export const GridContext = createContext()

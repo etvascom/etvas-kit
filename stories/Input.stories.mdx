@@ -1,12 +1,11 @@
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
-import { Table, Input, Typography, Icon } from '../src'
+import { Meta, Preview, Story } from '@storybook/addon-docs/blocks'
+import { Icon, Input, Table, Typography } from '../src'
 
-<Meta title="Guides/Input" component={Input} />
+<Meta title='Guides/Input' component={Input} />
 
 # Input
 
 The `Input` component has a couple of options:
-
 
 ## Placeholder
 
@@ -15,7 +14,6 @@ The `Input` component has a couple of options:
     <Input name='test1' id='test' placeholder='a placeholder' />
   </Story>
 </Preview>
-
 
 ## Error
 
@@ -27,11 +25,18 @@ The input will display errors underneath. The error can be a string or a React n
       <Typography variant='titleSmall'>Simple error</Typography>
       <Input id='test2' name='test' error='Needs value' />
       <Typography variant='titleSmall'>Component error</Typography>
-      <Input id='test3' name='test' error={<span><Icon name='alertCircle' /> Required</span>} />
+      <Input
+        id='test3'
+        name='test'
+        error={
+          <span>
+            <Icon name='alertCircle' /> Required
+          </span>
+        }
+      />
     </>
   </Story>
 </Preview>
-
 
 ## Label
 
@@ -39,9 +44,15 @@ The input will display errors underneath. The error can be a string or a React n
   <Story name='Label'>
     <>
       <Input id='test4' name='test' label='Name' />
-      <Input id='test5' name='test1' label={<span><Icon name='alertCircle' /> Name</span>} />
+      <Input
+        id='test5'
+        name='test1'
+        label={
+          <span>
+            <Icon name='alertCircle' /> Name
+          </span>
+        }
+      />
     </>
   </Story>
 </Preview>
-
-

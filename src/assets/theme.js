@@ -1,22 +1,20 @@
+import { DROPDOWN_VARIANTS } from '../Dropdown'
+import { INPUT_VARIANTS } from '../Input'
 import {
   BORDERS,
   BREAKPOINTS,
   FONTS,
   FONT_WEIGHTS,
-  LINE_HEIGHTS,
   LETTER_SPACINGS,
+  LINE_HEIGHTS,
   RADII,
   SHADOWS,
   SPACE,
   Z_INDICES
 } from '../assets/core'
-
-import { DROPDOWN_VARIANTS } from '../Dropdown'
-import { INPUT_VARIANTS } from '../Input'
-
+import animationSpeeds from './animationSpeeds'
 import colors from './colors'
 import sizes from './sizes'
-import animationSpeeds from './animationSpeeds'
 
 const theme = {
   dropdowns: DROPDOWN_VARIANTS,

@@ -1,6 +1,8 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
+
 import { Box } from '../Box'
 
 export const LoadBar = ({ colors, ...props }) => (

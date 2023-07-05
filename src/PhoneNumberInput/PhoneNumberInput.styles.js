@@ -1,6 +1,6 @@
 import { typography } from '../Typography'
-import sizes from '../assets/sizes'
 import { RADII } from '../assets/core'
+import sizes from '../assets/sizes'
 
 export default {
   phoneNumberInput: {

@@ -1,11 +1,12 @@
-import React, { cloneElement, useMemo, useContext } from 'react'
+import React, { cloneElement, useContext, useMemo } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 
-import { HeaderContext, TableContext } from './base'
 import { Card } from './Card'
 import styles from './Row.styles'
+import { HeaderContext, TableContext } from './base'
 
 export const Row = ({ children }) => {
   const headerCtx = useContext(HeaderContext)

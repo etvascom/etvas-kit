@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react'
 
+import { Box, Button, Card, Flex, Typography } from '../../../../src'
 import { EmbededAppParent } from '../embededApp'
 import { ModalParent } from '../modals'
-import { Typography, Button, Card, Flex, Box } from '../../../../src'
 
 const demos = {
   embededApp: {
@@ -18,9 +18,10 @@ const demos = {
 
 export const Root = () => {
   const [currentDemo, setCurrentDemo] = useState()
-  const handleLoadDemo = useCallback(demo => () => setCurrentDemo(demo), [
-    setCurrentDemo
-  ])
+  const handleLoadDemo = useCallback(
+    demo => () => setCurrentDemo(demo),
+    [setCurrentDemo]
+  )
   const Component = useMemo(
     () => (currentDemo ? demos[currentDemo].Component : null),
     [currentDemo]

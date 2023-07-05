@@ -1,6 +1,8 @@
 import React from 'react'
-import { addIcons, Icon, Card, Flex, Typography } from '../src'
-import { mdiAbugidaThai, mdiAbjadArabic, mdiAbjadHebrew } from '@mdi/js'
+
+import { mdiAbjadArabic, mdiAbjadHebrew, mdiAbugidaThai } from '@mdi/js'
+
+import { Card, Flex, Icon, Typography, addIcons } from '../src'
 
 export default {
   title: 'Demo/Icon',

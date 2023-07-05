@@ -1,6 +1,6 @@
+import typography from '../Typography/variants'
 import { BORDERS } from '../assets/core'
 import sizes from '../assets/sizes'
-import typography from '../Typography/variants'
 
 const DEFAULT_DISABLED_STYLE = {
   cursor: 'not-allowed',
