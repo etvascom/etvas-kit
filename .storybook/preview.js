@@ -4,11 +4,13 @@ import { addDecorator } from '@storybook/react'
 
 import { BrandingProvider, GlobalStyle, ThemeProvider } from '../src'
 
-addDecorator(storyFn => (
-  <BrandingProvider>
-    <ThemeProvider>
-      <GlobalStyle />
-      {storyFn()}
-    </ThemeProvider>
-  </BrandingProvider>
-))
+export const decorators = [
+  storyFn => (
+    <BrandingProvider>
+      <ThemeProvider>
+        <GlobalStyle />
+        {storyFn()}
+      </ThemeProvider>
+    </BrandingProvider>
+  )
+]
