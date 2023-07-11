@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
@@ -36,13 +35,11 @@ export const Checkbox = ({
 
   return (
     <StyledLabel htmlFor={id} {...props}>
-      <Flex alignItems='center' justifyContent='center'>
-        <Icon
-          color={isChecked && !disabled ? color : 'uncheckedCheckbox'}
-          size={size}
-          name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
-        />
-      </Flex>
+      <Icon
+        color={isChecked && !disabled ? color : 'uncheckedCheckbox'}
+        size={size}
+        name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
+      />
       <input
         type='checkbox'
         id={id}
@@ -67,7 +64,7 @@ export const Checkbox = ({
 const StyledLabel = styled.label`
   display: flex;
   user-select: none;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
 `
 
