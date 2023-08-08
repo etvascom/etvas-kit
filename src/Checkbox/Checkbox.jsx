@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Box } from '../Box'
+import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
@@ -36,13 +36,13 @@ export const Checkbox = ({
 
   return (
     <StyledLabel htmlFor={id} {...props}>
-      <Box width={size}>
+      <Flex width={size}>
         <Icon
           color={isChecked && !disabled ? color : 'uncheckedCheckbox'}
           size={size}
           name={isChecked ? 'checkboxMarked' : 'checkboxBlankOutline'}
         />
-      </Box>
+      </Flex>
       <input
         type='checkbox'
         id={id}
