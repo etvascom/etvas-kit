@@ -16,9 +16,11 @@ import {
 import variants from './variants'
 
 const Typography = styled.div(
-  css({
-    color: 'text'
-  }),
+  ({ overflowWrap }) =>
+    css({
+      color: 'text',
+      overflowWrap
+    }),
   compose(
     color,
     colorStyle,
@@ -70,7 +72,8 @@ Typography.propTypes = {
 
 Typography.defaultProps = {
   as: 'div',
-  variant: 'default'
+  variant: 'default',
+  overflowWrap: 'normal'
 }
 
 Typography.displayName = 'Typography'
