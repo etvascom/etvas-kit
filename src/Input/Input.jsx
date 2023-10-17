@@ -195,14 +195,17 @@ const StyledInput = styled.input(
     ...typography.labelSmall
   }),
   variant({ variants }),
-  ({ tinted, error, warn, disabled, type }) => ({
+  ({ tinted, error, warn, disabled }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
     borderColor: tinted && !(error || warn || disabled) && 'white',
-    ...(type === 'search'
-      ? {
-          paddingRight: '12px'
-        }
-      : {})
+    '::-webkit-search-cancel-button': {
+      position: 'absolute',
+      right: '12px',
+      '-webkit-appearance': 'none',
+      background: `url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"%2F%3E%3C%2Fsvg%3E') no-repeat 50% 50%`,
+      width: '12px',
+      height: '12px'
+    }
   })
 )
 
