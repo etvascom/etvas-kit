@@ -197,6 +197,7 @@ export const Types = () => (
     <StorybookInput label='Input type time' id='id' type='time' />
     <StorybookInput label='Input type url' id='id' type='url' />
     <StorybookInput label='Input type week' id='id' type='week' />
+    <StorybookInput label='Input type search' id='id' type='search' />
   </>
 )
 

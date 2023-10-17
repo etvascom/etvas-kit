@@ -195,9 +195,14 @@ const StyledInput = styled.input(
     ...typography.labelSmall
   }),
   variant({ variants }),
-  ({ tinted, error, warn, disabled }) => ({
+  ({ tinted, error, warn, disabled, type }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
-    borderColor: tinted && !(error || warn || disabled) && 'white'
+    borderColor: tinted && !(error || warn || disabled) && 'white',
+    ...(type === 'search'
+      ? {
+          paddingRight: '12px'
+        }
+      : {})
   })
 )
 
