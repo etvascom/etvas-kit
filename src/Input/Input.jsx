@@ -110,12 +110,15 @@ export const Input = forwardRef(
       if (onIcRightClick) {
         return onIcRightClick()
       }
-      if (inputType === 'search') {
-        if (value) {
-          onChange({ target: { value: '' } })
-        } else {
-          inputRef.current.focus()
-        }
+
+      if (!inputType === 'search') {
+        return
+      }
+
+      if (value) {
+        onChange({ target: { value: '' } })
+      } else {
+        inputRef.current.focus()
       }
     }
 
