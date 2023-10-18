@@ -31,6 +31,7 @@ export const Input = forwardRef(
       warning,
       icLeft,
       icRight,
+      onIcRightClick,
       id,
       label,
       optionalText,
@@ -69,10 +70,12 @@ export const Input = forwardRef(
     const currentIcRight = useMemo(() => {
       if (loading) return 'loading'
       else if (error || warning) return 'alertCircle'
+      else if (inputType === 'search')
+        return value ? 'close' : icRight || 'magnify'
       else if (valid || !icRight) return 'check'
 
       return icRight
-    }, [loading, error, warning, valid, icRight])
+    }, [loading, error, warning, valid, icRight, inputType, value])
 
     const currentIcRightColor = useMemo(() => {
       if (loading) return 'brand'
@@ -103,6 +106,22 @@ export const Input = forwardRef(
     )
 
     const icStateIsNotIconToggle = () => type !== 'password' || error || loading
+
+    const handleIcRightClick = () => {
+      if (onIcRightClick) {
+        return onIcRightClick()
+      }
+
+      if (!inputType === 'search') {
+        return
+      }
+
+      if (value) {
+        onChange({ target: { value: '' } })
+      } else {
+        inputRef.current.focus()
+      }
+    }
 
     return (
       <StyledFlex flexDirection='column' width={1} {...rest}>
@@ -158,6 +177,7 @@ export const Input = forwardRef(
                   name={currentIcRight}
                   color={currentIcRightColor}
                   spin={currentIcRight === 'loading'}
+                  onClick={handleIcRightClick}
                 />
               )
             ) : (
@@ -197,7 +217,10 @@ const StyledInput = styled.input(
   variant({ variants }),
   ({ tinted, error, warn, disabled }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
-    borderColor: tinted && !(error || warn || disabled) && 'white'
+    borderColor: tinted && !(error || warn || disabled) && 'white',
+    '::-webkit-search-cancel-button': {
+      '-webkit-appearance': 'none'
+    }
   })
 )
 
@@ -242,6 +265,7 @@ Input.propTypes = {
     PropTypes.number,
     PropTypes.object
   ]),
+  onIcRightClick: PropTypes.func,
   onInputClick: PropTypes.func,
   extension: PropTypes.node
 }
