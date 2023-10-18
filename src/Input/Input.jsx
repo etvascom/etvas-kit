@@ -70,7 +70,8 @@ export const Input = forwardRef(
     const currentIcRight = useMemo(() => {
       if (loading) return 'loading'
       else if (error || warning) return 'alertCircle'
-      else if (inputType === 'search') return value ? 'close' : 'magnify'
+      else if (inputType === 'search')
+        return value ? 'close' : icRight || 'magnify'
       else if (valid || !icRight) return 'check'
 
       return icRight
