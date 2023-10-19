@@ -117,10 +117,11 @@ export const Input = forwardRef(
       }
 
       if (value) {
-        onChange({ target: { value: '' } })
-      } else {
-        inputRef.current.focus()
+        return onChange({ target: { value: '' } })
       }
+
+      const currentRef = ref || inputRef
+      currentRef.current.focus()
     }
 
     return (
