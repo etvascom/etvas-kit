@@ -1,6 +1,6 @@
 {
-  "name": "@etvas/etvaskit-2",
-  "version": "0.0.2",
+  "name": "@etvas/etvaskit",
+  "version": "2.0.0",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,6 +32,7 @@
     "styled-components": "^6.0.0-rc.3"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "^1.2.1",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
     "@styled-system/css": "^5.1.5",
