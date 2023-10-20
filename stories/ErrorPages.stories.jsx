@@ -1,5 +1,6 @@
 import React from 'react'
-import { NotFound, NotCompatible, Link, Flex, Box, Typography } from '../src'
+
+import { Box, Flex, Link, NotCompatible, NotFound, Typography } from '../src'
 
 export default {
   title: 'Demo/ErrorPages',

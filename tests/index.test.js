@@ -1,4 +1,5 @@
 import assert from 'assert'
+
 import colorUtils from '../src/utils/colorUtilities'
 
 const { rgb2hex, hex2rgb, rgb2hsv, hsv2rgb, hex2hsv, hsv2hex } = colorUtils

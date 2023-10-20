@@ -1,4 +1,4 @@
-import { Flag, Typography, Flex } from '../src'
+import { Flag, Flex, Typography } from '../src'
 import { rawCountriesData } from '../src/i18n/rawCountriesData'
 
 export default {

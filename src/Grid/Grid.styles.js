@@ -15,8 +15,9 @@ export default {
     width: '100%',
     marginBottom: vspace,
     ...md(theme)({
-      width: `calc((100% - ${cols -
-        1} * ${hspace}) / ${cols} * ${span} + (${span} - 1) * ${hspace})`,
+      width: `calc((100% - ${
+        cols - 1
+      } * ${hspace}) / ${cols} * ${span} + (${span} - 1) * ${hspace})`,
       marginLeft: hspace,
       [`:nth-child(${cols}n + 1)`]: {
         marginLeft: 0

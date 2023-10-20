@@ -1,5 +1,6 @@
 import React from 'react'
-import { IntegrationHeader, Card, Flex, Typography } from '../src'
+
+import { Card, Flex, IntegrationHeader, Typography } from '../src'
 
 export default {
   title: 'Demo/IntegrationHeader',

@@ -1,7 +1,8 @@
 import React from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 
 import { Flex } from '../Flex'
 import { Typography } from '../Typography'
@@ -12,7 +13,8 @@ export const Chip = ({
   children,
   label,
   isNeutral,
-  contentColor
+  contentColor,
+  typographyVariant
 }) => (
   <ChipContainer
     color={isNeutral ? 'baseGrayLightest' : color}
@@ -21,7 +23,7 @@ export const Chip = ({
     <ChipText
       color='inherit'
       isNeutral={isNeutral}
-      variant={isNeutral ? 'base14Light' : 'base12Bold'}>
+      variant={typographyVariant || (isNeutral ? 'base14Light' : 'base12Bold')}>
       {label || children}
     </ChipText>
   </ChipContainer>
@@ -51,7 +53,8 @@ Chip.propTypes = {
   children: PropTypes.node,
   label: PropTypes.node,
   contentColor: PropTypes.string,
-  isNeutral: PropTypes.bool
+  isNeutral: PropTypes.bool,
+  typographyVariant: PropTypes.string
 }
 
 Chip.defaultProps = {

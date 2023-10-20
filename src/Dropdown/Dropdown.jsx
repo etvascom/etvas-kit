@@ -2,26 +2,27 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
-  useState,
+  useCallback,
   useEffect,
   useLayoutEffect,
-  useCallback,
+  useMemo,
   useRef,
-  useMemo
+  useState
 } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 
 import { Flex } from '../Flex'
+import { Icon } from '../Icon'
+import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
 import { typography } from '../Typography'
-import { Icon } from '../Icon'
-import Option from './Option'
-import Heading from './Heading'
 import sizes from '../assets/sizes'
-import { SubLabel } from '../Input/SubLabel'
 import { isEqual } from '../utils/isEqual'
+import Heading from './Heading'
+import Option from './Option'
 
 const Dropdown = ({
   disabled,

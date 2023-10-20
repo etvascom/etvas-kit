@@ -1,5 +1,6 @@
 import React from 'react'
-import { Chip, Card } from '../src'
+
+import { Card, Chip } from '../src'
 
 export default {
   title: 'Demo/Chip',
@@ -28,6 +29,18 @@ export const NeutralChip = () => (
 export const CustomChip = () => (
   <Card p={3}>
     <Chip color='statusWarning' contentColor='etvasDark'>
+      Chip text
+    </Chip>
+  </Card>
+)
+
+export const SmallChip = () => (
+  <Card p={3}>
+    <Chip
+      color='statusWarning'
+      contentColor='etvasDark'
+      typographyVariant='base8Bold'
+      isRounded>
       Chip text
     </Chip>
   </Card>

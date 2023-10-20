@@ -1,9 +1,10 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 
-import { themed } from '../utils'
 import { Box } from '../Box'
+import { themed } from '../utils'
 
 export const RunningBar = ({ colors: { background, primary }, ...props }) => (
   <Bar

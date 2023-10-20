@@ -1,7 +1,8 @@
 import EventEmitter from 'events'
 import isEqual from 'lodash/isEqual'
+
+import { hex2rgb, mergeDeep, shading } from '../utils'
 import { InterCom } from './InterCom'
-import { hex2rgb, shading, mergeDeep } from '../utils'
 
 const varMapping = {
   brandColor: 'brand-color',
@@ -62,13 +63,15 @@ export class BrandingService extends EventEmitter {
       ? this.buildColorVariants('accent', updates.accentColor, updates)
       : {}
 
+    const previousCssVars = { ...this.cssVars }
+
     this.cssVars = {
       ...newVars,
       ...brandColorVariants,
       ...accentColorVariants
     }
 
-    if (isEqual(newVars, this.cssVars)) {
+    if (isEqual(previousCssVars, this.cssVars)) {
       return
     }
 

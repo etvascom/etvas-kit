@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react'
-import styled from 'styled-components'
+
 import PropTypes from 'prop-types'
-import { useResizeObserver } from '../utils/hooks'
+import styled from 'styled-components'
+
 import { InterCom } from '../providers'
+import { useResizeObserver } from '../utils/hooks'
 
 export const EmbededAppReporter = ({ children }) => {
   const intercom = useRef(new InterCom('etvas.embededApp'))

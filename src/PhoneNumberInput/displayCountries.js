@@ -1,12 +1,14 @@
 import React from 'react'
+
 import css from '@styled-system/css'
-import styled from 'styled-components'
 import 'flag-icon-css/css/flag-icon.css'
-import { md } from '../utils'
+import styled from 'styled-components'
+
 import { Box } from '../Box'
 import { Flex } from '../Flex'
 import { Space } from '../Space'
 import sizes from '../assets/sizes'
+import { md } from '../utils'
 import styles from './PhoneNumberInput.styles'
 
 export const displayCountries = ({

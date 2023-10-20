@@ -1,21 +1,21 @@
 import React, { useCallback, useMemo } from 'react'
-import PropTypes from 'prop-types'
-import { useField } from 'formik'
 
-import { fieldShape } from './shapes'
+import { useField, useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
+
 import { Dropdown } from '../Dropdown'
+import { fieldShape } from './shapes'
 
 export const DropdownField = ({
   options,
   optionAttributes,
-  error,
-  required,
   multiple,
   itemFilter,
   valueRender,
   onFieldValueChange,
   ...props
 }) => {
+  const { submitCount, errors } = useFormikContext()
   const [field, meta, helpers] = useField(props)
 
   const handleChange = useCallback(
@@ -68,21 +68,8 @@ export const DropdownField = ({
     ? selectedOption[optionAttributes.value]
     : undefined
 
-  const errorDisplay = useMemo(() => {
-    if (!meta.touched) {
-      return null
-    }
-    if (meta.error || error) {
-      return meta.error || error
-    }
-    if (
-      required &&
-      (!meta.value || (Array.isArray(meta.value) && meta.value.length === 0))
-    ) {
-      return 'Required'
-    }
-    return null
-  }, [error, required, meta])
+  const error = meta.touched && meta.error
+  const displayedError = submitCount > 0 ? error : field.value && error
 
   const mappedOptions = useMemo(
     () =>
@@ -110,8 +97,7 @@ export const DropdownField = ({
       optionalText={props.optionalText}
       value={selectedValue}
       itemFilter={filterItem}
-      required={required}
-      error={errorDisplay}
+      error={displayedError}
       multiple={multiple}
       valueRender={selectedLabel}
       {...props}>

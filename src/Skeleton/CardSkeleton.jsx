@@ -1,13 +1,14 @@
 import React from 'react'
+
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import propTypes from '@styled-system/prop-types'
-import css from '@styled-system/css'
 import { compose, layout, space } from 'styled-system'
 
-import { BlockSkeleton } from './BlockSkeleton'
-import { Flex } from '../Flex'
 import { Box } from '../Box'
+import { Flex } from '../Flex'
+import { BlockSkeleton } from './BlockSkeleton'
 
 const dimensions = (position, size) => ({
   width:

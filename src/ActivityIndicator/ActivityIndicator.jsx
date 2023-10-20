@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react'
+
 import PropTypes from 'prop-types'
+
 import { LoadBar } from './LoadBar'
 import { RunningBar } from './RunningBar'
 import { Spinner } from './Spinner'

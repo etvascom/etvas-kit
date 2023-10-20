@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react'
-import PropTypes from 'prop-types'
-import { useField, useFormikContext } from 'formik'
 
+import { useField, useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
+
+import { PhoneNumberInput } from '../PhoneNumberInput'
 import { fieldShape } from './shapes'
 import { makeId } from './utils'
-import { PhoneNumberInput } from '../PhoneNumberInput'
 
 export const PhoneNumberInputField = props => {
   const { submitCount } = useFormikContext()

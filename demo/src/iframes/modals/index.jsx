@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+
 import css from '@styled-system/css'
+import styled from 'styled-components'
+
 import {
-  Button,
-  Modal,
   Box,
+  Button,
   Card,
+  EmbededAppContainer,
   Flex,
-  Typography,
-  EmbededAppContainer
+  Modal,
+  Typography
 } from '../../../../src'
 
 export const ModalChild = () => {

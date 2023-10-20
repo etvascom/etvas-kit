@@ -1,12 +1,13 @@
-import React, { useMemo, useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useMemo, useRef } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 
-import { typography } from '../Typography'
-import { Flex } from '../Flex'
 import { Box } from '../Box'
 import { Checkbox } from '../Checkbox'
+import { Flex } from '../Flex'
+import { typography } from '../Typography'
 import sizes from '../assets/sizes'
 
 const DropdownItem = ({

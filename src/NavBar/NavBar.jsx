@@ -1,9 +1,11 @@
-import React, { useMemo, useState, useRef, useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
-import { NavItem } from './Item'
+
 import { Icon } from '../Icon'
+import { NavItem } from './Item'
 
 const GRADIENT_SIZE = 32
 
@@ -55,6 +57,7 @@ export const NavBar = ({ children }) => {
             isLastChild={item.idx === items.length - 1}
             isActive={activeIndex === item.idx}
             item={item}
+            key={item.key}
             onClick={updateActiveIndex(item.idx)}
           />
         ))}

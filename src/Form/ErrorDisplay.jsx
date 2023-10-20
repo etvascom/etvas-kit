@@ -1,9 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import { useField } from 'formik'
-import { Typography } from '../Typography'
-import { Icon } from '../Icon'
+import PropTypes from 'prop-types'
+
 import { Flex } from '../Flex'
+import { Icon } from '../Icon'
+import { Typography } from '../Typography'
 
 export const ErrorDisplay = ({ name, type }) => {
   const [, meta] = useField({

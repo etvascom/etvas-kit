@@ -1,6 +1,7 @@
-import React, { useRef, useCallback, useState, useLayoutEffect } from 'react'
-import styled from 'styled-components'
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
+
 import css from '@styled-system/css'
+import styled from 'styled-components'
 
 import { InterCom } from '../providers'
 

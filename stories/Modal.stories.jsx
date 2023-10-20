@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Modal, Button, PhoneNumberInputField, Card, Form, Flex } from '../src'
+
+import { Button, Card, Flex, Form, Modal, PhoneNumberInputField } from '../src'
 
 export default {
   title: 'Demo/Modal',

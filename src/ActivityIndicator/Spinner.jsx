@@ -1,18 +1,27 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { themed, hex2Rgba } from '../utils'
+import { hex2Rgba, themed } from '../utils'
 
-const backgroundColour = (() => ({ colors: { background } }) =>
-  themed(`colors.${background}`, background))()
+const backgroundColour = (
+  () =>
+  ({ colors: { background } }) =>
+    themed(`colors.${background}`, background)
+)()
 
-const primaryColour = (() => ({ colors: { primary } }) =>
-  themed(`colors.${primary}`, primary))()
+const primaryColour = (
+  () =>
+  ({ colors: { primary } }) =>
+    themed(`colors.${primary}`, primary)
+)()
 
-const complementaryColour = (() => ({ colors: { background }, ...props }) => {
-  const hex = themed(`colors.${background}`, background)(props)
-  return hex.charAt(0) === '#' ? hex2Rgba(hex, 0) : hex
-})()
+const complementaryColour = (
+  () =>
+  ({ colors: { background }, ...props }) => {
+    const hex = themed(`colors.${background}`, background)(props)
+    return hex.charAt(0) === '#' ? hex2Rgba(hex, 0) : hex
+  }
+)()
 
 const spinnerSize = ({ size }) => {
   const validSize = ['number', 'string']

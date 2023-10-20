@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
-import { useField, useFormikContext } from 'formik'
-import { Input } from '../Input'
 
+import { useField, useFormikContext } from 'formik'
+import PropTypes from 'prop-types'
+
+import { Input } from '../Input'
 import { fieldShape } from './shapes'
 import { makeId } from './utils'
 

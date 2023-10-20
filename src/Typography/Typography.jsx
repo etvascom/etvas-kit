@@ -1,6 +1,7 @@
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 import {
   color,
   colorStyle,
@@ -11,14 +12,15 @@ import {
   typography,
   variant
 } from 'styled-system'
-import propTypes from '@styled-system/prop-types'
 
 import variants from './variants'
 
 const Typography = styled.div(
-  css({
-    color: 'text'
-  }),
+  ({ overflowWrap }) =>
+    css({
+      color: 'text',
+      overflowWrap
+    }),
   compose(
     color,
     colorStyle,
@@ -70,7 +72,8 @@ Typography.propTypes = {
 
 Typography.defaultProps = {
   as: 'div',
-  variant: 'default'
+  variant: 'default',
+  overflowWrap: 'normal'
 }
 
 Typography.displayName = 'Typography'

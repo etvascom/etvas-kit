@@ -1,4 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
+
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import {
@@ -11,7 +13,7 @@ import {
   space,
   typography
 } from 'styled-system'
-import propTypes from '@styled-system/prop-types'
+
 import { themed } from '../utils'
 
 export const Touchable = ({
@@ -55,10 +57,10 @@ export const Touchable = ({
     }
   }, [handleDrag, isBeingPressed])
 
-  const touchableEffect = useMemo(() => (disabled ? 'no-feedback' : effect), [
-    disabled,
-    effect
-  ])
+  const touchableEffect = useMemo(
+    () => (disabled ? 'no-feedback' : effect),
+    [disabled, effect]
+  )
 
   return (
     <Wrapper

@@ -1,5 +1,5 @@
-import sizes from '../assets/sizes'
 import typography from '../Typography/variants'
+import sizes from '../assets/sizes'
 
 const DEFAULT_STYLE = {
   ...typography.inputLabel,

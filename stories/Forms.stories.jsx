@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
+
 import { action } from '@storybook/addon-actions'
+
 import {
-  Flex,
+  AutocompleteField,
   Button,
-  Typography,
-  Form,
   CheckboxField,
-  RadioField,
   DropdownField,
   ErrorDisplay,
-  TextField,
+  Flex,
+  Form,
   Input,
   PhoneNumberInputField,
-  TextAreaField,
+  RadioField,
   SubdomainField,
-  AutocompleteField
+  TextAreaField,
+  TextField,
+  Typography
 } from '../src'
 
 export default {
@@ -44,7 +46,7 @@ const movieOptions = [
   { label: 'Sci-Fi', value: 'scifi' }
 ]
 
-const minLength = l => s => (s?.length < l ? `Min length: ${l}` : undefined)
+const minLength = l => s => s?.length < l ? `Min length: ${l}` : undefined
 
 const formValidate = values => {
   const errors = {}

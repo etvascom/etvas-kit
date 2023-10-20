@@ -2,21 +2,21 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
-  useState,
   useLayoutEffect,
+  useMemo,
   useRef,
-  useMemo
+  useState
 } from 'react'
+
+import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import css from '@styled-system/css'
 
-import Option from '../Dropdown/Option'
 import Heading from '../Dropdown/Heading'
-
-import { Input } from '../Input'
-import { Icon } from '../Icon'
+import Option from '../Dropdown/Option'
 import { Flex } from '../Flex'
+import { Icon } from '../Icon'
+import { Input } from '../Input'
 import sizes from '../assets/sizes'
 
 const Autocomplete = ({

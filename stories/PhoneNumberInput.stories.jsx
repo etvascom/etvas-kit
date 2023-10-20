@@ -1,6 +1,7 @@
-import { PhoneNumberInput } from '../src/PhoneNumberInput'
 import React, { useState } from 'react'
+
 import { Card } from '../src'
+import { PhoneNumberInput } from '../src/PhoneNumberInput'
 
 export default {
   title: 'Demo/PhoneNumberInput',

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SubdomainInput, Card, Box } from '../src'
+
+import { Box, Card, SubdomainInput } from '../src'
 
 export default {
   title: 'Demo/SubdomainInput',

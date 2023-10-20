@@ -1,16 +1,17 @@
-import { action } from '@storybook/addon-actions'
 import React, { useState } from 'react'
+
+import { action } from '@storybook/addon-actions'
+
 import {
+  Button,
   Card,
+  Flex,
   Form,
   Image,
-  TextField,
-  Typography,
-  Button,
   Link,
-  Flex
+  TextField,
+  Typography
 } from '../src'
-
 import logo from './assets/etvas.svg'
 
 export default {

@@ -1,27 +1,29 @@
-import React, { useState, useCallback } from 'react'
-import styled from 'styled-components'
+import React, { useCallback, useState } from 'react'
+
 import css from '@styled-system/css'
+import styled from 'styled-components'
+
 import {
-  EmbededAppReporter,
-  EmbededAppContainer,
   BlockSkeleton,
-  Touchable,
+  Box,
   Card,
   Checkbox,
-  Icon,
-  Typography,
+  EmbededAppContainer,
+  EmbededAppReporter,
   Flex,
-  Box
+  Icon,
+  Touchable,
+  Typography
 } from '../../../../src'
 
 export const EmbededAppChild = () => {
   const [height, setHeight] = useState(100)
   const [useReporter, setUseReporter] = useState(false)
   const taller = useCallback(() => setHeight(height + 100), [setHeight, height])
-  const shorter = useCallback(() => setHeight(height - 100), [
-    setHeight,
-    height
-  ])
+  const shorter = useCallback(
+    () => setHeight(height - 100),
+    [setHeight, height]
+  )
 
   const toggleReporter = useCallback(
     ev => {

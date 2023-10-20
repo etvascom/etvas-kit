@@ -1,9 +1,9 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Typography } from '../Typography'
-
 import styles from './radio.styles'
 
 const RadioButton = ({

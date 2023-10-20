@@ -1,27 +1,23 @@
 import React, {
-  useLayoutEffect,
-  useEffect,
-  useRef,
-  useCallback,
   Children,
   cloneElement,
   isValidElement,
   useMemo
 } from 'react'
+
+import css from '@styled-system/css'
+import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { flexbox } from 'styled-system'
-import css from '@styled-system/css'
-import propTypes from '@styled-system/prop-types'
 
-import { Flex } from '../Flex'
 import { Box } from '../Box'
+import { Flex } from '../Flex'
+import { InterCom } from '../providers'
+import { useOnClickOutside } from '../utils/hooks'
 import style from './Modal.style'
 import { ModalContent } from './ModalContent'
-import { InterCom } from '../providers'
-
-import { enableScroll, disableScroll, isInsideIframe } from './utils'
-import { useOnClickOutside } from '../utils/hooks'
+import { disableScroll, enableScroll, isInsideIframe } from './utils'
 
 const ModalBackdrop = styled(Box)(
   css(style.backdrop),

@@ -1,8 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
+
 import PropTypes from 'prop-types'
-import { Flex } from '../Flex'
+import styled from 'styled-components'
+
 import { Box } from '../Box'
+import { Flex } from '../Flex'
 import svg from './404.svg'
 
 const StyledImg = styled.img({

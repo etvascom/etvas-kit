@@ -1,10 +1,12 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { variant as variantBuilder } from 'styled-system'
 
 import { Typography } from '../Typography'
 import { default as variants } from './SubLabel.variants'
+
 export const SubLabel = ({ variant, content, preserveSpace }) => (
   <Wrapper preserveSpace={preserveSpace} variant={variant} mt={1}>
     {content && <Span>{content}</Span>}
