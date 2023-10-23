@@ -1,6 +1,7 @@
 import React from 'react'
-
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
+import isPropValid from '@emotion/is-prop-valid'
+import { StyleSheetManager } from 'styled-components'
 
 import { BrandingProvider, GlobalStyle, ThemeProvider } from '../../src'
 import { EmbededAppChild, ModalChild, Root } from './iframes'
@@ -23,12 +24,23 @@ const components = {
 const Component = components[demo] || NotFound
 
 const Demo = () => (
-  <ThemeProvider>
-    <BrandingProvider>
-      <GlobalStyle />
-      <Component />
-    </BrandingProvider>
-  </ThemeProvider>
+  <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+    <ThemeProvider>
+      <BrandingProvider>
+        <GlobalStyle />
+        <Component />
+      </BrandingProvider>
+    </ThemeProvider>
+  </StyleSheetManager>
 )
 
-render(<Demo />, document.querySelector('#demo'))
+function shouldForwardProp(propName, target) {
+  if (typeof target === 'string') {
+    return isPropValid(propName)
+  }
+  return true
+}
+
+const rootDemo = createRoot(document.querySelector('#demo'))
+
+rootDemo.render(<Demo />)
