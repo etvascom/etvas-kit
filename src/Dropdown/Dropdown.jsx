@@ -141,7 +141,10 @@ const Dropdown = ({
     option => {
       if (multiple) {
         const newValues = isEmpty ? [] : [...value]
-        const idx = newValues.indexOf(option)
+        const idx = isObject(option)
+          ? newValues.findIndex(value => value.id === option.id)
+          : newValues.indexOf(option)
+
         if (idx >= 0) {
           newValues.splice(idx, 1)
         } else {
@@ -551,6 +554,10 @@ Dropdown.defaultProps = {
   searchPlaceholder: 'Type to search in #len items. Max 30 items shown.',
   searchMaxResults: 30,
   searchThreshold: 20
+}
+
+const isObject = item => {
+  return typeof item === 'object' && !Array.isArray(item) && item !== null
 }
 
 Dropdown.Option = Option
