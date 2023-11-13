@@ -142,8 +142,8 @@ const Dropdown = ({
       if (multiple) {
         const newValues = isEmpty ? [] : [...value]
         const idx = isObject(option)
-          ? newValues.findIndex(obj => obj.id === option.id)
-          : newValues.indexOf(option) 
+          ? newValues.findIndex(value => value.id === option.id)
+          : newValues.indexOf(option)
 
         if (idx >= 0) {
           newValues.splice(idx, 1)

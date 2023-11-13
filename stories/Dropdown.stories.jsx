@@ -212,13 +212,18 @@ export const HugeCollection = () => {
 export const MultipleSearch = () => {
   const [selected, setSelected] = useState([])
 
-  const itemSelected = (value, item) => !!value.find(val => val.id === item.id)
+  const itemSelected = (values, item) =>
+    !!values.find(value => value.id === item.id)
 
-  const valueRender = value => value.map(val => val.label).join(', ')
+  const valueRender = values => values.map(value => value.label).join(', ')
 
   const items = []
   for (let i = 0; i < 1000; i++) {
-    items.push({ id: `key-${i}`, label: `Item number ${i}` })
+    items.push({
+      id: `key-${i}`,
+      label: `Item number ${i}`,
+      value: 'Item value ${i}'
+    })
   }
 
   return (
