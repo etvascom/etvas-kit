@@ -2,38 +2,60 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-import { Box } from '../Box'
+import { Flex } from '../Flex'
+import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-export const Label = ({ label, inputId, showOptionalText, optionalText }) => (
-  <Box mb={1}>
-    <Typography
-      as='label'
-      htmlFor={inputId}
-      variant='base12Bold'
-      color='baseMetal'
-      width='fit-content'>
-      {label}
-    </Typography>
-    {showOptionalText && optionalText && (
+export const Label = ({
+  label,
+  inputId,
+  showOptionalText,
+  optionalText,
+  showTooltip
+}) => {
+  const tooltipIconId = `${inputId}-icon`
+  return (
+    <Flex mb={1} alignItems='center'>
       <Typography
-        ml={1}
         as='label'
         htmlFor={inputId}
         variant='base12Bold'
-        color='baseGray'
+        color='baseMetal'
         width='fit-content'>
-        - {optionalText}
+        {label}
       </Typography>
-    )}
-  </Box>
-)
+      {inputId && showTooltip && (
+        <Flex ml={1} alignItems='center' id={tooltipIconId}>
+          <Icon
+            name='information'
+            color='baseMetal'
+            size='small'
+            opacity='.5'
+            cursor='pointer'
+          />
+        </Flex>
+      )}
+      {showOptionalText && optionalText && (
+        <Typography
+          ml={1}
+          as='label'
+          htmlFor={inputId}
+          variant='base12Bold'
+          color='baseGray'
+          width='fit-content'>
+          - {optionalText}
+        </Typography>
+      )}
+    </Flex>
+  )
+}
 
 Label.propTypes = {
   inputId: PropTypes.string,
   label: PropTypes.node,
   showOptionalText: PropTypes.bool,
-  optionalText: PropTypes.node
+  optionalText: PropTypes.node,
+  showTooltip: PropTypes.bool
 }
 
 Label.defaultProps = {
