@@ -44,7 +44,7 @@
     "lodash": "^4.17.20",
     "prop-types": "^15.8.1",
     "styled-system": "^5.1.5",
-    "use-resize-observer": "^7.0.1",
+    "use-resize-observer": "^9.0.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
