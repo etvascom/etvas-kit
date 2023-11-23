@@ -44,6 +44,7 @@ const Dropdown = ({
   onChange,
   tinted,
   children,
+  showTooltip,
   ...props
 }) => {
   const [isCollapsed, setCollapsed] = useState(true)
@@ -141,7 +142,10 @@ const Dropdown = ({
     option => {
       if (multiple) {
         const newValues = isEmpty ? [] : [...value]
-        const idx = newValues.indexOf(option)
+        const idx = isObject(option)
+          ? newValues.findIndex(value => value.id === option.id)
+          : newValues.indexOf(option)
+
         if (idx >= 0) {
           newValues.splice(idx, 1)
         } else {
@@ -252,6 +256,7 @@ const Dropdown = ({
           inputId={id}
           showOptionalText={!required}
           optionalText={optionalText}
+          showTooltip={showTooltip}
         />
       )}
       <DropdownWrapper
@@ -524,7 +529,8 @@ Dropdown.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   searchPlaceholder: PropTypes.string,
   tinted: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element)
+  children: PropTypes.arrayOf(PropTypes.element),
+  showTooltip: PropTypes.bool
 }
 
 Dropdown.defaultProps = {
@@ -539,18 +545,22 @@ Dropdown.defaultProps = {
     typeof v === 'string'
       ? v.toLocaleLowerCase().includes(search)
       : typeof v === 'object'
-      ? Object.keys(v).some(
-          key =>
-            v[key] &&
-            typeof v[key] === 'string' &&
-            v[key].toLocaleLowerCase().includes(search)
-        )
-      : false,
+        ? Object.keys(v).some(
+            key =>
+              v[key] &&
+              typeof v[key] === 'string' &&
+              v[key].toLocaleLowerCase().includes(search)
+          )
+        : false,
   onChange: () => console.warn('Dropdown.onChange should be a function'),
   placeholder: 'Please select an option',
   searchPlaceholder: 'Type to search in #len items. Max 30 items shown.',
   searchMaxResults: 30,
   searchThreshold: 20
+}
+
+const isObject = item => {
+  return typeof item === 'object' && !Array.isArray(item) && item !== null
 }
 
 Dropdown.Option = Option

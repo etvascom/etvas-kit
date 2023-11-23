@@ -52,6 +52,7 @@ export const Input = forwardRef(
       showValidationCheck,
       onInputClick,
       extension,
+      showTooltip,
       ...rest
     },
     ref
@@ -132,6 +133,7 @@ export const Input = forwardRef(
             inputId={id}
             showOptionalText={!required}
             optionalText={optionalText}
+            showTooltip={showTooltip}
           />
         )}
         <Flex alignItems='center' position='relative' width='100%'>
@@ -268,7 +270,8 @@ Input.propTypes = {
   ]),
   onIcRightClick: PropTypes.func,
   onInputClick: PropTypes.func,
-  extension: PropTypes.node
+  extension: PropTypes.node,
+  showTooltip: PropTypes.bool
 }
 
 Input.defaultProps = {

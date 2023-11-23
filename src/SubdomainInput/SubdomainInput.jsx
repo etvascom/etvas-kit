@@ -60,6 +60,7 @@ export const SubdomainInput = forwardRef(
       subLabel,
       loading,
       tinted,
+      showTooltip,
       ...rest
     },
     ref
@@ -168,6 +169,7 @@ export const SubdomainInput = forwardRef(
             inputId={id}
             showOptionalText={!required}
             optionalText={optionalText}
+            showTooltip={showTooltip}
           />
         )}
         <Wrapper
