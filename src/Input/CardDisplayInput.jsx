@@ -90,7 +90,7 @@ const StyledInput = styled.input(
     outline: 'none',
     color: 'text',
     padding: 3,
-    ':hover, :focus': {
+    '&:hover, &:focus': {
       borderWidth: 1,
       borderStyle: 'solid'
     }

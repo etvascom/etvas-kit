@@ -127,7 +127,7 @@ const NavItemsContainer = styled.div(
     alignItems: 'center',
     transition: 'left .5s ease-in-out',
     overflowY: 'auto',
-    '::-webkit-scrollbar': {
+    '&::-webkit-scrollbar': {
       display: 'none'
     },
     '-ms-overflow-style': 'none' /* IE and Edge */,

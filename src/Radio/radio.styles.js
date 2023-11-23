@@ -55,9 +55,9 @@ export default {
     color: colors.white,
     cursor: 'pointer',
     outline: 'none',
-    ':checked': {
+    '&:checked': {
       background: colors.accent,
-      '::before': {
+      '&::before': {
         height: '20px',
         width: '20px',
         content: `url(

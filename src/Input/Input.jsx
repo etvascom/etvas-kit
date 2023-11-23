@@ -219,7 +219,7 @@ const StyledInput = styled.input(
   ({ tinted, error, warn, disabled }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
     borderColor: tinted && !(error || warn || disabled) && 'white',
-    '::-webkit-search-cancel-button': {
+    '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
     }
   })

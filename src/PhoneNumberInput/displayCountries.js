@@ -51,7 +51,7 @@ const StyledDropdownItem = styled(Flex)(
   ({ theme, isSelected }) =>
     css({
       backgroundColor: isSelected ? 'brand' : 'backgroundLightGray',
-      ':hover': {
+      '&:hover': {
         backgroundColor: isSelected ? 'brand' : 'brandLighter'
       },
       color: isSelected ? 'white' : 'black',

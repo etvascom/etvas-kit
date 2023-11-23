@@ -253,7 +253,7 @@ const Wrapper = styled(Flex)(
       backgroundColor: bg,
       color: fg,
       ...(!isValid && {
-        ':hover': {
+        '&:hover': {
           borderColor: brd,
           backgroundColor: bg,
           color: fg

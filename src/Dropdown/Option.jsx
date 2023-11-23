@@ -106,7 +106,7 @@ const Option = styled(Flex)(
   ({ touch }) =>
     !touch
       ? css({
-          ':hover': {
+          '&:hover': {
             backgroundColor: 'brandLighter'
           }
         })
@@ -116,7 +116,7 @@ const Option = styled(Flex)(
       ? css({
           backgroundColor: 'brand',
           color: 'white',
-          ':hover': {
+          '&:hover': {
             backgroundColor: 'brand'
           }
         })

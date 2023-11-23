@@ -357,7 +357,7 @@ const Toggler = styled.button(
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     color: 'textInputActive',
-    ':hover, :focus': {
+    '&:hover, &:focus': {
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'brandLight'

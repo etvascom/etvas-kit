@@ -22,16 +22,16 @@ const DEFAULT_STYLE = {
   color: 'textInputActive',
   width: '100%',
   outline: 'none',
-  '::placeholder': {
+  '&::placeholder': {
     color: 'textInputPlaceholder'
   },
-  ':hover': {
+  '&:hover': {
     borderColor: 'brandLight'
   },
-  ':focus': {
+  '&:focus': {
     borderColor: 'brandLight'
   },
-  ':disabled': {
+  '&:disabled': {
     ...DEFAULT_DISABLED_STYLE,
     background: 'backgroundGray'
   }
@@ -41,13 +41,13 @@ const ERROR_STYLE = {
   ...DEFAULT_STYLE,
   borderSize: `${BORDERS[1]}`,
   borderColor: 'error',
-  ':hover': {
+  '&:hover': {
     borderColor: 'error'
   },
-  ':focus': {
+  '&:focus': {
     borderColor: 'error'
   },
-  ':disabled': {
+  '&:disabled': {
     ...DEFAULT_DISABLED_STYLE,
     backgroundColor: 'backgroundGray',
     color: 'textInputDisabled',
@@ -59,13 +59,13 @@ const WARNING_STYLE = {
   ...DEFAULT_STYLE,
   borderSize: `${BORDERS[1]}`,
   borderColor: 'warning',
-  ':hover': {
+  '&:hover': {
     borderColor: 'warning'
   },
-  ':focus': {
+  '&:focus': {
     borderColor: 'warning'
   },
-  ':disabled': {
+  '&:disabled': {
     ...DEFAULT_DISABLED_STYLE,
     background: 'backgroundGray',
     color: 'textInputDisabled'
@@ -82,7 +82,7 @@ const DISABLED_STYLE = {
   backgroundColor: 'backgroundGray',
   borderColor: 'inputGray',
   color: 'textInputDisabled',
-  ':hover': {
+  '&:hover': {
     borderColor: 'inputGray'
   }
 }

@@ -10,15 +10,15 @@ const DEFAULT_STYLE = {
   color: colors.dark,
   height: '40px',
   paddingLeft: `${SPACE[5]}px`,
-  '::placeholder': {
+  '&::placeholder': {
     color: colors.light
   },
-  ':disabled, :readonly': {
+  '&:disabled, &:readonly': {
     color: colors.gray,
     borderColor: colors.gray,
     cursor: 'not-allowed'
   },
-  ':focus, :hover': {
+  '&:focus, &:hover': {
     borderColor: colors.accent
   }
 }
@@ -31,7 +31,7 @@ export default {
     color: '#979ca6',
     cursor: 'not-allowed',
     opacity: 0.5,
-    ':focus, :hover': {
+    '&:focus, &:hover': {
       border: `${BORDERS[1]} ${colors.gray}`,
       opacity: 0.5
     }
@@ -40,7 +40,7 @@ export default {
     ...DEFAULT_STYLE,
     border: `${BORDERS[1]} ${colors.error}`,
     color: colors.error,
-    ':focus, :hover': {
+    '&:focus, &:hover': {
       border: `${BORDERS[1]} ${colors.accent}`
     }
   },
