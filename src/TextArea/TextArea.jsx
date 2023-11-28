@@ -39,6 +39,7 @@ export const TextArea = forwardRef(
       warning,
       textAreaProps,
       tinted,
+      showTooltip,
       ...rest
     },
     ref
@@ -61,6 +62,7 @@ export const TextArea = forwardRef(
             inputId={id}
             showOptionalText={!required}
             optionalText={optionalText}
+            showTooltip={showTooltip}
           />
         )}
         <Flex alignItems='center' position='relative' width='100%'>
@@ -136,6 +138,7 @@ TextArea.propTypes = {
   noBottomSpace: PropTypes.bool,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
+  showTooltip: PropTypes.bool,
   valid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   value: PropTypes.oneOfType([
     PropTypes.string,
