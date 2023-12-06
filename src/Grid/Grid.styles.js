@@ -19,7 +19,7 @@ export default {
         cols - 1
       } * ${hspace}) / ${cols} * ${span} + (${span} - 1) * ${hspace})`,
       marginLeft: hspace,
-      [`:nth-child(${cols}n + 1)`]: {
+      [`&:nth-child(${cols}n + 1)`]: {
         marginLeft: 0
       }
     })
