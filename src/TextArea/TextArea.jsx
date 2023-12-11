@@ -69,7 +69,8 @@ export const TextArea = forwardRef(
           <StyledTextArea
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            disabled={readOnly || disabled}
+            disabled={disabled}
+            ariaDisabled={readOnly || disabled}
             error={error}
             hasLabel={label}
             id={id}
