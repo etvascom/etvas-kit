@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'

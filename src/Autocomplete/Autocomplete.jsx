@@ -1,4 +1,4 @@
-import React, {
+import {
   Children,
   cloneElement,
   isValidElement,
@@ -90,7 +90,8 @@ const Autocomplete = ({
         ref={wrapper}
         alignItems='center'
         position='relative'
-        width='100%'>
+        width='100%'
+      >
         <Input
           error={error}
           placeholder={placeholder}
@@ -112,7 +113,8 @@ const Autocomplete = ({
                 <ScrollingList
                   aria-labelledby={id}
                   role='menu'
-                  id={`drop-${id}`}>
+                  id={`drop-${id}`}
+                >
                   {options.map(child =>
                     isValidElement(child)
                       ? cloneElement(child, {

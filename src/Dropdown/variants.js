@@ -38,10 +38,10 @@ export default {
     'background-color': 'white',
     border: '1 outline',
     opacity: 0.5,
-    ':focus, :hover': { border: '1 outline' },
+    '&:focus, &:hover': { border: '1 outline' },
     '.dropdown-text': { color: '#1b202f' },
     '&.dropdown-selected': {
-      ':focus, :hover': { border: '1 outline' },
+      '&:focus, &:hover': { border: '1 outline' },
       'border-radius': 8
     },
     '&.dropdown-active': { 'border-color': 'outline' }

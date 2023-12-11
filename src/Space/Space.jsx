@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, useCallback } from 'react'
+import { Children, cloneElement, useCallback } from 'react'
 
 import PropTypes from 'prop-types'
 import styled from 'styled-components'

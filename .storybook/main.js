@@ -1,6 +1,10 @@
 module.exports = {
   stories: ['../stories/**/*.stories.@(js|jsx|mdx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-mdx-gfm'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-mdx-gfm'
+  ],
   features: {
     postcss: false
   },
@@ -11,4 +15,4 @@ module.exports = {
   docs: {
     autodocs: true
   }
-};
+}

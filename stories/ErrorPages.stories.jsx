@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Box, Flex, Link, NotCompatible, NotFound, Typography } from '../src'
 
 export default {

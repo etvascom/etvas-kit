@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
@@ -77,7 +77,8 @@ export const Touchable = ({
       tabIndex={tabIndex}
       type={type}
       underlayColor={underlayColor}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </Wrapper>
   )
@@ -87,25 +88,25 @@ const touchableWithEffect = ({ effect, activeOpacity, underlayColor }) => {
   switch (effect) {
     case 'opacity':
       return css`
-        :hover,
-        :active {
+        &:hover,
+        &:active {
           opacity: ${activeOpacity};
         }
       `
     case 'highlight':
       return css`
-        :hover {
+        &:hover {
           background-color: ${themed(`colors.${underlayColor}`, underlayColor)};
           color: ${themed('colors.baseWhite')};
         }
-        :active {
+        &:active {
           color: ${themed('colors.baseWhite')};
           background-color: ${themed(`colors.${underlayColor}`, underlayColor)};
         }
       `
     default:
       return css`
-        :active {
+        &:active {
           transform: scale(1);
         }
       `
@@ -121,10 +122,10 @@ const Wrapper = styled.button`
   padding: 0;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 
-  :focus {
+  &:focus {
     outline: none;
   }
-  :active {
+  &:active {
     transform: scale(0.985);
   }
 

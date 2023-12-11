@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { Box, Button, Card, Flex, Typography } from '../../../../src'
 import { EmbededAppParent } from '../embededApp'
@@ -37,7 +37,8 @@ export const Root = () => {
             <Button
               disabled={demo === currentDemo}
               onClick={handleLoadDemo(demo)}
-              variant='outline'>
+              variant='outline'
+            >
               {demos[demo].name}
             </Button>
           </Box>

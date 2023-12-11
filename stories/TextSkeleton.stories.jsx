@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { TextSkeleton } from '../src'
 
 export default {

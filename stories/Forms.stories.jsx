@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { action } from '@storybook/addon-actions'
 
@@ -46,7 +46,7 @@ const movieOptions = [
   { label: 'Sci-Fi', value: 'scifi' }
 ]
 
-const minLength = l => s => s?.length < l ? `Min length: ${l}` : undefined
+const minLength = l => s => (s?.length < l ? `Min length: ${l}` : undefined)
 
 const formValidate = values => {
   const errors = {}
@@ -94,7 +94,8 @@ export const SimpleForm = () => (
   <Form
     onSubmit={action('submit')}
     initialValues={values}
-    validate={formValidate}>
+    validate={formValidate}
+  >
     <Typography variant='titleSmall'>Basic info</Typography>
     <PhoneNumberInputField
       name='phone'
@@ -204,7 +205,8 @@ export const DropdownForm = () => (
   <Form
     onSubmit={action('submit')}
     initialValues={values}
-    validate={formValidate}>
+    validate={formValidate}
+  >
     <Typography variant='titleSmall'>Cars</Typography>
     <DropdownField
       valueRender={renderMultipleSelectLabel}
@@ -499,7 +501,8 @@ export const SubdomainAutoCompleteForm = () => {
     <Form
       onSubmit={action('submit')}
       initialValues={sdValues}
-      validate={sdValidate}>
+      validate={sdValidate}
+    >
       {props => (
         <>
           <Input
@@ -548,7 +551,8 @@ export const AutocompleteFieldForm = () => {
     <Form
       onSubmit={action('submit')}
       initialValues={values}
-      validate={validate}>
+      validate={validate}
+    >
       <>
         <AutocompleteField
           handleInputChange={handleInputChange}

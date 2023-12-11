@@ -1,4 +1,4 @@
-import React, { cloneElement, useContext, useMemo } from 'react'
+import { cloneElement, useContext, useMemo } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'

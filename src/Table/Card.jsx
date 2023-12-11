@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'

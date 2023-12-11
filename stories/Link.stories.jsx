@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Link } from '../src'
 
 export default {
@@ -18,7 +16,8 @@ export const ButtonLink = () => (
     component='a'
     variant='button'
     href='https://google.com'
-    target='_blank'>
+    target='_blank'
+  >
     Button Link
   </Link>
 )

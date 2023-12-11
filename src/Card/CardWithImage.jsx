@@ -1,5 +1,3 @@
-import React from 'react'
-
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -38,8 +36,8 @@ export const CardWithImage = ({
   const invImageSize = Array.isArray(imageSize)
     ? imageSize.map(size => 1 - size)
     : imageSize
-    ? 1 - imageSize
-    : undefined
+      ? 1 - imageSize
+      : undefined
 
   return (
     <CardWrapper vertical={vertical} {...props}>
@@ -47,14 +45,16 @@ export const CardWithImage = ({
         flexDirection={flexDirection}
         justifyContent='space-between'
         width='100%'
-        height='100%'>
+        height='100%'
+      >
         <ContentBox vertical={vertical} ratio={imageSize} p={imagePadding}>
           <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
         <ContentBox
           vertical={vertical}
           p={contentPadding ?? defaultContentPadding}
-          ratio={invImageSize}>
+          ratio={invImageSize}
+        >
           {children}
         </ContentBox>
       </Flex>

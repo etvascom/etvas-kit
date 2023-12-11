@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
@@ -17,7 +17,8 @@ export const Steps = ({ steps, active, onChange }) => (
         isFirst={i === 0}
         isLast={i === steps.length - 1}
         isActive={active === i + 1}
-        onClick={onChange}>
+        onClick={onChange}
+      >
         {content}
       </Item>
     ))}
@@ -44,7 +45,8 @@ const Item = ({ id, isActive, isFirst, isLast, children, onClick }) => {
       <Typography
         ml={6}
         variant='titleSmall'
-        color={isActive ? 'accent' : 'lighterText'}>
+        color={isActive ? 'accent' : 'lighterText'}
+      >
         {children}
       </Typography>
     </ItemContainer>

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Box, Chip, Flex } from '../src'
 import { shading } from '../src/utils'
 

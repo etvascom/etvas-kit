@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Box, Flex, Icon, Touchable } from '../src'
 
 export default {
@@ -20,7 +18,8 @@ export const TouchableExamples = () => (
         alignItems='center'
         display='flex'
         effect='opacity'
-        onClick={() => {}}>
+        onClick={() => {}}
+      >
         <Icon name='globe' /> Touchable Opacity
       </Touchable>
     </Box>
@@ -29,7 +28,8 @@ export const TouchableExamples = () => (
         effect='highlight'
         onClick={() => {}}
         p='12px'
-        underlayColor='brand'>
+        underlayColor='brand'
+      >
         Touchable Highlight
       </Touchable>
     </Box>

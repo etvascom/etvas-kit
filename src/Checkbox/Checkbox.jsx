@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -56,7 +56,8 @@ export const Checkbox = ({
         <Typography
           variant={variant}
           color={disabled ? 'baseGray' : 'text'}
-          ml={2}>
+          ml={2}
+        >
           {label}
         </Typography>
       )}

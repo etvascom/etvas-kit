@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { mdiAbjadArabic, mdiAbjadHebrew, mdiAbugidaThai } from '@mdi/js'
 
 import { Card, Flex, Icon, Typography, addIcons } from '../src'

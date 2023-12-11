@@ -13,15 +13,15 @@ const BUTTON_DEFAULT = {
   display: 'flex',
   justifyContent: 'center',
   label: { cursor: 'pointer', pointerEvents: 'none' },
-  ':hover': { opacity: 0.75 },
-  ':active ': { transform: 'scale(0.965)' },
-  ':focus': {
+  '&:hover': { opacity: 0.75 },
+  '&:active ': { transform: 'scale(0.965)' },
+  '&:focus': {
     opacity: 0.75,
     outlineStyle: 'none',
     userSelect: 'none',
     outlineColor: 'transparent'
   },
-  ':disabled': {
+  '&:disabled': {
     opacity: 0.3,
     transform: 'scale(1)',
     cursor: 'not-allowed'
@@ -32,16 +32,16 @@ const PRIMARY_DEFAULT = ({ colorVariants }) => ({
   ...BUTTON_DEFAULT,
   backgroundColor: colorVariants.buttonColor ?? 'accent',
   color: 'white',
-  ':not([disabled])': {
-    ':hover': {
+  '&:not([disabled])': {
+    '&:hover': {
       backgroundColor: colorVariants.buttonColorDark ?? 'accentColorDark'
     },
-    ':active': {
+    '&:active': {
       backgroundColor: colorVariants.buttonColorDarkest ?? 'accentColorDarkest'
     }
   },
-  ':hover': { opacity: 1 },
-  ':disabled': {
+  '&:hover': { opacity: 1 },
+  '&:disabled': {
     backgroundColor: 'disabled',
     transform: 'scale(1)',
     cursor: 'not-allowed'
@@ -71,14 +71,14 @@ const LINK_DEFAULT = ({ colorVariants }) => ({
   minWidth: 'auto',
   padding: 0,
   minHeight: 'max-content',
-  ':not([disabled])': {
-    ':hover': { color: colorVariants.buttonColorDark ?? 'accentColorDark' },
-    ':active': {
+  '&:not([disabled])': {
+    '&:hover': { color: colorVariants.buttonColorDark ?? 'accentColorDark' },
+    '&:active': {
       color: colorVariants.buttonColorDarkest ?? 'accentColorDarkest'
     }
   },
-  ':hover': { opacity: 1 },
-  ':disabled': {
+  '&:hover': { opacity: 1 },
+  '&:disabled': {
     color: 'disabled',
     transform: 'scale(1)',
     cursor: 'not-allowed'
@@ -93,12 +93,12 @@ const LINK_STYLE = props => ({
 const LINK_POSITIVE_STYLE = props => ({
   ...LINK_DEFAULT(props),
   color: props.colorVariants.buttonColor ?? 'statusSuccess',
-  ':not([disabled])': {
-    ':hover': {
+  '&:not([disabled])': {
+    '&:hover': {
       opacity: 0.75,
       color: props.colorVariants.buttonColor ?? 'statusSuccess'
     },
-    ':active': { color: props.colorVariants.buttonColor ?? 'statusSuccess' }
+    '&:active': { color: props.colorVariants.buttonColor ?? 'statusSuccess' }
   }
 })
 

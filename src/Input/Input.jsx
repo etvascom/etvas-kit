@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
 
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
@@ -88,6 +82,10 @@ export const Input = forwardRef(
       return 'inputIcon'
     }, [loading, error, warning, valid, disabled])
 
+    const icRightHidden =
+      !currentIcRight || (currentIcRight === 'check' && !showValidationCheck)
+    const inputPaddingRight = icRightHidden ? 2 : 10
+
     const resetInputType = useCallback(() => setInputType(type), [type])
 
     const togglePassword = useCallback(
@@ -138,6 +136,7 @@ export const Input = forwardRef(
         )}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
+            paddingRight={inputPaddingRight}
             tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
@@ -218,10 +217,11 @@ const StyledInput = styled.input(
     ...typography.labelSmall
   }),
   variant({ variants }),
-  ({ tinted, error, warn, disabled }) => ({
+  ({ tinted, error, warn, disabled, paddingRight }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
     borderColor: tinted && !(error || warn || disabled) && 'white',
-    '::-webkit-search-cancel-button': {
+    paddingRight: `${paddingRight * 4}px`,
+    '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
     }
   })

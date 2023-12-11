@@ -12,7 +12,7 @@ export default {
     whiteSpace: 'pre-line',
     textAlign: 'center'
   },
-  '::after': {
+  '&::after': {
     position: 'absolute',
     content: '""',
     bottom: '0',

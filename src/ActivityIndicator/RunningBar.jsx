@@ -1,5 +1,3 @@
-import React from 'react'
-
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 
@@ -41,7 +39,7 @@ const loading = keyframes`
 `
 
 const Bar = styled(Box)`
-  :before {
+  &:before {
     animation: ${loading} 2s linear infinite;
     background-color: ${({ primary }) => themed(`colors.${primary}`, primary)};
     content: '';

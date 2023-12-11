@@ -1,5 +1,3 @@
-import React from 'react'
-
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -18,7 +16,8 @@ export const IntegrationHeader = ({
     justifyContent='space-between'
     alignItems='flex-start'
     flexDirection={['column', 'row']}
-    mb={[6, 8]}>
+    mb={[6, 8]}
+  >
     <Typography variant='titleLarge'>{title}</Typography>
     <Typography variant='textSmall' color='outline' mt={[4, 0]}>
       {providerPrefix}{' '}

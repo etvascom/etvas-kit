@@ -1,9 +1,13 @@
-import React from 'react'
-
 import { NotCompatible } from '../ErrorPages'
 
 export const EmbededAppCompatibility = ({ children }) => {
-  const incompatibleFeature = compatibilityFeatures.find(f => !f.isCompatible)
+  const incompatibleFeature = useMemo(
+    () =>
+      compatibilityFeaturesDefinitions
+        .map(f => f(window))
+        .find(f => !f.isCompatible),
+    []
+  )
 
   if (incompatibleFeature) {
     return <NotCompatible feature={incompatibleFeature} />
@@ -16,7 +20,7 @@ export const EmbededAppCompatibility = ({ children }) => {
   The minimum list of required features that the
   app needs in order to function properly
 */
-const compatibilityFeatures = [
+const compatibilityFeaturesDefinitions = [
   global => ({
     name: 'sessionStorage',
     isCompatible: (global => {
@@ -30,4 +34,4 @@ const compatibilityFeatures = [
       }
     })(global)
   })
-].map(f => f(window))
+]

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import { useField, useFormikContext } from 'formik'
 import PropTypes from 'prop-types'

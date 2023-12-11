@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -39,7 +39,8 @@ export const EmbededAppChild = () => {
         width='fit-content'
         mx='auto'
         p={4}
-        alignItems='center'>
+        alignItems='center'
+      >
         <Touchable onClick={taller}>
           <Icon name='plus' color='brand' />
         </Touchable>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Button, Card, Flex, Form, Modal, PhoneNumberInputField } from '../src'
 
@@ -45,13 +45,15 @@ export const Default = () => {
           animated
           backDrop='whiteShadow'
           onEscape={hideModal}
-          onBackDropClick={hideModal}>
+          onBackDropClick={hideModal}
+        >
           <Modal.Content onClose={hideModal} width={['90%', '400px']}>
             <Form
               name='user-create'
               validate={_handleValidation}
               onSubmit={_handleSubmit}
-              initialValues={{ phoneNumber: '+49' }}>
+              initialValues={{ phoneNumber: '+49' }}
+            >
               {({ isSubmitting, touched, errors }) => (
                 <Card p={6}>
                   <PhoneNumberInputField
@@ -70,7 +72,8 @@ export const Default = () => {
                       type='submit'
                       variant='primary'
                       disabled={isSubmitting}
-                      loading={isSubmitting}>
+                      loading={isSubmitting}
+                    >
                       Save
                     </Button>
                   </Flex>
@@ -100,7 +103,8 @@ export const BigModal = () => {
           animated
           backDrop='whiteShadow'
           onBackDropClick={hideModal}
-          onEscape={hideModal}>
+          onEscape={hideModal}
+        >
           <Modal.Content width={['90%', '400px']}>
             <Card p={6}>
               TITLE

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Box, Card, CardWithImage, Typography } from '../src'
 
 export default {
@@ -23,7 +21,8 @@ export const ColouredCard = () => (
       p={2}
       bg='etvasLighter'
       boxShadow='0 0 2px'
-      borderRadius='10px'>
+      borderRadius='10px'
+    >
       <Typography variant='titleSmall'>
         This is an overriden coloured card
       </Typography>
@@ -42,7 +41,8 @@ export const WithImage = () => (
     imageUrl='https://picsum.photos/640/360/?grayscale&blur'
     imageSize={1 / 3}
     height='300px'
-    imgOnLeft={true}>
+    imgOnLeft={true}
+  >
     <Typography variant='titleSmall'>CardWithImage</Typography>
     <Typography variant='textSmall'>This is the content</Typography>
   </CardWithImage>
@@ -54,7 +54,8 @@ export const WithImageAndNoContentPadding = () => (
     imageSize={1 / 3}
     height='300px'
     imgOnLeft={true}
-    contentPadding={0}>
+    contentPadding={0}
+  >
     <Typography variant='titleSmall'>CardWithImage</Typography>
     <Typography variant='textSmall'>
       This is the content with no padding
@@ -67,7 +68,8 @@ export const WithImageHero = () => (
     variant='hero'
     imageUrl='https://picsum.photos/640/360/?grayscale&blur'
     imageSize={1 / 3}
-    height='300px'>
+    height='300px'
+  >
     <Typography variant='titleSmall'>CardWithImage</Typography>
     <Typography variant='textSmall'>This is the content</Typography>
   </CardWithImage>
@@ -78,7 +80,8 @@ export const WithImageVertical = () => (
     vertical
     imageUrl='https://picsum.photos/640/360/?grayscale&blur'
     imageSize={1 / 3}
-    height='300px'>
+    height='300px'
+  >
     <Typography variant='titleSmall'>CardWithImage</Typography>
     <Typography variant='textSmall'>This is the content</Typography>
   </CardWithImage>
@@ -89,7 +92,8 @@ export const WithDifferentLayoutHero = () => (
     imageUrl='https://picsum.photos/640/360/?grayscale&blur'
     variant='hero'
     imageSize={[1 / 2, 1 / 3]}
-    height='300px'>
+    height='300px'
+  >
     <Typography variant='titleSmall'>CardWithImage</Typography>
     <Typography variant='textSmall'>
       The image should be 1/2 in desktop mode and 1/3 in mobile mode

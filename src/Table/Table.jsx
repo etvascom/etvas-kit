@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'

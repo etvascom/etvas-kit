@@ -1,6 +1,6 @@
 {
   "name": "@etvas/etvaskit",
-  "version": "1.1.81",
+  "version": "2.0.10",
   "description": "ETVAS UI Kit",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,15 +23,16 @@
     "test:coverage": "nyc mocha tests --require @babel/register",
     "test:watch": "mocha tests --require @babel/register --watch",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o build/ --quiet"
+    "build-storybook": "storybook -o build/ --quiet"
   },
   "peerDependencies": {
-    "formik": "^2.1.4",
-    "react": "^16.6.0 || ^17",
-    "react-dom": "^16.6.0 || ^17",
-    "styled-components": "^5.1.0"
+    "formik": "^2.4.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "styled-components": "^6.1.1"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "^1.2.1",
     "@mdi/js": "^5.8.55",
     "@mdi/react": "^1.4.0",
     "@styled-system/css": "^5.1.5",
@@ -44,7 +45,7 @@
     "lodash": "^4.17.20",
     "prop-types": "^15.8.1",
     "styled-system": "^5.1.5",
-    "use-resize-observer": "^9.0.1",
+    "use-resize-observer": "^9.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -80,12 +81,12 @@
     "lint-staged": "^10.2.7",
     "mocha": "^10.1.0",
     "nyc": "^15.1.0",
-    "prettier-eslint": "^9.0.2",
-    "prettier-eslint-cli": "^5.0.0",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "prettier-eslint": "^16.1.1",
+    "prettier-eslint-cli": "^8.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "storybook": "^7.0.26",
-    "styled-components": "^5.1.1",
+    "styled-components": "^6.1.1",
     "stylelint": "^15.10.3",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",

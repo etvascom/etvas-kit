@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import propTypes from '@styled-system/prop-types'
 import random from 'lodash/random'

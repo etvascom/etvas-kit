@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { CardSkeleton, Flex, TextSkeleton } from '../src'
 
 export default {

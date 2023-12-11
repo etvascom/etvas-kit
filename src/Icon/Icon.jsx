@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { default as DefaultIcon } from '@mdi/react'
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { useField } from 'formik'
 
 import { Checkbox } from '../Checkbox'

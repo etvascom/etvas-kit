@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Card, Flex, IntegrationHeader, Typography } from '../src'
 
 export default {

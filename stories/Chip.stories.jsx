@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Card, Chip } from '../src'
 
 export default {
@@ -40,7 +38,8 @@ export const SmallChip = () => (
       color='statusWarning'
       contentColor='etvasDark'
       typographyVariant='base8Bold'
-      isRounded>
+      isRounded
+    >
       Chip text
     </Chip>
   </Card>

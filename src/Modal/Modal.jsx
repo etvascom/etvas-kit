@@ -1,10 +1,11 @@
-import React, {
+import {
   Children,
   cloneElement,
   isValidElement,
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef
 } from 'react'
 
@@ -46,7 +47,6 @@ const StyledModal = styled(Box)(
     animation-name: modal;
     animation-duration:0.5s;`
 )
-const isModalInIframe = isInsideIframe()
 
 export const Modal = ({
   backDrop,
@@ -59,6 +59,8 @@ export const Modal = ({
 }) => {
   const contentWrapperRef = useRef()
   const intercom = useRef(new InterCom('etvas.modal'))
+
+  const isModalInIframe = useMemo(isInsideIframe, [])
 
   const modalBackdropClickHandler = useCallback(() => {
     onBackDropClick && onBackDropClick()
@@ -112,7 +114,8 @@ export const Modal = ({
       <StyledModal animated={animated} {...props}>
         <Container
           justifyContent='center'
-          alignItems={isModalInIframe ? 'flex-start' : 'center'}>
+          alignItems={isModalInIframe ? 'flex-start' : 'center'}
+        >
           {childrenWithProps}
         </Container>
       </StyledModal>

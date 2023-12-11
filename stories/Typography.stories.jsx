@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Card, Flex, Table, Typography } from '../src'
 
 const { Row, Header, Body, Cell } = Table

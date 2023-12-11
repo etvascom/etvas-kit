@@ -11,10 +11,10 @@ const DEFAULT_STYLE = {
   color: 'textInputActive',
   borderRadius: 3,
   cursor: 'default',
-  '::placeholder': {
+  '&::placeholder': {
     color: 'textInputPlaceholder'
   },
-  ':disabled': {
+  '&:disabled': {
     background: 'backgroundGray'
   }
 }
