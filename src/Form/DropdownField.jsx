@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { useField, useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
@@ -65,8 +65,8 @@ export const DropdownField = ({
   const selectedValue = multiple
     ? field.value
     : selectedOption
-    ? selectedOption[optionAttributes.value]
-    : undefined
+      ? selectedOption[optionAttributes.value]
+      : undefined
 
   const error = meta.touched && meta.error
   const displayedError = submitCount > 0 ? error : field.value && error
@@ -100,11 +100,13 @@ export const DropdownField = ({
       error={displayedError}
       multiple={multiple}
       valueRender={selectedLabel}
-      {...props}>
+      {...props}
+    >
       {options.map(option => (
         <Dropdown.Option
           key={option[optionAttributes.key]}
-          value={option[optionAttributes.value]}>
+          value={option[optionAttributes.value]}
+        >
           {option[optionAttributes.label]}
         </Dropdown.Option>
       ))}

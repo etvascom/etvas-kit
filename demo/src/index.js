@@ -1,6 +1,5 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
 import isPropValid from '@emotion/is-prop-valid'
+import { createRoot } from 'react-dom/client'
 import { StyleSheetManager } from 'styled-components'
 
 import { BrandingProvider, GlobalStyle, ThemeProvider } from '../../src'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -19,11 +17,13 @@ export const Chip = ({
   <ChipContainer
     color={isNeutral ? 'baseGrayLightest' : color}
     contentColor={isNeutral ? 'baseBlack' : contentColor}
-    borderRadius={isNeutral ? '40px' : isRounded ? '3px' : 0}>
+    borderRadius={isNeutral ? '40px' : isRounded ? '3px' : 0}
+  >
     <ChipText
       color='inherit'
       isNeutral={isNeutral}
-      variant={typographyVariant || (isNeutral ? 'base14Light' : 'base12Bold')}>
+      variant={typographyVariant || (isNeutral ? 'base14Light' : 'base12Bold')}
+    >
       {label || children}
     </ChipText>
   </ChipContainer>

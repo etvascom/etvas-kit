@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { ActivityIndicator, Box, Card, Flex } from '../src'
 
 export default {

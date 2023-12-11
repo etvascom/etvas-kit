@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
@@ -59,7 +59,8 @@ export const CardDisplayInput = ({
         <Flex pointerEvents='auto' position='absolute' right={2}>
           <StyledTouchable
             onClick={handleEdit}
-            pointerEvents={disabled ? 'none' : ''}>
+            pointerEvents={disabled ? 'none' : ''}
+          >
             <Icon
               mr={5}
               size='small'

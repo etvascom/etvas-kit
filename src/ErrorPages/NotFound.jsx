@@ -1,5 +1,3 @@
-import React from 'react'
-
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -17,7 +15,8 @@ export const NotFound = ({ children }) => (
     height='100%'
     alignItems='center'
     flexDirection='column'
-    justifyContent='center'>
+    justifyContent='center'
+  >
     <StyledImg src={svg} />
     {children ? <Box mt={[8, 15]}>{children}</Box> : null}
   </Flex>

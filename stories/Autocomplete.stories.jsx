@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Autocomplete } from '../src'
 
@@ -19,7 +19,8 @@ const StorybookAutocomplete = props => {
       value={value}
       onChange={handleChange}
       label='Select a family'
-      {...props}>
+      {...props}
+    >
       <Autocomplete.Option value='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non est repudiandae quia in culpa beatae iure dolores voluptate accusamus fuga at eaque, nostrum placeat debitis incidunt sit perferendis facere. Omnis voluptatem consectetur exercitationem. Error nemo illum inventore totam.'>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non
         est repudiandae quia in culpa beatae iure dolores voluptate accusamus

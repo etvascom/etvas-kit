@@ -1,5 +1,3 @@
-import React from 'react'
-
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
@@ -54,7 +52,8 @@ export const CardSkeleton = ({
         width='100%'
         justifyContent='stretch'
         alignItems='stretch'
-        flexDirection={direction}>
+        flexDirection={direction}
+      >
         <Box {...dimensions(imagePosition, imageSize)} flexGrow='0'>
           <BlockSkeleton width='100%' height='100%' />
         </Box>

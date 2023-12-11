@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Card, Dropdown } from '../src'
 
@@ -15,7 +15,8 @@ const DummySpace = () => (
       justifyContent: 'center',
       height: '200px',
       position: 'relative'
-    }}>
+    }}
+  >
     This is just a dummy text
   </div>
 )
@@ -31,7 +32,8 @@ export const Simple = () => {
         valueRender={value =>
           `${value.substr(0, 1).toUpperCase()}${value.substr(1)}`
         }
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         <Dropdown.Option value='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non est repudiandae quia in culpa beatae iure dolores voluptate accusamus fuga at eaque, nostrum placeat debitis incidunt sit perferendis facere. Omnis voluptatem consectetur exercitationem. Error nemo illum inventore totam.'>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi qui non
           est repudiandae quia in culpa beatae iure dolores voluptate accusamus
@@ -62,7 +64,8 @@ export const Multiple = () => {
         multiple
         label='Select more than one...'
         valueRender={valueRender}
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         <Dropdown.Option value='Lannister'>Lannister</Dropdown.Option>
         <Dropdown.Option value='Tyrell'>Tyrell</Dropdown.Option>
         <Dropdown.Option value='Arryn'>Arryn</Dropdown.Option>
@@ -87,7 +90,8 @@ export const TintedDropdown = () => {
         tinted
         label='Select more than one...'
         valueRender={valueRender}
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         <Dropdown.Option value='Lannister'>Lannister</Dropdown.Option>
         <Dropdown.Option value='Tyrell'>Tyrell</Dropdown.Option>
         <Dropdown.Option value='Arryn'>Arryn</Dropdown.Option>
@@ -110,7 +114,8 @@ export const UsingHeadings = () => {
         valueRender={value =>
           `${value.substr(0, 1).toUpperCase()}${value.substr(1)}`
         }
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         <Dropdown.Heading>Good guys</Dropdown.Heading>
         <Dropdown.Option value='yoda'>Yoda</Dropdown.Option>
         <Dropdown.Option value='anakin'>Luke Skywalker</Dropdown.Option>
@@ -133,7 +138,8 @@ export const ObjectAsValues = () => {
         label='Select a house and get a family'
         valueRender={value => value.label}
         itemSelected={itemSelected}
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         <Dropdown.Option value={{ id: 'lannister', label: 'Lannister' }}>
           House of Lannister
         </Dropdown.Option>
@@ -169,7 +175,8 @@ export const Disabled = () => {
       valueRender={value =>
         `${value.substr(0, 1).toUpperCase()}${value.substr(1)}`
       }
-      onChange={setSelected}>
+      onChange={setSelected}
+    >
       <Dropdown.Option value='lannister'>Lannister</Dropdown.Option>
       <Dropdown.Option value='tyrell'>Tyrell</Dropdown.Option>
       <Dropdown.Option value='arryn'>Arryn</Dropdown.Option>
@@ -197,7 +204,8 @@ export const HugeCollection = () => {
         label='You can search for 9...'
         itemSelected={itemSelected}
         valueRender={valueRender}
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         {items.map(item => (
           <Dropdown.Option key={item.id} value={item}>
             {item.label}
@@ -234,7 +242,8 @@ export const MultipleSearch = () => {
         multiple
         itemSelected={itemSelected}
         valueRender={valueRender}
-        onChange={setSelected}>
+        onChange={setSelected}
+      >
         {items.map(item => (
           <Dropdown.Option key={item.id} value={item}>
             {item.label}

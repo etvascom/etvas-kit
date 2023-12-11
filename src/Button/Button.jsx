@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
@@ -61,7 +61,8 @@ const Button = ({
       variant={variant}
       hSpacing={hSpacing}
       colorVariants={colorVariants}
-      {...rest}>
+      {...rest}
+    >
       {loading ? (
         <Icon size='medium' name='loading' spin color={iconColor} />
       ) : (
@@ -80,7 +81,8 @@ const Button = ({
               as='label'
               variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
               htmlFor={id}
-              color='inherit'>
+              color='inherit'
+            >
               {children}
             </Typography>
           )}

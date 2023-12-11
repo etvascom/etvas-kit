@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { RadioButton } from '../src'
 
 export default {

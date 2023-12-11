@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import propTypes from '@styled-system/prop-types'
 import PropTypes from 'prop-types'
@@ -77,7 +77,8 @@ export const Touchable = ({
       tabIndex={tabIndex}
       type={type}
       underlayColor={underlayColor}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </Wrapper>
   )

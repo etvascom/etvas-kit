@@ -1,8 +1,7 @@
-import React from 'react'
-import { StyleSheetManager } from 'styled-components'
 import isPropValid from '@emotion/is-prop-valid'
+import { StyleSheetManager } from 'styled-components'
 
-import { BrandingProvider, ThemeProvider, GlobalStyle } from '../src'
+import { BrandingProvider, GlobalStyle, ThemeProvider } from '../src'
 
 export const decorators = [
   storyFn => (

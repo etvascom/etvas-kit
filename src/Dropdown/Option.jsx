@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo, useRef } from 'react'
+import { useLayoutEffect, useMemo, useRef } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
@@ -68,7 +68,8 @@ const DropdownItem = ({
       hovering={hasKeyboardFocus}
       touch={hasTouch}
       hasCheckbox={hasCheckbox}
-      ref={optionRef}>
+      ref={optionRef}
+    >
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )

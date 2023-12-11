@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { action } from '@storybook/addon-actions'
 
@@ -69,7 +69,8 @@ const LoginScreen = ({ tinted }) => {
       <Form
         initialValues={values}
         validate={formValidate}
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+      >
         {({ values, submitForm }) => (
           <>
             <Flex justifyContent='center' pt={8} pb={2}>
@@ -103,7 +104,8 @@ const LoginScreen = ({ tinted }) => {
               <Button
                 onClick={action('button')}
                 disabled={isDisabled(values)}
-                mt={6}>
+                mt={6}
+              >
                 Login Account
               </Button>
             </Flex>

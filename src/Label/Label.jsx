@@ -1,5 +1,3 @@
-import React from 'react'
-
 import PropTypes from 'prop-types'
 
 import { Flex } from '../Flex'
@@ -21,7 +19,8 @@ export const Label = ({
         htmlFor={inputId}
         variant='base12Bold'
         color='baseMetal'
-        width='fit-content'>
+        width='fit-content'
+      >
         {label}
       </Typography>
       {inputId && showTooltip && (
@@ -42,7 +41,8 @@ export const Label = ({
           htmlFor={inputId}
           variant='base12Bold'
           color='baseGray'
-          width='fit-content'>
+          width='fit-content'
+        >
           - {optionalText}
         </Typography>
       )}

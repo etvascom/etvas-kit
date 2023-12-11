@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import { createContext } from 'react'
 
 import { Formik, Form as FormikForm } from 'formik'
 import PropTypes from 'prop-types'

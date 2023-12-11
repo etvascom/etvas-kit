@@ -1,5 +1,3 @@
-import React from 'react'
-
 import css from '@styled-system/css'
 import 'flag-icon-css/css/flag-icon.css'
 import styled from 'styled-components'
@@ -30,7 +28,8 @@ export const displayCountries = ({
             ? 'dropdown-country-prefix-item-selected'
             : ''
         }
-        onClick={handleSelectCountry(state)}>
+        onClick={handleSelectCountry(state)}
+      >
         <Space mr={2}>
           {areFlagsLoaded ? (
             <span

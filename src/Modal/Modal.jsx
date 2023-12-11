@@ -1,4 +1,4 @@
-import React, {
+import {
   Children,
   cloneElement,
   isValidElement,
@@ -114,7 +114,8 @@ export const Modal = ({
       <StyledModal animated={animated} {...props}>
         <Container
           justifyContent='center'
-          alignItems={isModalInIframe ? 'flex-start' : 'center'}>
+          alignItems={isModalInIframe ? 'flex-start' : 'center'}
+        >
           {childrenWithProps}
         </Container>
       </StyledModal>

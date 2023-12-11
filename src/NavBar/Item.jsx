@@ -1,5 +1,3 @@
-import React from 'react'
-
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -15,7 +13,8 @@ export const NavItem = ({ icon, label, isActive, as, onClick, ...props }) => (
       variant='labelButton'
       truncate
       color={isActive ? 'accent' : 'outline'}
-      ml={2}>
+      ml={2}
+    >
       {label}
     </Typography>
   </Container>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'

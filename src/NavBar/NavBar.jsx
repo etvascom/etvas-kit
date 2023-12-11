@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import css from '@styled-system/css'
 import PropTypes from 'prop-types'
@@ -96,7 +96,8 @@ const ItemScrollableContainer = ({ isActive, item, onClick, isLastChild }) => {
       className='nav-bar-item'
       key={item.key}
       ref={ref}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       {item.component}
     </ItemContainer>
   )

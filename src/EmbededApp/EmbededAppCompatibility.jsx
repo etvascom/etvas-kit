@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { NotCompatible } from '../ErrorPages'
 
 export const EmbededAppCompatibility = ({ children }) => {

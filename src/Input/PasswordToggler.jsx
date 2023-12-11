@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -33,7 +33,8 @@ export const PasswordToggler = ({
       onMouseUp={handleUp}
       onTouchStart={onToggle}
       onTouchEnd={handleUp}
-      tabIndex={tabIndex}>
+      tabIndex={tabIndex}
+    >
       <Icon
         color='inputIcon'
         size='small'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { action } from '@storybook/addon-actions'
 
 import { Button, Table } from '../src'
@@ -325,7 +323,8 @@ export const LinkIcon = () => {
                 variant={iconPseudoVariant.variant}
                 onClick={action(iconPseudoVariant.name)}
                 icon={iconPseudoVariant.icon ? iconPseudoVariant.icon : null}
-                iconPosition={iconPseudoVariant.iconPosition || null}>
+                iconPosition={iconPseudoVariant.iconPosition || null}
+              >
                 Hello Link
               </Button>
             </Cell>
@@ -334,7 +333,8 @@ export const LinkIcon = () => {
                 disabled
                 variant={iconPseudoVariant.variant}
                 icon={iconPseudoVariant.icon ? iconPseudoVariant.icon : null}
-                iconPosition={iconPseudoVariant.iconPosition || null}>
+                iconPosition={iconPseudoVariant.iconPosition || null}
+              >
                 Hello Link
               </Button>
             </Cell>
@@ -375,7 +375,8 @@ export const CustomColor = () => {
               <Button
                 color='statusWarning'
                 variant={variant}
-                onClick={action(variant)}>
+                onClick={action(variant)}
+              >
                 Warning Button
               </Button>
             </Cell>

@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
 
 import css from '@styled-system/css'
 import propTypes from '@styled-system/prop-types'

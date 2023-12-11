@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -26,7 +26,8 @@ export const ModalChild = () => {
         <Modal
           backDrop='whiteShadow'
           onBackDropClick={toggleModal}
-          onEscape={toggleModal}>
+          onEscape={toggleModal}
+        >
           <Modal.Content onClose={toggleModal}>
             <Card p={4} width='300px'>
               <Typography variant='textLarge'>Modal content</Typography>

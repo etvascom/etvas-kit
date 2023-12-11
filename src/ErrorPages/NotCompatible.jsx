@@ -1,5 +1,3 @@
-import React from 'react'
-
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -30,11 +28,13 @@ export const NotCompatible = ({ feature }) => (
     <IncompatibleFeatureBody
       dangerouslySetInnerHTML={{
         __html: incompatibilityMessages[feature.name].de
-      }}></IncompatibleFeatureBody>
+      }}
+    ></IncompatibleFeatureBody>
     <IncompatibleFeatureBody
       dangerouslySetInnerHTML={{
         __html: incompatibilityMessages[feature.name].en
-      }}></IncompatibleFeatureBody>
+      }}
+    ></IncompatibleFeatureBody>
   </IncompatibleFeatureMain>
 )
 

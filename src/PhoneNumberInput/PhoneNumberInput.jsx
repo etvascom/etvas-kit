@@ -1,4 +1,4 @@
-import React, {
+import {
   forwardRef,
   useEffect,
   useLayoutEffect,
@@ -224,10 +224,12 @@ const PhoneNumberInput = forwardRef((props, ref) => {
           tinted={tinted}
           error={error}
           disabled={disabled}
-          variant={inputVariant}>
+          variant={inputVariant}
+        >
           <PrefixDropdownTrigger
             ref={wrapperRef}
-            onClick={handleToggleOpenDropdown}>
+            onClick={handleToggleOpenDropdown}
+          >
             <Space mr={3}>
               <span
                 className={`flag-icon flag-icon-${country.code.toLowerCase()}`}
@@ -347,22 +349,24 @@ const StyledDropdown = styled(Flex)(({ theme, dropdownSize }) =>
   })
 )
 
-const StyledDropdownWrapper = styled(Flex)(css(styles.dropdown), ({ dropUp }) =>
-  dropUp
-    ? css({
-        top: 'auto',
-        bottom: 10,
-        borderTopLeftRadius: RADII[8],
-        borderTopRightRadius: RADII[8],
-        boxShadow: SHADOWS.phoneNumberInputUp
-      })
-    : css({
-        bottom: 'auto',
-        top: 10,
-        borderBottomRightRadius: RADII[8],
-        borderBottomLeftRadius: RADII[8],
-        boxShadow: SHADOWS.phoneNumberInputDown
-      })
+const StyledDropdownWrapper = styled(Flex)(
+  css(styles.dropdown),
+  ({ dropUp }) =>
+    dropUp
+      ? css({
+          top: 'auto',
+          bottom: 10,
+          borderTopLeftRadius: RADII[8],
+          borderTopRightRadius: RADII[8],
+          boxShadow: SHADOWS.phoneNumberInputUp
+        })
+      : css({
+          bottom: 'auto',
+          top: 10,
+          borderBottomRightRadius: RADII[8],
+          borderBottomLeftRadius: RADII[8],
+          boxShadow: SHADOWS.phoneNumberInputDown
+        })
 )
 
 const StyledFlex = styled(Flex)`
@@ -394,13 +398,13 @@ PhoneNumberInput.defaultProps = {
     typeof v === 'string'
       ? v.toLocaleLowerCase().includes(search)
       : typeof v === 'object'
-      ? Object.keys(v).some(
-          key =>
-            v[key] &&
-            typeof v[key] === 'string' &&
-            v[key].toLocaleLowerCase().includes(search)
-        )
-      : false
+        ? Object.keys(v).some(
+            key =>
+              v[key] &&
+              typeof v[key] === 'string' &&
+              v[key].toLocaleLowerCase().includes(search)
+          )
+        : false
 }
 PhoneNumberInput.displayName = 'PhoneNumberInput'
 

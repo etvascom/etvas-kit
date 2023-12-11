@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 
 import { useField, useFormikContext } from 'formik'
 import PropTypes from 'prop-types'
@@ -30,11 +30,13 @@ export const AutocompleteField = ({
       error={displayedError}
       valid={hasValidation(props) && !meta.error && meta.touched}
       tinted={props.tinted}
-      onSelectItemChange={handleItemChange}>
+      onSelectItemChange={handleItemChange}
+    >
       {options.map(option => (
         <Autocomplete.Option
           key={option[optionAttributes.key]}
-          value={option[optionAttributes.value]}>
+          value={option[optionAttributes.value]}
+        >
           {option[optionAttributes.value]}
         </Autocomplete.Option>
       ))}
