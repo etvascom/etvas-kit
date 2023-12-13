@@ -9,6 +9,7 @@ const build = () => {
     entryPoints: ['src/index.js'],
     minify: true,
     bundle: true,
+    jsx: 'automatic',
     loader: {
       '.js': 'jsx',
       '.jsx': 'jsx',
