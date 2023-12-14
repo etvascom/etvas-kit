@@ -23,7 +23,7 @@
     "test:coverage": "nyc mocha tests --require @babel/register",
     "test:watch": "mocha tests --require @babel/register --watch",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook -o build/ --quiet"
+    "build-storybook": "storybook build -o build/ --quiet"
   },
   "peerDependencies": {
     "formik": "^2.4.1",

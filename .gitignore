@@ -4,6 +4,7 @@
 /lib
 /node_modules
 /umd
+/build
 npm-debug.log*
 .vscode/
 .idea/
