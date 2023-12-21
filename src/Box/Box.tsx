@@ -1,5 +1,15 @@
-import propTypes from '@styled-system/prop-types'
 import styled from 'styled-components'
+import {
+  BackgroundProps,
+  BorderProps,
+  ColorProps,
+  ColorStyleProps,
+  LayoutProps,
+  PositionProps,
+  ShadowProps,
+  SpaceProps,
+  TypographyProps
+} from 'styled-system'
 import {
   background,
   border,
@@ -15,7 +25,18 @@ import {
 
 import { pointerEvents, visibility } from '../utils/customProps'
 
-export const Box = styled.div`
+interface Props
+  extends BackgroundProps,
+    BorderProps,
+    ShadowProps,
+    ColorProps,
+    ColorStyleProps,
+    LayoutProps,
+    PositionProps,
+    SpaceProps,
+    TypographyProps {}
+
+export const Box = styled.div<Props>`
   ${compose(
     background,
     border,
@@ -30,16 +51,3 @@ export const Box = styled.div`
     visibility
   )};
 `
-
-Box.propTypes = {
-  ...propTypes.background,
-  ...propTypes.border,
-  ...propTypes.compose,
-  ...propTypes.shadow,
-  ...propTypes.color,
-  ...propTypes.colorStyle,
-  ...propTypes.layout,
-  ...propTypes.position,
-  ...propTypes.space,
-  ...propTypes.typography
-}

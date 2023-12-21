@@ -1,14 +1,13 @@
-import propTypes from '@styled-system/prop-types'
+import { FlexboxProps } from 'styled-system'
 import styled from 'styled-components'
 import { flexbox } from 'styled-system'
 
 import { Box } from '../Box'
 
-export const Flex = styled(Box)`
+interface Props extends FlexboxProps {
+}
+
+export const Flex = styled(Box)<Props>`
   display: flex;
   ${flexbox}
 `
-
-Flex.propTypes = {
-  ...propTypes.flexbox
-}
