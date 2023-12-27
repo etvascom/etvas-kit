@@ -25,7 +25,7 @@ import {
 
 import { pointerEvents, visibility } from '../utils/customProps'
 
-interface Props
+export interface BoxProps
   extends BackgroundProps,
     BorderProps,
     ShadowProps,
@@ -36,7 +36,7 @@ interface Props
     SpaceProps,
     TypographyProps {}
 
-export const Box = styled.div<Props>`
+export const Box = styled.div<BoxProps>`
   ${compose(
     background,
     border,

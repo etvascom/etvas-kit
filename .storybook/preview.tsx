@@ -1,20 +1,25 @@
+import React from 'react'
+import { Decorator } from '@storybook/react'
+
 import isPropValid from '@emotion/is-prop-valid'
 import { StyleSheetManager } from 'styled-components'
 
 import { BrandingProvider, GlobalStyle, ThemeProvider } from '../src'
 
-export const decorators = [
-  storyFn => (
-    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+export const decorators: Decorator[] = [
+  Story => (
+    <StyleSheetManagerWrapper shouldForwardProp={shouldForwardProp}>
       <BrandingProvider>
         <ThemeProvider>
           <GlobalStyle />
-          {storyFn()}
+          <Story />
         </ThemeProvider>
       </BrandingProvider>
-    </StyleSheetManager>
+    </StyleSheetManagerWrapper>
   )
 ]
+
+const StyleSheetManagerWrapper = ({children, ...props}) =>  <StyleSheetManager {...props}>{children}</StyleSheetManager>
 
 function shouldForwardProp(propName, target) {
   if (typeof target === 'string') {

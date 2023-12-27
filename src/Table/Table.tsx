@@ -1,7 +1,6 @@
-import { useMemo, useState } from 'react'
+import React,{FC, PropsWithChildren, useMemo, useState } from 'react'
 
-import css from '@styled-system/css'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 
 import { useResizeObserver } from '../utils/hooks'
@@ -12,20 +11,26 @@ import { Row } from './Row'
 import styles from './Table.styles'
 import { TableContext } from './base'
 
-const useResizeObserverRaf = () => {
-  const [size, setSize] = useState({ width: undefined, height: undefined })
-  const onResize = size => requestAnimationFrame(() => setSize(size))
-  const { ref } = useResizeObserver({ onResize })
-  return { ref, ...size }
+interface Props {
+  mode?: 'web' | 'mobile'
+  breakpoint?: number
+  verticalBreakpointDisplay?: boolean
 }
 
-export const Table = ({
+interface TableSubComponents {
+  Cell: typeof Cell
+  Row: typeof Row
+  Body: typeof Body
+  Header: typeof Header
+}
+
+export const Table: FC<PropsWithChildren<Props>> & TableSubComponents = ({
   mode,
   breakpoint,
-  verticalBreakpointDisplay,
+  verticalBreakpointDisplay = false,
   ...props
 }) => {
-  const [cells, setCells] = useState([])
+  const [cells, setCells] = useState<any[]>([])
   const { ref, width = 1 } = useResizeObserverRaf()
 
   const actualMode = useMemo(() => {
@@ -45,9 +50,9 @@ export const Table = ({
       cells,
       mode: actualMode,
       verticalBreakpointDisplay,
-      setHeaderCell: (idx, content) => {
+      setHeaderCell: (idx:number, content:any) => {
         if (!cells || cells[idx] !== content) {
-          const newCells = [...cells]
+          const newCells:any[] = [...cells]
           newCells[idx] = content
           setCells(newCells)
         }
@@ -65,19 +70,30 @@ export const Table = ({
   )
 }
 
-Table.propTypes = {
-  breakpoint: PropTypes.number,
-  mode: PropTypes.oneOf(['web', 'mobile']),
-  verticalBreakpointDisplay: PropTypes.bool
-}
-
 const Wrapper = styled.div(css(styles.wrapper))
 
-const StyledTable = styled.table(css(styles.default), ({ mode }) =>
-  css(styles[mode])
+
+interface StyledTableProps {
+  mode: keyof typeof styles
+
+}
+const StyledTable = styled.table<StyledTableProps>(css(styles.default as SystemStyleObject), ({ mode }) =>
+  css(styles[mode] as SystemStyleObject)
 )
 
 Table.Cell = Cell
 Table.Row = Row
 Table.Body = Body
 Table.Header = Header
+
+interface Size {
+  width?: number
+  height?: number
+}
+
+const useResizeObserverRaf = () => {
+  const [size, setSize] = useState<Size>({ width: undefined, height: undefined })
+  const onResize = (size: Size) => requestAnimationFrame(() => setSize(size))
+  const { ref } = useResizeObserver({ onResize })
+  return { ref, ...size }
+}

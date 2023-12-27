@@ -1,5 +1,7 @@
 import { DROPDOWN_VARIANTS } from '../Dropdown'
 import { INPUT_VARIANTS } from '../Input'
+import animationSpeeds from './animationSpeeds'
+import colors from './colors'
 import {
   BORDERS,
   BREAKPOINTS,
@@ -11,9 +13,7 @@ import {
   SHADOWS,
   SPACE,
   Z_INDICES
-} from '../assets/core'
-import animationSpeeds from './animationSpeeds'
-import colors from './colors'
+} from './core'
 import sizes from './sizes'
 
 const theme = {

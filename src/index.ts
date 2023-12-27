@@ -1,18 +1,18 @@
-// import styled from 'styled-components'
+import styled from 'styled-components'
 
-// export * from './providers'
-// export * from './utils'
+export * from './providers'
+export * from './utils'
 // export * from './i18n'
 
 // export * from './Button'
-// export * from './Card'
+export * from './Card'
 // export * from './Dropdown'
 // export * from './Input'
 // export * from './TextArea'
-// export * from './Typography'
+export * from './Typography'
 // export * from './Tooltip'
 // export * from './Grid'
-// export * from './Table'
+export * from './Table'
 // export * from './Modal'
 // export * from './Radio'
 // export * from './Rating'
@@ -40,4 +40,4 @@ export * from './Flex'
 // export * from './Image'
 // export * from './Touchable'
 
-// export { styled }
+export { styled }

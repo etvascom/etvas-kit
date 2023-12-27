@@ -33,7 +33,20 @@ const colorVariations = {
 }
 
 export class BrandingService extends EventEmitter {
-  constructor({ intercom, defaults, prefix = 'etvas' }) {
+  intercom: InterCom
+  prefix: string
+  defaults: any
+  cssVars: any
+
+  constructor({
+    intercom,
+    defaults,
+    prefix = 'etvas'
+  }: {
+    intercom: InterCom
+    defaults: any
+    prefix: string
+  }) {
     super()
     this.defaults = defaults
     this.prefix = prefix
@@ -52,7 +65,7 @@ export class BrandingService extends EventEmitter {
     }
   }
 
-  updateCssVars(updates) {
+  updateCssVars(updates: any) {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
     const brandColorVariants = updates.brandColor
@@ -63,15 +76,13 @@ export class BrandingService extends EventEmitter {
       ? this.buildColorVariants('accent', updates.accentColor, updates)
       : {}
 
-    const previousCssVars = { ...this.cssVars }
-
     this.cssVars = {
       ...newVars,
       ...brandColorVariants,
       ...accentColorVariants
     }
 
-    if (isEqual(previousCssVars, this.cssVars)) {
+    if (isEqual(newVars, this.cssVars)) {
       return
     }
 
@@ -88,13 +99,13 @@ export class BrandingService extends EventEmitter {
     this.intercom.response('cssVars', this.cssVars)
   }
 
-  handleNewCssVars = cssVars => {
+  handleNewCssVars = (cssVars: any) => {
     this.updateCssVars(cssVars)
   }
 
-  write(key, value) {
+  write(key: string, value: string) {
     const root = document.documentElement
-    key = varMapping[key]
+    key = varMapping[key as keyof typeof varMapping]
 
     if (key) {
       if (key.substr(-5) === 'color') {
@@ -104,22 +115,29 @@ export class BrandingService extends EventEmitter {
     }
   }
 
-  read(key) {
+  read(key: string) {
     const root = document.documentElement
-    key = varMapping[key]
+    key = varMapping[key as keyof typeof varMapping]
     if (key) {
       return root.style.getPropertyValue(`--${this.prefix}-${key}`)
     }
   }
 
-  buildColorVariants(prefix, source, existing) {
+  buildColorVariants(
+    prefix: string,
+    source: string,
+    existing: Record<string, string>
+  ) {
     return Object.keys(colorVariations).reduce(
       (colors, key) => ({
         ...colors,
         ...(existing[`${prefix}${key}`]
           ? {}
           : {
-              [`${prefix}${key}`]: shading(source, colorVariations[key])
+              [`${prefix}${key}`]: shading(
+                source,
+                colorVariations[key as keyof typeof colorVariations]
+              )
             })
       }),
       {}

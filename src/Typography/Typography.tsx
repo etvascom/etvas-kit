@@ -1,7 +1,13 @@
 import css from '@styled-system/css'
-import propTypes from '@styled-system/prop-types'
-import PropTypes from 'prop-types'
+import type * as CSS from 'csstype'
 import styled from 'styled-components'
+import {
+  ColorProps,
+  LayoutProps,
+  SpaceProps,
+  TextStyleProps,
+  TypographyProps
+} from 'styled-system'
 import {
   color,
   colorStyle,
@@ -15,7 +21,23 @@ import {
 
 import variants from './variants'
 
-const Typography = styled.div(
+type VariantKey = keyof typeof variants
+
+interface Props
+  extends ColorProps,
+    LayoutProps,
+    SpaceProps,
+    TextStyleProps,
+    TypographyProps {
+  as?: string
+  children?: React.ReactNode
+  truncate?: boolean | number | string
+  variant: VariantKey | VariantKey[] | object 
+  overflowWrap?: CSS.Property.OverflowWrap
+}
+
+
+const Typography = styled.div<Props>(
   ({ overflowWrap }) =>
     css({
       color: 'text',
@@ -44,31 +66,9 @@ const Typography = styled.div(
         css({
           overflow: 'hidden',
           display: '-webkit-box',
-          '-webkit-box-orient': 'vertical',
-          '-webkit-line-clamp': `${truncate}`
+          lineClamp: `${truncate}`
         })
 )
-
-Typography.propTypes = {
-  ...propTypes.color,
-  ...propTypes.layout,
-  ...propTypes.space,
-  ...propTypes.textStyle,
-  ...propTypes.typography,
-  ...propTypes.variant,
-  as: PropTypes.string,
-  children: PropTypes.node,
-  truncate: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.number,
-    PropTypes.string
-  ]),
-  variant: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.objectOf(PropTypes.string)
-  ])
-}
 
 Typography.defaultProps = {
   as: 'div',

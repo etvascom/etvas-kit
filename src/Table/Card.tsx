@@ -1,7 +1,6 @@
-import { useCallback, useState } from 'react'
+import React, { FC, PropsWithChildren, useCallback, useState } from 'react'
 
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Box } from '../Box'
@@ -10,7 +9,14 @@ import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 import styles from './Card.styles'
 
-export const Card = ({ leader, children }) => {
+interface Props {
+  leader?: React.ReactElement
+}
+interface CardSubComponents {
+  Item: typeof CardItem
+}
+
+export const Card: FC<PropsWithChildren<Props>> & CardSubComponents = ({ leader, children }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleToggle = useCallback(
@@ -31,16 +37,17 @@ export const Card = ({ leader, children }) => {
   )
 }
 
-Card.propTypes = {
-  leader: PropTypes.node,
-  children: PropTypes.node
-}
-
 const StyledContent = styled(Box)(css(styles.content))
 
 const StyledCardWrapper = styled.td(css(styles.card))
 
-export const CardItem = ({ header, cell, vertical }) => (
+interface CardItemProps {
+  header: React.ReactNode
+  cell: React.ReactNode
+  vertical?: boolean
+}
+
+export const CardItem: FC<CardItemProps> = ({ header, cell, vertical }) => (
   <Flex my={4} flexDirection={vertical ? 'column' : 'row'}>
     <Box width={1 / 3} pr={1}>
       <Typography truncate variant='labelSmallBold'>
@@ -50,11 +57,5 @@ export const CardItem = ({ header, cell, vertical }) => (
     <Box width={2 / 3}>{cell}</Box>
   </Flex>
 )
-
-CardItem.propTypes = {
-  header: PropTypes.node,
-  cell: PropTypes.node,
-  vertical: PropTypes.bool
-}
 
 Card.Item = CardItem

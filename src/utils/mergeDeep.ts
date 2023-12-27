@@ -1,4 +1,4 @@
-export const mergeDeep = (target, ...sources) => {
+export const mergeDeep = (target: any, ...sources: any[]): any => {
   if (!sources.length) return target
   const source = sources.shift()
 
@@ -16,5 +16,5 @@ export const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources)
 }
 
-const isObject = item =>
+const isObject = (item: any): boolean =>
   item && typeof item === 'object' && !Array.isArray(item)

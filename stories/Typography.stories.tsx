@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card, Flex, Table, Typography } from '../src'
 
 const { Row, Header, Body, Cell } = Table
@@ -8,7 +9,7 @@ export default {
 }
 
 export const Variants = () => {
-  const variants = [
+  const variants: any[] = [
     'textSmallest',
     'textSmall',
     'textLarge',

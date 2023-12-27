@@ -1,26 +1,27 @@
+import React, { FC } from 'react'
+
 import { default as DefaultIcon } from '@mdi/react'
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
-import glyphs from './glyphs.js'
+import glyphs from './glyphs'
 
-const externalGlyphs = {}
+const externalGlyphs: { [key: string]: string } = {}
 
-const addIcon = (name, icon) => {
+const addIcon = (name: string, icon: string) => {
   if (externalGlyphs[name] && externalGlyphs[name] !== icon) {
     console.warn('* Warning: overwriting injected icon', name)
   }
   externalGlyphs[name] = icon
 }
 
-export const addIcons = icons => {
+export const addIcons = (icons: { [key: string]: string }) => {
   Object.keys(icons).forEach(key => addIcon(key, icons[key]))
 }
 
-const validate = name => {
+const validate = (name: string) => {
   if (/^[acglmqstvz][ 0-9.]+/gi.test(name)) {
     return name
   }
@@ -28,10 +29,30 @@ const validate = name => {
   return 'M0 0L24 0L24 24 L0 24Z'
 }
 
-export const Icon = ({ name, size, color, rotate, spin, ...props }) => (
+interface Props {
+  name: string
+  size?: string | number
+  color?: string
+  rotate?: number
+  spin?: boolean
+}
+
+interface IconSubComponents {
+  glyphs: typeof glyphs
+  externalGlyphs: typeof externalGlyphs
+}
+
+export const Icon: FC<Props> & IconSubComponents = ({
+  name,
+  size = 'small',
+  color,
+  rotate,
+  spin,
+  ...props
+}) => (
   <BaseIcon
-    path={externalGlyphs[name] || glyphs[name] || validate(name)}
-    size={sizes[size] ?? size}
+    path={externalGlyphs[name] || glyphs[name as keyof typeof glyphs] || validate(name)}
+    size={sizes[size as keyof typeof sizes] ?? size}
     color={color}
     spin={spin}
     rotate={rotate}
@@ -50,24 +71,3 @@ const BaseIcon = styled(DefaultIcon)(({ spin, color }) =>
 
 Icon.glyphs = glyphs
 Icon.externalGlyphs = externalGlyphs
-
-Icon.propTypes = {
-  name: PropTypes.string,
-  size: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  color: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-    PropTypes.string
-  ]),
-  rotate: PropTypes.number,
-  spin: PropTypes.bool
-}
-
-Icon.defaultProps = {
-  size: 'small'
-}

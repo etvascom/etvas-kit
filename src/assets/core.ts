@@ -2,7 +2,7 @@ import { range } from '../utils/helpers'
 
 export const BORDERS = [0, '1px solid', '2px solid', '3px solid', '4px solid']
 
-const breakpoints = ['30rem', '48rem', '80rem']
+const breakpoints: any = ['30rem', '48rem', '80rem']
 const [sm, md, lg] = breakpoints
 breakpoints.sm = sm
 breakpoints.md = md

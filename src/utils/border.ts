@@ -1,4 +1,8 @@
-export const _border = (width, fill, color) => {
+export const _border = (
+  width?: string | number,
+  fill?: string | number,
+  color?: string | number
+): string => {
   let w = width,
     f = fill,
     c = color

@@ -66,7 +66,7 @@ export default {
   white: StyleGuide.white100,
   transparent: StyleGuide.transparent,
   inputGray: StyleGuide.gray300,
-  backgroundWhite: StyleGuide.white,
+  backgroundWhite: StyleGuide.white100,
   backgroundLightGray: StyleGuide.gray100,
   backgroundGray: StyleGuide.gray200,
   backgroundCustomers: StyleGuide.gray200,

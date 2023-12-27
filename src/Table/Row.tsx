@@ -1,31 +1,48 @@
-import { cloneElement, useContext, useMemo } from 'react'
+import React, {
+  FC,
+  PropsWithChildren,
+  ReactElement,
+  cloneElement,
+  useContext,
+  useMemo
+} from 'react'
 
-import css from '@styled-system/css'
+import css, { SystemStyleObject } from '@styled-system/css'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Card } from './Card'
+import { Props as CellProps } from './Cell'
 import styles from './Row.styles'
 import { HeaderContext, TableContext } from './base'
 
-export const Row = ({ children }) => {
+interface Row {
+  cell: React.ReactNode
+  header: React.ReactNode
+}
+
+export const Row: FC<PropsWithChildren> = ({ children }) => {
   const headerCtx = useContext(HeaderContext)
   const { mode, cells, verticalBreakpointDisplay } = useContext(TableContext)
 
   const type = useMemo(() => (headerCtx ? 'header' : 'body'), [headerCtx])
 
+  const childArray = React.Children.toArray(
+    children
+  ) as ReactElement<CellProps>[]
+
   if (type === 'body' && mode === 'mobile') {
     let leader
-    const remainingCells = []
+    const remainingCells = [] as Row[]
 
-    children.forEach((c, idx) => {
-      if (c.props.leader) {
-        leader = c
+    childArray.forEach((child, idx) => {
+      if (child.props.leader) {
+        leader = child
         return
       }
 
       remainingCells.push({
-        cell: cloneElement(c, { type: 'body' }),
+        cell: cloneElement(child, { type: 'body' }),
         header: cells[idx]
       })
     })
@@ -48,8 +65,8 @@ export const Row = ({ children }) => {
   }
 
   return (
-    <StyledTr mode={mode}>
-      {Array.from(children).map((child, idx) =>
+    <StyledTr mode={mode as keyof typeof styles}>
+      {childArray.map((child, idx) =>
         cloneElement(child, { idx, key: idx, type })
       )}
     </StyledTr>
@@ -58,7 +75,13 @@ export const Row = ({ children }) => {
 
 const PseudoRow = styled.tr(css(styles.pseudoTr))
 
-const StyledTr = styled.tr(({ mode }) => css(styles[mode]))
+interface StyledTrProps {
+  mode: keyof typeof styles
+}
+
+const StyledTr = styled.tr<StyledTrProps>(({ mode }) =>
+  css(styles[mode] as SystemStyleObject)
+)
 
 Row.propTypes = {
   children: PropTypes.node

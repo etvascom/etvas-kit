@@ -1,15 +1,19 @@
-const hex2rgb = color =>
-  /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
-    .exec(
-      color.replace(
-        /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-        (r, g, b) => `${r}${r}${g}${g}${b}${b}`
-      )
+const hex2rgb = (color: string): number[] => {
+  const transformed = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+    color.replace(
+      /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+      (r, g, b) => `${r}${r}${g}${g}${b}${b}`
     )
-    .slice(1)
-    .map(c => parseInt(c, 16))
+  )
 
-const hex2Rgba = (hex, alpha) => {
+  if (!transformed) {
+    return []
+  }
+
+  return transformed.slice(1).map(c => parseInt(c, 16))
+}
+
+const hex2Rgba = (hex: string, alpha: string): string => {
   let r,
     g,
     b,
@@ -51,21 +55,21 @@ const hex2Rgba = (hex, alpha) => {
   r = parseInt(r, 16)
   g = parseInt(g, 16)
   b = parseInt(b, 16)
-  a = typeof a === 'number' ? a : parseInt(a, 16) / 255
-  return `rgba(${r},${g},${b},${a})`
+  const _a = typeof a === 'number' ? a : parseInt(a, 16) / 255
+  return `rgba(${r},${g},${b},${_a})`
 
-  function selfIncrement(item) {
+  function selfIncrement(item: string) {
     item += item
   }
 }
 
-const rgb2hex = rgb =>
+const rgb2hex = (rgb: number[]): string =>
   rgb
     .map(c => c.toString(16))
     .map(c => (c.length === 1 ? `0${c}` : c))
     .reduce((hex, c) => `${hex}${c}`, '#')
 
-const rgb2hsv = rgb => {
+const rgb2hsv = (rgb: number[]): number[] => {
   const [r, g, b] = rgb.map(c => c / 255)
   const cMax = Math.max(r, g, b)
   const cMin = Math.min(r, g, b)
@@ -89,7 +93,7 @@ const rgb2hsv = rgb => {
   return [h, Math.round(s * 1000) / 10, Math.round(v * 1000) / 10]
 }
 
-const hsv2rgb = ([h, s, v]) => {
+const hsv2rgb = ([h, s, v]: number[]): number[] => {
   h = Math.max(0, Math.min(360, h))
   s = Math.max(0, Math.min(100, s)) / 100
   v = Math.max(0, Math.min(100, v)) / 100
@@ -99,22 +103,22 @@ const hsv2rgb = ([h, s, v]) => {
   const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
   const m = v - c
   const cases = {
-    0: [c, x, 0],
-    1: [x, c, 0],
-    2: [0, c, x],
-    3: [0, x, c],
-    4: [x, 0, c],
-    5: [c, 0, x]
+    '0': [c, x, 0],
+    '1': [x, c, 0],
+    '2': [0, c, x],
+    '3': [0, x, c],
+    '4': [x, 0, c],
+    '5': [c, 0, x]
   }
-  return cases[`${Math.floor(h / 60)}`]
-    .map(c => c + m)
-    .map(c => Math.floor(255 * c))
+
+  const caseIndex = `${Math.floor(h / 60)}` as keyof typeof cases
+  return cases[caseIndex].map(c => c + m).map(c => Math.floor(255 * c))
 }
 
-const hex2hsv = hex => rgb2hsv(hex2rgb(hex))
-const hsv2hex = hsv => rgb2hex(hsv2rgb(hsv))
+const hex2hsv = (hex: string): number[] => rgb2hsv(hex2rgb(hex))
+const hsv2hex = (hsv: number[]): string => rgb2hex(hsv2rgb(hsv))
 
-const shade = (hex, amount) => {
+const shade = (hex: string, amount: number): string => {
   const [r, g, b] = hex2rgb(hex)
   const t = amount < 0 ? 0 : 255
   const p = Math.abs(amount) > 1 ? Math.abs(amount) / 100 : Math.abs(amount)
@@ -128,8 +132,13 @@ const shade = (hex, amount) => {
     .slice(1)}`
 }
 
-const scale = (hex, percent, variation) => {
-  variation = variation || 'hue'
+type Variation = 'hue' | 'saturation' | 'value'
+
+const scale = (
+  hex: string,
+  percent: number,
+  variation: Variation = 'hue'
+): string => {
   const [h, s, v] = hex2hsv(hex)
   const component = variation === 'hue' ? h : variation === 'saturation' ? s : v
   const p = Math.abs(percent) > 1 ? percent / 100 : percent
@@ -142,7 +151,7 @@ const scale = (hex, percent, variation) => {
   ])
 }
 
-function lighten(col, percentage) {
+function lighten(col: string, percentage: number): string {
   var amt = (percentage / 100) * 200
   var usePound = false
   if (col[0] === '#') {
@@ -162,7 +171,7 @@ function lighten(col, percentage) {
   return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16)
 }
 
-const shading = (hex, amount) => {
+const shading = (hex: string, amount: number): string => {
   if (amount > 0) {
     return lighten(hex, amount)
   }
@@ -170,9 +179,10 @@ const shading = (hex, amount) => {
   return v === 100 ? shade(hex, amount) : scale(hex, amount, 'value')
 }
 
-const darken = (hex, amount) => shading(hex, Math.abs(amount))
+const darken = (hex: string, amount: number): string =>
+  shading(hex, Math.abs(amount))
 
-const rgb2hsl = rgb => {
+const rgb2hsl = (rgb: number[]): number[] => {
   const [r, g, b] = rgb.map(c => c / 255)
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
@@ -200,14 +210,14 @@ const rgb2hsl = rgb => {
   return [Math.floor(h * 360), Math.floor(s * 100), Math.floor(l * 100)]
 }
 
-const hsl2rgb = hsl => {
+const hsl2rgb = (hsl: number[]): number[] => {
   const [h, s, l] = [hsl[0] / 360, hsl[1] / 100, hsl[2] / 100]
 
   if (s === 0) {
     return [Math.round(l * 255), Math.round(l * 255), Math.round(l * 255)]
   }
   let r, g, b
-  const hue2rgb = (p, q, t) => {
+  const hue2rgb = (p: number, q: number, t: number): number => {
     if (t < 0) t += 1
     if (t > 1) t -= 1
     if (t < 1 / 6) return p + (q - p) * 6 * t
@@ -225,8 +235,8 @@ const hsl2rgb = hsl => {
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)]
 }
 
-const hex2hsl = hex => rgb2hsl(hex2rgb(hex))
-const hsl2hex = hsl => rgb2hex(hsl2rgb(hsl))
+const hex2hsl = (hex: string): number[] => rgb2hsl(hex2rgb(hex))
+const hsl2hex = (hsl: number[]): string => rgb2hex(hsl2rgb(hsl))
 
 export default {
   hex2rgb,

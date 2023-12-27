@@ -1,23 +1,20 @@
-import { useMemo } from 'react'
-
-import PropTypes from 'prop-types'
+import React,{ FC, useMemo } from 'react'
 import { ThemeProvider as LibThemeProvider } from 'styled-components'
 
 import { etvasTheme, mergeDeep } from '../utils'
 
-export const ThemeProvider = ({ children, theme }) => {
+interface Props {
+  children: React.ReactNode
+  theme?: object
+}
+
+export const ThemeProvider:FC<Props> = ({ children, theme }) => {
   const mergedTheme = useMemo(() => mergeDeep({}, etvasTheme, theme), [theme])
   if (process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line
     console.info('Current theme:', mergedTheme)
   }
 
   return <LibThemeProvider theme={mergedTheme}>{children}</LibThemeProvider>
-}
-
-ThemeProvider.propTypes = {
-  children: PropTypes.node,
-  theme: PropTypes.object
 }
 
 ThemeProvider.defaultProps = {
