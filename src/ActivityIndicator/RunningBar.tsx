@@ -1,10 +1,17 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { Box } from '../Box'
 import { themed } from '../utils'
 
-export const RunningBar = ({ colors: { background, primary }, ...props }) => (
+interface Props {
+  colors: {
+    background: string
+    primary: string
+  }
+}
+
+export const RunningBar:FC<Props> = ({ colors: { background, primary }, ...props }) => (
   <Bar
     bg={background}
     height='4px'
@@ -38,7 +45,11 @@ const loading = keyframes`
   }
 `
 
-const Bar = styled(Box)`
+interface BarProps {
+  primary: string
+}
+
+const Bar = styled(Box)<BarProps>`
   &:before {
     animation: ${loading} 2s linear infinite;
     background-color: ${({ primary }) => themed(`colors.${primary}`, primary)};
@@ -51,9 +62,6 @@ const Bar = styled(Box)`
   }
 `
 
-RunningBar.propTypes = {
-  colors: PropTypes.object.isRequired
-}
 RunningBar.defaultProps = {
   colors: {
     background: 'baseWhite',

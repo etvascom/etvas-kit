@@ -1,9 +1,14 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
+
 import styled, { css, keyframes } from 'styled-components'
 
 import { Box } from '../Box'
 
-export const LoadBar = ({ colors, ...props }) => (
+interface Props {
+  colors: string[]
+}
+
+export const LoadBar: FC<Props> = ({ colors, ...props }) => (
   <Box bg='brand' height='4px' position='relative' width={1} {...props}>
     {colors.map(color => (
       <Bar bg={color} colourList={colors} key={color} />
@@ -28,16 +33,20 @@ const loading = keyframes`
   }
 `
 
-const loopColours = ({ colourList }) =>
+const loopColours = ({ colourList }: BarProps) =>
   colourList.map(
-    (color, ix) => css`
+    (_, ix) => css`
       &:nth-child(n + ${ix + 1}) {
         animation: ${loading} ${colourList.length}s linear ${ix}s infinite;
       }
     `
   )
+  
+interface BarProps {
+  colourList: string[]
+}
 
-const Bar = styled(Box)`
+const Bar = styled(Box)<BarProps>`
   content: '';
   display: inline;
   height: 100%;
@@ -49,9 +58,6 @@ const Bar = styled(Box)`
   ${loopColours};
 `
 
-LoadBar.propTypes = {
-  colors: PropTypes.arrayOf(PropTypes.string)
-}
 LoadBar.defaultProps = {
   colors: ['statusWarning', 'statusSuccess', 'statusError']
 }

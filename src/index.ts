@@ -35,9 +35,9 @@ export * from './Table'
 
 export * from './Box'
 export * from './Flex'
-// export * from './Space'
-// export * from './ActivityIndicator'
-// export * from './Image'
-// export * from './Touchable'
+export * from './Space'
+export * from './ActivityIndicator'
+export * from './Image'
+export * from './Touchable' // todo: discuss tudor
 
 export { styled }
