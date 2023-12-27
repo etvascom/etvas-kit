@@ -28,7 +28,7 @@ const BUTTON_DEFAULT = {
   }
 }
 
-const PRIMARY_DEFAULT = ({ colorVariants }) => ({
+const PRIMARY_DEFAULT = ({ colorVariants }: ColorVariantsProps) => ({
   ...BUTTON_DEFAULT,
   backgroundColor: colorVariants.buttonColor ?? 'accent',
   color: 'white',
@@ -48,22 +48,24 @@ const PRIMARY_DEFAULT = ({ colorVariants }) => ({
   }
 })
 
-const PRIMARY_STYLE = props => ({ ...PRIMARY_DEFAULT(props) })
+const PRIMARY_STYLE = (props: ColorVariantsProps) => ({
+  ...PRIMARY_DEFAULT(props)
+})
 
-const LARGE_STYLE = props => ({
+const LARGE_STYLE = (props: ColorVariantsProps) => ({
   ...PRIMARY_DEFAULT(props),
   paddingLeft: sizes.spacingLarge,
   paddingRight: sizes.spacingLarge,
   height: sizes.largeButtonHeight
 })
 
-const POSITIVE_STYLE = ({ colorVariants }) => ({
+const POSITIVE_STYLE = ({ colorVariants }: ColorVariantsProps) => ({
   ...BUTTON_DEFAULT,
   backgroundColor: colorVariants.buttonColor ?? 'statusSuccess',
   color: 'white'
 })
 
-const LINK_DEFAULT = ({ colorVariants }) => ({
+const LINK_DEFAULT = ({ colorVariants }: ColorVariantsProps) => ({
   ...BUTTON_DEFAULT,
   backgroundColor: 'transparent',
   height: 'auto',
@@ -85,12 +87,12 @@ const LINK_DEFAULT = ({ colorVariants }) => ({
   }
 })
 
-const LINK_STYLE = props => ({
+const LINK_STYLE = (props: ColorVariantsProps) => ({
   ...LINK_DEFAULT(props),
   color: props.colorVariants.buttonColor ?? 'accent'
 })
 
-const LINK_POSITIVE_STYLE = props => ({
+const LINK_POSITIVE_STYLE = (props: ColorVariantsProps) => ({
   ...LINK_DEFAULT(props),
   color: props.colorVariants.buttonColor ?? 'statusSuccess',
   '&:not([disabled])': {
@@ -102,7 +104,11 @@ const LINK_POSITIVE_STYLE = props => ({
   }
 })
 
-export default props => ({
+interface ColorVariantsProps {
+  colorVariants: any
+}
+
+export default (props: ColorVariantsProps) => ({
   primary: PRIMARY_STYLE(props),
   large: LARGE_STYLE(props),
   link: LINK_STYLE(props),

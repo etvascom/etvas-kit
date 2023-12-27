@@ -1,11 +1,17 @@
-import { useMemo } from 'react'
+import React, { FC, PropsWithChildren, useMemo } from 'react'
 
-import propTypes from '@styled-system/prop-types'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { layout, position, space, variant } from 'styled-system'
+import {
+  LayoutProps,
+  PositionProps,
+  SpaceProps,
+  layout,
+  position,
+  space,
+  variant
+} from 'styled-system'
 
-import { Flex, Space } from '../'
+import { Flex, Space } from '..'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 import colors from '../assets/colors'
@@ -13,22 +19,38 @@ import sizes from '../assets/sizes'
 import { brandingService } from '../providers/BrandingService'
 import variants from './variants'
 
-const Button = ({
-  iconColor,
+const defaultVariants = variants({ colorVariants: {} })
+type VariantKey = keyof typeof defaultVariants
+
+interface Props extends LayoutProps, PositionProps, SpaceProps {
+  iconColor?: string
+  color?: keyof typeof colors
+  icon?: string
+  disabled?: boolean
+  loading?: boolean
+  onClick?: () => void
+  type?: 'button' | 'submit' | 'reset'
+  variant: VariantKey | VariantKey[] | object
+  iconPosition?: 'left' | 'right'
+  id?: string
+}
+
+const Button: FC<PropsWithChildren<Props>> = ({
+  iconColor = 'currentColor',
   color,
   children,
-  disabled,
+  disabled = false,
   icon,
   id,
-  loading,
+  loading = false,
   onClick,
-  type,
-  variant,
-  iconPosition,
+  type = 'button',
+  variant = 'primary',
+  iconPosition = 'left',
   ...rest
 }) => {
   const hSpacing = useMemo(() => {
-    if (!loading || variant.startsWith('link')) {
+    if (!loading || variant.toString().startsWith('link')) {
       return null
     }
     return variant === 'large' ? sizes.spacingNormal : sizes.spacingCompact
@@ -57,12 +79,11 @@ const Button = ({
       disabled={disabled}
       id={id}
       onClick={onClick}
-      type={type}
-      variant={variant}
-      hSpacing={hSpacing}
+      type={type as 'button' | 'submit' | 'reset'}
+      variant={variant} 
+      hSpacing={Number(hSpacing) || 0}
       colorVariants={colorVariants}
-      {...rest}
-    >
+      {...rest}>
       {loading ? (
         <Icon size='medium' name='loading' spin color={iconColor} />
       ) : (
@@ -81,8 +102,7 @@ const Button = ({
               as='label'
               variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
               htmlFor={id}
-              color='inherit'
-            >
+              color='inherit'>
               {children}
             </Typography>
           )}
@@ -101,45 +121,19 @@ const Button = ({
   )
 }
 
-const StyledButton = styled.button`
-  ${layout}
-  ${position}
-  ${space}
+interface StyledButtonProps {
+  hSpacing: number
+  variant: VariantKey | VariantKey[] | object
+  colorVariants: object
+}
+
+const StyledButton = styled.button<StyledButtonProps>`
   ${props => variant({ variants: variants(props) })(props)}
   ${({ hSpacing }) =>
     hSpacing ? `padding-left: ${hSpacing}; padding-right: ${hSpacing};` : ''}
+  ${layout}
+  ${position}
+  ${space}
 `
-
-Button.propTypes = {
-  ...propTypes.layout,
-  ...propTypes.position,
-  ...propTypes.space,
-  children: PropTypes.node,
-  iconColor: PropTypes.string,
-  color: PropTypes.string,
-  icon: PropTypes.string,
-  iconPosition: PropTypes.oneOf(['left', 'right']),
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  onClick: PropTypes.func,
-  type: PropTypes.string,
-  variant: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.objectOf(PropTypes.string)
-  ])
-}
-
-Button.defaultProps = {
-  iconColor: 'currentColor',
-  disabled: false,
-  loading: false,
-  icon: null,
-  spinnerSize: '1.5rem',
-  type: 'button',
-  variant: 'primary',
-  iconPosition: 'left'
-}
-
 Button.displayName = 'Button'
 export default Button
