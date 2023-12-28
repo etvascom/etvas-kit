@@ -1,12 +1,15 @@
+import { PropsWithChildren } from 'react'
+
 import css from '@styled-system/css'
 import type * as CSS from 'csstype'
 import styled from 'styled-components'
 import {
   ColorProps,
   LayoutProps,
+  SizeProps,
   SpaceProps,
-  TextStyleProps,
-  TypographyProps
+  TypographyProps as StyledSystemTypographyProps,
+  TextStyleProps
 } from 'styled-system'
 import {
   color,
@@ -23,21 +26,20 @@ import variants from './variants'
 
 type VariantKey = keyof typeof variants
 
-interface Props
+export interface TypographyProps
   extends ColorProps,
     LayoutProps,
     SpaceProps,
+    SizeProps,
     TextStyleProps,
-    TypographyProps {
+    StyledSystemTypographyProps {
   as?: string
-  children?: React.ReactNode
   truncate?: boolean | number | string
-  variant: VariantKey | VariantKey[] | object 
+  variant: VariantKey | VariantKey[] | object | string | string[] // allowing string and string[] lets us specify custom variants in components that override the default typography variants such as sublabel
   overflowWrap?: CSS.Property.OverflowWrap
 }
 
-
-const Typography = styled.div<Props>(
+const Typography = styled.div<PropsWithChildren<TypographyProps>>(
   ({ overflowWrap }) =>
     css({
       color: 'text',

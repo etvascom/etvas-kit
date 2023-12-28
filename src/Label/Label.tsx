@@ -1,14 +1,22 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-export const Label = ({
+interface Props {
+  label: React.ReactNode
+  inputId?: string | number
+  showOptionalText?: boolean
+  optionalText?: React.ReactNode
+  showTooltip?: boolean
+}
+
+export const Label: FC<Props> = ({
   label,
   inputId,
   showOptionalText,
-  optionalText,
+  optionalText = 'Optional',
   showTooltip
 }) => {
   const tooltipIconId = `${inputId}-icon`
@@ -19,8 +27,7 @@ export const Label = ({
         htmlFor={inputId}
         variant='base12Bold'
         color='baseMetal'
-        width='fit-content'
-      >
+        width='fit-content'>
         {label}
       </Typography>
       {inputId && showTooltip && (
@@ -41,23 +48,10 @@ export const Label = ({
           htmlFor={inputId}
           variant='base12Bold'
           color='baseGray'
-          width='fit-content'
-        >
+          width='fit-content'>
           - {optionalText}
         </Typography>
       )}
     </Flex>
   )
-}
-
-Label.propTypes = {
-  inputId: PropTypes.string,
-  label: PropTypes.node,
-  showOptionalText: PropTypes.bool,
-  optionalText: PropTypes.node,
-  showTooltip: PropTypes.bool
-}
-
-Label.defaultProps = {
-  optionalText: 'Optional'
 }

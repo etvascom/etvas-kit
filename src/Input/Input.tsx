@@ -1,9 +1,12 @@
-import { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useCallback,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 
-import css from '@styled-system/css'
-import propTypes from '@styled-system/prop-types'
-import { themeGet as themed } from '@styled-system/theme-get'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
 
@@ -15,11 +18,46 @@ import { default as variants } from './Input.variants'
 import { PasswordToggler } from './PasswordToggler'
 import { SubLabel } from './SubLabel'
 
-export const Input = forwardRef(
+type InputRefProps = React.ComponentPropsWithRef<'input'>
+
+interface Props {
+  autoComplete?: string
+  autoFocus?: boolean
+  disabled?: boolean
+  error?: boolean | string | React.ReactNode
+  warning?: boolean | string | React.ReactNode
+  icLeft?: string
+  icRight?: string
+  onIcRightClick?: () => void
+  id: string | number
+  label?: React.ReactNode
+  optionalText?: React.ReactNode
+  name?: string
+  noBottomSpace?: boolean
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  passwordView?: 'peek' | 'toggle'
+  placeholder?: string
+  placeholderTextColor?: string
+  readOnly?: boolean
+  required?: boolean
+  type?: string
+  valid?: boolean | string
+  value?: string | number | object
+  variant?: string
+  subLabel?: string
+  loading?: boolean
+  tinted?: boolean
+  showValidationCheck?: boolean
+  onInputClick?: () => void
+  extension?: React.ReactNode
+  showTooltip?: boolean
+}
+
+export const Input = forwardRef<InputRefProps, Props>(
   (
     {
       autoComplete,
-      autoFocus,
+      autoFocus = false,
       disabled,
       error,
       warning,
@@ -30,20 +68,20 @@ export const Input = forwardRef(
       label,
       optionalText,
       name,
-      noBottomSpace,
+      noBottomSpace = false,
       onChange,
-      passwordView,
+      passwordView = 'peek',
       placeholder,
-      readOnly,
+      readOnly = false,
       required,
-      type,
+      type = 'text',
       valid,
-      value,
-      variant,
+      value = '',
+      variant = 'default',
       subLabel,
       loading,
-      tinted,
-      showValidationCheck,
+      tinted = false,
+      showValidationCheck = false,
       onInputClick,
       extension,
       showTooltip,
@@ -51,7 +89,7 @@ export const Input = forwardRef(
     },
     ref
   ) => {
-    const inputRef = useRef()
+    const inputRef = useRef<HTMLInputElement>()
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
@@ -89,7 +127,7 @@ export const Input = forwardRef(
     const resetInputType = useCallback(() => setInputType(type), [type])
 
     const togglePassword = useCallback(
-      ev => {
+      (event: any) => {
         const elRef = ref || inputRef
         if (document.activeElement !== elRef.current) elRef.current.focus()
         if (inputType.includes('password')) {
@@ -97,8 +135,8 @@ export const Input = forwardRef(
         } else {
           resetInputType()
         }
-        if (ev) {
-          ev.preventDefault()
+        if (event) {
+          event.preventDefault()
         }
       },
       [inputType, ref, inputRef, resetInputType]
@@ -124,7 +162,7 @@ export const Input = forwardRef(
     }
 
     return (
-      <StyledFlex flexDirection='column' width={1} {...rest}>
+      <StyledFlex flexDirection='column' width={1} minHeight={40} {...rest}>
         {!!label && (
           <Label
             label={label}
@@ -167,7 +205,7 @@ export const Input = forwardRef(
               name={icLeft}
               pointerEvents='none'
               position='absolute'
-              tabIndex='-1'
+              tabIndex={-1}
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
@@ -207,19 +245,21 @@ export const Input = forwardRef(
 const StyledFlex = styled(Flex)`
   &:focus-within {
     label {
-      color: ${themed('colors.textInputFocused')};
+      color: ${({ theme }) => theme.colors.textInputFocused};
     }
   }
 `
 
-const StyledInput = styled.input(
-  css({
-    ...typography.labelSmall
-  }),
+type StyledInputProps = Pick<Props, 'tinted' | 'warning' | 'disabled'> & {
+  paddingRight: number
+}
+
+const StyledInput = styled.input<StyledInputProps>(
+  css(typography.labelSmall as SystemStyleObject),
   variant({ variants }),
-  ({ tinted, error, warn, disabled, paddingRight }) => ({
-    backgroundColor: tinted && !(error || warn || disabled) && 'white',
-    borderColor: tinted && !(error || warn || disabled) && 'white',
+  ({ tinted, error, warning, disabled, paddingRight }: any) => ({
+    backgroundColor: tinted && !(error || warning || disabled) && 'white',
+    borderColor: tinted && !(error || warning || disabled) && 'white',
     paddingRight: `${paddingRight * 4}px`,
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
@@ -227,65 +267,4 @@ const StyledInput = styled.input(
   })
 )
 
-Input.propTypes = {
-  ...propTypes.inputStyle,
-  tinted: PropTypes.bool,
-  loading: PropTypes.bool,
-  subLabel: PropTypes.string,
-  autoComplete: PropTypes.string,
-  autoFocus: PropTypes.bool,
-  disabled: PropTypes.bool,
-  warning: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
-  error: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
-  icLeft: PropTypes.string,
-  icRight: PropTypes.string,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  label: PropTypes.node,
-  optionalText: PropTypes.node,
-  name: PropTypes.string,
-  /** dummy space added for consistent spacing with validated inputs.
-   *
-   * remove space by setting this to true */
-  noBottomSpace: PropTypes.bool,
-  onChange: PropTypes.func,
-  passwordView: PropTypes.oneOf(['peek', 'toggle']),
-  placeholder: PropTypes.string,
-  placeholderTextColor: PropTypes.string,
-  readOnly: PropTypes.bool,
-  required: PropTypes.bool,
-  type: PropTypes.string,
-  valid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
-  onIcRightClick: PropTypes.func,
-  onInputClick: PropTypes.func,
-  extension: PropTypes.node,
-  showTooltip: PropTypes.bool
-}
-
-Input.defaultProps = {
-  autoFocus: false,
-  minHeight: 40,
-  noBottomSpace: false,
-  passwordView: 'peek',
-  readOnly: false,
-  type: 'text',
-  value: '',
-  tinted: false,
-  variant: 'default',
-  showValidationCheck: false
-}
-
 Input.displayName = 'Input'
-/** @component */

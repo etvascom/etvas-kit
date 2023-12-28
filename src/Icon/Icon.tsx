@@ -1,8 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, ReactSVGElement } from 'react'
 
 import { default as DefaultIcon } from '@mdi/react'
 import css from '@styled-system/css'
+import type * as CSS from 'csstype'
 import styled from 'styled-components'
+import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
 
 import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
@@ -29,12 +31,18 @@ const validate = (name: string) => {
   return 'M0 0L24 0L24 24 L0 24Z'
 }
 
-interface Props {
+interface Props
+  extends React.HTMLAttributes<ReactSVGElement>,
+    OpacityProps,
+    PositionProps,
+    SpaceProps {
   name: string
   size?: string | number
   color?: string
   rotate?: number
   spin?: boolean
+  cursor?: CSS.Property.Cursor // TODO: this should already be included in React.HTMLAttributes<ReactSVGElement>
+  pointerEvents?: CSS.Property.PointerEvents // TODO: this should already be included in React.HTMLAttributes<ReactSVGElement>
 }
 
 interface IconSubComponents {
@@ -51,7 +59,11 @@ export const Icon: FC<Props> & IconSubComponents = ({
   ...props
 }) => (
   <BaseIcon
-    path={externalGlyphs[name] || glyphs[name as keyof typeof glyphs] || validate(name)}
+    path={
+      externalGlyphs[name] ||
+      glyphs[name as keyof typeof glyphs] ||
+      validate(name)
+    }
     size={sizes[size as keyof typeof sizes] ?? size}
     color={color}
     spin={spin}
