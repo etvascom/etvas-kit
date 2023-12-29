@@ -106,9 +106,10 @@ const StyledTextArea = styled.textarea(
     ...typography.labelSmall
   }),
   variant({ variants }),
-  ({ tinted, error, warn, disabled }) => ({
+  ({ tinted, error, warn, disabled, allowResize }) => ({
     backgroundColor: tinted && !(error || warn || disabled) && 'white',
-    borderColor: tinted && !(error || warn || disabled) && 'white'
+    borderColor: tinted && !(error || warn || disabled) && 'white',
+    resize: allowResize ? 'both' : 'none'
   })
 )
 
