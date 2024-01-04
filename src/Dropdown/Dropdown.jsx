@@ -269,8 +269,7 @@ const Dropdown = ({
         tabIndex='0'
         ref={wrapper}
         error={error}
-        {...props}
-      >
+        {...props}>
         <StyledIndicator
           size='small'
           color='inputIcon'
@@ -284,11 +283,11 @@ const Dropdown = ({
           disabled={disabled}
           type='button'
           role='switch'
+          id={id}
           aria-controls={`drop-${cId}`}
           error={error}
           tinted={tinted}
-          onClick={toggleDropdown}
-        >
+          onClick={toggleDropdown}>
           {isEmpty ? placeholder : displayValue}
         </Toggler>
         <DropdownList
@@ -299,8 +298,7 @@ const Dropdown = ({
           onTouchStart={clicked}
           onTouchMove={inhibit}
           onTouchEnd={decide}
-          borderClr={dropdownBorderClr}
-        >
+          borderClr={dropdownBorderClr}>
           {hasSearch ? (
             <SearchInput
               ref={searchField}

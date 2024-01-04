@@ -11,6 +11,7 @@ import { typography } from '../Typography'
 import sizes from '../assets/sizes'
 
 const DropdownItem = ({
+  id,
   children,
   onSelectItem,
   disabled,
@@ -62,14 +63,14 @@ const DropdownItem = ({
 
   return (
     <Option
+      id={id}
       role='option'
       onClick={_handleClick}
       selected={isSelected}
       hovering={hasKeyboardFocus}
       touch={hasTouch}
       hasCheckbox={hasCheckbox}
-      ref={optionRef}
-    >
+      ref={optionRef}>
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
