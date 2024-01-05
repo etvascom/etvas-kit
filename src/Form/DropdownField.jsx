@@ -100,13 +100,12 @@ export const DropdownField = ({
       error={displayedError}
       multiple={multiple}
       valueRender={selectedLabel}
-      {...props}
-    >
+      {...props}>
       {options.map(option => (
         <Dropdown.Option
+          id={option[optionAttributes.id]}
           key={option[optionAttributes.key]}
-          value={option[optionAttributes.value]}
-        >
+          value={option[optionAttributes.value]}>
           {option[optionAttributes.label]}
         </Dropdown.Option>
       ))}
@@ -133,6 +132,7 @@ DropdownField.defaultProps = {
   optionAttributes: {
     key: 'value',
     value: 'value',
-    label: 'label'
+    label: 'label',
+    id: 'id'
   }
 }
