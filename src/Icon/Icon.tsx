@@ -1,7 +1,6 @@
 import React, { FC, ReactSVGElement } from 'react'
 
 import { default as DefaultIcon } from '@mdi/react'
-import css from '@styled-system/css'
 import type * as CSS from 'csstype'
 import styled from 'styled-components'
 import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
@@ -72,14 +71,11 @@ export const Icon: FC<Props> & IconSubComponents = ({
   />
 )
 
-const BaseIcon = styled(DefaultIcon)(({ spin, color }) =>
-  css({
-    animation: spin
-      ? `rotation ${animationSpeeds.rotation} infinite linear`
-      : '',
-    fill: color
-  })
-)
+const BaseIcon = styled(DefaultIcon)`
+  animation: ${({ spin }) =>
+    spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
+  fill: ${({ color }) => color};
+`
 
 Icon.glyphs = glyphs
 Icon.externalGlyphs = externalGlyphs

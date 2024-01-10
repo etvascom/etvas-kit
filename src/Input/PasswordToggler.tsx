@@ -11,6 +11,7 @@ interface Props {
   inputType: string
   tabIndex?: string
   onToggle: (event: any) => void
+  onDrag: (event: any) => void
   viewOption: (typeof toggleOptions)[number]
 }
 
@@ -19,6 +20,7 @@ export const PasswordToggler: FC<Props> = ({
   inputType,
   tabIndex,
   onToggle,
+  onDrag,
   viewOption,
   ...props
 }) => {
@@ -45,6 +47,7 @@ export const PasswordToggler: FC<Props> = ({
       onMouseUp={handleUp}
       onTouchStart={onToggle}
       onTouchEnd={handleUp}
+      onDrag={onDrag}
       tabIndex={tabIndex}>
       <Icon
         color='inputIcon'

@@ -8,7 +8,7 @@ import React, {
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
+import {  variant } from 'styled-system'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
@@ -18,10 +18,9 @@ import { default as variants } from './Input.variants'
 import { PasswordToggler } from './PasswordToggler'
 import { SubLabel } from './SubLabel'
 
-type InputRefProps = React.ComponentPropsWithRef<'input'>
-
 interface Props {
   autoComplete?: string
+  ariaDisabled?: boolean
   autoFocus?: boolean
   disabled?: boolean
   error?: boolean | string | React.ReactNode
@@ -53,7 +52,7 @@ interface Props {
   showTooltip?: boolean
 }
 
-export const Input = forwardRef<InputRefProps, Props>(
+export const Input = forwardRef<HTMLInputElement, Props>(
   (
     {
       autoComplete,
@@ -89,7 +88,7 @@ export const Input = forwardRef<InputRefProps, Props>(
     },
     ref
   ) => {
-    const inputRef = useRef<HTMLInputElement>()
+    const inputRef = useRef<HTMLInputElement>(null)
     const [inputType, setInputType] = useState(type)
 
     const inputVariant = useMemo(() => {
@@ -128,8 +127,13 @@ export const Input = forwardRef<InputRefProps, Props>(
 
     const togglePassword = useCallback(
       (event: any) => {
-        const elRef = ref || inputRef
-        if (document.activeElement !== elRef.current) elRef.current.focus()
+        const currentRef = ref || inputRef
+        if (
+          typeof currentRef !== 'function' &&
+          document.activeElement !== currentRef.current
+        ) {
+          currentRef.current?.focus()
+        }
         if (inputType.includes('password')) {
           setInputType('text')
         } else {
@@ -149,18 +153,17 @@ export const Input = forwardRef<InputRefProps, Props>(
         return onIcRightClick()
       }
 
-      if (!inputType === 'search') {
+      if (inputType !== 'search') {
         return
       }
 
-      if (value) {
-        return onChange({ target: { value: '' } })
+      if (value && onChange) {
+        return onChange({ target: { value: '' } } as any)
       }
 
       const currentRef = ref || inputRef
-      currentRef.current.focus()
+      typeof currentRef !== 'function' && currentRef.current?.focus()
     }
-
     return (
       <StyledFlex flexDirection='column' width={1} minHeight={40} {...rest}>
         {!!label && (
@@ -181,9 +184,6 @@ export const Input = forwardRef<InputRefProps, Props>(
             ariaDisabled={readOnly || disabled}
             disabled={disabled}
             error={error}
-            hasLabel={label}
-            hasIcLeft={icLeft}
-            hasIcRight={icRight}
             id={id}
             name={name}
             onChange={onChange}
@@ -208,7 +208,7 @@ export const Input = forwardRef<InputRefProps, Props>(
               tabIndex={-1}
             />
           ) : null}
-          <Flex pointerEvents='auto' position='absolute' right={2}>
+          <Flex pointerEvents='auto' position='absolute' right={2}> 
             {icStateIsNotIconToggle() && currentIcRight ? (
               currentIcRight === 'check' && !showValidationCheck ? null : (
                 <Icon
@@ -250,12 +250,12 @@ const StyledFlex = styled(Flex)`
   }
 `
 
-type StyledInputProps = Pick<Props, 'tinted' | 'warning' | 'disabled'> & {
+interface StyledInputProps extends Props {
   paddingRight: number
 }
 
 const StyledInput = styled.input<StyledInputProps>(
-  css(typography.labelSmall as SystemStyleObject),
+  css(typography.labelSmall as SystemStyleObject) as any,
   variant({ variants }),
   ({ tinted, error, warning, disabled, paddingRight }: any) => ({
     backgroundColor: tinted && !(error || warning || disabled) && 'white',
