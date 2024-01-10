@@ -24,7 +24,7 @@ export const Label: FC<Props> = ({
     <Flex mb={1} alignItems='center'>
       <Typography
         as='label'
-        htmlFor={inputId}
+        htmlFor={inputId?.toString()}
         variant='base12Bold'
         color='baseMetal'
         width='fit-content'>
@@ -45,7 +45,7 @@ export const Label: FC<Props> = ({
         <Typography
           ml={1}
           as='label'
-          htmlFor={inputId}
+          htmlFor={inputId?.toString()}
           variant='base12Bold'
           color='baseGray'
           width='fit-content'>

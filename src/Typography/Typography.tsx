@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { LabelHTMLAttributes, PropsWithChildren } from 'react'
 
 import css from '@styled-system/css'
 import type * as CSS from 'csstype'
@@ -27,7 +27,8 @@ import variants from './variants'
 type VariantKey = keyof typeof variants
 
 export interface TypographyProps
-  extends ColorProps,
+  extends Omit<LabelHTMLAttributes<HTMLDivElement>, 'color'>,
+    ColorProps,
     LayoutProps,
     SpaceProps,
     SizeProps,
