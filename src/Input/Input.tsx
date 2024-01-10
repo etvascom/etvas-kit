@@ -8,7 +8,7 @@ import React, {
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
-import {  variant } from 'styled-system'
+import { variant } from 'styled-system'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
@@ -208,7 +208,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
               tabIndex={-1}
             />
           ) : null}
-          <Flex pointerEvents='auto' position='absolute' right={2}> 
+          <Flex pointerEvents='auto' position='absolute' right={2}>
             {icStateIsNotIconToggle() && currentIcRight ? (
               currentIcRight === 'check' && !showValidationCheck ? null : (
                 <Icon

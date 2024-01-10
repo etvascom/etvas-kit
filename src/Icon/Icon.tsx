@@ -40,8 +40,8 @@ interface Props
   color?: string
   rotate?: number
   spin?: boolean
-  cursor?: CSS.Property.Cursor // TODO: this should already be included in React.HTMLAttributes<ReactSVGElement>
-  pointerEvents?: CSS.Property.PointerEvents // TODO: this should already be included in React.HTMLAttributes<ReactSVGElement>
+  cursor?: CSS.Property.Cursor
+  pointerEvents?: CSS.Property.PointerEvents 
 }
 
 interface IconSubComponents {
