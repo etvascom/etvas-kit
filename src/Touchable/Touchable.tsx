@@ -1,4 +1,11 @@
-import { FC, PropsWithChildren, useCallback, useMemo, useState } from 'react'
+import {
+  HTMLAttributes,
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  useState
+} from 'react'
 import React from 'react'
 
 import styled, { css } from 'styled-components'
@@ -21,8 +28,9 @@ import {
 
 import { themed } from '../utils'
 
-interface Props
-  extends BorderProps,
+export interface TouchableProps
+  extends HTMLAttributes<HTMLButtonElement>,
+    BorderProps,
     FlexboxProps,
     LayoutProps,
     PositionProps,
@@ -31,18 +39,11 @@ interface Props
   activeOpacity?: number | string
   disabled?: boolean
   effect: (typeof effects)[number]
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  onDrag?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  onMouseDown?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  onMouseUp?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  onTouchStart?: (event: React.TouchEvent<HTMLButtonElement>) => void
-  onTouchEnd?: (event: React.TouchEvent<HTMLButtonElement>) => void
-  tabIndex?: string
   type?: 'button' | 'submit' | 'reset'
   underlayColor?: string
 }
 
-export const Touchable: FC<PropsWithChildren<Props>> = ({
+export const Touchable: FC<PropsWithChildren<TouchableProps>> = ({
   activeOpacity = 0.75,
   children,
   disabled = false,

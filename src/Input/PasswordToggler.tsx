@@ -1,17 +1,17 @@
-import React, { FC, useCallback } from 'react'
+import React, { DetailsHTMLAttributes, FC, useCallback } from 'react'
 
 import styled from 'styled-components'
 
-import { Icon } from '../Icon'
+import { Icon, IconProps } from '../Icon'
 import { Touchable } from '../Touchable'
 import sizes from '../assets/sizes'
 
-interface Props {
+interface Props
+  extends Pick<DetailsHTMLAttributes<HTMLButtonElement>, 'onToggle' | 'onDrag'>,
+    Omit<IconProps, 'onDrag' | 'name'> {
   error?: boolean
+  name?: string
   inputType: string
-  tabIndex?: string
-  onToggle: (event: any) => void
-  onDrag: (event: any) => void
   viewOption: (typeof toggleOptions)[number]
 }
 
@@ -50,10 +50,10 @@ export const PasswordToggler: FC<Props> = ({
       onDrag={onDrag}
       tabIndex={tabIndex}>
       <Icon
-        color='inputIcon'
-        size='small'
-        name={inputType === 'password' ? 'eye' : 'eyeNo'}
         {...props}
+        color='inputIcon'
+        size={'small'}
+        name={inputType === 'password' ? 'eye' : 'eyeNo'}
       />
     </StyledTouchable>
   )

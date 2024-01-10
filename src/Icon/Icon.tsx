@@ -30,13 +30,14 @@ const validate = (name: string) => {
   return 'M0 0L24 0L24 24 L0 24Z'
 }
 
-interface Props
+export interface IconProps
   extends React.HTMLAttributes<ReactSVGElement>,
     OpacityProps,
     PositionProps,
     SpaceProps {
   name: string
-  size?: string | number
+  size?: 'small' | 'medium' | 'large'
+
   color?: string
   rotate?: number
   spin?: boolean
@@ -49,7 +50,7 @@ interface IconSubComponents {
   externalGlyphs: typeof externalGlyphs
 }
 
-export const Icon: FC<Props> & IconSubComponents = ({
+export const Icon: FC<IconProps> & IconSubComponents = ({
   name,
   size = 'small',
   color,

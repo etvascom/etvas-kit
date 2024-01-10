@@ -1,4 +1,5 @@
 import React, {
+  InputHTMLAttributes,
   forwardRef,
   useCallback,
   useMemo,
@@ -18,8 +19,7 @@ import { default as variants } from './Input.variants'
 import { PasswordToggler } from './PasswordToggler'
 import { SubLabel } from './SubLabel'
 
-interface Props {
-  autoComplete?: string
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   ariaDisabled?: boolean
   autoFocus?: boolean
   disabled?: boolean
@@ -28,7 +28,6 @@ interface Props {
   icLeft?: string
   icRight?: string
   onIcRightClick?: () => void
-  id: string | number
   label?: React.ReactNode
   optionalText?: React.ReactNode
   name?: string
@@ -41,7 +40,6 @@ interface Props {
   required?: boolean
   type?: string
   valid?: boolean | string
-  value?: string | number | object
   variant?: string
   subLabel?: string
   loading?: boolean
@@ -225,7 +223,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
                 error={!!error}
                 inputType={inputType}
                 onDrag={resetInputType}
-                tabIndex='-1'
+                tabIndex={-1}
                 onToggle={togglePassword}
                 viewOption={passwordView}
               />
