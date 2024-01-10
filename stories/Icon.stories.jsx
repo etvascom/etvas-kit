@@ -14,8 +14,7 @@ export const Size = () => (
       m={4}
       flexDirection='column'
       justifyContent='center'
-      alignItems='center'
-    >
+      alignItems='center'>
       <Card my={1} p={2}>
         <Icon name='circleArrowLeft' size='small' />
       </Card>
@@ -30,8 +29,7 @@ export const Size = () => (
       m={4}
       flexDirection='column'
       justifyContent='center'
-      alignItems='center'
-    >
+      alignItems='center'>
       <Card my={1} p={2}>
         <Icon name='circleArrowLeft' size='medium' />
       </Card>
@@ -43,8 +41,7 @@ export const Size = () => (
       m={4}
       flexDirection='column'
       justifyContent='center'
-      alignItems='center'
-    >
+      alignItems='center'>
       <Card my={1} p={2}>
         <Icon name='circleArrowLeft' size='large' />
       </Card>
@@ -66,15 +63,13 @@ export const AllIcons = () => (
           <Flex
             flexDirection='column'
             justifyContent='center'
-            alignItems='center'
-          >
+            alignItems='center'>
             <Card my={1} p={2}>
               <Icon name={k} size='small' />
             </Card>
             <Typography
               color={alternates[k] ? 'error' : 'outline'}
-              variant='textSmall'
-            >
+              variant='textSmall'>
               {k}
             </Typography>
           </Flex>

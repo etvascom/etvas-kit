@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import type * as CSS from 'csstype'
+
 import {
   BackgroundProps,
   BorderProps,
@@ -34,7 +36,10 @@ export interface BoxProps
     LayoutProps,
     PositionProps,
     SpaceProps,
-    TypographyProps {}
+    TypographyProps {
+  pointerEvents?: CSS.Property.PointerEvents
+  visibility?: CSS.Property.Visibility
+}
 
 export const Box = styled.div<BoxProps>`
   ${compose(

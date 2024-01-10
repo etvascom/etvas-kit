@@ -1,40 +1,54 @@
-import { useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Icon } from '../Icon'
 import { Touchable } from '../Touchable'
 import sizes from '../assets/sizes'
 
-export const PasswordToggler = ({
+interface Props {
+  error?: boolean
+  inputType: string
+  tabIndex?: string
+  onToggle: (event: any) => void
+  onDrag: (event: any) => void
+  viewOption: (typeof toggleOptions)[number]
+}
+
+export const PasswordToggler: FC<Props> = ({
   error,
   inputType,
   tabIndex,
   onToggle,
+  onDrag,
   viewOption,
   ...props
 }) => {
-  const handleDown = useCallback(() => {
-    onToggle && onToggle()
-  }, [onToggle])
+  const handleDown = useCallback(
+    (event: any) => {
+      onToggle && onToggle(event)
+    },
+    [onToggle]
+  )
 
-  const handleUp = useCallback(() => {
-    if (viewOption.includes('peek')) {
-      handleDown()
-    }
-  }, [viewOption, handleDown])
+  const handleUp = useCallback(
+    (event: any) => {
+      if (viewOption.includes('peek')) {
+        handleDown(event)
+      }
+    },
+    [viewOption, handleDown]
+  )
 
   return (
     <StyledTouchable
       effect='no-feedback'
-      // onClick={handleDown}
       onMouseDown={handleDown}
       onMouseUp={handleUp}
       onTouchStart={onToggle}
       onTouchEnd={handleUp}
-      tabIndex={tabIndex}
-    >
+      onDrag={onDrag}
+      tabIndex={tabIndex}>
       <Icon
         color='inputIcon'
         size='small'
@@ -54,10 +68,3 @@ const StyledTouchable = styled(Touchable)`
 `
 
 const toggleOptions = ['peek', 'toggle']
-PasswordToggler.propTypes = {
-  error: PropTypes.bool,
-  inputType: PropTypes.string,
-  tabIndex: PropTypes.string,
-  onToggle: PropTypes.func.isRequired,
-  viewOption: PropTypes.oneOf(toggleOptions)
-}
