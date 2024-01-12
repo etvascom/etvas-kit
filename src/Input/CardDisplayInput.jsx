@@ -46,7 +46,7 @@ export const CardDisplayInput = ({
       {!!label && <Label label={label} inputId={id} />}
       <Flex alignItems='center' position='relative' width='100%'>
         <StyledInput
-          ariaDisabled={disabled}
+          aria-disabled={disabled}
           hasLabel={label}
           hasIcRight={true}
           id={id}
@@ -59,8 +59,7 @@ export const CardDisplayInput = ({
         <Flex pointerEvents='auto' position='absolute' right={2}>
           <StyledTouchable
             onClick={handleEdit}
-            pointerEvents={disabled ? 'none' : ''}
-          >
+            pointerEvents={disabled ? 'none' : ''}>
             <Icon
               mr={5}
               size='small'

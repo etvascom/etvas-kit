@@ -178,19 +178,17 @@ export const SubdomainInput = forwardRef(
           onClick={focusInput}
           variant={variant}
           isValid={inputVariant === 'valid' || inputVariant === 'default'}
-          {...wrapperStyle}
-        >
+          {...wrapperStyle}>
           <Typography
             mr={!value ? prefixSpace : 0}
             color='textInputPlaceholder'
-            variant='labelSmall'
-          >
+            variant='labelSmall'>
             {prefix}
           </Typography>
           <StyledInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            ariaDisabled={readOnly || disabled}
+            aria-disabled={readOnly || disabled}
             disabled={disabled}
             suffixSpace={value ? suffixSpace : 0}
             prefixSpace={value ? prefixSpace : 0}
@@ -203,15 +201,13 @@ export const SubdomainInput = forwardRef(
             contentEditable={!disabled && 'plaintext-only'}
             onFocus={onInputFocus}
             onBlur={onInputBlur}
-            suppressContentEditableWarning={true}
-          >
+            suppressContentEditableWarning={true}>
             {valueRef.current}
           </StyledInput>
           <Suffix
             mr={!value ? suffixSpace : 0}
             color='textInputPlaceholder'
-            variant='labelSmall'
-          >
+            variant='labelSmall'>
             {!hasValue && placeholder}
           </Suffix>
           <Suffix color='textInputPlaceholder' variant='labelSmall'>
@@ -220,8 +216,7 @@ export const SubdomainInput = forwardRef(
           <StatusIcon
             position='absolute'
             alignItems='center'
-            justifyContent='center'
-          >
+            justifyContent='center'>
             {currentIcRight ? (
               <Icon
                 mr={5}

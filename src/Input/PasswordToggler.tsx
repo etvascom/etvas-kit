@@ -12,7 +12,7 @@ interface Props
   error?: boolean
   name?: string
   inputType: string
-  viewOption: (typeof toggleOptions)[number]
+  viewOption: ViewOption
 }
 
 export const PasswordToggler: FC<Props> = ({
@@ -68,3 +68,4 @@ const StyledTouchable = styled(Touchable)`
 `
 
 const toggleOptions = ['peek', 'toggle']
+type ViewOption = (typeof toggleOptions)[number]

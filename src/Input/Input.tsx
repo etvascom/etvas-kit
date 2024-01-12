@@ -20,9 +20,6 @@ import { PasswordToggler } from './PasswordToggler'
 import { SubLabel } from './SubLabel'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  ariaDisabled?: boolean
-  autoFocus?: boolean
-  disabled?: boolean
   error?: boolean | string | React.ReactNode
   warning?: boolean | string | React.ReactNode
   icLeft?: string
@@ -30,15 +27,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onIcRightClick?: () => void
   label?: React.ReactNode
   optionalText?: React.ReactNode
-  name?: string
   noBottomSpace?: boolean
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   passwordView?: 'peek' | 'toggle'
-  placeholder?: string
   placeholderTextColor?: string
-  readOnly?: boolean
-  required?: boolean
-  type?: string
   valid?: boolean | string
   variant?: string
   subLabel?: string
@@ -179,7 +170,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            ariaDisabled={readOnly || disabled}
+            aria-disabled={readOnly || disabled}
             disabled={disabled}
             error={error}
             id={id}
@@ -253,7 +244,7 @@ interface StyledInputProps extends Props {
 }
 
 const StyledInput = styled.input<StyledInputProps>(
-  css(typography.labelSmall as SystemStyleObject) as any,
+  css(typography.labelSmall as SystemStyleObject),
   variant({ variants }),
   ({ tinted, error, warning, disabled, paddingRight }: any) => ({
     backgroundColor: tinted && !(error || warning || disabled) && 'white',
