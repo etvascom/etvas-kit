@@ -1,6 +1,6 @@
 import { lg, md, sm } from '../utils'
 
-const _extract = (value, idx, defaultValue) => {
+const _extract = (value: any, idx: number, defaultValue: any) => {
   if (!value) {
     return defaultValue
   }
@@ -17,19 +17,27 @@ export default {
     borderRadius: '3px'
   },
 
-  contentBox: ({ theme, ratio }) => ({
+  contentBox: ({ theme, ratio }: { theme: any; ratio: number | number[] }) => ({
     flex: `${1 + _extract(ratio, 0, 0)} 0 ${100 * _extract(ratio, 0, 0)}%`,
     ...sm(theme)({
       flex: `${1 + _extract(ratio, 1, 0)} 0 ${100 * _extract(ratio, 1, 0)}%`
-    }),
+    } as any),
     ...md(theme)({
       flex: `${1 + _extract(ratio, 2, 0)} 0 ${100 * _extract(ratio, 2, 0)}%`
-    }),
+    } as any),
     ...lg(theme)({
       flex: `${1 + _extract(ratio, 3, 0)} 0 ${100 * _extract(ratio, 3, 0)}%`
-    })
+    } as any)
   }),
-  image: ({ theme, url, contain }) => ({
+  image: ({
+    theme,
+    url,
+    contain
+  }: {
+    theme: any
+    url: string
+    contain: string | string[]
+  }) => ({
     width: '100%',
     height: '100%',
     display: 'block',
@@ -40,12 +48,12 @@ export default {
     backgroundImage: `url(${url})`,
     ...sm(theme)({
       backgroundSize: _extract(contain, 1, 'cover')
-    }),
+    } as any),
     ...md(theme)({
       backgroundSize: _extract(contain, 2, 'cover')
-    }),
+    } as any),
     ...lg(theme)({
       backgroundSize: _extract(contain, 3, 'cover')
-    })
+    } as any)
   })
 }

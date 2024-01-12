@@ -1,34 +1,36 @@
-import PropTypes from 'prop-types'
+import React, { FC, PropsWithChildren } from 'react'
+
 import styled from 'styled-components'
 
 import { Box } from '../Box'
 import { Flex } from '../Flex'
-import { Card } from './Card'
+import { Card, CardProps } from './Card'
 import styles from './CardWithImage.styles'
 
-const CardWrapper = styled(Card)(styles.container)
+interface Props extends Omit<CardProps, 'variant'> {
+  imageUrl: string
+  imageSize?: number | number[]
+  imageContain?: string | string[]
+  vertical?: boolean
+  imgOnLeft?: boolean
+  contentPadding?: number | number[]
+  imagePadding?: number | number[]
+  variant?: 'default' | 'hero'
+}
 
-const Image = styled.div`
-  ${styles.image}
-`
-
-const ContentBox = styled(Box)`
-  ${styles.contentBox}
-`
-
-export const CardWithImage = ({
+export const CardWithImage: FC<PropsWithChildren<Props>> = ({
   imageUrl,
-  imageSize,
-  imageContain,
+  imageSize = 1 / 3,
+  imageContain = 'cover',
   vertical,
-  variant,
+  variant = 'default',
   children,
   imgOnLeft,
   contentPadding,
-  imagePadding,
+  imagePadding = 0,
   ...props
 }) => {
-  const flexDirection = vertical
+  const flexDirection: any = vertical // show tudor
     ? 'column'
     : ['column', imgOnLeft ? 'row' : 'row-reverse']
   const defaultContentPadding = variant === 'hero' ? [4, 8] : [2, 4]
@@ -45,16 +47,14 @@ export const CardWithImage = ({
         flexDirection={flexDirection}
         justifyContent='space-between'
         width='100%'
-        height='100%'
-      >
+        height='100%'>
         <ContentBox vertical={vertical} ratio={imageSize} p={imagePadding}>
           <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
         <ContentBox
           vertical={vertical}
           p={contentPadding ?? defaultContentPadding}
-          ratio={invImageSize}
-        >
+          ratio={invImageSize}>
           {children}
         </ContentBox>
       </Flex>
@@ -62,26 +62,24 @@ export const CardWithImage = ({
   )
 }
 
-CardWithImage.propTypes = {
-  ...Card.propTypes,
-  variant: PropTypes.oneOf(['default', 'hero']),
-  imageUrl: PropTypes.string.isRequired,
-  imageContain: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.string
-  ]),
-  imageSize: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
-    PropTypes.number
-  ]),
-  vertical: PropTypes.bool,
-  imgOnLeft: PropTypes.bool
+const CardWrapper = styled(Card)(styles.container)
+
+interface ImageProps {
+  url: Props['imageUrl']
+  contain: Props['imageContain']
 }
 
-CardWithImage.defaultProps = {
-  imageSize: 1 / 3,
-  variant: 'default',
-  imageContain: 'cover',
-  imagePadding: 0
+const Image = styled.div<ImageProps>`
+  ${styles.image as any}
+`
+
+interface ContentBoxProps {
+  vertical?: Props['vertical']
+  ratio?: Props['imageSize']
 }
+
+const ContentBox = styled(Box)<ContentBoxProps>`
+  ${styles.contentBox as any}
+`
+
 CardWithImage.displayName = 'CardWithImage'

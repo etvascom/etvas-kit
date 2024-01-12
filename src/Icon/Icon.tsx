@@ -37,7 +37,6 @@ export interface IconProps
     SpaceProps {
   name: string
   size?: 'small' | 'medium' | 'large'
-
   color?: string
   rotate?: number
   spin?: boolean
