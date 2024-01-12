@@ -30,7 +30,7 @@ export const Variants = () => {
           <Cell>Sample</Cell>
         </Row>
       </Header>
-      <Body>
+      <Body mode='web'>
         {variants.map(variant => (
           <Row key={variant}>
             <Cell>{variant}</Cell>

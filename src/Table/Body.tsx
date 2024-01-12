@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, PropsWithChildren, useContext } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ interface Props {
   mode: Styles
 }
 
-export const Body: FC<Props> = props => {
+export const Body: FC<PropsWithChildren<Props>> = props => {
   const { mode } = useContext(TableContext)
 
   return <StyledBody {...props} mode={mode as Styles} />
@@ -19,5 +19,9 @@ export const Body: FC<Props> = props => {
 const StyledBody = styled.tbody<Props>(({ mode }) =>
   css(styles[mode] as SystemStyleObject)
 )
+
+Body.defaultProps = {
+  mode: 'web'
+}
 
 type Styles = keyof typeof styles
