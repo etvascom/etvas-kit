@@ -12,11 +12,15 @@ import styles from './Card.styles'
 interface Props {
   leader?: React.ReactElement
 }
+
 interface CardSubComponents {
   Item: typeof CardItem
 }
 
-export const Card: FC<PropsWithChildren<Props>> & CardSubComponents = ({ leader, children }) => {
+export const Card: FC<PropsWithChildren<Props>> & CardSubComponents = ({
+  leader,
+  children
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleToggle = useCallback(

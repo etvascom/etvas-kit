@@ -1,4 +1,4 @@
-import React, {FC, useContext } from 'react'
+import React, { FC, useContext } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
@@ -6,14 +6,18 @@ import styled from 'styled-components'
 import styles from './Body.styles'
 import { TableContext } from './base'
 
-export const Body: FC<any> = props => {
+interface Props {
+  mode: Styles
+}
+
+export const Body: FC<Props> = props => {
   const { mode } = useContext(TableContext)
 
-  return <StyledBody {...props} mode={mode as keyof typeof styles} />
+  return <StyledBody {...props} mode={mode as Styles} />
 }
 
-interface StyledBodyProps {
-  mode: keyof typeof styles
-}
+const StyledBody = styled.tbody<Props>(({ mode }) =>
+  css(styles[mode] as SystemStyleObject)
+)
 
-const StyledBody = styled.tbody<StyledBodyProps>(({ mode }) => css(styles[mode] as SystemStyleObject))
+type Styles = keyof typeof styles

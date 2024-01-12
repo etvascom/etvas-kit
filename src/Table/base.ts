@@ -18,7 +18,7 @@ interface TableContextProps {
 
 export const TableContext = createContext<TableContextProps>({
   mode: 'web',
-  setHeaderCell: (idx: number, content: any) => {},
+  setHeaderCell: () => {},
   cells: [],
   verticalBreakpointDisplay: false
 })

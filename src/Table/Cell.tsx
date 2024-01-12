@@ -31,7 +31,7 @@ export const Cell: FC<PropsWithChildren<Props>> = ({
   }
 
   return (
-    <StyledTd type={type} leader={leader} mode={mode as keyof typeof styles}>
+    <StyledTd type={type} leader={leader} mode={mode as Styles}>
       {children}
     </StyledTd>
   )
@@ -43,8 +43,8 @@ const StyledDiv = styled.div(
 )
 
 interface StyledTdProps {
-  type: keyof typeof styles
-  mode: keyof typeof styles
+  type: Styles
+  mode: Styles
   leader: boolean
 }
 
@@ -56,3 +56,5 @@ const StyledTd = styled.td<StyledTdProps>(
 )
 
 Cell.displayName = 'Cell'
+
+type Styles = keyof typeof styles

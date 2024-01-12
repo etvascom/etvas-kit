@@ -1,4 +1,4 @@
-import React,{FC, PropsWithChildren, useMemo, useState } from 'react'
+import React, { FC, PropsWithChildren, useMemo, useState } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
@@ -50,9 +50,9 @@ export const Table: FC<PropsWithChildren<Props>> & TableSubComponents = ({
       cells,
       mode: actualMode,
       verticalBreakpointDisplay,
-      setHeaderCell: (idx:number, content:any) => {
+      setHeaderCell: (idx: number, content: any) => {
         if (!cells || cells[idx] !== content) {
-          const newCells:any[] = [...cells]
+          const newCells: any[] = [...cells]
           newCells[idx] = content
           setCells(newCells)
         }
@@ -72,13 +72,13 @@ export const Table: FC<PropsWithChildren<Props>> & TableSubComponents = ({
 
 const Wrapper = styled.div(css(styles.wrapper))
 
-
 interface StyledTableProps {
-  mode: keyof typeof styles
-
+  mode: Styles
 }
-const StyledTable = styled.table<StyledTableProps>(css(styles.default as SystemStyleObject), ({ mode }) =>
-  css(styles[mode] as SystemStyleObject)
+
+const StyledTable = styled.table<StyledTableProps>(
+  css(styles.default as SystemStyleObject),
+  ({ mode }) => css(styles[mode] as SystemStyleObject)
 )
 
 Table.Cell = Cell
@@ -92,8 +92,13 @@ interface Size {
 }
 
 const useResizeObserverRaf = () => {
-  const [size, setSize] = useState<Size>({ width: undefined, height: undefined })
+  const [size, setSize] = useState<Size>({
+    width: undefined,
+    height: undefined
+  })
   const onResize = (size: Size) => requestAnimationFrame(() => setSize(size))
   const { ref } = useResizeObserver({ onResize })
   return { ref, ...size }
 }
+
+type Styles = keyof typeof styles

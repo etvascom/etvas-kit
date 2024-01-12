@@ -65,7 +65,7 @@ export const Row: FC<PropsWithChildren> = ({ children }) => {
   }
 
   return (
-    <StyledTr mode={mode as keyof typeof styles}>
+    <StyledTr mode={mode as Styles}>
       {childArray.map((child, idx) =>
         cloneElement(child, { idx, key: idx, type })
       )}
@@ -76,7 +76,7 @@ export const Row: FC<PropsWithChildren> = ({ children }) => {
 const PseudoRow = styled.tr(css(styles.pseudoTr))
 
 interface StyledTrProps {
-  mode: keyof typeof styles
+  mode: Styles
 }
 
 const StyledTr = styled.tr<StyledTrProps>(({ mode }) =>
@@ -88,3 +88,5 @@ Row.propTypes = {
 }
 
 Row.displayName = 'Row'
+
+type Styles = keyof typeof styles
