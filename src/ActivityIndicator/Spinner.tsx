@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { hex2Rgba, themed } from '../utils'
+import { Colors } from './ActivityIndicator'
 
 const backgroundColour = (
   () =>
@@ -23,17 +24,14 @@ const complementaryColour = (
 )()
 
 interface Props {
-  size: string | number
-  colors: {
-    background: string
-    primary: string
-  }
+  size?: string | number
+  colors: Colors
 }
 
 export const Spinner = styled.div<Props>`
   font-size: 10px;
   text-indent: -9999em;
-  ${({ size }: { size: string | number }) => {
+  ${({ size }: Pick<Props, 'size'>) => {
     if (typeof size === 'number')
       return css`
         width: ${size}px;

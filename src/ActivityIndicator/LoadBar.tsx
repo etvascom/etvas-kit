@@ -11,7 +11,7 @@ interface Props {
 export const LoadBar: FC<Props> = ({ colors, ...props }) => (
   <Box bg='brand' height='4px' position='relative' width={1} {...props}>
     {colors.map(color => (
-      <Bar bg={color} colourList={colors} key={color} />
+      <Bar bg={color} colorList={colors} key={color} />
     ))}
   </Box>
 )
@@ -33,17 +33,17 @@ const loading = keyframes`
   }
 `
 
-const loopColours = ({ colourList }: BarProps) =>
-  colourList.map(
+const loopColors = ({ colorList }: BarProps) =>
+  colorList.map(
     (_, ix) => css`
       &:nth-child(n + ${ix + 1}) {
-        animation: ${loading} ${colourList.length}s linear ${ix}s infinite;
+        animation: ${loading} ${colorList.length}s linear ${ix}s infinite;
       }
     `
   )
-  
+
 interface BarProps {
-  colourList: string[]
+  colorList: string[]
 }
 
 const Bar = styled(Box)<BarProps>`
@@ -55,7 +55,7 @@ const Bar = styled(Box)<BarProps>`
   text-align: center;
   width: 0;
 
-  ${loopColours};
+  ${loopColors};
 `
 
 LoadBar.defaultProps = {

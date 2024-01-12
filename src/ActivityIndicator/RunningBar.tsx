@@ -1,17 +1,19 @@
 import React, { FC } from 'react'
+
 import styled, { keyframes } from 'styled-components'
 
 import { Box } from '../Box'
 import { themed } from '../utils'
+import { Colors } from './ActivityIndicator'
 
 interface Props {
-  colors: {
-    background: string
-    primary: string
-  }
+  colors: Colors
 }
 
-export const RunningBar:FC<Props> = ({ colors: { background, primary }, ...props }) => (
+export const RunningBar: FC<Props> = ({
+  colors: { background, primary },
+  ...props
+}) => (
   <Bar
     bg={background}
     height='4px'

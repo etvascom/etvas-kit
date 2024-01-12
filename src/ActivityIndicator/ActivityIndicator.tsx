@@ -1,25 +1,22 @@
 import React, { FC } from 'react'
 
+import { VariantProp } from '../utils/types'
 import { LoadBar } from './LoadBar'
 import { RunningBar } from './RunningBar'
 import { Spinner } from './Spinner'
 
-interface Colors {
+export interface Colors {
   background: string
   primary: string
 }
 
+type VariantKey = (typeof activityIndicators)[number]
+
 interface Props {
   colors?: string[] | Colors
-  variant?: (typeof activityIndicators)[number]
+  variant?: VariantProp<VariantKey>
   size?: string | number
 }
-
-/**
- * spinner, runningbar -> colors: { background: '', primary: '' };
- *
- * loadbar -> colors: String[]
- */
 
 export const ActivityIndicator: FC<Props> = ({
   variant,
@@ -33,13 +30,7 @@ export const ActivityIndicator: FC<Props> = ({
   if (variant === 'runningbar') {
     return <RunningBar colors={colors as Colors} {...props} />
   }
-  return (
-    <Spinner
-      colors={colors as Colors}
-      size={size as string | number}
-      {...props}
-    />
-  )
+  return <Spinner colors={colors as Colors} size={size} {...props} />
 }
 
 const activityIndicators = ['spinner', 'loadbar', 'runningbar']
