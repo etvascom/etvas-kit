@@ -1,5 +1,5 @@
 import {
-  HTMLAttributes,
+  ButtonHTMLAttributes,
   FC,
   PropsWithChildren,
   useCallback,
@@ -28,8 +28,10 @@ import {
 
 import { themed } from '../utils'
 
+type Effect = (typeof effects)[number]
+
 export interface TouchableProps
-  extends HTMLAttributes<HTMLButtonElement>,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     BorderProps,
     FlexboxProps,
     LayoutProps,
@@ -37,9 +39,7 @@ export interface TouchableProps
     SpaceProps,
     TypographyProps {
   activeOpacity?: number | string
-  disabled?: boolean
-  effect: (typeof effects)[number]
-  type?: 'button' | 'submit' | 'reset'
+  effect: Effect
   underlayColor?: string
 }
 
@@ -115,11 +115,7 @@ const touchableWithEffect = ({
   effect,
   activeOpacity,
   underlayColor
-}: {
-  effect: (typeof effects)[number]
-  activeOpacity?: number | string
-  underlayColor?: string
-}) => {
+}: WrapperProps) => {
   switch (effect) {
     case 'opacity':
       return css`
@@ -148,12 +144,10 @@ const touchableWithEffect = ({
   }
 }
 
-interface WrapperProps {
-  disabled?: boolean
-  effect: (typeof effects)[number]
-  activeOpacity?: number | string
-  underlayColor?: string
-}
+type WrapperProps = Pick<
+  TouchableProps,
+  'effect' | 'activeOpacity' | 'underlayColor'
+>
 
 const Wrapper = styled.button<WrapperProps>`
   background: transparent;
