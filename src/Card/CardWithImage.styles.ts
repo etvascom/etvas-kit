@@ -16,7 +16,6 @@ export default {
     overflow: 'hidden',
     borderRadius: '3px'
   },
-
   contentBox: ({ theme, ratio }: { theme: any; ratio: number | number[] }) => ({
     flex: `${1 + _extract(ratio, 0, 0)} 0 ${100 * _extract(ratio, 0, 0)}%`,
     ...sm(theme)({

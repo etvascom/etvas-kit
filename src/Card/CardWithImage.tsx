@@ -30,9 +30,10 @@ export const CardWithImage: FC<PropsWithChildren<Props>> = ({
   imagePadding = 0,
   ...props
 }) => {
-  const flexDirection: any = vertical // show tudor
+  const flexDirection: any = vertical
     ? 'column'
     : ['column', imgOnLeft ? 'row' : 'row-reverse']
+
   const defaultContentPadding = variant === 'hero' ? [4, 8] : [2, 4]
 
   const invImageSize = Array.isArray(imageSize)
@@ -62,7 +63,7 @@ export const CardWithImage: FC<PropsWithChildren<Props>> = ({
   )
 }
 
-const CardWrapper = styled(Card)(styles.container)
+const CardWrapper = styled(Card)<any>(styles.container)
 
 interface ImageProps {
   url: Props['imageUrl']
