@@ -18,15 +18,21 @@ export default {
   },
   contentBox: ({ theme, ratio }: { theme: any; ratio: number | number[] }) => ({
     flex: `${1 + _extract(ratio, 0, 0)} 0 ${100 * _extract(ratio, 0, 0)}%`,
-    ...sm(theme)({
-      flex: `${1 + _extract(ratio, 1, 0)} 0 ${100 * _extract(ratio, 1, 0)}%`
-    } as any),
-    ...md(theme)({
-      flex: `${1 + _extract(ratio, 2, 0)} 0 ${100 * _extract(ratio, 2, 0)}%`
-    } as any),
-    ...lg(theme)({
-      flex: `${1 + _extract(ratio, 3, 0)} 0 ${100 * _extract(ratio, 3, 0)}%`
-    } as any)
+    ...sm(theme)([
+      {
+        flex: `${1 + _extract(ratio, 1, 0)} 0 ${100 * _extract(ratio, 1, 0)}%`
+      }
+    ]),
+    ...md(theme)([
+      {
+        flex: `${1 + _extract(ratio, 2, 0)} 0 ${100 * _extract(ratio, 2, 0)}%`
+      }
+    ]),
+    ...lg(theme)([
+      {
+        flex: `${1 + _extract(ratio, 3, 0)} 0 ${100 * _extract(ratio, 3, 0)}%`
+      }
+    ])
   }),
   image: ({
     theme,
@@ -45,14 +51,20 @@ export default {
     backgroundPosition: 'center',
     position: 'relative',
     backgroundImage: `url(${url})`,
-    ...sm(theme)({
-      backgroundSize: _extract(contain, 1, 'cover')
-    } as any),
-    ...md(theme)({
-      backgroundSize: _extract(contain, 2, 'cover')
-    } as any),
-    ...lg(theme)({
-      backgroundSize: _extract(contain, 3, 'cover')
-    } as any)
+    ...sm(theme)([
+      {
+        backgroundSize: _extract(contain, 1, 'cover')
+      }
+    ]),
+    ...md(theme)([
+      {
+        backgroundSize: _extract(contain, 2, 'cover')
+      }
+    ]),
+    ...lg(theme)([
+      {
+        backgroundSize: _extract(contain, 3, 'cover')
+      }
+    ])
   })
 }

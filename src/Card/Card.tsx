@@ -15,8 +15,7 @@ export interface CardProps extends BoxProps {
 }
 
 export const Card = styled(Box)<CardProps>(
-  props =>
-    css(mergeDeep({}, styles, compose(color, border, shadow)(props))) as any,
+  props => css(mergeDeep({}, styles, compose(color, border, shadow)(props))),
   ({ theme }) =>
     variant({
       variants: mergeDeep({}, variants, theme.cards)
