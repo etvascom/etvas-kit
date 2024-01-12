@@ -22,6 +22,7 @@ import {
   variant
 } from 'styled-system'
 
+import { VariantProp } from '../utils/types'
 import variants from './variants'
 
 type VariantKey = keyof typeof variants
@@ -36,7 +37,7 @@ export interface TypographyProps
     StyledSystemTypographyProps {
   as?: string
   truncate?: boolean | number | string
-  variant: VariantKey | VariantKey[] | object | string | string[] // allowing string and string[] lets us specify custom variants in components that override the default typography variants such as sublabel
+  variant: VariantProp<VariantKey>
   overflowWrap?: CSS.Property.OverflowWrap
 }
 

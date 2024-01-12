@@ -1,4 +1,10 @@
-import React, { FC, PropsWithChildren, useMemo } from 'react'
+import React, {
+  ButtonHTMLAttributes,
+  FC,
+  HTMLAttributes,
+  PropsWithChildren,
+  useMemo
+} from 'react'
 
 import styled from 'styled-components'
 import {
@@ -17,22 +23,23 @@ import { Typography } from '../Typography'
 import colors from '../assets/colors'
 import sizes from '../assets/sizes'
 import { brandingService } from '../providers/BrandingService'
+import { VariantProp } from '../utils/types'
 import variants from './variants'
 
 const defaultVariants = variants({ colorVariants: {} })
 type VariantKey = keyof typeof defaultVariants
 
-interface Props extends LayoutProps, PositionProps, SpaceProps {
+interface Props
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    LayoutProps,
+    PositionProps,
+    SpaceProps {
   iconColor?: string
   color?: keyof typeof colors
   icon?: string
-  disabled?: boolean
   loading?: boolean
-  onClick?: () => void
-  type?: 'button' | 'submit' | 'reset'
-  variant: VariantKey | VariantKey[] | object
+  variant: VariantProp<VariantKey>
   iconPosition?: 'left' | 'right'
-  id?: string
 }
 
 const Button: FC<PropsWithChildren<Props>> = ({
@@ -79,8 +86,8 @@ const Button: FC<PropsWithChildren<Props>> = ({
       disabled={disabled}
       id={id}
       onClick={onClick}
-      type={type as 'button' | 'submit' | 'reset'}
-      variant={variant} 
+      type={type}
+      variant={variant}
       hSpacing={Number(hSpacing) || 0}
       colorVariants={colorVariants}
       {...rest}>
@@ -123,7 +130,7 @@ const Button: FC<PropsWithChildren<Props>> = ({
 
 interface StyledButtonProps {
   hSpacing: number
-  variant: VariantKey | VariantKey[] | object
+  variant: Props['variant']
   colorVariants: object
 }
 

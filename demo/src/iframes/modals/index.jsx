@@ -26,8 +26,7 @@ export const ModalChild = () => {
         <Modal
           backDrop='whiteShadow'
           onBackDropClick={toggleModal}
-          onEscape={toggleModal}
-        >
+          onEscape={toggleModal}>
           <Modal.Content onClose={toggleModal}>
             <Card p={4} width='300px'>
               <Typography variant='textLarge'>Modal content</Typography>
