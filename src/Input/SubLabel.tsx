@@ -4,11 +4,14 @@ import styled from 'styled-components'
 import { variant as variantBuilder } from 'styled-system'
 
 import { Typography, TypographyProps } from '../Typography'
+import { VariantProp } from '../utils/types'
 import { default as variants } from './SubLabel.variants'
+
+type VariantKey = keyof typeof variants
 
 interface Props extends Omit<TypographyProps, 'variant'> {
   preserveSpace?: boolean
-  variant: string
+  variant: VariantProp<VariantKey>
   content?: any
 }
 
@@ -26,4 +29,5 @@ const Wrapper = styled(Typography)<Omit<Props, 'content'>>`
 const Span = styled.span`
   letter-spacing: inherit;
 `
+
 SubLabel.displayName = 'SubLabel'
