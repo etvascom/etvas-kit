@@ -13,7 +13,7 @@
     "umd"
   ],
   "scripts": {
-    "build": "node build.js",
+    "build": "node build.js && tsc --outDir es && tsc --outDir lib",
     "clean": "rm -rf lib es",
     "start": "BROWSER=none node build --serve",
     "format": "prettier-eslint \"$PWD/src/**/*.{js,jsx}\" --write",
