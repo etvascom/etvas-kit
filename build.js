@@ -1,12 +1,13 @@
-/* eslint-disable noconsole */
+/* eslint-disable no-console */
 import browserslist from 'browserslist'
-import esbuild, { BuildOptions } from 'esbuild'
+import esbuild from 'esbuild'
 import { nodeExternalsPlugin } from 'esbuild-node-externals'
 import { esbuildPluginBrowserslist } from 'esbuild-plugin-browserslist'
+import esbuildPluginTsc from 'esbuild-plugin-tsc'
 import esbuildServe from 'esbuild-serve'
 
 const build = () => {
-  const config: BuildOptions = {
+  const config = {
     logLevel: 'info',
     entryPoints: ['src/index.ts'],
     minify: true,
@@ -20,6 +21,7 @@ const build = () => {
       '.svg': 'text'
     },
     plugins: [
+      esbuildPluginTsc(),
       nodeExternalsPlugin(),
       esbuildPluginBrowserslist(browserslist(), {
         printUnknownTargets: false

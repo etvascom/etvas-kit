@@ -13,7 +13,7 @@
     "umd"
   ],
   "scripts": {
-    "build": "ts-node --esm build.ts & tsc -noEmit --jsx react",
+    "build": "node build.js",
     "clean": "rm -rf lib es",
     "start": "BROWSER=none node build --serve",
     "format": "prettier-eslint \"$PWD/src/**/*.{js,jsx}\" --write",
@@ -90,6 +90,7 @@
     "esbuild-node-externals": "^1.11.0",
     "esbuild-plugin-browserslist": "^0.10.0",
     "esbuild-plugin-svgr": "^2.1.0",
+    "esbuild-plugin-tsc": "^0.4.0",
     "esbuild-serve": "^1.0.1",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-babel": "^5.3.0",
