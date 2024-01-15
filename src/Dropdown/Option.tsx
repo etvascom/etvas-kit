@@ -77,6 +77,7 @@ const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
 
   return (
     <Option
+      id={id}
       role='option'
       onClick={_handleClick}
       selected={selected}
@@ -98,7 +99,8 @@ const TextWrapper = styled.div(
   })
 )
 
-interface StyledOptionProps extends Pick<OptionProps, 'hasCheckbox' | 'selected'> {
+interface StyledOptionProps
+  extends Pick<OptionProps, 'hasCheckbox' | 'selected'> {
   hovering?: OptionProps['hasKeyboardFocus']
   touch?: boolean
 }

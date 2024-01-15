@@ -322,6 +322,7 @@ const Dropdown: FC<PropsWithChildren<Props>> & DropdownSubComponents = ({
           disabled={disabled}
           type='button'
           role='switch'
+          id={id}
           aria-controls={`drop-${cId}`}
           error={error}
           tinted={tinted}
