@@ -1,7 +1,13 @@
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import React, {
+  FC,
+  OptionHTMLAttributes,
+  PropsWithChildren,
+  useLayoutEffect,
+  useMemo,
+  useRef
+} from 'react'
 
-import css from '@styled-system/css'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 
 import { Box } from '../Box'
@@ -10,16 +16,23 @@ import { Flex } from '../Flex'
 import { typography } from '../Typography'
 import sizes from '../assets/sizes'
 
-const DropdownItem = ({
+export interface OptionProps extends OptionHTMLAttributes<HTMLDivElement> {
+  onSelectItem: (value: any) => void
+  hasKeyboardFocus?: boolean
+  hasCheckbox?: boolean
+  value: any
+}
+
+const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
   children,
   onSelectItem,
-  disabled,
-  isSelected,
-  hasKeyboardFocus,
+  disabled = false,
+  selected = false,
+  hasKeyboardFocus = false,
   value,
-  hasCheckbox
+  hasCheckbox = false
 }) => {
-  const optionRef = useRef()
+  const optionRef = useRef<HTMLDivElement>(null)
 
   const _handleClick = () => {
     if (!disabled) {
@@ -30,8 +43,7 @@ const DropdownItem = ({
   const hasTouch = useMemo(
     () =>
       'ontouchstart' in document.documentElement ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0,
+      navigator.maxTouchPoints > 0,
     []
   )
 
@@ -44,8 +56,8 @@ const DropdownItem = ({
       <Box mr={3}>
         <Checkbox
           size='small'
-          checked={isSelected}
-          aria-checked={isSelected}
+          checked={selected}
+          aria-checked={selected}
           onChange={_handleClick}
           onClick={e => e.stopPropagation()}
         />
@@ -56,7 +68,10 @@ const DropdownItem = ({
 
   useLayoutEffect(() => {
     if (hasKeyboardFocus) {
-      optionRef.current.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+      optionRef.current?.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest'
+      })
     }
   }, [hasKeyboardFocus])
 
@@ -64,12 +79,11 @@ const DropdownItem = ({
     <Option
       role='option'
       onClick={_handleClick}
-      selected={isSelected}
+      selected={selected}
       hovering={hasKeyboardFocus}
       touch={hasTouch}
       hasCheckbox={hasCheckbox}
-      ref={optionRef}
-    >
+      ref={optionRef}>
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
@@ -84,7 +98,12 @@ const TextWrapper = styled.div(
   })
 )
 
-const Option = styled(Flex)(
+interface StyledOptionProps extends Pick<OptionProps, 'hasCheckbox' | 'selected'> {
+  hovering?: OptionProps['hasKeyboardFocus']
+  touch?: boolean
+}
+
+const Option = styled(Flex)<StyledOptionProps>(
   css({
     ...typography.labelSmall,
     paddingLeft: 3,
@@ -97,14 +116,14 @@ const Option = styled(Flex)(
     outline: 'none',
     height: sizes.dropdownItemHeightMobile,
     lineHeight: sizes.dropdownItemHeightMobile
-  }),
-  ({ hovering }) =>
+  } as SystemStyleObject),
+  ({ hovering }: StyledOptionProps) =>
     hovering
       ? css({
           backgroundColor: 'brandLighter'
         })
       : null,
-  ({ touch }) =>
+  ({ touch }: StyledOptionProps) =>
     !touch
       ? css({
           '&:hover': {
@@ -112,7 +131,7 @@ const Option = styled(Flex)(
           }
         })
       : null,
-  ({ selected, hasCheckbox }) =>
+  ({ selected, hasCheckbox }: StyledOptionProps) =>
     selected && !hasCheckbox
       ? css({
           backgroundColor: 'brand',
@@ -123,27 +142,5 @@ const Option = styled(Flex)(
         })
       : null
 )
-
-DropdownItem.propTypes = {
-  children: PropTypes.node,
-  isSelected: PropTypes.bool,
-  hasKeyboardFocus: PropTypes.bool,
-  disabled: PropTypes.bool,
-  hasCheckbox: PropTypes.bool,
-  onSelectItem: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-    PropTypes.number
-  ])
-}
-
-DropdownItem.defaultProps = {
-  disabled: false,
-  isSelected: false,
-  hasKeyboardFocus: false,
-  checkbox: false
-}
 
 export default DropdownItem

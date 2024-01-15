@@ -1,4 +1,4 @@
-export const isEqual = (object1, object2) => {
+export const isEqual = (object1: any, object2: any) => {
   if (typeof object1 !== typeof object2) {
     return false
   }

@@ -1,5 +1,9 @@
-import {
+import React, {
+  ButtonHTMLAttributes,
   Children,
+  FC,
+  HTMLAttributes,
+  PropsWithChildren,
   cloneElement,
   isValidElement,
   useCallback,
@@ -10,38 +14,65 @@ import {
   useState
 } from 'react'
 
-import css from '@styled-system/css'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
-import { SubLabel } from '../Input/SubLabel'
-import { Label } from '../Label'
+import { SubLabel, SubLabelProps } from '../Input/SubLabel'
+import { Label, LabelProps } from '../Label'
 import { typography } from '../Typography'
 import sizes from '../assets/sizes'
 import { isEqual } from '../utils/isEqual'
+import { Error } from '../utils/types'
 import Heading from './Heading'
-import Option from './Option'
+import Option, { OptionProps } from './Option'
 
-const Dropdown = ({
-  disabled,
-  multiple,
+interface Props
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'id'>,
+    Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
+    Partial<Pick<LabelProps, 'label' | 'optionalText'>> {
+  multiple?: boolean
+  error?: Error
+  value?: any
+  id?: LabelProps['inputId']
+  required?: LabelProps['showOptionalText']
+  noBottomSpace?: SubLabelProps['preserveSpace']
+  searchMaxResults?: number
+  searchThreshold?: number
+  onChange?: (value: any) => void
+  valueRender?: ((value: any) => string) | string
+  itemSelected?: (value: any, item: any) => boolean
+  itemFilter?: (search: string, item: any) => boolean
+  placeholder?: React.ReactNode
+  searchPlaceholder?: string
+  tinted?: boolean
+  showTooltip?: boolean
+}
+
+interface DropdownSubComponents {
+  Option: typeof Option
+  Heading: typeof Heading
+}
+
+const Dropdown: FC<PropsWithChildren<Props>> & DropdownSubComponents = ({
+  disabled = false,
+  multiple = false,
   error,
   label,
   optionalText,
-  value,
+  value = '',
   id,
-  required,
+  required = false,
   noBottomSpace,
-  searchThreshold,
-  searchMaxResults,
-  placeholder,
-  valueRender,
-  itemSelected,
-  itemFilter,
-  searchPlaceholder,
-  onChange,
+  searchThreshold = 20,
+  searchMaxResults = 30,
+  placeholder = 'Please select an option',
+  valueRender = defaultValueRender,
+  itemSelected = defaultItemSelected,
+  itemFilter = defaultItemFilter,
+  onChange = defaultOnChange,
+  searchPlaceholder = 'Type to search in #len items. Max 30 items shown.',
   tinted,
   children,
   showTooltip,
@@ -52,18 +83,21 @@ const Dropdown = ({
   const [search, setSearch] = useState('')
   const [currentKeyboardFocus, setCurrentKeyboardFocus] = useState(-1)
 
-  const wrapper = useRef()
-  const searchField = useRef()
+  const wrapper = useRef<HTMLDivElement>(null)
+  const searchField = useRef<HTMLInputElement>(null)
 
   useLayoutEffect(() => {
-    const clickOutside = event => {
-      if (!wrapper.current.contains(event.target)) {
+    const clickOutside = (event: any) => {
+      if (!wrapper.current?.contains(event.target)) {
         setCollapsed(true)
       }
     }
-    window.addEventListener('click', clickOutside, { passive: true })
+    const options: AddEventListenerOptions & EventListenerOptions = {
+      passive: true
+    }
+    window.addEventListener('click', clickOutside, options)
     return () => {
-      window.removeEventListener('click', clickOutside, { passive: true })
+      window.removeEventListener('click', clickOutside, options)
     }
   }, [])
 
@@ -82,10 +116,10 @@ const Dropdown = ({
     () => (search ? search.trim().toLocaleLowerCase() : ''),
     [search]
   )
-  const searchPh = useMemo(
-    () => searchPlaceholder.replace('#len', children ? children.length : '?'),
-    [searchPlaceholder, children]
-  )
+  const searchPh = useMemo(() => {
+    const replaceWith = Array.isArray(children) ? children.length : '?'
+    return searchPlaceholder.replace('#len', replaceWith.toString())
+  }, [searchPlaceholder, children])
 
   const cId = useMemo(
     () => id || `dd-${Math.floor(1000000 * Math.random())}`,
@@ -130,7 +164,7 @@ const Dropdown = ({
     setSwipe(true)
   }
 
-  const decide = event => {
+  const decide = (event: any) => {
     if (isSwipe) {
       event.preventDefault()
       event.stopPropagation()
@@ -139,7 +173,7 @@ const Dropdown = ({
   }
 
   const onSelectItem = useCallback(
-    option => {
+    (option: any) => {
       if (multiple) {
         const newValues = isEmpty ? [] : [...value]
         const idx = isObject(option)
@@ -162,7 +196,7 @@ const Dropdown = ({
     [isEmpty, multiple, onChange, value]
   )
 
-  const setSearchText = event => {
+  const setSearchText = (event: any) => {
     setSearch(event.target.value)
   }
 
@@ -175,11 +209,14 @@ const Dropdown = ({
       return Children.toArray(children).slice(0, searchMaxResults)
     }
     return Children.toArray(children)
-      .filter(child => itemFilter(searchText, child.props.value))
+      .filter(child =>
+        itemFilter(searchText, isValidElement(child) && child.props.value)
+      )
       .slice(0, searchMaxResults)
   }, [hasSearch, searchText, children, itemFilter, searchMaxResults])
 
-  const isItemSelected = item => (!isEmpty ? itemSelected(value, item) : false)
+  const isItemSelected = (item: any) =>
+    !isEmpty ? itemSelected(value, item) : false
 
   const dropdownBorderClr = useMemo(
     () =>
@@ -191,38 +228,41 @@ const Dropdown = ({
     setCurrentKeyboardFocus(-1)
   }, [])
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (event: any) => {
     if (isCollapsed) {
       return
     }
 
-    switch (e.code) {
+    switch (event.code) {
       case 'Escape':
-        e.preventDefault()
+        event.preventDefault()
         setCollapsed(true)
         break
 
       case 'ArrowDown':
-        e.preventDefault()
+        event.preventDefault()
         setCurrentKeyboardFocus(hover =>
           Math.min(options.length - 1, Math.max(-1, hover + 1))
         )
         break
 
       case 'ArrowUp':
-        e.preventDefault()
+        event.preventDefault()
         setCurrentKeyboardFocus(hover =>
           Math.min(options.length - 1, Math.max(-1, hover - 1))
         )
         break
 
       case 'Enter':
-        e.preventDefault()
-        if (
-          currentKeyboardFocus !== -1 &&
-          !options[currentKeyboardFocus].props.disabled
-        ) {
-          onSelectItem(options[currentKeyboardFocus].props.value)
+        event.preventDefault()
+        const currentOption = options[currentKeyboardFocus]
+
+        if (!isValidElement(currentOption)) {
+          break
+        }
+
+        if (currentKeyboardFocus !== -1 && !currentOption.props.disabled) {
+          onSelectItem(currentOption.props.value)
         }
         break
 
@@ -241,15 +281,15 @@ const Dropdown = ({
       return
     }
 
-    const optionIndex = options.findIndex(option =>
-      isEqual(option.props.value, value)
+    const optionIndex = options.findIndex(
+      option => isValidElement(option) && isEqual(option.props.value, value)
     )
 
     setCurrentKeyboardFocus(optionIndex)
   }, [isCollapsed, options, value, multiple])
 
   return (
-    <StyledFlex flexDirection='column' hasLabel={label} width={1} {...props}>
+    <StyledFlex flexDirection='column' width={1} {...props}>
       {label && (
         <Label
           label={label}
@@ -266,11 +306,9 @@ const Dropdown = ({
         aria-expanded={!isCollapsed}
         onKeyDown={handleKeyDown}
         onMouseMove={removeCurrentKeyboardFocus}
-        tabIndex='0'
+        tabIndex={0}
         ref={wrapper}
-        error={error}
-        {...props}
-      >
+        {...props}>
         <StyledIndicator
           size='small'
           color='inputIcon'
@@ -287,8 +325,7 @@ const Dropdown = ({
           aria-controls={`drop-${cId}`}
           error={error}
           tinted={tinted}
-          onClick={toggleDropdown}
-        >
+          onClick={toggleDropdown}>
           {isEmpty ? placeholder : displayValue}
         </Toggler>
         <DropdownList
@@ -299,8 +336,7 @@ const Dropdown = ({
           onTouchStart={clicked}
           onTouchMove={inhibit}
           onTouchEnd={decide}
-          borderClr={dropdownBorderClr}
-        >
+          borderClr={dropdownBorderClr}>
           {hasSearch ? (
             <SearchInput
               ref={searchField}
@@ -314,10 +350,10 @@ const Dropdown = ({
           ) : null}
           <ScrollingList aria-labelledby={cId} role='menu' id={`drop-${cId}`}>
             {options.map((child, idx) =>
-              isValidElement(child)
+              isValidElement<OptionProps>(child)
                 ? cloneElement(child, {
                     onSelectItem,
-                    isSelected: isItemSelected(child.props.value),
+                    selected: isItemSelected(child.props.value),
                     hasKeyboardFocus: currentKeyboardFocus === idx,
                     hasCheckbox: multiple
                   })
@@ -343,7 +379,11 @@ const StyledFlex = styled(Flex)(
   })
 )
 
-const Toggler = styled.button(
+interface TogglerProps extends Pick<Props, 'error' | 'disabled' | 'tinted'> {
+  dataCollapsed: boolean
+}
+
+const Toggler = styled.button<TogglerProps>(
   css({
     ...typography.labelSmall,
     appearance: 'none',
@@ -370,15 +410,15 @@ const Toggler = styled.button(
       borderStyle: 'solid',
       borderColor: 'brandLight'
     }
-  }),
-  ({ error }) =>
+  } as SystemStyleObject),
+  ({ error }: TogglerProps) =>
     error
       ? css({
           color: 'error',
           borderColor: 'error'
         })
       : null,
-  ({ disabled }) =>
+  ({ disabled }: TogglerProps) =>
     disabled
       ? css({
           color: 'textInputDisabled',
@@ -387,11 +427,11 @@ const Toggler = styled.button(
           backgroundColor: 'backgroundGray'
         })
       : null,
-  ({ tinted, error, disabled }) => ({
-    backgroundColor: tinted && !(error || disabled) && 'white',
-    borderColor: tinted && !(error || disabled) && 'white'
+  ({ tinted, error, disabled }: TogglerProps) => ({
+    backgroundColor: tinted && !(error || disabled) ? 'white' : 'initial',
+    borderColor: tinted && !(error || disabled) ? 'white' : 'initial'
   }),
-  ({ dataCollapsed }) =>
+  ({ dataCollapsed }: TogglerProps) =>
     !dataCollapsed
       ? css({
           borderBottomLeftRadius: 0,
@@ -400,16 +440,6 @@ const Toggler = styled.button(
         })
       : null
 )
-
-Toggler.propTypes = {
-  collapsed: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
-  onClick: PropTypes.func
-}
 
 const StyledIndicator = styled(Icon)(
   css({
@@ -444,7 +474,12 @@ const DropdownWrapper = styled.div(
   })
 )
 
-const DropdownList = styled.div(
+interface DropdownListProps {
+  collapsed: boolean
+  borderClr: string
+}
+
+const DropdownList = styled.div<DropdownListProps>(
   css({
     position: 'absolute',
     left: 0,
@@ -464,8 +499,9 @@ const DropdownList = styled.div(
     paddingBottom: 3,
     boxShadow: 'etvasCard'
   }),
-  ({ collapsed }) => css({ display: collapsed ? 'none' : 'block' }),
-  ({ borderClr }) =>
+  ({ collapsed }: DropdownListProps) =>
+    css({ display: collapsed ? 'none' : 'block' }),
+  ({ borderClr }: DropdownListProps) =>
     css({
       borderLeftColor: borderClr,
       borderRightColor: borderClr,
@@ -473,18 +509,7 @@ const DropdownList = styled.div(
     })
 )
 
-DropdownList.propTypes = {
-  collapsed: PropTypes.bool,
-  borderClr: PropTypes.string,
-  onMouseDown: PropTypes.func,
-  onMouseMove: PropTypes.func,
-  onMouseUp: PropTypes.func,
-  onTouchStart: PropTypes.func,
-  onTouchMove: PropTypes.func,
-  onTouchEnd: PropTypes.func
-}
-
-const ScrollingList = styled.div(
+const ScrollingList = styled.div<any>(
   css({
     maxHeight: '172px',
     overflowX: 'hidden',
@@ -506,63 +531,31 @@ const SearchInput = styled.input(
     borderBottomColor: 'inputBorderGray',
     borderBottomStyle: 'solid',
     borderRadius: 0
-  })
+  } as SystemStyleObject)
 )
 
-Dropdown.propTypes = {
-  disabled: PropTypes.bool,
-  multiple: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  optionalText: PropTypes.node,
-  id: PropTypes.string,
-  required: PropTypes.bool,
-  noBottomSpace: PropTypes.bool,
-  searchMaxResults: PropTypes.number,
-  searchThreshold: PropTypes.number,
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  itemSelected: PropTypes.func,
-  itemFilter: PropTypes.func,
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  searchPlaceholder: PropTypes.string,
-  tinted: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element),
-  showTooltip: PropTypes.bool
-}
+const defaultItemFilter = (search: string, value: any) =>
+  typeof value === 'string'
+    ? value.toLocaleLowerCase().includes(search)
+    : typeof value === 'object'
+      ? Object.keys(value).some(
+          key =>
+            value[key] &&
+            typeof value[key] === 'string' &&
+            value[key].toLocaleLowerCase().includes(search)
+        )
+      : false
 
-Dropdown.defaultProps = {
-  disabled: false,
-  multiple: false,
-  required: false,
-  value: '',
-  valueRender: v => (Array.isArray(v) ? v.join(', ') : v),
-  itemSelected: (value, v) =>
-    value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
-  itemFilter: (search, v) =>
-    typeof v === 'string'
-      ? v.toLocaleLowerCase().includes(search)
-      : typeof v === 'object'
-        ? Object.keys(v).some(
-            key =>
-              v[key] &&
-              typeof v[key] === 'string' &&
-              v[key].toLocaleLowerCase().includes(search)
-          )
-        : false,
-  onChange: () => console.warn('Dropdown.onChange should be a function'),
-  placeholder: 'Please select an option',
-  searchPlaceholder: 'Type to search in #len items. Max 30 items shown.',
-  searchMaxResults: 30,
-  searchThreshold: 20
-}
+const defaultValueRender = (value: any) =>
+  Array.isArray(value) ? value.join(', ') : value
 
-const isObject = item => {
+const defaultItemSelected = (value: any, item: any) =>
+  value ? (Array.isArray(value) ? value.includes(item) : value === item) : false
+
+const defaultOnChange = () =>
+  console.warn('Dropdown.onChange should be a function')
+
+const isObject = (item: any) => {
   return typeof item === 'object' && !Array.isArray(item) && item !== null
 }
 

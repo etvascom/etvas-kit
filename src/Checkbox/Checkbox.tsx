@@ -1,22 +1,34 @@
-import { useCallback, useEffect, useState } from 'react'
+import React, {
+  FC,
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useState
+} from 'react'
 
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Flex } from '../Flex'
-import { Icon } from '../Icon'
-import { Typography } from '../Typography'
+import { Icon, IconProps } from '../Icon'
+import { Typography, TypographyProps } from '../Typography'
 
-export const Checkbox = ({
+interface Props
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
+    Partial<Pick<TypographyProps, 'variant'>>,
+    Pick<IconProps, 'size'> {
+  label?: string
+}
+
+export const Checkbox: FC<Props> = ({
   label,
-  color,
+  color='brand',
   checked,
   name,
   id,
   onChange,
-  size,
-  variant,
-  disabled,
+  size = 'medium',
+  variant = 'base14Light',
+  disabled = false,
   ...props
 }) => {
   const [isChecked, setChecked] = useState(!!checked)
@@ -26,7 +38,7 @@ export const Checkbox = ({
   }, [checked])
 
   const handleChange = useCallback(
-    event => {
+    (event: any) => {
       const { checked: nativeChecked } = event.target
       setChecked(nativeChecked)
       onChange && onChange(event)
@@ -56,8 +68,7 @@ export const Checkbox = ({
         <Typography
           variant={variant}
           color={disabled ? 'baseGray' : 'text'}
-          ml={2}
-        >
+          ml={2}>
           {label}
         </Typography>
       )}
@@ -65,28 +76,9 @@ export const Checkbox = ({
   )
 }
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<any>`
   display: flex;
   user-select: none;
   align-items: center;
   justify-content: flex-start;
 `
-
-Checkbox.propTypes = {
-  label: PropTypes.node,
-  color: PropTypes.string,
-  name: PropTypes.string,
-  id: PropTypes.string,
-  onChange: PropTypes.func,
-  checked: PropTypes.bool,
-  size: PropTypes.string,
-  variant: PropTypes.string,
-  disabled: PropTypes.bool
-}
-
-Checkbox.defaultProps = {
-  color: 'brand',
-  size: 'medium',
-  variant: 'base14Light',
-  disabled: false
-}

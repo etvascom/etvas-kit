@@ -1,10 +1,14 @@
+import React, { FC } from 'react'
+import { PropsWithChildren } from 'react'
+
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { typography } from '../Typography'
 
-const DropdownHeading = ({ children }) => <Heading>{children}</Heading>
+const DropdownHeading: FC<PropsWithChildren> = ({ children }) => (
+  <Heading>{children}</Heading>
+)
 
 const Heading = styled.div(
   css({
@@ -23,9 +27,5 @@ const Heading = styled.div(
     outline: 'none'
   })
 )
-
-DropdownHeading.propTypes = {
-  children: PropTypes.node
-}
 
 export default DropdownHeading

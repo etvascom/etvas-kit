@@ -4,7 +4,7 @@ import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-interface Props {
+export interface LabelProps {
   label: React.ReactNode
   inputId?: string | number
   showOptionalText?: boolean
@@ -12,7 +12,7 @@ interface Props {
   showTooltip?: boolean
 }
 
-export const Label: FC<Props> = ({
+export const Label: FC<LabelProps> = ({
   label,
   inputId,
   showOptionalText,

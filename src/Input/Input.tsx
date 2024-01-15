@@ -15,13 +15,14 @@ import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { typography } from '../Typography'
+import { Error, Warning } from '../utils/types'
 import { default as variants } from './Input.variants'
 import { PasswordToggler } from './PasswordToggler'
 import { SubLabel } from './SubLabel'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  error?: boolean | string | React.ReactNode
-  warning?: boolean | string | React.ReactNode
+  error?: Error
+  warning?: Warning
   icLeft?: string
   icRight?: string
   onIcRightClick?: () => void
@@ -246,9 +247,11 @@ interface StyledInputProps extends Props {
 const StyledInput = styled.input<StyledInputProps>(
   css(typography.labelSmall as SystemStyleObject),
   variant({ variants }),
-  ({ tinted, error, warning, disabled, paddingRight }: any) => ({
-    backgroundColor: tinted && !(error || warning || disabled) && 'white',
-    borderColor: tinted && !(error || warning || disabled) && 'white',
+  ({ tinted, error, warning, disabled, paddingRight }: StyledInputProps) => ({
+    backgroundColor:
+      tinted && !(error || warning || disabled) ? 'white' : 'initial',
+    borderColor:
+      tinted && !(error || warning || disabled) ? 'white' : 'initial',
     paddingRight: `${paddingRight * 4}px`,
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
