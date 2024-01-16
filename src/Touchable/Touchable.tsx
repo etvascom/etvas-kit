@@ -8,6 +8,7 @@ import {
 } from 'react'
 import React from 'react'
 
+import type * as CSS from 'csstype'
 import styled, { css } from 'styled-components'
 import {
   BorderProps,
@@ -27,6 +28,7 @@ import {
 } from 'styled-system'
 
 import { themed } from '../utils'
+import { pointerEvents, visibility } from '../utils/customProps'
 
 type Effect = (typeof effects)[number]
 
@@ -41,6 +43,8 @@ export interface TouchableProps
   activeOpacity?: number | string
   effect: Effect
   underlayColor?: string
+  pointerEvents?: CSS.Property.PointerEvents
+  visibility?: CSS.Property.Visibility
 }
 
 export const Touchable: FC<PropsWithChildren<TouchableProps>> = ({
@@ -165,7 +169,17 @@ const Wrapper = styled.button<WrapperProps>`
     transform: scale(0.985);
   }
 
-  ${compose(border, color, flexbox, layout, position, space, typography)};
+  ${compose(
+    border,
+    color,
+    flexbox,
+    layout,
+    position,
+    space,
+    typography,
+    pointerEvents,
+    visibility
+  )};
   ${touchableWithEffect};
 `
 
