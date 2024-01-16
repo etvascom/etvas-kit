@@ -11,11 +11,11 @@ const DEFAULT_STYLE = {
   height: '40px',
   paddingLeft: `${SPACE[5]}px`,
   '&::placeholder': {
-    color: colors.light
+    color: colors.brandLight
   },
   '&:disabled, &:readonly': {
-    color: colors.gray,
-    borderColor: colors.gray,
+    color: colors.baseGray,
+    borderColor: colors.baseGray,
     cursor: 'not-allowed'
   },
   '&:focus, &:hover': {
@@ -32,7 +32,7 @@ export default {
     cursor: 'not-allowed',
     opacity: 0.5,
     '&:focus, &:hover': {
-      border: `${BORDERS[1]} ${colors.gray}`,
+      border: `${BORDERS[1]} ${colors.baseGray}`,
       opacity: 0.5
     }
   },
