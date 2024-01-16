@@ -14,12 +14,12 @@ import { Flex } from '../Flex'
 import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
 import { typography } from '../Typography'
-import { VariantProp, Warning } from '../utils/types'
+import { Error, VariantProp, Warning } from '../utils/types'
 import { default as variants } from './TextArea.variants'
 
 type VariantKey = keyof typeof variants
 
-interface Props
+export interface TextAreaProps
   extends Pick<
       TextareaHTMLAttributes<HTMLTextAreaElement>,
       | 'autoComplete'
@@ -49,7 +49,7 @@ interface Props
   showTooltip?: boolean
 }
 
-export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       autoComplete,
@@ -140,7 +140,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 
 interface StyledTextAreaProps
   extends Pick<
-    Props,
+    TextAreaProps,
     'error' | 'tinted' | 'allowResize' | 'warning' | 'disabled' | 'variant'
   > {}
 

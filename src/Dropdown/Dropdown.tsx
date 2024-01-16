@@ -28,7 +28,7 @@ import { Error } from '../utils/types'
 import Heading from './Heading'
 import Option, { OptionProps } from './Option'
 
-interface Props
+export interface DropdownProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'id'>,
     Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>,
     Partial<Pick<LabelProps, 'label' | 'optionalText'>> {
@@ -55,7 +55,7 @@ interface DropdownSubComponents {
   Heading: typeof Heading
 }
 
-const Dropdown: FC<PropsWithChildren<Props>> & DropdownSubComponents = ({
+export const Dropdown: FC<PropsWithChildren<DropdownProps>> & DropdownSubComponents = ({
   disabled = false,
   multiple = false,
   error,
@@ -380,7 +380,7 @@ const StyledFlex = styled(Flex)(
   })
 )
 
-interface TogglerProps extends Pick<Props, 'error' | 'disabled' | 'tinted'> {
+interface TogglerProps extends Pick<DropdownProps, 'error' | 'disabled' | 'tinted'> {
   dataCollapsed: boolean
 }
 
@@ -563,4 +563,3 @@ const isObject = (item: any) => {
 Dropdown.Option = Option
 Dropdown.Heading = Heading
 
-export default Dropdown

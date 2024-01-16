@@ -22,7 +22,7 @@ import { SubLabel } from './SubLabel'
 
 type VariantKey = keyof typeof variants
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: Error
   warning?: Warning
   icLeft?: string
@@ -44,7 +44,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   showTooltip?: boolean
 }
 
-export const Input = forwardRef<HTMLInputElement, Props>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       autoComplete,
@@ -242,7 +242,7 @@ const StyledFlex = styled(Flex)`
   }
 `
 
-interface StyledInputProps extends Props {
+interface StyledInputProps extends InputProps {
   paddingRight: number
 }
 
