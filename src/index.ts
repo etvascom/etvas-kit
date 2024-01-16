@@ -6,7 +6,7 @@ export * from './utils'
 
 export * from './Button'
 export * from './Card'
-// export * from './Dropdown'
+export * from './Dropdown'
 export * from './Input'
 // export * from './TextArea'
 export * from './Typography'
@@ -38,6 +38,6 @@ export * from './Flex'
 export * from './Space'
 export * from './ActivityIndicator'
 export * from './Image'
-export * from './Touchable' // todo: discuss tudor
+export * from './Touchable'
 
 export { styled }

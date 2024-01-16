@@ -1,8 +1,6 @@
-import { useMemo } from 'react'
+import React, { FC, InputHTMLAttributes, useMemo } from 'react'
 
-import css from '@styled-system/css'
-import propTypes from '@styled-system/prop-types'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
 import { v4 } from 'uuid'
@@ -13,19 +11,33 @@ import { Label } from '../Label'
 import { Touchable } from '../Touchable'
 import { typography } from '../Typography'
 import sizes from '../assets/sizes'
+import { VariantProp } from '../utils/types'
 import { default as variants } from './CardDisplayInput.variants'
 import { SubLabel } from './SubLabel'
 
-export const CardDisplayInput = ({
+type VariantKey = keyof typeof variants
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  autoFocus?: boolean
+  disabled?: boolean
+  label?: React.ReactNode
+  noBottomSpace?: boolean
+  onEdit: () => void
+  variant?: VariantProp<VariantKey>
+  subLabel?: string
+}
+
+export const CardDisplayInput: FC<Props> = ({
   disabled,
   id,
   label,
   name,
-  noBottomSpace,
+  noBottomSpace = false,
   onEdit,
-  value,
-  variant,
+  value = '',
+  variant = 'default',
   subLabel,
+  autoFocus = false,
   ...rest
 }) => {
   id = id || v4()
@@ -42,24 +54,24 @@ export const CardDisplayInput = ({
   }
 
   return (
-    <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+    <Flex flexDirection='column' width={1} {...rest}>
       {!!label && <Label label={label} inputId={id} />}
       <Flex alignItems='center' position='relative' width='100%'>
         <StyledInput
           aria-disabled={disabled}
-          hasLabel={label}
-          hasIcRight={true}
-          id={id}
+          id={id?.toString()}
           name={name}
           readOnly={true}
-          value={value ? `●●●● ●●●● ●●●● ${value.substr(-4)}` : ''}
+          value={value ? `●●●● ●●●● ●●●● ${value.toString().slice(-4)}` : ''}
           variant={inputVariant}
+          autoFocus={autoFocus}
           {...rest}
         />
         <Flex pointerEvents='auto' position='absolute' right={2}>
           <StyledTouchable
             onClick={handleEdit}
-            pointerEvents={disabled ? 'none' : ''}>
+            pointerEvents={disabled ? 'none' : 'initial'}
+            effect='highlight'>
             <Icon
               mr={5}
               size='small'
@@ -78,7 +90,7 @@ export const CardDisplayInput = ({
   )
 }
 
-const StyledInput = styled.input(
+const StyledInput = styled.input<Omit<Props, 'onEdit'>>(
   css({
     ...typography.labelSmall,
     display: 'block',
@@ -94,7 +106,7 @@ const StyledInput = styled.input(
       borderWidth: 1,
       borderStyle: 'solid'
     }
-  }),
+  } as SystemStyleObject),
   variant({ variants })
 )
 
@@ -106,25 +118,4 @@ const StyledTouchable = styled(Touchable)`
   height: ${sizes.buttonMinWidth};
 `
 
-CardDisplayInput.propTypes = {
-  ...propTypes.inputStyle,
-  subLabel: PropTypes.string,
-  disabled: PropTypes.bool,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  label: PropTypes.node,
-  name: PropTypes.string,
-  noBottomSpace: PropTypes.bool,
-  onEdit: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
-
-CardDisplayInput.defaultProps = {
-  autoFocus: false,
-  minHeight: 40,
-  noBottomSpace: false,
-  value: '',
-  variant: 'default'
-}
-
 CardDisplayInput.displayName = 'Input'
-/** @component */
