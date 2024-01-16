@@ -24,6 +24,7 @@ export interface OptionProps extends OptionHTMLAttributes<HTMLDivElement> {
 }
 
 const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
+  id,
   children,
   onSelectItem,
   disabled = false,
