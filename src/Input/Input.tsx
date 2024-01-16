@@ -15,10 +15,12 @@ import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { typography } from '../Typography'
-import { Error, Warning } from '../utils/types'
+import { Error, VariantProp, Warning } from '../utils/types'
 import { default as variants } from './Input.variants'
 import { PasswordToggler } from './PasswordToggler'
 import { SubLabel } from './SubLabel'
+
+type VariantKey = keyof typeof variants
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: Error
@@ -32,7 +34,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   passwordView?: 'peek' | 'toggle'
   placeholderTextColor?: string
   valid?: boolean | string
-  variant?: string
+  variant?: VariantProp<VariantKey>
   subLabel?: string
   loading?: boolean
   tinted?: boolean
