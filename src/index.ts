@@ -29,7 +29,7 @@ export * from './Form'
 // export * from './Steps'
 // export * from './Chip'
 
-// export * from './SubdomainInput'
+export * from './SubdomainInput'
 // export * from './Autocomplete'
 // export * from './PhoneNumberInput'
 

@@ -1,44 +1,34 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
 
-import css from '@styled-system/css'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
-import { Input } from '../Input'
+import {  InputProps } from '../Input'
 import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
 import { Typography, typography } from '../Typography'
 
-const replaceCaret = el => {
-  const target = document.createTextNode('')
-  el.appendChild(target)
-  const isTargetFocused = document.activeElement === el
-  if (target !== null && target.nodeValue !== null && isTargetFocused) {
-    const sel = window.getSelection()
-    if (sel !== null) {
-      const range = document.createRange()
-      range.setStart(target, target.nodeValue.length)
-      range.collapse(true)
-      sel.removeAllRanges()
-      sel.addRange(range)
-    }
-    if (el instanceof HTMLElement) el.focus()
-  }
+interface Props extends InputProps {
+  prefix?: string
+  suffix?: string
+  icRight?: string
+  suffixSpace?: number
+  prefixSpace?: number
 }
 
-export const SubdomainInput = forwardRef(
+export const SubdomainInput = forwardRef<HTMLDivElement, Props>(
   (
     {
-      prefix,
-      suffix,
+      prefix = 'https://',
+      suffix = '',
       suffixSpace,
       prefixSpace,
       autoComplete,
-      autoFocus,
+      autoFocus = false,
       disabled,
       error,
       warning,
@@ -47,25 +37,27 @@ export const SubdomainInput = forwardRef(
       label,
       optionalText,
       name,
-      noBottomSpace,
+      noBottomSpace = false,
       onChange,
-      passwordView,
+      passwordView = 'peek',
       placeholder,
-      readOnly,
+      readOnly = false,
       required,
-      type,
+      type = 'text',
       valid,
-      value,
-      variant,
+      value = '',
+      variant = 'default',
       subLabel,
       loading,
-      tinted,
+      tinted = false,
       showTooltip,
       ...rest
     },
     ref
   ) => {
-    const inputRef = useRef()
+    const inputRef = useRef<HTMLDivElement>(null)
+
+    const combinedRef = ref || inputRef
     const [isFocused, setFocused] = useState(false)
     const valueRef = useRef(value)
 
@@ -77,40 +69,42 @@ export const SubdomainInput = forwardRef(
       return variant
     }, [loading, disabled, error, warning, valid, variant])
 
-    const focusInput = () => (ref || inputRef).current.focus()
+    const focusInput = () =>
+      typeof combinedRef !== 'function' && combinedRef.current?.focus()
 
-    const onInputFocus = e => {
+    const onInputFocus = () => {
       setFocused(true)
-      const el = (ref || inputRef).current
-      replaceCaret(el)
+      const element =
+        typeof combinedRef !== 'function' ? combinedRef.current : undefined
+      replaceCaret(element)
     }
 
-    const onInputBlur = e => {
+    const onInputBlur = () => {
       setFocused(false)
     }
 
     const wrapperStyle = useMemo(() => {
       const ws = {
-        brd: 'inputBorderGray',
-        bg: 'white',
-        fg: 'textInputActive'
+        borderColor: 'inputBorderGray',
+        backgroundColor: 'white',
+        color: 'textInputActive'
       }
       if (disabled) {
-        ws.bg = 'backgroundGray'
+        ws.backgroundColor = 'backgroundGray'
       } else {
         if (error) {
-          ws.brd = 'error'
+          ws.borderColor = 'error'
         }
         if (warning) {
-          ws.brd = 'warning'
+          ws.borderColor = 'warning'
         }
       }
       if (tinted && !disabled && !error && !warning) {
-        ws.brd = 'transparent'
+        ws.borderColor = 'transparent'
       }
 
       if (isFocused && !disabled && !error && !warning) {
-        ws.brd = 'brandLight'
+        ws.borderColor = 'brandLight'
       }
       return ws
     }, [disabled, error, tinted, warning, isFocused])
@@ -118,22 +112,24 @@ export const SubdomainInput = forwardRef(
     const hasValue = useMemo(() => !!value, [value])
 
     useEffect(() => {
-      const el = (ref || inputRef).current
-      if (!el) {
+      const element =
+        typeof combinedRef !== 'function' ? combinedRef.current : null
+      if (!element) {
         return
       }
-      if (el.innerText !== value) {
+      if (element.innerText !== value) {
         valueRef.current = value
-        el.innerText = value
-        replaceCaret(el)
+        element?.innerText && (element.innerText = value.toString())
+        replaceCaret(element)
       }
     }, [value, ref])
 
-    const handleInput = event => {
+    const handleInput = (event: any) => {
       const { innerText } = event.target
-      const el = (ref || inputRef).current
-      el.innerText = innerText.replaceAll('\n', '')
-      replaceCaret(el)
+      const element =
+        typeof combinedRef !== 'function' ? combinedRef.current : null
+      element?.innerText && (element.innerText = innerText.replaceAll('\n', ''))
+      replaceCaret(element)
 
       const evt = Object.assign({}, event, {
         target: {
@@ -173,10 +169,10 @@ export const SubdomainInput = forwardRef(
           />
         )}
         <Wrapper
+          variant={variant}
           alignItems='center'
           width={1}
           onClick={focusInput}
-          variant={variant}
           isValid={inputVariant === 'valid' || inputVariant === 'default'}
           {...wrapperStyle}>
           <Typography
@@ -194,9 +190,9 @@ export const SubdomainInput = forwardRef(
             prefixSpace={value ? prefixSpace : 0}
             id={id}
             name={name}
-            tabIndex='0'
+            tabIndex={0}
             onInput={handleInput}
-            ref={ref || inputRef}
+            ref={combinedRef}
             required={required}
             contentEditable={!disabled && 'plaintext-only'}
             onFocus={onInputFocus}
@@ -242,43 +238,51 @@ const Suffix = styled(Typography)`
   white-space: nowrap;
 `
 
-const Wrapper = styled(Flex)(
+interface WrapperProps extends Pick<Props,'variant'> {
+  borderColor?: string
+  backgroundColor?: string
+  color?: string
+  isValid: boolean
+}
+
+const Wrapper = styled(Flex)<WrapperProps>(
   css({
     position: 'relative',
     cursor: 'text',
     backgroundColor: 'white'
   }),
   variant({ variants }),
-  ({ brd, bg, fg, isValid }) =>
+  ({ borderColor, backgroundColor, color, isValid }: WrapperProps) =>
     css({
-      borderColor: brd,
-      backgroundColor: bg,
-      color: fg,
+      borderColor,
+      backgroundColor,
+      color,
       ...(!isValid && {
         '&:hover': {
-          borderColor: brd,
-          backgroundColor: bg,
-          color: fg
+          borderColor,
+          backgroundColor,
+          color
         }
       })
     })
 )
 
-const StyledInput = styled.div(({ disabled, suffixSpace, prefixSpace }) =>
-  css({
-    ...typography.labelSmall,
-    color: disabled ? 'textInputPlaceholder' : 'textInputActive',
-    marginRight: suffixSpace,
-    marginLeft: prefixSpace,
-    backgroundColor: 'transparent',
-    outline: 'none',
-    border: 'none',
-    padding: 0,
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    minWidth: '1px',
-    appearance: 'none'
-  })
+const StyledInput = styled.div<any>(
+  ({ disabled, suffixSpace, prefixSpace }: any) =>
+    css({
+      ...typography.labelSmall,
+      color: disabled ? 'textInputPlaceholder' : 'textInputActive',
+      marginRight: suffixSpace,
+      marginLeft: prefixSpace,
+      backgroundColor: 'transparent',
+      outline: 'none',
+      border: 'none',
+      padding: 0,
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      minWidth: '1px',
+      appearance: 'none'
+    } as SystemStyleObject)
 )
 
 const StatusIcon = styled(Flex)(
@@ -290,18 +294,24 @@ const StatusIcon = styled(Flex)(
   })
 )
 
-SubdomainInput.propTypes = {
-  ...Input.propTypes,
-  prefix: PropTypes.string,
-  suffix: PropTypes.string,
-  icRight: PropTypes.string
-}
-
-SubdomainInput.defaultProps = {
-  ...Input.defaultProps,
-  variant: 'default',
-  prefix: 'https://',
-  suffix: ''
-}
-
 SubdomainInput.displayName = 'SubdomainInput'
+
+const replaceCaret = (element?: HTMLDivElement | null) => {
+  if (!element) {
+    return
+  }
+  const target = document.createTextNode('')
+  element.appendChild(target)
+  const isTargetFocused = document.activeElement === element
+  if (target !== null && target.nodeValue !== null && isTargetFocused) {
+    const sel = window.getSelection()
+    if (sel !== null) {
+      const range = document.createRange()
+      range.setStart(target, target.nodeValue.length)
+      range.collapse(true)
+      sel.removeAllRanges()
+      sel.addRange(range)
+    }
+    if (element instanceof HTMLElement) element.focus()
+  }
+}
