@@ -12,7 +12,7 @@ import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
 import { Typography, typography } from '../Typography'
 
-interface Props extends InputProps {
+export interface SubdomainInputProps extends InputProps {
   prefix?: string
   suffix?: string
   icRight?: string
@@ -20,7 +20,7 @@ interface Props extends InputProps {
   prefixSpace?: number
 }
 
-export const SubdomainInput = forwardRef<HTMLDivElement, Props>(
+export const SubdomainInput = forwardRef<HTMLDivElement, SubdomainInputProps>(
   (
     {
       prefix = 'https://',
@@ -238,7 +238,7 @@ const Suffix = styled(Typography)`
   white-space: nowrap;
 `
 
-interface WrapperProps extends Pick<Props,'variant'> {
+interface WrapperProps extends Pick<SubdomainInputProps,'variant'> {
   borderColor?: string
   backgroundColor?: string
   color?: string
