@@ -381,7 +381,7 @@ const StyledFlex = styled(Flex)(
     '&:focus-within > div > label': {
       color: 'textInputFocused'
     }
-  })
+  }) as any
 )
 
 interface TogglerProps
@@ -416,15 +416,15 @@ const Toggler = styled.button<TogglerProps>(
       borderStyle: 'solid',
       borderColor: 'brandLight'
     }
-  } as SystemStyleObject),
+  } as SystemStyleObject) as any,
   ({ error }: TogglerProps) =>
-    error
+    (error
       ? css({
           color: 'error',
           borderColor: 'error'
         })
-      : null,
-  ({ disabled }: TogglerProps) =>
+      : null) as any,
+  (({ disabled }: TogglerProps) =>
     disabled
       ? css({
           color: 'textInputDisabled',
@@ -432,19 +432,19 @@ const Toggler = styled.button<TogglerProps>(
           pointerEvents: 'none',
           backgroundColor: 'backgroundGray'
         })
-      : null,
+      : null) as any,
   ({ tinted, error, disabled }: TogglerProps) => ({
     backgroundColor: tinted && !(error || disabled) ? 'white' : 'initial',
     borderColor: tinted && !(error || disabled) ? 'white' : 'initial'
   }),
-  ({ dataCollapsed }: TogglerProps) =>
+  (({ dataCollapsed }: TogglerProps) =>
     !dataCollapsed
       ? css({
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
           borderColor: 'brandLight'
         })
-      : null
+      : null) as any
 )
 
 const StyledIndicator = styled(Icon)(
@@ -468,7 +468,7 @@ const StyledIndicator = styled(Icon)(
     '&[aria-disabled="true"]': {
       opacity: 0.5
     }
-  })
+  } as SystemStyleObject) as any
 )
 
 const DropdownWrapper = styled.div(
@@ -477,7 +477,7 @@ const DropdownWrapper = styled.div(
     position: 'relative',
     width: '100%',
     outline: 'none'
-  })
+  } as SystemStyleObject) as any
 )
 
 interface DropdownListProps {
@@ -504,15 +504,15 @@ const DropdownList = styled.div<DropdownListProps>(
     color: 'text',
     paddingBottom: 3,
     boxShadow: 'etvasCard'
-  }),
+  } as SystemStyleObject) as any,
   ({ collapsed }: DropdownListProps) =>
-    css({ display: collapsed ? 'none' : 'block' }),
+    css({ display: collapsed ? 'none' : 'block' }) as any,
   ({ borderClr }: DropdownListProps) =>
     css({
       borderLeftColor: borderClr,
       borderRightColor: borderClr,
       borderBottomColor: borderClr
-    })
+    }) as any
 )
 
 const ScrollingList = styled.div<any>(
@@ -520,7 +520,7 @@ const ScrollingList = styled.div<any>(
     maxHeight: '172px',
     overflowX: 'hidden',
     overflowY: 'auto'
-  })
+  }) as any
 )
 
 const SearchInput = styled.input(
@@ -537,7 +537,7 @@ const SearchInput = styled.input(
     borderBottomColor: 'inputBorderGray',
     borderBottomStyle: 'solid',
     borderRadius: 0
-  } as SystemStyleObject)
+  } as SystemStyleObject) as any
 )
 
 const defaultItemFilter = (search: string, value: any) =>

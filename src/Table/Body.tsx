@@ -16,8 +16,8 @@ export const Body: FC<PropsWithChildren<Props>> = props => {
   return <StyledBody {...props} mode={mode as Styles} />
 }
 
-const StyledBody = styled.tbody<Props>(({ mode }) =>
-  css(styles[mode] as SystemStyleObject)
+const StyledBody = styled.tbody<Props>(
+  ({ mode }) => css(styles[mode] as SystemStyleObject) as any
 )
 
 Body.defaultProps = {

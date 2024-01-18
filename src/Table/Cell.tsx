@@ -38,8 +38,8 @@ export const Cell: FC<PropsWithChildren<Props>> = ({
 }
 
 const StyledDiv = styled.div(
-  css(styles.shared as SystemStyleObject),
-  css(styles.mobile)
+  css(styles.shared as SystemStyleObject) as any,
+  css(styles.mobile) as any
 )
 
 interface StyledTdProps {
@@ -49,9 +49,9 @@ interface StyledTdProps {
 }
 
 const StyledTd = styled.td<StyledTdProps>(
-  css(styles.shared as SystemStyleObject),
-  ({ type }) => css(styles[type] as SystemStyleObject),
-  ({ mode }) => css(styles[mode] as SystemStyleObject),
+  css(styles.shared as SystemStyleObject) as any,
+  ({ type }) => css(styles[type] as SystemStyleObject) as any,
+  ({ mode }) => css(styles[mode] as SystemStyleObject) as any,
   ({ leader }) => (leader ? css(styles.leader as SystemStyleObject) : {})
 )
 

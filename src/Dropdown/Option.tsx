@@ -98,7 +98,7 @@ const TextWrapper = styled.div(
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     width: '100%'
-  })
+  }) as any
 )
 
 interface StyledOptionProps
@@ -120,22 +120,22 @@ const Option = styled(Flex)<StyledOptionProps>(
     outline: 'none',
     height: sizes.dropdownItemHeightMobile,
     lineHeight: sizes.dropdownItemHeightMobile
-  } as SystemStyleObject),
-  ({ hovering }: StyledOptionProps) =>
+  } as SystemStyleObject) as any,
+  (({ hovering }: StyledOptionProps) =>
     hovering
       ? css({
           backgroundColor: 'brandLighter'
         })
-      : null,
-  ({ touch }: StyledOptionProps) =>
+      : null) as any,
+  (({ touch }: StyledOptionProps) =>
     !touch
       ? css({
           '&:hover': {
             backgroundColor: 'brandLighter'
           }
         })
-      : null,
-  ({ selected, hasCheckbox }: StyledOptionProps) =>
+      : null) as any,
+  (({ selected, hasCheckbox }: StyledOptionProps) =>
     selected && !hasCheckbox
       ? css({
           backgroundColor: 'brand',
@@ -144,7 +144,7 @@ const Option = styled(Flex)<StyledOptionProps>(
             backgroundColor: 'brand'
           }
         })
-      : null
+      : null) as any
 )
 
 export default DropdownItem

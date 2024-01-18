@@ -1,5 +1,5 @@
-import { default as useNativeResizeObserver } from 'use-resize-observer'
-import { default as usePolyfilledResizeObserver } from 'use-resize-observer/polyfilled'
+import useNativeResizeObserver from 'use-resize-observer'
+import usePolyfilledResizeObserver from 'use-resize-observer/polyfilled'
 
 const useResizeObserver = (...args: any[]) => {
   const resizeObserverHook =

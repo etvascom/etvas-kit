@@ -46,7 +46,7 @@ const Typography = styled.div<PropsWithChildren<TypographyProps>>(
     css({
       color: 'text',
       overflowWrap
-    }),
+    }) as any,
   compose(
     color,
     colorStyle,
@@ -67,11 +67,11 @@ const Typography = styled.div<PropsWithChildren<TypographyProps>>(
           whiteSpace: 'nowrap'
         })
       : truncate &&
-        css({
+        (css({
           overflow: 'hidden',
           display: '-webkit-box',
           lineClamp: `${truncate}`
-        })
+        }) as any)
 )
 
 Typography.defaultProps = {

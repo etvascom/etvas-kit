@@ -255,7 +255,7 @@ const Wrapper = styled(Flex)<WrapperProps>(
     position: 'relative',
     cursor: 'text',
     backgroundColor: 'white'
-  }),
+  }) as any,
   variant({ variants }),
   ({ borderColor, backgroundColor, color, isValid }: WrapperProps) =>
     css({
@@ -269,7 +269,7 @@ const Wrapper = styled(Flex)<WrapperProps>(
           color
         }
       })
-    })
+    }) as any
 )
 
 const StyledInput = styled.div<any>(
@@ -287,7 +287,7 @@ const StyledInput = styled.div<any>(
       whiteSpace: 'nowrap',
       minWidth: '1px',
       appearance: 'none'
-    } as SystemStyleObject)
+    } as SystemStyleObject) as any
 )
 
 const StatusIcon = styled(Flex)(
@@ -296,7 +296,7 @@ const StatusIcon = styled(Flex)(
     top: 0,
     bottom: 0,
     width: '36px'
-  })
+  }) as any
 )
 
 SubdomainInput.displayName = 'SubdomainInput'
