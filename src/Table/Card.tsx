@@ -41,9 +41,9 @@ export const Card: FC<PropsWithChildren<Props>> & CardSubComponents = ({
   )
 }
 
-const StyledContent = styled(Box)(css(styles.content))
+const StyledContent = styled(Box)(css(styles.content) as any)
 
-const StyledCardWrapper = styled.td(css(styles.card))
+const StyledCardWrapper = styled.td(css(styles.card) as any)
 
 interface CardItemProps {
   header: React.ReactNode

@@ -147,7 +147,7 @@ interface StyledTextAreaProps
 const StyledTextArea = styled.textarea<StyledTextAreaProps>(
   css({
     ...typography.labelSmall
-  } as SystemStyleObject),
+  } as SystemStyleObject) as any,
   variant({ variants }),
   ({ tinted, error, warning, disabled, allowResize }: StyledTextAreaProps) => ({
     backgroundColor:

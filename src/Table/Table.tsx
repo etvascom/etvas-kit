@@ -70,15 +70,15 @@ export const Table: FC<PropsWithChildren<Props>> & TableSubComponents = ({
   )
 }
 
-const Wrapper = styled.div(css(styles.wrapper))
+const Wrapper = styled.div(css(styles.wrapper) as any)
 
 interface StyledTableProps {
   mode: Styles
 }
 
 const StyledTable = styled.table<StyledTableProps>(
-  css(styles.default as SystemStyleObject),
-  ({ mode }) => css(styles[mode] as SystemStyleObject)
+  css(styles.default as SystemStyleObject) as any,
+  ({ mode }) => css(styles[mode] as SystemStyleObject) as any
 )
 
 Table.Cell = Cell

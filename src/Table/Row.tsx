@@ -73,14 +73,14 @@ export const Row: FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
-const PseudoRow = styled.tr(css(styles.pseudoTr))
+const PseudoRow = styled.tr(css(styles.pseudoTr) as any)
 
 interface StyledTrProps {
   mode: Styles
 }
 
-const StyledTr = styled.tr<StyledTrProps>(({ mode }) =>
-  css(styles[mode] as SystemStyleObject)
+const StyledTr = styled.tr<StyledTrProps>(
+  ({ mode }) => css(styles[mode] as SystemStyleObject) as any
 )
 
 Row.propTypes = {

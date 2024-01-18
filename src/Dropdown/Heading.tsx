@@ -25,7 +25,7 @@ const Heading = styled.div(
     textAlign: 'left',
     border: 'none',
     outline: 'none'
-  })
+  }) as any
 )
 
 export default DropdownHeading

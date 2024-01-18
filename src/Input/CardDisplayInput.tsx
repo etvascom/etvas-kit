@@ -107,7 +107,7 @@ const StyledInput = styled.input<Omit<Props, 'onEdit'>>(
       borderWidth: 1,
       borderStyle: 'solid'
     }
-  } as SystemStyleObject),
+  } as SystemStyleObject) as any,
   variant({ variants })
 )
 

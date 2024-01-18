@@ -247,7 +247,7 @@ interface StyledInputProps extends InputProps {
 }
 
 const StyledInput = styled.input<StyledInputProps>(
-  css(typography.labelSmall as SystemStyleObject),
+  css(typography.labelSmall as SystemStyleObject) as any,
   variant({ variants }),
   ({ tinted, error, warning, disabled, paddingRight }: StyledInputProps) => ({
     backgroundColor:

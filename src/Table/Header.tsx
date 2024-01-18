@@ -20,8 +20,8 @@ interface StyledTheadProps {
   mode: Styles
 }
 
-const StyledThead = styled.thead<StyledTheadProps>(({ mode }) =>
-  css(styles[mode] as SystemStyleObject)
+const StyledThead = styled.thead<StyledTheadProps>(
+  ({ mode }) => css(styles[mode] as SystemStyleObject) as any
 )
 
 type Styles = keyof typeof styles
