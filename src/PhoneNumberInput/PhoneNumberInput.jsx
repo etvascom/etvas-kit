@@ -240,7 +240,7 @@ const PhoneNumberInput = forwardRef((props, ref) => {
           <StyledPhoneNumberInput
             autoComplete={autoComplete}
             autoFocus={autoFocus}
-            ariaDisabled={readOnly || disabled}
+            aria-disabled={readOnly || disabled}
             error={error}
             hasLabel={label}
             id={id}
