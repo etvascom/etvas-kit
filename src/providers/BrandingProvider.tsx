@@ -1,6 +1,9 @@
 import React, { FC, createContext, useEffect, useMemo, useState } from 'react'
 
-import { BrandingService, brandingService as defaultBrandingService } from './BrandingService'
+import {
+  BrandingService,
+  brandingService as defaultBrandingService
+} from './BrandingService'
 
 interface BrandingContext {
   cssVars: any
@@ -13,7 +16,10 @@ interface Props {
   children: React.ReactNode
 }
 
-export const BrandingProvider: FC<Props> = ({ brandingService = defaultBrandingService, children }) => {
+export const BrandingProvider: FC<Props> = ({
+  brandingService = defaultBrandingService,
+  children
+}) => {
   const [cssVars, setCssVars] = useState(brandingService.cssVars)
 
   useEffect(() => {

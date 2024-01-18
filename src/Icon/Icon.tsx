@@ -54,7 +54,11 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   ...props
 }) => (
   <BaseIcon
-    path={externalGlyphs[name] || glyphs[name as keyof typeof glyphs] || validate(name)}
+    path={
+      externalGlyphs[name] ||
+      glyphs[name as keyof typeof glyphs] ||
+      validate(name)
+    }
     size={sizes[size] ?? size}
     color={color}
     spin={spin}

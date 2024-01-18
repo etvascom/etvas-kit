@@ -55,7 +55,8 @@ interface DropdownSubComponents {
   Heading: typeof Heading
 }
 
-export const Dropdown: FC<PropsWithChildren<DropdownProps>> & DropdownSubComponents = ({
+export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
+  DropdownSubComponents = ({
   disabled = false,
   multiple = false,
   error,
@@ -308,7 +309,8 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> & DropdownSubCompone
         onMouseMove={removeCurrentKeyboardFocus}
         tabIndex={0}
         ref={wrapper}
-        {...props}>
+        {...props}
+      >
         <StyledIndicator
           size='small'
           color='inputIcon'
@@ -326,7 +328,8 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> & DropdownSubCompone
           aria-controls={`drop-${cId}`}
           error={error}
           tinted={tinted}
-          onClick={toggleDropdown}>
+          onClick={toggleDropdown}
+        >
           {isEmpty ? placeholder : displayValue}
         </Toggler>
         <DropdownList
@@ -337,7 +340,8 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> & DropdownSubCompone
           onTouchStart={clicked}
           onTouchMove={inhibit}
           onTouchEnd={decide}
-          borderClr={dropdownBorderClr}>
+          borderClr={dropdownBorderClr}
+        >
           {hasSearch ? (
             <SearchInput
               ref={searchField}
@@ -380,7 +384,8 @@ const StyledFlex = styled(Flex)(
   })
 )
 
-interface TogglerProps extends Pick<DropdownProps, 'error' | 'disabled' | 'tinted'> {
+interface TogglerProps
+  extends Pick<DropdownProps, 'error' | 'disabled' | 'tinted'> {
   dataCollapsed: boolean
 }
 
@@ -562,4 +567,3 @@ const isObject = (item: any) => {
 
 Dropdown.Option = Option
 Dropdown.Heading = Heading
-

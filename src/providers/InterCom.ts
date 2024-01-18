@@ -45,8 +45,8 @@ export class InterCom extends EventEmitter {
       window.parent.postMessage(message, '*')
     } else {
       const iframes = document.getElementsByTagName('iframe')
-      Array.from(iframes).forEach(
-        iframe => iframe.contentWindow?.postMessage(message, '*')
+      Array.from(iframes).forEach(iframe =>
+        iframe.contentWindow?.postMessage(message, '*')
       )
     }
   }

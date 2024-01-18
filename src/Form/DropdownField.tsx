@@ -109,12 +109,14 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
       error={displayedError}
       multiple={multiple}
       valueRender={selectedLabel}
-      {...props}>
+      {...props}
+    >
       {options.map(option => (
         <Dropdown.Option
           id={option[optionAttributes.id]}
           key={option[optionAttributes.key]}
-          value={option[optionAttributes.value]}>
+          value={option[optionAttributes.value]}
+        >
           {option[optionAttributes.label]}
         </Dropdown.Option>
       ))}

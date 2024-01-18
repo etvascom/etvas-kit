@@ -71,7 +71,8 @@ export const CardDisplayInput: FC<Props> = ({
           <StyledTouchable
             onClick={handleEdit}
             pointerEvents={disabled ? 'none' : 'initial'}
-            effect='highlight'>
+            effect='highlight'
+          >
             <Icon
               mr={5}
               size='small'

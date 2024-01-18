@@ -48,7 +48,8 @@ export const PasswordToggler: FC<Props> = ({
       onTouchStart={onToggle}
       onTouchEnd={handleUp}
       onDrag={onDrag}
-      tabIndex={tabIndex}>
+      tabIndex={tabIndex}
+    >
       <Icon
         {...props}
         color='inputIcon'

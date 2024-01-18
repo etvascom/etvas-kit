@@ -71,7 +71,8 @@ export const Checkbox: FC<Props> = ({
         <Typography
           variant={variant}
           color={disabled ? 'baseGray' : 'text'}
-          ml={2}>
+          ml={2}
+        >
           {label}
         </Typography>
       )}

@@ -109,7 +109,8 @@ export const Touchable: FC<PropsWithChildren<TouchableProps>> = ({
       tabIndex={Number(tabIndex)}
       type={type}
       underlayColor={underlayColor}
-      {...rest}>
+      {...rest}
+    >
       {children}
     </Wrapper>
   )

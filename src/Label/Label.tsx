@@ -27,7 +27,8 @@ export const Label: FC<LabelProps> = ({
         htmlFor={inputId?.toString()}
         variant='base12Bold'
         color='baseMetal'
-        width='fit-content'>
+        width='fit-content'
+      >
         {label}
       </Typography>
       {inputId && showTooltip && (
@@ -48,7 +49,8 @@ export const Label: FC<LabelProps> = ({
           htmlFor={inputId?.toString()}
           variant='base12Bold'
           color='baseGray'
-          width='fit-content'>
+          width='fit-content'
+        >
           - {optionalText}
         </Typography>
       )}

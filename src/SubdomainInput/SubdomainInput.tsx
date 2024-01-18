@@ -6,7 +6,7 @@ import { variant } from 'styled-system'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
-import {  InputProps } from '../Input'
+import { InputProps } from '../Input'
 import { default as variants } from '../Input/Input.variants'
 import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
@@ -174,11 +174,13 @@ export const SubdomainInput = forwardRef<HTMLDivElement, SubdomainInputProps>(
           width={1}
           onClick={focusInput}
           isValid={inputVariant === 'valid' || inputVariant === 'default'}
-          {...wrapperStyle}>
+          {...wrapperStyle}
+        >
           <Typography
             mr={!value ? prefixSpace : 0}
             color='textInputPlaceholder'
-            variant='labelSmall'>
+            variant='labelSmall'
+          >
             {prefix}
           </Typography>
           <StyledInput
@@ -197,13 +199,15 @@ export const SubdomainInput = forwardRef<HTMLDivElement, SubdomainInputProps>(
             contentEditable={!disabled && 'plaintext-only'}
             onFocus={onInputFocus}
             onBlur={onInputBlur}
-            suppressContentEditableWarning={true}>
+            suppressContentEditableWarning={true}
+          >
             {valueRef.current}
           </StyledInput>
           <Suffix
             mr={!value ? suffixSpace : 0}
             color='textInputPlaceholder'
-            variant='labelSmall'>
+            variant='labelSmall'
+          >
             {!hasValue && placeholder}
           </Suffix>
           <Suffix color='textInputPlaceholder' variant='labelSmall'>
@@ -212,7 +216,8 @@ export const SubdomainInput = forwardRef<HTMLDivElement, SubdomainInputProps>(
           <StatusIcon
             position='absolute'
             alignItems='center'
-            justifyContent='center'>
+            justifyContent='center'
+          >
             {currentIcRight ? (
               <Icon
                 mr={5}
@@ -238,7 +243,7 @@ const Suffix = styled(Typography)`
   white-space: nowrap;
 `
 
-interface WrapperProps extends Pick<SubdomainInputProps,'variant'> {
+interface WrapperProps extends Pick<SubdomainInputProps, 'variant'> {
   borderColor?: string
   backgroundColor?: string
   color?: string

@@ -90,7 +90,8 @@ const Button: FC<PropsWithChildren<Props>> = ({
       variant={variant}
       hSpacing={Number(hSpacing) || 0}
       colorVariants={colorVariants}
-      {...rest}>
+      {...rest}
+    >
       {loading ? (
         <Icon size='medium' name='loading' spin color={iconColor} />
       ) : (
@@ -109,7 +110,8 @@ const Button: FC<PropsWithChildren<Props>> = ({
               as='label'
               variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
               htmlFor={id}
-              color='inherit'>
+              color='inherit'
+            >
               {children}
             </Typography>
           )}

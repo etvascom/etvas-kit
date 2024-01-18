@@ -85,7 +85,8 @@ const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
       hovering={hasKeyboardFocus}
       touch={hasTouch}
       hasCheckbox={hasCheckbox}
-      ref={optionRef}>
+      ref={optionRef}
+    >
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )

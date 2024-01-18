@@ -1,8 +1,4 @@
-import React, {
-  FC,
-  FormHTMLAttributes,
-  PropsWithChildren,
-} from 'react'
+import React, { FC, FormHTMLAttributes, PropsWithChildren } from 'react'
 
 import { Formik, FormikConfig, Form as FormikForm } from 'formik'
 

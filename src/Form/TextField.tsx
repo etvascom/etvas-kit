@@ -32,5 +32,3 @@ export const TextField = forwardRef<
 })
 
 const hasValidation = (props: Props) => props.validate || props.required
-
-

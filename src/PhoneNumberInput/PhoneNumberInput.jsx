@@ -224,10 +224,12 @@ const PhoneNumberInput = forwardRef((props, ref) => {
           tinted={tinted}
           error={error}
           disabled={disabled}
-          variant={inputVariant}>
+          variant={inputVariant}
+        >
           <PrefixDropdownTrigger
             ref={wrapperRef}
-            onClick={handleToggleOpenDropdown}>
+            onClick={handleToggleOpenDropdown}
+          >
             <Space mr={3}>
               <span
                 className={`flag-icon flag-icon-${country.code.toLowerCase()}`}

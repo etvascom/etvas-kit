@@ -15,7 +15,11 @@ export interface SubLabelProps extends Omit<TypographyProps, 'variant'> {
   content?: any
 }
 
-export const SubLabel: FC<SubLabelProps> = ({ variant, content, preserveSpace }) => (
+export const SubLabel: FC<SubLabelProps> = ({
+  variant,
+  content,
+  preserveSpace
+}) => (
   <Wrapper preserveSpace={preserveSpace} variant={variant} mt={1}>
     {content && <Span>{content}</Span>}
   </Wrapper>

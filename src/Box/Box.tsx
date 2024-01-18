@@ -1,6 +1,5 @@
-import styled from 'styled-components'
 import type * as CSS from 'csstype'
-
+import styled from 'styled-components'
 import {
   BackgroundProps,
   BorderProps,
