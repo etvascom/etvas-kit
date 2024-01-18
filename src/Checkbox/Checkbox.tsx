@@ -1,6 +1,6 @@
 import React, {
   FC,
-  InputHTMLAttributes,
+  LabelHTMLAttributes,
   useCallback,
   useEffect,
   useState
@@ -13,15 +13,18 @@ import { Icon, IconProps } from '../Icon'
 import { Typography, TypographyProps } from '../Typography'
 
 interface Props
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'size'>,
     Partial<Pick<TypographyProps, 'variant'>>,
     Pick<IconProps, 'size'> {
   label?: string
+  checked?: boolean
+  name?: string
+  disabled?: boolean
 }
 
 export const Checkbox: FC<Props> = ({
   label,
-  color='brand',
+  color = 'brand',
   checked,
   name,
   id,
@@ -76,7 +79,7 @@ export const Checkbox: FC<Props> = ({
   )
 }
 
-const StyledLabel = styled.label<any>`
+const StyledLabel = styled.label`
   display: flex;
   user-select: none;
   align-items: center;
