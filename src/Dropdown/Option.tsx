@@ -17,13 +17,14 @@ import { typography } from '../Typography'
 import sizes from '../assets/sizes'
 
 export interface OptionProps extends OptionHTMLAttributes<HTMLDivElement> {
-  onSelectItem: (value: any) => void
+  onSelectItem?: (value: any) => void
   hasKeyboardFocus?: boolean
   hasCheckbox?: boolean
   value: any
 }
 
 const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
+  id,
   children,
   onSelectItem,
   disabled = false,
@@ -36,7 +37,7 @@ const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
 
   const _handleClick = () => {
     if (!disabled) {
-      onSelectItem(value)
+      onSelectItem && onSelectItem(value)
     }
   }
 

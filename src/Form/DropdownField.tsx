@@ -1,25 +1,35 @@
-import { useCallback, useMemo } from 'react'
+import React, { FC, useCallback, useMemo } from 'react'
 
-import { useField, useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
+import { FieldHookConfig, useField, useFormikContext } from 'formik'
 
-import { Dropdown } from '../Dropdown'
-import { fieldShape } from './shapes'
+import { Dropdown, DropdownProps } from '../Dropdown'
 
-export const DropdownField = ({
+interface Props extends DropdownProps {
+  options: any[]
+  optionAttributes: {
+    key: string
+    value: string
+    label: string
+    id: string
+  }
+  onFieldValueChange?: (value: string) => void
+}
+
+export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
   options,
-  optionAttributes,
+  optionAttributes = defaultOptionAttributes,
   multiple,
   itemFilter,
   valueRender,
   onFieldValueChange,
+  optionalText = 'Optional',
   ...props
 }) => {
-  const { submitCount, errors } = useFormikContext()
+  const { submitCount } = useFormikContext()
   const [field, meta, helpers] = useField(props)
 
   const handleChange = useCallback(
-    value => {
+    (value: any) => {
       helpers.setValue(value)
       onFieldValueChange && onFieldValueChange(value)
     },
@@ -37,7 +47,7 @@ export const DropdownField = ({
     )
   }, [field, options, optionAttributes, multiple])
 
-  const renderSelectedLabel = value => {
+  const renderSelectedLabel = (value: any) => {
     if (multiple) {
       const selectedOptions = options.filter(option =>
         value.includes(option.value)
@@ -93,8 +103,7 @@ export const DropdownField = ({
   return (
     <Dropdown
       onChange={handleChange}
-      label={props.label}
-      optionalText={props.optionalText}
+      optionalText={optionalText}
       value={selectedValue}
       itemFilter={filterItem}
       error={displayedError}
@@ -113,26 +122,9 @@ export const DropdownField = ({
   )
 }
 
-DropdownField.propTypes = {
-  ...fieldShape,
-  options: PropTypes.arrayOf(PropTypes.object),
-  optionAttributes: PropTypes.shape({
-    key: PropTypes.string,
-    value: PropTypes.string,
-    label: PropTypes.string
-  }),
-  itemFilter: PropTypes.func,
-  multiple: PropTypes.bool,
-  valueRender: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  onFieldValueChange: PropTypes.func
-}
-
-DropdownField.defaultProps = {
-  optionalText: 'Optional',
-  optionAttributes: {
-    key: 'value',
-    value: 'value',
-    label: 'label',
-    id: 'id'
-  }
+const defaultOptionAttributes = {
+  key: 'value',
+  value: 'value',
+  label: 'label',
+  id: 'id'
 }

@@ -1,8 +1,12 @@
-import { forwardRef, useMemo, useRef } from 'react'
+import React, {
+  HTMLAttributes,
+  TextareaHTMLAttributes,
+  forwardRef,
+  useMemo,
+  useRef
+} from 'react'
 
-import css from '@styled-system/css'
-import propTypes from '@styled-system/prop-types'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
 
@@ -10,13 +14,46 @@ import { Flex } from '../Flex'
 import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
 import { typography } from '../Typography'
+import { Error, VariantProp, Warning } from '../utils/types'
 import { default as variants } from './TextArea.variants'
 
-export const TextArea = forwardRef(
+type VariantKey = keyof typeof variants
+
+export interface TextAreaProps
+  extends Pick<
+      TextareaHTMLAttributes<HTMLTextAreaElement>,
+      | 'autoComplete'
+      | 'disabled'
+      | 'name'
+      | 'placeholder'
+      | 'readOnly'
+      | 'required'
+      | 'value'
+      | 'maxLength'
+      | 'onChange'
+    >,
+    Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
+  error?: Error
+  label?: React.ReactNode
+  optionalText?: React.ReactNode
+  valid?: boolean
+  variant?: VariantProp<VariantKey>
+  allowResize?: boolean
+  noBottomSpace?: boolean
+  cols?: number
+  rows?: number
+  loading?: boolean
+  warning?: Warning
+  textAreaProps?: TextareaHTMLAttributes<HTMLTextAreaElement>
+  tinted?: boolean
+  showTooltip?: boolean
+}
+
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       autoComplete,
-      autoFocus,
+      autoFocus = false,
       disabled,
       error,
       id,
@@ -25,26 +62,26 @@ export const TextArea = forwardRef(
       name,
       onChange,
       placeholder,
-      readOnly,
+      readOnly = false,
       required,
       valid,
-      value,
-      variant,
-      allowResize,
-      noBottomSpace,
+      value = '',
+      variant = 'default',
+      allowResize = true,
+      noBottomSpace = false,
       cols,
-      rows,
+      rows = 5,
       maxLength,
       loading,
       warning,
       textAreaProps,
-      tinted,
+      tinted = false,
       showTooltip,
       ...rest
     },
     ref
   ) => {
-    const textAreaRef = useRef()
+    const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
     const textAreaVariant = useMemo(() => {
       if (disabled || loading) return 'disabled'
@@ -55,7 +92,7 @@ export const TextArea = forwardRef(
     }, [loading, disabled, error, warning, valid, variant])
 
     return (
-      <Flex flexDirection='column' hasLabel={label} width={1} {...rest}>
+      <Flex flexDirection='column' width={1} {...rest}>
         {!!label && (
           <Label
             label={label}
@@ -72,7 +109,6 @@ export const TextArea = forwardRef(
             disabled={disabled}
             aria-disabled={readOnly || disabled}
             error={error}
-            hasLabel={label}
             id={id}
             name={name}
             onChange={onChange}
@@ -87,13 +123,14 @@ export const TextArea = forwardRef(
             cols={cols}
             rows={rows}
             tinted={tinted}
+            warning={warning}
             {...textAreaProps}
           />
         </Flex>
 
         <SubLabel
           variant='error'
-          content={error}
+          content={error || warning}
           preserveSpace={!noBottomSpace}
         />
       </Flex>
@@ -101,64 +138,24 @@ export const TextArea = forwardRef(
   }
 )
 
-const StyledTextArea = styled.textarea(
+interface StyledTextAreaProps
+  extends Pick<
+    TextAreaProps,
+    'error' | 'tinted' | 'allowResize' | 'warning' | 'disabled' | 'variant'
+  > {}
+
+const StyledTextArea = styled.textarea<StyledTextAreaProps>(
   css({
     ...typography.labelSmall
-  }),
+  } as SystemStyleObject),
   variant({ variants }),
-  ({ tinted, error, warn, disabled, allowResize }) => ({
-    backgroundColor: tinted && !(error || warn || disabled) && 'white',
-    borderColor: tinted && !(error || warn || disabled) && 'white',
+  ({ tinted, error, warning, disabled, allowResize }: StyledTextAreaProps) => ({
+    backgroundColor:
+      tinted && !(error || warning || disabled) ? 'white' : 'initial',
+    borderColor:
+      tinted && !(error || warning || disabled) ? 'white' : 'initial',
     resize: allowResize ? 'both' : 'none'
   })
 )
 
-TextArea.propTypes = {
-  ...propTypes.inputStyle,
-  allowResize: PropTypes.bool,
-  maxLength: PropTypes.number,
-  cols: PropTypes.number,
-  rows: PropTypes.number,
-  autoComplete: PropTypes.string,
-  autoFocus: PropTypes.bool,
-  disabled: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  label: PropTypes.node,
-  optionalText: PropTypes.node,
-  name: PropTypes.string,
-  tinted: PropTypes.bool,
-  /** dummy space added for consistent spacing with validated inputs.
-   *
-   * remove space by setting this to true */
-  onChange: PropTypes.func,
-  placeholder: PropTypes.string,
-  noBottomSpace: PropTypes.bool,
-  readOnly: PropTypes.bool,
-  required: PropTypes.bool,
-  showTooltip: PropTypes.bool,
-  valid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ])
-}
-
-TextArea.defaultProps = {
-  autoFocus: false,
-  rows: 5,
-  allowResize: true,
-  noBottomSpace: false,
-  readOnly: false,
-  value: '',
-  variant: 'default',
-  tinted: false
-}
-
 TextArea.displayName = 'TextArea'
-/** @component */
