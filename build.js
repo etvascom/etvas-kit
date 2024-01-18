@@ -14,6 +14,8 @@ const build = () => {
     bundle: true,
     inject: ['build-react-shim.js'],
     loader: {
+      '.js': 'jsx',
+      '.jsx': 'jsx',
       '.ts': 'tsx',
       '.tsx': 'tsx',
       '.woff': 'copy',
