@@ -1,5 +1,5 @@
 import EventEmitter from 'events'
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash/isEqual.js'
 
 import { hex2rgb, mergeDeep, shading } from '../utils'
 import { InterCom } from './InterCom'

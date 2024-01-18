@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 
 import propTypes from '@styled-system/prop-types'
-import random from 'lodash/random'
-import range from 'lodash/range'
+import random from 'lodash/random.js'
+import range from 'lodash/range.js'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { compose, layout, space } from 'styled-system'
