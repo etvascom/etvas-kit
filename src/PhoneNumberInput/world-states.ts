@@ -1,6 +1,22 @@
 import { Countries } from '../i18n'
 
-export const statesWorld = Countries.asArray(country => ({
+export interface Country {
+  code: string
+  full: string
+  short: string
+  prefix: string
+  isEU: boolean
+  native?: string
+}
+
+export interface State {
+  name: string
+  code: string
+  isEU: boolean
+  prefix: string
+}
+
+export const statesWorld: State[] = Countries.asArray((country: Country) => ({
   name: country.native
     ? `${country.short || country.full} (${country.native})`
     : country.full,
