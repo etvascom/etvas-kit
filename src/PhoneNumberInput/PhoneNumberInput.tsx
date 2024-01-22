@@ -106,12 +106,11 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   useLayoutEffect(() => {
     if (ref) {
       typeof ref !== 'function' &&
-        ref?.current &&
-        (ref.current.selectionStart = ref.current.selectionEnd = cursorPosition)
-    } else {
-      inputRef.current &&
-        (inputRef.current.selectionStart = inputRef.current.selectionEnd =
+        (ref.current!.selectionStart = ref.current!.selectionEnd =
           cursorPosition)
+    } else {
+      inputRef.current!.selectionStart = inputRef.current!.selectionEnd =
+        cursorPosition
     }
   }, [value, ref, inputRef, cursorPosition, cursorPositionChangedToggler])
 
@@ -235,12 +234,10 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
           tinted={tinted}
           error={error}
           disabled={disabled}
-          variant={inputVariant}
-        >
+          variant={inputVariant}>
           <PrefixDropdownTrigger
             ref={wrapperRef}
-            onClick={handleToggleOpenDropdown}
-          >
+            onClick={handleToggleOpenDropdown}>
             <Space mr={3}>
               <span
                 className={`flag-icon flag-icon-${country.code.toLowerCase()}`}
