@@ -1,6 +1,5 @@
 import React, { FC, SVGAttributes } from 'react'
 
-import { default as DefaultIcon } from '@mdi/react'
 import styled from 'styled-components'
 import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
 
@@ -67,7 +66,7 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   />
 )
 
-const BaseIcon = styled(DefaultIcon)`
+const BaseIcon = styled.svg<any>`
   animation: ${({ spin }) =>
     spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
   fill: ${({ color }) => color};
