@@ -8,6 +8,8 @@ import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
 import glyphs from './glyphs'
 
+console.warn({DefaultIcon})
+
 const externalGlyphs: Record<string, string> = {}
 
 const addIcon = (name: string, icon: string) => {
