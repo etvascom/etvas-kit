@@ -10,8 +10,8 @@ const build = () => {
   const config = {
     logLevel: 'info',
     entryPoints: ['src/index.ts'],
-    minify: false,
-    bundle: false,
+    minify: true,
+    bundle: true,
     inject: ['build-react-shim.js'],
     loader: {
       '.js': 'jsx',
