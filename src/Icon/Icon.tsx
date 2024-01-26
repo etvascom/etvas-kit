@@ -55,7 +55,7 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   spin,
   ...props
 }) => (
-  <BaseIcon
+  <DefaultIcon
     path={
       externalGlyphs[name] ||
       glyphs[name as keyof typeof glyphs] ||
@@ -69,11 +69,11 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   />
 )
 
-const BaseIcon = styled(DefaultIcon)`
-  animation: ${({ spin }) =>
-    spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
-  fill: ${({ color }) => color};
-`
+// const BaseIcon = styled(DefaultIcon)`
+//   animation: ${({ spin }) =>
+//     spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
+//   fill: ${({ color }) => color};
+// `
 
 Icon.glyphs = glyphs
 Icon.externalGlyphs = externalGlyphs
