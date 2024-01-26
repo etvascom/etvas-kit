@@ -1,6 +1,6 @@
 import React, { FC, SVGAttributes } from 'react'
 
-import DefaultIcon from '@mdi/react'
+import * as DefaultIcon from '@mdi/react'
 import styled from 'styled-components'
 import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
 
@@ -55,7 +55,7 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   spin,
   ...props
 }) => (
-  <DefaultIcon
+  <DefaultIcon.Icon
     path={
       externalGlyphs[name] ||
       glyphs[name as keyof typeof glyphs] ||
