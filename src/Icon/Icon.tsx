@@ -1,14 +1,12 @@
 import React, { FC, SVGAttributes } from 'react'
 
-import * as DefaultIcon from '@mdi/react'
+import * as MDIReact from '@mdi/react'
 import styled from 'styled-components'
 import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
 
 import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
 import glyphs from './glyphs'
-
-console.warn({ etvasKit: { DefaultIcon, styled } })
 
 const externalGlyphs: Record<string, string> = {}
 
@@ -55,7 +53,7 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   spin,
   ...props
 }) => (
-  <DefaultIcon.Icon
+  <BaseIcon
     path={
       externalGlyphs[name] ||
       glyphs[name as keyof typeof glyphs] ||
@@ -69,11 +67,11 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
   />
 )
 
-// const BaseIcon = styled(DefaultIcon)`
-//   animation: ${({ spin }) =>
-//     spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
-//   fill: ${({ color }) => color};
-// `
+const BaseIcon = styled(MDIReact.Icon)`
+  animation: ${({ spin }) =>
+    spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
+  fill: ${({ color }) => color};
+`
 
 Icon.glyphs = glyphs
 Icon.externalGlyphs = externalGlyphs
