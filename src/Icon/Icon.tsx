@@ -3,12 +3,13 @@ import React, { FC, SVGAttributes } from 'react'
 import DefaultIcon from '@mdi/react'
 import styled from 'styled-components'
 import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
+import css from '@styled-system/css'
 
 import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
 import glyphs from './glyphs'
 
-console.warn({DefaultIcon})
+console.warn({etvaskit: DefaultIcon })
 
 const externalGlyphs: Record<string, string> = {}
 
@@ -68,12 +69,14 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
     {...props}
   />
 )
-
-const BaseIcon = styled(DefaultIcon)`
-  animation: ${({ spin }) =>
-    spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
-  fill: ${({ color }) => color};
-`
+const BaseIcon = styled(DefaultIcon)(({ spin, color }) =>
+  css({
+    animation: spin
+      ? `rotation ${animationSpeeds.rotation} infinite linear`
+      : '',
+    fill: color
+  }) as any 
+)
 
 Icon.glyphs = glyphs
 Icon.externalGlyphs = externalGlyphs
