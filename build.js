@@ -23,7 +23,7 @@ const build = () => {
       '.svg': 'text'
     },
     plugins: [
-      esbuildPluginTsc(),
+      esbuildPluginTsc({ tsx: true }),
       nodeExternalsPlugin(),
       esbuildPluginBrowserslist(browserslist(), {
         printUnknownTargets: false
