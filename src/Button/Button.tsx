@@ -1,7 +1,6 @@
 import React, {
   ButtonHTMLAttributes,
   FC,
-  HTMLAttributes,
   PropsWithChildren,
   useMemo
 } from 'react'

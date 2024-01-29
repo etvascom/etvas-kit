@@ -434,8 +434,8 @@ const Toggler = styled.button<TogglerProps>(
         })
       : null) as any,
   ({ tinted, error, disabled }: TogglerProps) => ({
-    backgroundColor: tinted && !(error || disabled) ? 'white' : 'initial',
-    borderColor: tinted && !(error || disabled) ? 'white' : 'initial'
+    backgroundColor: tinted && !(error || disabled) ? 'white' : '',
+    borderColor: tinted && !(error || disabled) ? 'white' : ''
   }),
   (({ dataCollapsed }: TogglerProps) =>
     !dataCollapsed

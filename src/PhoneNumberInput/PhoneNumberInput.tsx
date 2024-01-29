@@ -336,8 +336,8 @@ const StyledPhoneNumberWrapper = styled.div<StyledPhoneNumberWrapperProps>(
   css(styles.phoneNumberWrapper as SystemStyleObject) as any,
   variant({ variants }),
   ({ tinted, error, disabled }: StyledPhoneNumberWrapperProps) => ({
-    backgroundColor: tinted && !(error || disabled) ? 'white' : 'initial',
-    borderColor: tinted && !(error || disabled) ? 'white' : 'initial'
+    backgroundColor: tinted && !(error || disabled) ? 'white' : '',
+    borderColor: tinted && !(error || disabled) ? 'white' : ''
   })
 )
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger) as any)

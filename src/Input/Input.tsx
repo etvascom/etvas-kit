@@ -251,9 +251,9 @@ const StyledInput = styled.input<StyledInputProps>(
   variant({ variants }),
   ({ tinted, error, warning, disabled, paddingRight }: StyledInputProps) => ({
     backgroundColor:
-      tinted && !(error || warning || disabled) ? 'white' : 'initial',
+      tinted && !(error || warning || disabled) ? 'white' : '',
     borderColor:
-      tinted && !(error || warning || disabled) ? 'white' : 'initial',
+      tinted && !(error || warning || disabled) ? 'white' : '',
     paddingRight: `${paddingRight * 4}px`,
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
