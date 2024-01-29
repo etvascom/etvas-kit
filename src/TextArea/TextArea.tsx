@@ -151,9 +151,9 @@ const StyledTextArea = styled.textarea<StyledTextAreaProps>(
   variant({ variants }),
   ({ tinted, error, warning, disabled, allowResize }: StyledTextAreaProps) => ({
     backgroundColor:
-      tinted && !(error || warning || disabled) ? 'white' : 'initial',
+      tinted && !(error || warning || disabled) ? 'white' : '',
     borderColor:
-      tinted && !(error || warning || disabled) ? 'white' : 'initial',
+      tinted && !(error || warning || disabled) ? 'white' : '',
     resize: allowResize ? 'both' : 'none'
   })
 )
