@@ -41,7 +41,7 @@ export interface TouchableProps
     SpaceProps,
     TypographyProps {
   activeOpacity?: number | string
-  effect: Effect
+  effect?: Effect
   underlayColor?: string
   pointerEvents?: CSS.Property.PointerEvents
   visibility?: CSS.Property.Visibility
