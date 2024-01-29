@@ -2,7 +2,17 @@ import React, { FC, SVGAttributes } from 'react'
 
 import * as MDIReact from '@mdi/react'
 import styled from 'styled-components'
-import { OpacityProps, PositionProps, SpaceProps } from 'styled-system'
+import {
+  ColorProps,
+  OpacityProps,
+  PositionProps,
+  SpaceProps,
+  color,
+  compose,
+  layout,
+  position,
+  space
+} from 'styled-system'
 
 import animationSpeeds from '../assets/animationSpeeds'
 import sizes from '../assets/sizes'
@@ -30,9 +40,10 @@ const validate = (name: string) => {
 }
 
 export interface IconProps
-  extends Omit<SVGAttributes<SVGElement>, 'opacity'>,
+  extends Omit<SVGAttributes<SVGElement>, 'opacity' | 'color'>,
     OpacityProps,
     PositionProps,
+    ColorProps,
     SpaceProps {
   name: string
   size?: 'small' | 'medium' | 'large'
@@ -60,7 +71,7 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
       validate(name)
     }
     size={sizes[size] ?? size}
-    color={color}
+    color={color?.toString()}
     spin={spin}
     rotate={rotate}
     {...props}
@@ -68,9 +79,10 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
 )
 
 const BaseIcon = styled(MDIReact.Icon)`
+  ${compose(color, layout, position, space)};
   animation: ${({ spin }) =>
     spin ? `rotation ${animationSpeeds.rotation} infinite linear` : ''};
-  fill: ${({ color }) => color};
+  fill: ${({ theme, color }) => theme.colors[color || '']};
 `
 
 Icon.glyphs = glyphs
