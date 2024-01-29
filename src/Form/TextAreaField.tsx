@@ -6,7 +6,7 @@ import { TextArea, TextAreaProps } from '../TextArea'
 import { makeId } from './utils'
 
 interface Props extends TextAreaProps {
-  validate: (args: any) => any
+  validate?: (args: any) => any
 }
 
 export const TextAreaField = forwardRef<

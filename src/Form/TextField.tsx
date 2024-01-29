@@ -6,7 +6,7 @@ import { Input, InputProps } from '../Input'
 import { makeId } from './utils'
 
 interface Props extends InputProps {
-  validate: (args: any) => any
+  validate?: (args: any) => any
 }
 export const TextField = forwardRef<
   HTMLInputElement,

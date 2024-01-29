@@ -6,7 +6,7 @@ import { SubdomainInput, SubdomainInputProps } from '../SubdomainInput'
 import { makeId } from './utils'
 
 interface Props extends SubdomainInputProps {
-  validate: (args: any) => any
+  validate?: (args: any) => any
 }
 
 export const SubdomainField: FC<Props & FieldHookConfig<string>> = props => {
