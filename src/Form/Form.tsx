@@ -1,4 +1,4 @@
-import React, { FC, FormHTMLAttributes, PropsWithChildren } from 'react'
+import React, { FC, FormHTMLAttributes } from 'react'
 
 import { Formik, FormikConfig, Form as FormikForm } from 'formik'
 
@@ -8,11 +8,7 @@ interface Props
   extends Pick<FormHTMLAttributes<HTMLFormElement>, 'name'>,
     FormikConfig<any> {}
 
-export const Form: FC<PropsWithChildren<Props>> = ({
-  name,
-  children,
-  ...props
-}) => {
+export const Form: FC<Props> = ({ name, children, ...props }) => {
   name = name ? `form-${name}` : makeId('form', 'form')
 
   return (
