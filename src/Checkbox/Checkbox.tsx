@@ -1,6 +1,7 @@
 import React, {
   FC,
   LabelHTMLAttributes,
+  ReactNode,
   useCallback,
   useEffect,
   useState
@@ -16,7 +17,7 @@ interface Props
   extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'size'>,
     Partial<Pick<TypographyProps, 'variant'>>,
     Pick<IconProps, 'size'> {
-  label?: string
+  label?: ReactNode
   checked?: boolean
   name?: string
   disabled?: boolean
@@ -71,8 +72,7 @@ export const Checkbox: FC<Props> = ({
         <Typography
           variant={variant}
           color={disabled ? 'baseGray' : 'text'}
-          ml={2}
-        >
+          ml={2}>
           {label}
         </Typography>
       )}
