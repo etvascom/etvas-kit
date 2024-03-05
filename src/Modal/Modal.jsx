@@ -62,9 +62,12 @@ export const Modal = ({
 
   const isModalInIframe = useMemo(isInsideIframe, [])
 
-  const modalBackdropClickHandler = useCallback((event) => {
-    onBackDropClick && onBackDropClick(event)
-  }, [onBackDropClick])
+  const modalBackdropClickHandler = useCallback(
+    event => {
+      onBackDropClick && onBackDropClick(event)
+    },
+    [onBackDropClick]
+  )
   useOnClickOutside(contentWrapperRef, modalBackdropClickHandler)
 
   const handleKeyPress = useCallback(
@@ -114,8 +117,7 @@ export const Modal = ({
       <StyledModal animated={animated} {...props}>
         <Container
           justifyContent='center'
-          alignItems={isModalInIframe ? 'flex-start' : 'center'}
-        >
+          alignItems={isModalInIframe ? 'flex-start' : 'center'}>
           {childrenWithProps}
         </Container>
       </StyledModal>
