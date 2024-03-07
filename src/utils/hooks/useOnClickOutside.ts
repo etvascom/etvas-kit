@@ -15,7 +15,7 @@ export const useOnClickOutside = (
       }
       handler(event)
     }
-    document.addEventListener('touchstart', listener)
+    document.addEventListener('touchstart', listener, { passive: false })
     document.addEventListener('mousedown', listener)
     return () => {
       document.removeEventListener('touchstart', listener)
