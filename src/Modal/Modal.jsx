@@ -64,6 +64,7 @@ export const Modal = ({
 
   const modalBackdropClickHandler = useCallback(
     event => {
+      event.preventDefault()
       onBackDropClick && onBackDropClick(event)
     },
     [onBackDropClick]
