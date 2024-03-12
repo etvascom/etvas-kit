@@ -113,7 +113,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const icRightHidden =
       !currentIcRight || (currentIcRight === 'check' && !showValidationCheck)
-    const inputPaddingRight = icRightHidden ? 2 : 10
+    const inputPaddingRight = icRightHidden ? 2 : 12
 
     const resetInputType = useCallback(() => setInputType(type), [type])
 

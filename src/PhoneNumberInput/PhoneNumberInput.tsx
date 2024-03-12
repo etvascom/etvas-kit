@@ -64,6 +64,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     subLabel,
     loading,
     tinted = false,
+    showValidationCheck = false,
     searchPlaceholder = 'Search country',
     itemFilter = defaultItemFilter,
     ...rest
@@ -125,9 +126,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const currentIcRight = useMemo(() => {
     if (loading) return 'loading'
     else if (error || warning) return 'alertCircle'
-    else if (valid) return 'check'
-
-    return null
+    return 'check'
   }, [loading, error, warning, valid])
 
   const currentIcRightColor = useMemo(() => {
@@ -139,7 +138,9 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
     return 'inputIcon'
   }, [loading, error, warning, valid, disabled])
-
+  const icRightHidden =
+    !currentIcRight || (currentIcRight === 'check' && !showValidationCheck)
+  const inputPaddingRight = icRightHidden ? 2 : 12
   const displayValue = useMemo(() => {
     const normalizedValue = value ? value.toString().replace(/[\s]+/g, '') : ''
     const found = prefixLengthOrderedStates.find(
@@ -246,6 +247,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
             <Typography variant='labelSmall'>({country.prefix})</Typography>
           </PrefixDropdownTrigger>
           <StyledPhoneNumberInput
+            paddingRight={inputPaddingRight}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             aria-disabled={readOnly || disabled}
@@ -266,15 +268,16 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
           />
         </StyledPhoneNumberWrapper>
         <Flex pointerEvents='auto' position='absolute' right={2}>
-          {icStateIsNotIconToggle() && currentIcRight && (
-            <Icon
-              mr={5}
-              size='small'
-              name={currentIcRight}
-              color={currentIcRightColor}
-              spin={currentIcRight === 'loading'}
-            />
-          )}
+          {icStateIsNotIconToggle() &&
+            (currentIcRight !== 'check' || showValidationCheck) && (
+              <Icon
+                mr={5}
+                size='small'
+                name={currentIcRight}
+                color={currentIcRightColor}
+                spin={currentIcRight === 'loading'}
+              />
+            )}
         </Flex>
         {dropdownOpen && (
           <StyledDropdownWrapper dropUp={dropUp}>
@@ -341,10 +344,17 @@ const StyledPhoneNumberWrapper = styled.div<StyledPhoneNumberWrapperProps>(
   })
 )
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger) as any)
-const StyledPhoneNumberInput = styled.input<Props>(
+interface StyledPhoneNumberInputProps extends Props {
+  paddingRight: number
+}
+
+const StyledPhoneNumberInput = styled.input<StyledPhoneNumberInputProps>(
   css(styles.phoneNumberInput as SystemStyleObject) as any,
   variant({ variants }),
-  `border: none;`
+  `border: none;`,
+  ({ paddingRight }: StyledPhoneNumberInputProps) => ({
+    paddingRight: `${paddingRight * 4}px`
+  })
 )
 
 const calcDropdownHeight = (height: string, size: number = 1) =>
