@@ -3,9 +3,9 @@ import { FlexboxProps, flexbox } from 'styled-system'
 
 import { Box, BoxProps } from '../Box'
 
-interface Props extends FlexboxProps, BoxProps {}
+export interface FlexProps extends FlexboxProps, BoxProps {}
 
-export const Flex = styled(Box)<Props>`
+export const Flex = styled(Box)<FlexProps>`
   display: flex;
   ${flexbox}
 `

@@ -10,7 +10,7 @@ import React, {
 import css, { SystemStyleObject } from '@styled-system/css'
 import 'flag-icon-css/css/flag-icon.css'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
+import { compose, space, variant } from 'styled-system'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
@@ -247,7 +247,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
             <Typography variant='labelSmall'>({country.prefix})</Typography>
           </PrefixDropdownTrigger>
           <StyledPhoneNumberInput
-            paddingRight={inputPaddingRight}
+            pr={inputPaddingRight}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             aria-disabled={readOnly || disabled}
@@ -344,17 +344,11 @@ const StyledPhoneNumberWrapper = styled.div<StyledPhoneNumberWrapperProps>(
   })
 )
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger) as any)
-interface StyledPhoneNumberInputProps extends Props {
-  paddingRight: number
-}
 
-const StyledPhoneNumberInput = styled.input<StyledPhoneNumberInputProps>(
+
+const StyledPhoneNumberInput = styled.input<Props>(
+  compose(space, variant({ variants })),
   css(styles.phoneNumberInput as SystemStyleObject) as any,
-  variant({ variants }),
-  `border: none;`,
-  ({ paddingRight }: StyledPhoneNumberInputProps) => ({
-    paddingRight: `${paddingRight * 4}px`
-  })
 )
 
 const calcDropdownHeight = (height: string, size: number = 1) =>

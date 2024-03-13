@@ -9,9 +9,9 @@ import React, {
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
+import { compose, space, variant } from 'styled-system'
 
-import { Flex } from '../Flex'
+import { Flex, FlexProps } from '../Flex'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { typography } from '../Typography'
@@ -22,7 +22,12 @@ import { SubLabel } from './SubLabel'
 
 type VariantKey = keyof typeof variants
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends Omit<
+      InputHTMLAttributes<HTMLInputElement>,
+      'color' | 'height' | 'size' | 'width'
+    >,
+    FlexProps {
   error?: Error
   warning?: Warning
   icLeft?: string
@@ -169,7 +174,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
-            paddingRight={inputPaddingRight}
+            pr={inputPaddingRight}
             tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
@@ -241,20 +246,12 @@ const StyledFlex = styled(Flex)`
     }
   }
 `
-
-interface StyledInputProps extends InputProps {
-  paddingRight: number
-}
-
-const StyledInput = styled.input<StyledInputProps>(
+const StyledInput = styled.input<InputProps>(
   css(typography.labelSmall as SystemStyleObject) as any,
-  variant({ variants }),
-  ({ tinted, error, warning, disabled, paddingRight }: StyledInputProps) => ({
-    backgroundColor:
-      tinted && !(error || warning || disabled) ? 'white' : '',
-    borderColor:
-      tinted && !(error || warning || disabled) ? 'white' : '',
-    paddingRight: `${paddingRight * 4}px`,
+  compose(space, variant({ variants })),
+  ({ tinted, error, warning, disabled }: InputProps) => ({
+    backgroundColor: tinted && !(error || warning || disabled) ? 'white' : '',
+    borderColor: tinted && !(error || warning || disabled) ? 'white' : '',
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
     }
