@@ -116,10 +116,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       return 'inputIcon'
     }, [loading, error, warning, valid, disabled])
 
-    const icRightHidden =
-      !currentIcRight || (currentIcRight === 'check' && !showValidationCheck)
-    const inputPaddingRight = icRightHidden ? 2 : 12
-
     const resetInputType = useCallback(() => setInputType(type), [type])
 
     const togglePassword = useCallback(
@@ -161,6 +157,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       const currentRef = ref || inputRef
       typeof currentRef !== 'function' && currentRef.current?.focus()
     }
+
+    const shouldShowPasswordToggler =
+      !icStateIsNotIconToggle() || !currentIcRight
+    const shouldShowRightIcon =
+      currentIcRight && (currentIcRight !== 'check' || showValidationCheck)
+
+    const getInputPaddingRight= () => {
+      if (shouldShowPasswordToggler) {
+        return 6
+      }
+      if(type === 'search') {
+        return 10
+      }
+      if (shouldShowRightIcon) {
+        return 12
+      }
+      return 2
+    }
+
     return (
       <StyledFlex flexDirection='column' width={1} minHeight={40} {...rest}>
         {!!label && (
@@ -174,7 +189,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
-            pr={inputPaddingRight}
+            pr={getInputPaddingRight()}
             tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
@@ -206,18 +221,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icStateIsNotIconToggle() && currentIcRight ? (
-              currentIcRight === 'check' && !showValidationCheck ? null : (
-                <Icon
-                  mr={5}
-                  size='small'
-                  name={currentIcRight}
-                  color={currentIcRightColor}
-                  spin={currentIcRight === 'loading'}
-                  onClick={handleIcRightClick}
-                />
-              )
-            ) : (
+            {shouldShowPasswordToggler ? (
               <PasswordToggler
                 error={!!error}
                 inputType={inputType}
@@ -226,7 +230,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 onToggle={togglePassword}
                 viewOption={passwordView}
               />
-            )}
+            ) : shouldShowRightIcon ? (
+              <Icon
+                mr={5}
+                size='small'
+                name={currentIcRight}
+                color={currentIcRightColor}
+                spin={currentIcRight === 'loading'}
+                onClick={handleIcRightClick}
+              />
+            ) : null}
           </Flex>
         </Flex>
         <SubLabel

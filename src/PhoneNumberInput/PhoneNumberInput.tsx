@@ -138,9 +138,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
 
     return 'inputIcon'
   }, [loading, error, warning, valid, disabled])
-  const icRightHidden =
-    !currentIcRight || (currentIcRight === 'check' && !showValidationCheck)
-  const inputPaddingRight = icRightHidden ? 2 : 12
+
   const displayValue = useMemo(() => {
     const normalizedValue = value ? value.toString().replace(/[\s]+/g, '') : ''
     const found = prefixLengthOrderedStates.find(
@@ -220,6 +218,13 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     []
   )
 
+  const shouldShowIconRight =
+    icStateIsNotIconToggle() &&
+    currentIcRight &&
+    (currentIcRight !== 'check' || showValidationCheck)
+
+  const inputPaddingRight = shouldShowIconRight ? 12 : 2
+
   return (
     <StyledFlex flexDirection='column' width={1} {...rest}>
       {!!label && (
@@ -268,16 +273,15 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
           />
         </StyledPhoneNumberWrapper>
         <Flex pointerEvents='auto' position='absolute' right={2}>
-          {icStateIsNotIconToggle() &&
-            (currentIcRight !== 'check' || showValidationCheck) && (
-              <Icon
-                mr={5}
-                size='small'
-                name={currentIcRight}
-                color={currentIcRightColor}
-                spin={currentIcRight === 'loading'}
-              />
-            )}
+          {shouldShowIconRight && (
+            <Icon
+              mr={5}
+              size='small'
+              name={currentIcRight}
+              color={currentIcRightColor}
+              spin={currentIcRight === 'loading'}
+            />
+          )}
         </Flex>
         {dropdownOpen && (
           <StyledDropdownWrapper dropUp={dropUp}>
@@ -345,10 +349,9 @@ const StyledPhoneNumberWrapper = styled.div<StyledPhoneNumberWrapperProps>(
 )
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger) as any)
 
-
 const StyledPhoneNumberInput = styled.input<Props>(
   compose(space, variant({ variants })),
-  css(styles.phoneNumberInput as SystemStyleObject) as any,
+  css(styles.phoneNumberInput as SystemStyleObject) as any
 )
 
 const calcDropdownHeight = (height: string, size: number = 1) =>
