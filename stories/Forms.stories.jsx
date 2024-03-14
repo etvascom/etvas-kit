@@ -94,8 +94,7 @@ export const SimpleForm = () => (
   <Form
     onSubmit={action('submit')}
     initialValues={values}
-    validate={formValidate}
-  >
+    validate={formValidate}>
     <Typography variant='titleSmall'>Basic info</Typography>
     <PhoneNumberInputField
       name='phone'
@@ -103,6 +102,8 @@ export const SimpleForm = () => (
       label='Phone Number'
       placeholder='xxx-xxx-xxx'
       validate={minLength(5)}
+      showValidationCheck
+      required
     />
     <TextField
       name='name-no-validation'
@@ -205,8 +206,7 @@ export const DropdownForm = () => (
   <Form
     onSubmit={action('submit')}
     initialValues={values}
-    validate={formValidate}
-  >
+    validate={formValidate}>
     <Typography variant='titleSmall'>Cars</Typography>
     <DropdownField
       valueRender={renderMultipleSelectLabel}
@@ -501,8 +501,7 @@ export const SubdomainAutoCompleteForm = () => {
     <Form
       onSubmit={action('submit')}
       initialValues={sdValues}
-      validate={sdValidate}
-    >
+      validate={sdValidate}>
       {props => (
         <>
           <Input
@@ -551,8 +550,7 @@ export const AutocompleteFieldForm = () => {
     <Form
       onSubmit={action('submit')}
       initialValues={values}
-      validate={validate}
-    >
+      validate={validate}>
       <>
         <AutocompleteField
           handleInputChange={handleInputChange}

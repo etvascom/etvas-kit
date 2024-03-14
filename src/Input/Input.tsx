@@ -9,9 +9,9 @@ import React, {
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
+import { compose, space, variant } from 'styled-system'
 
-import { Flex } from '../Flex'
+import { Flex, FlexProps } from '../Flex'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import { typography } from '../Typography'
@@ -22,7 +22,12 @@ import { SubLabel } from './SubLabel'
 
 type VariantKey = keyof typeof variants
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends Omit<
+      InputHTMLAttributes<HTMLInputElement>,
+      'color' | 'height' | 'size' | 'width'
+    >,
+    FlexProps {
   error?: Error
   warning?: Warning
   icLeft?: string
@@ -111,10 +116,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       return 'inputIcon'
     }, [loading, error, warning, valid, disabled])
 
-    const icRightHidden =
-      !currentIcRight || (currentIcRight === 'check' && !showValidationCheck)
-    const inputPaddingRight = icRightHidden ? 2 : 10
-
     const resetInputType = useCallback(() => setInputType(type), [type])
 
     const togglePassword = useCallback(
@@ -156,6 +157,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       const currentRef = ref || inputRef
       typeof currentRef !== 'function' && currentRef.current?.focus()
     }
+
+    const shouldShowPasswordToggler =
+      !icStateIsNotIconToggle() || !currentIcRight
+    const shouldShowRightIcon =
+      currentIcRight && (currentIcRight !== 'check' || showValidationCheck)
+
+    const getInputPaddingRight = () => {
+      if (shouldShowPasswordToggler) {
+        return 6
+      }
+      if (type === 'search') {
+        return 10
+      }
+      if (shouldShowRightIcon) {
+        return 12
+      }
+      return 2
+    }
+
     return (
       <StyledFlex flexDirection='column' width={1} minHeight={40} {...rest}>
         {!!label && (
@@ -169,7 +189,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <Flex alignItems='center' position='relative' width='100%'>
           <StyledInput
-            paddingRight={inputPaddingRight}
+            pr={getInputPaddingRight()}
             tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
@@ -201,18 +221,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             />
           ) : null}
           <Flex pointerEvents='auto' position='absolute' right={2}>
-            {icStateIsNotIconToggle() && currentIcRight ? (
-              currentIcRight === 'check' && !showValidationCheck ? null : (
-                <Icon
-                  mr={5}
-                  size='small'
-                  name={currentIcRight}
-                  color={currentIcRightColor}
-                  spin={currentIcRight === 'loading'}
-                  onClick={handleIcRightClick}
-                />
-              )
-            ) : (
+            {shouldShowPasswordToggler ? (
               <PasswordToggler
                 error={!!error}
                 inputType={inputType}
@@ -221,7 +230,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 onToggle={togglePassword}
                 viewOption={passwordView}
               />
-            )}
+            ) : shouldShowRightIcon ? (
+              <Icon
+                mr={5}
+                size='small'
+                name={currentIcRight}
+                color={currentIcRightColor}
+                spin={currentIcRight === 'loading'}
+                onClick={handleIcRightClick}
+              />
+            ) : null}
           </Flex>
         </Flex>
         <SubLabel
@@ -241,20 +259,12 @@ const StyledFlex = styled(Flex)`
     }
   }
 `
-
-interface StyledInputProps extends InputProps {
-  paddingRight: number
-}
-
-const StyledInput = styled.input<StyledInputProps>(
+const StyledInput = styled.input<InputProps>(
   css(typography.labelSmall as SystemStyleObject) as any,
-  variant({ variants }),
-  ({ tinted, error, warning, disabled, paddingRight }: StyledInputProps) => ({
-    backgroundColor:
-      tinted && !(error || warning || disabled) ? 'white' : '',
-    borderColor:
-      tinted && !(error || warning || disabled) ? 'white' : '',
-    paddingRight: `${paddingRight * 4}px`,
+  compose(space, variant({ variants })),
+  ({ tinted, error, warning, disabled }: InputProps) => ({
+    backgroundColor: tinted && !(error || warning || disabled) ? 'white' : '',
+    borderColor: tinted && !(error || warning || disabled) ? 'white' : '',
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
     }
