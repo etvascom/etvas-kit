@@ -163,11 +163,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const shouldShowRightIcon =
       currentIcRight && (currentIcRight !== 'check' || showValidationCheck)
 
-    const getInputPaddingRight= () => {
+    const getInputPaddingRight = () => {
       if (shouldShowPasswordToggler) {
         return 6
       }
-      if(type === 'search') {
+      if (type === 'search') {
         return 10
       }
       if (shouldShowRightIcon) {
