@@ -1,11 +1,13 @@
-import React, { forwardRef } from 'react'
+import React, { InputHTMLAttributes, forwardRef } from 'react'
 
 import { FieldConfig, useField, useFormikContext } from 'formik'
 
 import { Input, InputProps } from '../Input'
 import { makeId } from './utils'
 
-interface Props extends InputProps {
+interface Props
+  extends Omit<InputProps, 'color' | 'height' | 'size' | 'width'>,
+    InputHTMLAttributes<HTMLInputElement> {
   validate?: (args: any) => any
 }
 export const TextField = forwardRef<
