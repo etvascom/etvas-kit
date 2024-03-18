@@ -187,7 +187,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             showTooltip={showTooltip}
           />
         )}
-        <Flex alignItems='center' position='relative' width='100%'>
+        <Flex alignItems='center' position='relative' width={1}>
           <StyledInput
             pr={getInputPaddingRight()}
             tinted={tinted}

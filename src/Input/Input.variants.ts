@@ -20,6 +20,7 @@ const DEFAULT_STYLE = {
   boxSizing: 'border-box',
   color: 'textInputActive',
   width: '100%',
+  minWidth: '95%',
   outline: 'none',
   '&::placeholder': {
     color: 'textInputPlaceholder'
