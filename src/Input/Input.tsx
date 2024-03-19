@@ -262,14 +262,37 @@ const StyledFlex = styled(Flex)`
 const StyledInput = styled.input<InputProps>(
   css(typography.labelSmall as SystemStyleObject) as any,
   compose(space, variant({ variants })),
-  ({ tinted, error, warning, disabled, type }: InputProps) => ({
-    backgroundColor: tinted && !(error || warning || disabled) ? 'white' : '',
-    borderColor: tinted && !(error || warning || disabled) ? 'white' : '',
-    minWidth: type === 'date' ? '95%' : '',
+  (props: InputProps) => ({
+    backgroundColor: getBackgroundColor(props),
+    borderColor: getBorderColor(props),
+    minWidth: props.type === 'date' ? '95%' : '',
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
     }
   })
 )
+
+const getBackgroundColor = ({
+  tinted,
+  error,
+  warning,
+  disabled,
+  type
+}: InputProps) => {
+  if (tinted && !(error || warning || disabled)) {
+    return 'white'
+  }
+  if (type === 'date') {
+    return 'white'
+  }
+  return ''
+}
+
+const getBorderColor = ({ tinted, error, warning, disabled }: InputProps) => {
+  if (tinted && !(error || warning || disabled)) {
+    return 'white'
+  }
+  return ''
+}
 
 Input.displayName = 'Input'
