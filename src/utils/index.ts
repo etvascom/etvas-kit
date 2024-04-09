@@ -18,11 +18,11 @@ export const media = (breakpoint: string | number, rules: any[]) => ({
   [`@media (min-width: ${breakpoint})`]: rules
 })
 
-export const sm = (theme: any) => (rules: any[]) =>
+export const sm = (theme: any) => (rules: any | any[]) =>
   media(theme.breakpoints[0], rules)
-export const md = (theme: any) => (rules: any[]) =>
+export const md = (theme: any) => (rules: any | any[]) =>
   media(theme.breakpoints[1], rules)
-export const lg = (theme: any) => (rules: any[]) =>
+export const lg = (theme: any) => (rules: any | any[]) =>
   media(theme.breakpoints[2], rules)
 
 export const {
