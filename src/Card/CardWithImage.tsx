@@ -48,16 +48,14 @@ export const CardWithImage: FC<PropsWithChildren<Props>> = ({
         flexDirection={flexDirection}
         justifyContent='space-between'
         width='100%'
-        height='100%'
-      >
+        height='100%'>
         <ContentBox vertical={vertical} ratio={imageSize} p={imagePadding}>
           <Image url={imageUrl} contain={imageContain} />
         </ContentBox>
         <ContentBox
           vertical={vertical}
           p={contentPadding ?? defaultContentPadding}
-          ratio={invImageSize}
-        >
+          ratio={invImageSize}>
           {children}
         </ContentBox>
       </Flex>
