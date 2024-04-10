@@ -1,6 +1,6 @@
 import { LabelHTMLAttributes, PropsWithChildren } from 'react'
 
-import css from '@styled-system/css'
+import css, { SystemStyleObject } from '@styled-system/css'
 import type * as CSS from 'csstype'
 import styled from 'styled-components'
 import {
@@ -70,8 +70,9 @@ const Typography = styled.div<PropsWithChildren<TypographyProps>>(
         (css({
           overflow: 'hidden',
           display: '-webkit-box',
-          lineClamp: `${truncate}`
-        }) as any)
+          WebkitLineClamp: `${truncate}`,
+          WebkitBoxOrient: 'vertical'
+        } as SystemStyleObject) as any)
 )
 
 Typography.defaultProps = {
