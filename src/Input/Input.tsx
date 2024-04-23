@@ -9,7 +9,7 @@ import React, {
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
-import { compose, space, variant } from 'styled-system'
+import { variant } from 'styled-system'
 
 import { Flex, FlexProps } from '../Flex'
 import { Icon } from '../Icon'
@@ -189,7 +189,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <Flex alignItems='center' position='relative' width={1}>
           <StyledInput
-            pr={getInputPaddingRight()}
+            paddingRight={getInputPaddingRight()}
             tinted={tinted}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
@@ -207,7 +207,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             value={value}
             variant={inputVariant}
             onClick={onInputClick}
-            {...rest}
+            {...(rest as any)}
           />
           {extension}
           {icLeft ? (
@@ -259,12 +259,18 @@ const StyledFlex = styled(Flex)`
     }
   }
 `
-const StyledInput = styled.input<InputProps>(
+
+interface StyledInputProps extends InputProps {
+  paddingRight: number
+}
+
+const StyledInput = styled.input<StyledInputProps>(
   css(typography.labelSmall as SystemStyleObject) as any,
-  compose(space, variant({ variants })),
-  (props: InputProps) => ({
+  variant({ variants }),
+  (props: StyledInputProps) => ({
     backgroundColor: getBackgroundColor(props),
     borderColor: getBorderColor(props),
+    paddingRight: `${props.paddingRight * 4}px`, // We avoid adding the space props to this component to avoid the duplication of space props from the rest object
     minWidth: props.type === 'date' ? '95%' : '',
     '&::-webkit-search-cancel-button': {
       '-webkit-appearance': 'none'
@@ -278,7 +284,7 @@ const getBackgroundColor = ({
   warning,
   disabled,
   type
-}: InputProps) => {
+}: StyledInputProps) => {
   if (tinted && !(error || warning || disabled)) {
     return 'white'
   }
@@ -288,7 +294,12 @@ const getBackgroundColor = ({
   return ''
 }
 
-const getBorderColor = ({ tinted, error, warning, disabled }: InputProps) => {
+const getBorderColor = ({
+  tinted,
+  error,
+  warning,
+  disabled
+}: StyledInputProps) => {
   if (tinted && !(error || warning || disabled)) {
     return 'white'
   }

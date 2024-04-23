@@ -252,7 +252,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
             <Typography variant='labelSmall'>({country.prefix})</Typography>
           </PrefixDropdownTrigger>
           <StyledPhoneNumberInput
-            pr={inputPaddingRight}
+            paddingRight={inputPaddingRight}
             autoComplete={autoComplete}
             autoFocus={autoFocus}
             aria-disabled={readOnly || disabled}
@@ -269,7 +269,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
             variant={inputVariant}
             pattern={pattern}
             disabled={disabled}
-            {...rest}
+            {...(rest as any)}
           />
         </StyledPhoneNumberWrapper>
         <Flex pointerEvents='auto' position='absolute' right={2}>
@@ -349,9 +349,16 @@ const StyledPhoneNumberWrapper = styled.div<StyledPhoneNumberWrapperProps>(
 )
 const PrefixDropdownTrigger = styled.div(css(styles.dropdownTrigger) as any)
 
-const StyledPhoneNumberInput = styled.input<Props>(
-  compose(space, variant({ variants })),
-  css(styles.phoneNumberInput as SystemStyleObject) as any
+interface StyledPhoneNumberInputProps extends InputProps {
+  paddingRight: number
+}
+
+const StyledPhoneNumberInput = styled.input<StyledPhoneNumberInputProps>(
+  variant({ variants }),
+  css(styles.phoneNumberInput as SystemStyleObject) as any,
+  ({ paddingRight }: StyledPhoneNumberInputProps) => ({
+    paddingRight: `${paddingRight * 4}px` // We avoid adding the space props to this component to avoid the duplication of space props from the rest object
+  })
 )
 
 const calcDropdownHeight = (height: string, size: number = 1) =>
