@@ -1,19 +1,24 @@
-import { useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 
-import { useField, useFormikContext } from 'formik'
-import PropTypes from 'prop-types'
+import { FieldHookConfig, useField, useFormikContext } from 'formik'
 
 import { PhoneNumberInput } from '../PhoneNumberInput'
-import { fieldShape } from './shapes'
+import { PhoneNumberInputProps } from '../PhoneNumberInput/PhoneNumberInput'
 import { makeId } from './utils'
 
-export const PhoneNumberInputField = props => {
+interface Props extends PhoneNumberInputProps {
+  validate?: (args: any) => any
+}
+
+export const PhoneNumberInputField: FC<
+  Props & FieldHookConfig<string>
+> = props => {
   const { submitCount } = useFormikContext()
   const [field, meta, helpers] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
   const handleChange = useCallback(
-    ev => {
-      const { value } = ev.target
+    (event: any) => {
+      const { value } = event.target
       return helpers.setValue(value)
     },
     [helpers]
@@ -23,7 +28,7 @@ export const PhoneNumberInputField = props => {
   return (
     <PhoneNumberInput
       {...field}
-      {...props}
+      {...(props as any)}
       id={id}
       error={displayedError}
       valid={hasValidation(props) && !meta.error && meta.touched}
@@ -33,17 +38,4 @@ export const PhoneNumberInputField = props => {
   )
 }
 
-const hasValidation = props => props.validate || props.required
-
-PhoneNumberInputField.propTypes = {
-  ...fieldShape,
-  type: PropTypes.string,
-  placeholder: PropTypes.node,
-  required: PropTypes.bool,
-  tinted: PropTypes.bool
-}
-
-PhoneNumberInputField.defaultProps = {
-  tinted: false,
-  optionalText: 'Optional'
-}
+const hasValidation = (props: Props) => props.validate || props.required
