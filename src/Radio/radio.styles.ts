@@ -1,8 +1,9 @@
 import colors from '../assets/colors'
 import { BORDERS, RADII, SPACE } from '../assets/core'
+import { LabelWrapperProps } from './RadioButton'
 
 export default {
-  radioLabel: ({ disabled, variant }) => ({
+  radioLabel: ({ disabled, variant }: LabelWrapperProps) => ({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: variant === 'normal' ? 'top' : 'center',
