@@ -8,7 +8,7 @@ import styles from './radio.styles'
 interface Props {
   name: string
   id: string
-  label?: any
+  label?: React.ReactNode
   value: any
   checked: boolean
   disabled?: boolean
@@ -48,7 +48,8 @@ const Input = styled.input<Props>`
   ${({ variant }) => variant === 'checkmark' && (styles.checkmarkInput as any)}
 `
 
-export interface LabelWrapperProps extends Pick<Props, 'variant' | 'disabled'> {}
+export interface LabelWrapperProps
+  extends Pick<Props, 'variant' | 'disabled'> {}
 const LabelWrapper = styled.label<LabelWrapperProps>`
   ${styles.radioLabel as any};
 `

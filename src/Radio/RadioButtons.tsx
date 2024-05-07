@@ -6,7 +6,7 @@ import RadioButton from './RadioButton'
 
 interface Props {
   name: string
-  label?: any
+  label?: React.ReactNode
   value: any
   options: Option[]
   onChange: (value: any) => void
@@ -17,7 +17,7 @@ interface Option {
   id: string
   name: string
   value: any
-  label: string
+  label: React.ReactNode
   disabled?: boolean
 }
 
