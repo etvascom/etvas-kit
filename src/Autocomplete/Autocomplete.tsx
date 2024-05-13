@@ -1,5 +1,9 @@
-import {
+import React, {
   Children,
+  FC,
+  InputHTMLAttributes,
+  PropsWithChildren,
+  ReactElement,
   cloneElement,
   isValidElement,
   useLayoutEffect,
@@ -8,27 +12,51 @@ import {
   useState
 } from 'react'
 
-import css from '@styled-system/css'
-import PropTypes from 'prop-types'
+import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
 
 import Heading from '../Dropdown/Heading'
-import Option from '../Dropdown/Option'
-import { Flex } from '../Flex'
+import Option, { OptionProps } from '../Dropdown/Option'
+import { Flex, FlexProps } from '../Flex'
 import { Icon } from '../Icon'
 import { Input } from '../Input'
 import sizes from '../assets/sizes'
+import { Error } from '../utils/types'
 
-const Autocomplete = ({
-  disabled,
+interface Props
+  extends FlexProps,
+    Omit<
+      InputHTMLAttributes<HTMLInputElement>,
+      'color' | 'height' | 'size' | 'width'
+    > {
+  label?: React.ReactNode
+  error?: Error
+  optionalText?: React.ReactNode
+  loading?: boolean
+  tinted?: boolean
+  searchMaxResults?: number
+  value: any
+  itemSelected: (value: any, item: any) => boolean
+  onSelectItemChange?: (item: any) => void
+  handleInputChange?: (value: string) => void
+}
+
+interface AutocompleteSubComponents {
+  Option: typeof Option
+  Heading: typeof Heading
+}
+
+const Autocomplete: FC<PropsWithChildren<Props>> &
+  AutocompleteSubComponents = ({
+  disabled = false,
   error,
   label,
-  value,
+  value = '',
   optionalText,
   id,
-  searchMaxResults,
-  placeholder,
-  itemSelected,
+  searchMaxResults = 30,
+  placeholder = 'Please select an option',
+  itemSelected = defaultItemSelected,
   onChange,
   onSelectItemChange,
   handleInputChange,
@@ -38,33 +66,33 @@ const Autocomplete = ({
   ...props
 }) => {
   const [isCollapsed, setCollapsed] = useState(true)
-  const wrapper = useRef()
+  const wrapper = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    const clickOutside = event => {
-      if (!wrapper.current.contains(event.target)) {
+    const clickOutside = (event: any) => {
+      if (!wrapper?.current?.contains(event.target)) {
         setCollapsed(true)
       }
     }
     window.addEventListener('click', clickOutside, { passive: true })
     return () => {
-      window.removeEventListener('click', clickOutside, { passive: true })
+      window.removeEventListener('click', clickOutside)
     }
   }, [])
 
-  const onSelectItem = option => {
+  const onSelectItem = (option: any) => {
     if (onSelectItemChange) {
       onSelectItemChange(option)
     } else {
-      onChange(null, option)
+      onChange && onChange({ target: { value: option } } as any)
     }
     setTimeout(() => {
       setCollapsed(true)
     }, 60)
   }
 
-  const handleOnChange = event => {
-    onChange(event)
+  const handleOnChange = (event: any) => {
+    onChange && onChange(event)
     handleInputChange && handleInputChange(event.target.value)
     isCollapsed && setCollapsed(false)
   }
@@ -73,12 +101,16 @@ const Autocomplete = ({
     if (!value) {
       return Children.toArray(children).slice(0, searchMaxResults)
     }
-    return Children.toArray(children)
+    const childArray = React.Children.toArray(
+      children
+    ) as ReactElement<OptionProps>[]
+    return childArray
       .filter(child => child.props.value.indexOf(value.toLowerCase()) > -1)
       .slice(0, searchMaxResults)
   }, [value, children, searchMaxResults])
 
-  const isItemSelected = item => (!value ? itemSelected(value, item) : false)
+  const isItemSelected = (item: any) =>
+    !value ? itemSelected(value, item) : false
   const handleInputClick = () => !value && setCollapsed(prev => !prev)
 
   return (
@@ -90,8 +122,7 @@ const Autocomplete = ({
         ref={wrapper}
         alignItems='center'
         position='relative'
-        width='100%'
-      >
+        width='100%'>
         <Input
           error={error}
           placeholder={placeholder}
@@ -101,7 +132,6 @@ const Autocomplete = ({
           optionalText={optionalText}
           role='searchbox'
           disabled={disabled}
-          collapsed={isCollapsed}
           autoComplete='off'
           onChange={handleOnChange}
           value={value}
@@ -113,13 +143,12 @@ const Autocomplete = ({
                 <ScrollingList
                   aria-labelledby={id}
                   role='menu'
-                  id={`drop-${id}`}
-                >
+                  id={`drop-${id}`}>
                   {options.map(child =>
-                    isValidElement(child)
+                    isValidElement<OptionProps>(child)
                       ? cloneElement(child, {
                           onSelectItem,
-                          isSelected: isItemSelected(child.props.value)
+                          selected: isItemSelected(child.props.value)
                         })
                       : null
                   )}
@@ -140,7 +169,11 @@ const Autocomplete = ({
 }
 
 const StyledFlex = styled(Flex)(
-  css({ '&:focus-within': { label: { color: 'textInputFocused' } } })
+  css({
+    '&:focus-within > div > label': {
+      color: 'textInputFocused'
+    }
+  }) as any
 )
 
 const ListWrapper = styled.div(
@@ -156,7 +189,7 @@ const ListWrapper = styled.div(
     borderRightColor: 'inputBorderGray',
     borderBottomColor: 'inputBorderGray',
     borderTop: 0
-  })
+  } as SystemStyleObject) as any
 )
 
 const ScrollingList = styled.div(
@@ -165,41 +198,11 @@ const ScrollingList = styled.div(
     overflowX: 'hidden',
     overflowY: 'auto',
     background: 'white'
-  })
+  }) as any
 )
 
-Autocomplete.propTypes = {
-  disabled: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.node,
-    PropTypes.string
-  ]),
-  id: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  optionalText: PropTypes.node,
-  searchMaxResults: PropTypes.number,
-  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  itemSelected: PropTypes.func,
-  onChange: PropTypes.func,
-  onSelectItemChange: PropTypes.func,
-  handleInputChange: PropTypes.func,
-  value: PropTypes.any,
-  tinted: PropTypes.bool,
-  loading: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element)
-}
-
-Autocomplete.defaultProps = {
-  disabled: false,
-  value: '',
-  valueRender: v => (Array.isArray(v) ? v.join(', ') : v),
-  itemSelected: (value, v) =>
-    value ? (Array.isArray(value) ? value.includes(v) : value === v) : false,
-  onChange: () => console.warn('Autocomplete.onChange should be a function'),
-  placeholder: 'Please select an option',
-  searchMaxResults: 30
-}
+const defaultItemSelected = (value: any, item: any) =>
+  value ? (Array.isArray(value) ? value.includes(item) : value === item) : false
 
 Autocomplete.Option = Option
 Autocomplete.Heading = Heading
