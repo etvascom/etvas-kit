@@ -28,7 +28,7 @@ import { displayCountries } from './displayCountries'
 import { trimStartingZero } from './trimStartingZero'
 import { State, orderedStates, prefixLengthOrderedStates } from './world-states'
 
-interface Props extends InputProps {
+export interface PhoneNumberInputProps extends InputProps {
   dropdownSize?: number
   dropUp?: boolean
   international?: boolean
@@ -37,7 +37,7 @@ interface Props extends InputProps {
   searchPlaceholder?: string
 }
 
-const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
+const PhoneNumberInput = forwardRef<HTMLInputElement, PhoneNumberInputProps>((props, ref) => {
   const {
     dropdownSize = 5,
     dropUp = false,
@@ -50,7 +50,7 @@ const PhoneNumberInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     warning,
     id,
     label,
-    optionalText,
+    optionalText = 'Optional',
     name,
     noBottomSpace = false,
     onChange,
@@ -335,7 +335,7 @@ const SearchInput = styled.input(
 )
 
 type StyledPhoneNumberWrapperProps = Pick<
-  Props,
+  PhoneNumberInputProps,
   'tinted' | 'error' | 'disabled' | 'variant'
 >
 
@@ -364,7 +364,7 @@ const StyledPhoneNumberInput = styled.input<StyledPhoneNumberInputProps>(
 const calcDropdownHeight = (height: string, size: number = 1) =>
   `${parseInt(height, 10) * size}px`
 
-type StyledDropdownProps = Pick<Props, 'dropdownSize'>
+type StyledDropdownProps = Pick<PhoneNumberInputProps, 'dropdownSize'>
 
 const StyledDropdown = styled(Flex)<StyledDropdownProps>(
   ({ dropdownSize }: StyledDropdownProps) =>
