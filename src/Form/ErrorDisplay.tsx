@@ -1,11 +1,20 @@
+import React, { FC } from 'react'
+
 import { useField } from 'formik'
-import PropTypes from 'prop-types'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
-export const ErrorDisplay = ({ name, type }) => {
+interface ErrorDisplayProps {
+  name: string
+  type?: 'radio' | 'checkbox' | 'text'
+}
+
+export const ErrorDisplay: FC<ErrorDisplayProps> = ({
+  name,
+  type = 'text'
+}) => {
   const [, meta] = useField({
     type,
     name
@@ -23,13 +32,4 @@ export const ErrorDisplay = ({ name, type }) => {
       </Typography>
     </Flex>
   )
-}
-
-ErrorDisplay.propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['radio', 'checkbox', 'text'])
-}
-
-ErrorDisplay.defaultProps = {
-  type: 'text'
 }
