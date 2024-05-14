@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Typography } from '../Typography'
 import styles from './radio.styles'
 
-interface Props {
+export interface RadioButtonProps {
   name: string
   id: string
   label?: React.ReactNode
@@ -16,7 +16,7 @@ interface Props {
   variant?: 'normal' | 'checkmark'
 }
 
-const RadioButton: FC<Props> = ({
+const RadioButton: FC<RadioButtonProps> = ({
   name,
   id,
   label,
@@ -44,12 +44,12 @@ const RadioButton: FC<Props> = ({
   </LabelWrapper>
 )
 
-const Input = styled.input<Props>`
+const Input = styled.input<RadioButtonProps>`
   ${({ variant }) => variant === 'checkmark' && (styles.checkmarkInput as any)}
 `
 
 export interface LabelWrapperProps
-  extends Pick<Props, 'variant' | 'disabled'> {}
+  extends Pick<RadioButtonProps, 'variant' | 'disabled'> {}
 const LabelWrapper = styled.label<LabelWrapperProps>`
   ${styles.radioLabel as any};
 `
