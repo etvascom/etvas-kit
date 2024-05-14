@@ -7,10 +7,10 @@ import { makeId } from './utils'
 
 interface CheckboxFieldProps
   extends Pick<
-    CheckboxProps,
-    'id' | 'name' | 'checked' | 'disabled' | 'label' | 'size' | 'variant' | 'onChange'
-  > {}
-
+      CheckboxProps,
+      'id' | 'checked' | 'disabled' | 'label' | 'size' | 'variant' | 'onChange'
+    >,
+    Required<Pick<CheckboxProps, 'name'>> {}
 
 export const CheckboxField: FC<CheckboxFieldProps> = props => {
   const [field] = useField({

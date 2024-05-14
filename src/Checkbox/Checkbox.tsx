@@ -19,7 +19,7 @@ export interface CheckboxProps
     Pick<IconProps, 'size'> {
   label?: ReactNode
   checked?: boolean
-  name: string
+  name?: string
   disabled?: boolean
   onChange?: (event: any) => void
 }
