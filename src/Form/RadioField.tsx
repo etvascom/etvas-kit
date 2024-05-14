@@ -1,10 +1,12 @@
+import React, { FC } from 'react'
+
 import { useField } from 'formik'
 
 import { RadioButton } from '../Radio'
-import { fieldShape } from './shapes'
+import { RadioButtonProps } from '../Radio/RadioButton'
 import { makeId } from './utils'
 
-export const RadioField = props => {
+export const RadioField: FC<RadioButtonProps> = props => {
   const [field] = useField({
     ...props,
     type: 'radio'
@@ -12,8 +14,4 @@ export const RadioField = props => {
   const id = props.id || makeId('field', props.name || 'radio')
 
   return <RadioButton {...props} {...field} id={id} />
-}
-
-RadioField.propTypes = {
-  ...fieldShape
 }
