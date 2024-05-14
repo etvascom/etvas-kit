@@ -23,7 +23,7 @@ import { Input } from '../Input'
 import sizes from '../assets/sizes'
 import { Error } from '../utils/types'
 
-interface Props
+export interface AutocompleteProps
   extends FlexProps,
     Omit<
       InputHTMLAttributes<HTMLInputElement>,
@@ -46,7 +46,7 @@ interface AutocompleteSubComponents {
   Heading: typeof Heading
 }
 
-const Autocomplete: FC<PropsWithChildren<Props>> &
+const Autocomplete: FC<PropsWithChildren<AutocompleteProps>> &
   AutocompleteSubComponents = ({
   disabled = false,
   error,
