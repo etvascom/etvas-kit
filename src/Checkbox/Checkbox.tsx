@@ -13,7 +13,7 @@ import { Flex } from '../Flex'
 import { Icon, IconProps } from '../Icon'
 import { Typography, TypographyProps } from '../Typography'
 
-interface Props
+export interface CheckboxProps
   extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'size'>,
     Partial<Pick<TypographyProps, 'variant'>>,
     Pick<IconProps, 'size'> {
@@ -21,9 +21,10 @@ interface Props
   checked?: boolean
   name?: string
   disabled?: boolean
+  onChange?: (event: any) => void
 }
 
-export const Checkbox: FC<Props> = ({
+export const Checkbox: FC<CheckboxProps> = ({
   label,
   color = 'brand',
   checked,
