@@ -14,7 +14,11 @@ export const EmbededAppCompatibility: FC<PropsWithChildren> = ({
   )
 
   if (incompatibleFeature) {
-    return <NotCompatible feature={incompatibleFeature} />
+    return (
+      <NotCompatible
+        feature={{ name: incompatibleFeature.name as 'sessionStorage' }}
+      />
+    )
   }
 
   return children

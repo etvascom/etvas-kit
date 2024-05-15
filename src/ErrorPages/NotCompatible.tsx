@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
+
 import styled from 'styled-components'
 
 const IncompatibleFeatureMain = styled.div`
@@ -21,20 +22,23 @@ const IncompatibleFeatureBody = styled.p`
   color: #333;
   font-family: sans-serif;
 `
+interface Props {
+  feature: {
+    name: 'sessionStorage'
+  }
+}
 
-export const NotCompatible = ({ feature }) => (
+export const NotCompatible: FC<Props> = ({ feature }) => (
   <IncompatibleFeatureMain>
     <IncompatibleFeatureTitle>&#9888;</IncompatibleFeatureTitle>
     <IncompatibleFeatureBody
       dangerouslySetInnerHTML={{
         __html: incompatibilityMessages[feature.name].de
-      }}
-    ></IncompatibleFeatureBody>
+      }}></IncompatibleFeatureBody>
     <IncompatibleFeatureBody
       dangerouslySetInnerHTML={{
         __html: incompatibilityMessages[feature.name].en
-      }}
-    ></IncompatibleFeatureBody>
+      }}></IncompatibleFeatureBody>
   </IncompatibleFeatureMain>
 )
 
@@ -42,11 +46,5 @@ const incompatibilityMessages = {
   sessionStorage: {
     de: `Lieber Etvas Nutzer, unser Marktplatz für Zusatz-Services ist aus technischen Gründen im Inkognitomodus leider nicht verfügbar. Bitte loggen Sie sich im normalen Browserbetrieb in die Plattform ein.`,
     en: `Dear Etvas user, our marketplace for additional services is unfortunately not available in incognito mode for technical reasons. Please log in to the platform in normal browser mode.`
-  }
-}
-
-NotCompatible.propTypes = {
-  feature: {
-    name: PropTypes.oneOf(['sessionStorage'])
   }
 }
