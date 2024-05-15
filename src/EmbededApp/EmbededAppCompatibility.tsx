@@ -1,6 +1,10 @@
+import React, { FC, PropsWithChildren, useMemo } from 'react'
+
 import { NotCompatible } from '../ErrorPages'
 
-export const EmbededAppCompatibility = ({ children }) => {
+export const EmbededAppCompatibility: FC<PropsWithChildren> = ({
+  children
+}) => {
   const incompatibleFeature = useMemo(
     () =>
       compatibilityFeaturesDefinitions
@@ -21,7 +25,7 @@ export const EmbededAppCompatibility = ({ children }) => {
   app needs in order to function properly
 */
 const compatibilityFeaturesDefinitions = [
-  global => ({
+  (global: typeof window) => ({
     name: 'sessionStorage',
     isCompatible: (global => {
       try {

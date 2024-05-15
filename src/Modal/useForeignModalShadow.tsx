@@ -1,4 +1,5 @@
 import React, {
+  ReactNode,
   useCallback,
   useLayoutEffect,
   useRef,
@@ -20,11 +21,14 @@ const resetIframe = (iframe: any) => {
   iframe.style = undefined
 }
 
-export const useForeignModalShadow = () => {
+export const useForeignModalShadow: () => [
+  React.RefObject<HTMLIFrameElement>,
+  ReactNode
+] = () => {
   const intercom = useRef(new InterCom('etvas.modal'))
   const [backdrop, setBackdrop] = useState(null)
   const [animated, setAnimated] = useState(false)
-  const iframeRef = useRef()
+  const iframeRef = useRef<HTMLIFrameElement>(null)
   const tk = useRef<NodeJS.Timeout | null>(null)
 
   const showBackdrop = useCallback(
