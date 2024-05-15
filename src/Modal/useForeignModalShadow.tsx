@@ -1,4 +1,9 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import React, {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState
+} from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -7,29 +12,29 @@ import { InterCom } from '../providers'
 
 const Z_INDEX_BASE = 50
 
-const raiseIframe = iframe => {
+const raiseIframe = (iframe: any) => {
   iframe.style.zIndex = 1 + Z_INDEX_BASE
 }
 
-const resetIframe = iframe => {
+const resetIframe = (iframe: any) => {
   iframe.style = undefined
 }
 
 export const useForeignModalShadow = () => {
   const intercom = useRef(new InterCom('etvas.modal'))
-  const [backdrop, setBackdrop] = useState()
+  const [backdrop, setBackdrop] = useState(null)
   const [animated, setAnimated] = useState(false)
   const iframeRef = useRef()
-  const tk = useRef(null)
+  const tk = useRef<NodeJS.Timeout | null>(null)
 
   const showBackdrop = useCallback(
-    payload => {
+    (payload: any) => {
       if (payload && typeof payload === 'object' && payload.backDrop) {
-        clearTimeout(tk.current)
+        tk.current && clearTimeout(tk.current)
         setBackdrop(payload.backDrop)
         setAnimated(!!payload.animated)
       } else if (payload) {
-        clearTimeout(tk.current)
+        tk.current && clearTimeout(tk.current)
         setBackdrop(payload)
         setAnimated(false)
       } else {
@@ -51,7 +56,7 @@ export const useForeignModalShadow = () => {
   }, [intercom])
 
   const openModal = useCallback(
-    payload => {
+    (payload: any) => {
       showBackdrop(payload)
       scrollPageToTop()
     },
@@ -94,9 +99,13 @@ export const useForeignModalShadow = () => {
     />
   ]
 }
+interface ShadowProps {
+  backdrop: string
+  animated: boolean
+}
 
-const Shadow = styled.div(
-  ({ backdrop }) =>
+const Shadow = styled.div<ShadowProps>(
+  ({ backdrop }: ShadowProps) =>
     css({
       position: 'fixed',
       left: 0,
@@ -106,7 +115,7 @@ const Shadow = styled.div(
       zIndex: Z_INDEX_BASE,
       backgroundColor: backdrop
     }),
-  ({ animated }) =>
+  ({ animated }: ShadowProps) =>
     animated &&
     `@keyframes modal {
         from { opacity: 0; }

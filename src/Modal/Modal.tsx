@@ -1,21 +1,21 @@
-import {
+import React, {
   Children,
+  PropsWithChildren,
   cloneElement,
   isValidElement,
   useCallback,
   useEffect,
   useLayoutEffect,
   useMemo,
-  useRef
+  useRef,
+  FC
 } from 'react'
 
 import css from '@styled-system/css'
-import propTypes from '@styled-system/prop-types'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { flexbox } from 'styled-system'
 
-import { Box } from '../Box'
+import { Box, BoxProps } from '../Box'
 import { Flex } from '../Flex'
 import { InterCom } from '../providers'
 import { useOnClickOutside } from '../utils/hooks'
@@ -23,9 +23,9 @@ import style from './Modal.style'
 import { ModalContent } from './ModalContent'
 import { disableScroll, enableScroll, isInsideIframe } from './utils'
 
-const ModalBackdrop = styled(Box)(
-  css(style.backdrop),
-  ({ blurredBg }) =>
+const ModalBackdrop = styled(Box)<ModalProps>(
+  css(style.backdrop as any),
+  ({ blurredBg }: ModalProps) =>
     blurredBg &&
     `
   @supports (backdrop-filter: blur(0)) {
@@ -34,10 +34,10 @@ const ModalBackdrop = styled(Box)(
   }
 `
 )
-const StyledModal = styled(Box)(
-  css(style.wrapper),
+const StyledModal = styled(Box)<ModalProps>(
+  css(style.wrapper as any),
   flexbox,
-  ({ animated }) =>
+  ({ animated }: ModalProps) =>
     animated &&
     `@keyframes modal {
         from { opacity: 0; }
@@ -48,7 +48,19 @@ const StyledModal = styled(Box)(
     animation-duration:0.5s;`
 )
 
-export const Modal = ({
+interface ModalProps extends BoxProps {
+  blurredBg?: boolean
+  animated?: boolean
+  backDrop?: string
+  onBackDropClick?: (event: any) => void
+  onEscape?: (event: any) => void
+}
+
+interface ModalSubComponents {
+  Content: typeof ModalContent
+}
+
+export const Modal:FC<PropsWithChildren<ModalProps>> & ModalSubComponents = ({
   backDrop,
   onBackDropClick,
   onEscape,
@@ -57,13 +69,13 @@ export const Modal = ({
   children,
   ...props
 }) => {
-  const contentWrapperRef = useRef()
+  const contentWrapperRef = useRef<HTMLElement>(null)
   const intercom = useRef(new InterCom('etvas.modal'))
 
   const isModalInIframe = useMemo(isInsideIframe, [])
 
   const modalBackdropClickHandler = useCallback(
-    event => {
+    (event: any) => {
       event.preventDefault()
       onBackDropClick && onBackDropClick(event)
     },
@@ -72,7 +84,7 @@ export const Modal = ({
   useOnClickOutside(contentWrapperRef, modalBackdropClickHandler)
 
   const handleKeyPress = useCallback(
-    event => {
+    (event: any) => {
       if (event.keyCode === 27) {
         onEscape && onEscape(event)
       }
@@ -106,7 +118,7 @@ export const Modal = ({
   }, [handleKeyPress])
 
   const childrenWithProps = Children.map(children, child => {
-    if (isValidElement(child)) {
+    if (isValidElement<any>(child)) {
       return cloneElement(child, { ref: contentWrapperRef })
     }
     return child
@@ -131,17 +143,6 @@ const Container = styled(Flex)`
   margin: var(--verticalSpacing) auto;
   min-height: calc(100% - 2 * var(--verticalSpacing));
 `
-
-Modal.propTypes = {
-  ...propTypes.color,
-  ...propTypes.flexbox,
-  backDrop: PropTypes.string,
-  onBackDropClick: PropTypes.func,
-  onEscape: PropTypes.func,
-  animated: PropTypes.bool,
-  blurredBg: PropTypes.bool,
-  children: PropTypes.node
-}
 
 Modal.Content = ModalContent
 Modal.displayName = 'Modal'
