@@ -8,13 +8,13 @@ import React, {
 } from 'react'
 
 import styled from 'styled-components'
-import { SpaceProps, space } from 'styled-system'
+import { SpaceProps as StyledSpaceProps, space } from 'styled-system'
 
-interface Props extends SpaceProps {
+export interface SpaceProps extends StyledSpaceProps {
   className?: string
 }
 
-const StyledChildren: FC<PropsWithChildren<Props>> = ({
+const StyledChildren: FC<PropsWithChildren<SpaceProps>> = ({
   children,
   className,
   ...rest
