@@ -1,16 +1,17 @@
-import { useEffect, useRef } from 'react'
+import React, { FC, PropsWithChildren, useEffect, useRef } from 'react'
 
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { InterCom } from '../providers'
 import { useResizeObserver } from '../utils/hooks'
 
-export const EmbededAppReporter = ({ children }) => {
+export const EmbededAppReporter: FC<Required<PropsWithChildren>> = ({
+  children
+}) => {
   const intercom = useRef(new InterCom('etvas.embededApp'))
 
   const { ref } = useResizeObserver({
-    onResize({ width, height }) {
+    onResize({ width, height }: { width: number; height: number }) {
       intercom.current.response('size', { width, height: height })
     }
   })
@@ -30,7 +31,3 @@ export const EmbededAppReporter = ({ children }) => {
 const Wrapper = styled.div`
   overflow: auto;
 `
-
-EmbededAppReporter.propTypes = {
-  children: PropTypes.node.isRequired
-}

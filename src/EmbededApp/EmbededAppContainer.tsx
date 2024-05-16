@@ -1,13 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import React, {
+  FC,
+  IframeHTMLAttributes,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { useForeignModalShadow } from '../Modal'
 import { InterCom } from '../providers'
 
-export const EmbededAppContainer = ({ defaultHeight, ...props }) => {
+interface Props extends IframeHTMLAttributes<HTMLIFrameElement> {
+  defaultHeight?: string | Array<string> | object
+}
+
+export const EmbededAppContainer: FC<Props> = ({ defaultHeight, ...props }) => {
   const intercom = useRef(new InterCom('etvas.embededApp'))
   const [size, setSize] = useState({ width: 0, height: 0 })
   const [iframeRef, shadowElement] = useForeignModalShadow()
@@ -20,10 +29,10 @@ export const EmbededAppContainer = ({ defaultHeight, ...props }) => {
   }, [setSize, intercom])
 
   let frameHeight = defaultHeight
-  let scrolling = 'auto'
+  let overflow = 'auto'
 
   if (size.height) {
-    scrolling = 'no'
+    overflow = 'hidden'
     frameHeight = `${size.height}px`
   }
 
@@ -34,27 +43,24 @@ export const EmbededAppContainer = ({ defaultHeight, ...props }) => {
         {...props}
         ref={iframeRef}
         height={frameHeight}
-        scrolling={scrolling}
+        overflow={overflow}
       />
     </>
   )
 }
 
-const StyledIframe = styled.iframe(({ height }) =>
+interface StyledIframeProps {
+  height?: Props['defaultHeight']
+  overflow: string
+}
+
+const StyledIframe = styled.iframe<StyledIframeProps>(({ height, overflow }) =>
   css({
     position: 'relative',
     width: '100%',
     display: 'block',
     border: 'none',
+    overflow,
     height
   })
 )
-
-EmbededAppContainer.propTypes = {
-  defaultHeight: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object
-  ]),
-  useForeignModalShadow: PropTypes.bool
-}
