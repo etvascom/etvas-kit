@@ -1,7 +1,8 @@
 import { md } from '../utils'
+import { GridItemProps, GridProps } from './Grid'
 
 export default {
-  container: ({ theme }) => ({
+  container: ({ theme }: { theme: any }) => ({
     display: 'block',
     ...md(theme)({
       display: 'flex',
@@ -11,7 +12,13 @@ export default {
       flexWrap: 'wrap'
     })
   }),
-  item: ({ theme, cols, span, vspace, hspace }) => ({
+  item: ({
+    theme,
+    cols,
+    span,
+    vspace,
+    hspace
+  }: GridProps & GridItemProps & { theme: any }) => ({
     width: '100%',
     marginBottom: vspace,
     ...md(theme)({
