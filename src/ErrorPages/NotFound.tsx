@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types'
+import React, { FC } from 'react'
+import { PropsWithChildren } from 'react'
+
 import styled from 'styled-components'
 
 import { Box } from '../Box'
@@ -9,19 +11,14 @@ const StyledImg = styled.img({
   maxWidth: '80%'
 })
 
-export const NotFound = ({ children }) => (
+export const NotFound: FC<PropsWithChildren> = ({ children }) => (
   <Flex
     width='100%'
     height='100%'
     alignItems='center'
     flexDirection='column'
-    justifyContent='center'
-  >
+    justifyContent='center'>
     <StyledImg src={svg} />
     {children ? <Box mt={[8, 15]}>{children}</Box> : null}
   </Flex>
 )
-
-NotFound.propTypes = {
-  children: PropTypes.node
-}
