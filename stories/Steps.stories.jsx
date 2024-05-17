@@ -18,3 +18,15 @@ export const Example = () => (
     active={2}
   />
 )
+export const Disabled = () => (
+  <Steps
+    isDisabled
+    steps={[
+      'Step 1 is simple',
+      'Step 2 is',
+      'Step 3 is longer and more complex and more words'
+    ]}
+    onChange={action('change')}
+    active={2}
+  />
+)
