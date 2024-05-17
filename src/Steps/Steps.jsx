@@ -7,35 +7,50 @@ import styled from 'styled-components'
 import { Flex } from '../Flex'
 import { Typography } from '../Typography'
 
-export const Steps = ({ steps, active, onChange }) => (
-  <Flex flexDirection='column'>
-    {steps.map((content, i) => (
-      <Item
-        // eslint-disable-next-line react/no-array-index-key
-        key={i}
-        id={i + 1}
-        isFirst={i === 0}
-        isLast={i === steps.length - 1}
-        isActive={active === i + 1}
-        onClick={onChange}
-      >
-        {content}
-      </Item>
-    ))}
-  </Flex>
-)
+export const Steps = ({ steps, active, isDisabled, onChange }) => {
+  const isActiveItem = i => active === i + 1
+  return (
+    <Flex flexDirection='column'>
+      {steps.map((content, i) => (
+        <Item
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          id={i + 1}
+          isFirst={i === 0}
+          isLast={i === steps.length - 1}
+          isActive={isActiveItem(i)}
+          isDisabled={!isActiveItem(i) && isDisabled}
+          onClick={onChange}>
+          {content}
+        </Item>
+      ))}
+    </Flex>
+  )
+}
 
 Steps.propTypes = {
   steps: PropTypes.arrayOf(PropTypes.node).isRequired,
+  isDisabled: PropTypes.bool,
   active: PropTypes.number,
   onChange: PropTypes.func
 }
 
-const Item = ({ id, isActive, isFirst, isLast, children, onClick }) => {
+const Item = ({
+  id,
+  isActive,
+  isFirst,
+  isLast,
+  isDisabled,
+  children,
+  onClick
+}) => {
   const handleClick = useCallback(() => onClick && onClick(id), [onClick, id])
 
   return (
-    <ItemContainer alignItems='center' onClick={handleClick}>
+    <ItemContainer
+      alignItems='center'
+      isDisabled={isDisabled}
+      onClick={handleClick}>
       <Vline isFirst={isFirst} isLast={isLast} />
       <Chip isRounded color={isActive ? 'accent' : 'outline'}>
         <Typography variant='labelButton' color='white'>
@@ -45,18 +60,17 @@ const Item = ({ id, isActive, isFirst, isLast, children, onClick }) => {
       <Typography
         ml={6}
         variant='titleSmall'
-        color={isActive ? 'accent' : 'lighterText'}
-      >
+        color={isActive ? 'accent' : 'lighterText'}>
         {children}
       </Typography>
     </ItemContainer>
   )
 }
 
-const ItemContainer = styled(Flex)(
+const ItemContainer = styled(Flex)(({ isDisabled }) =>
   css({
     position: 'relative',
-    cursor: 'pointer',
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
     paddingBottom: 6,
     '&:last-child': {
       paddingBottom: 0
@@ -95,6 +109,7 @@ Item.propTypes = {
   isActive: PropTypes.bool,
   isFirst: PropTypes.bool,
   isLast: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func
 }
