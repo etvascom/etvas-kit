@@ -31,7 +31,8 @@ const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
   selected = false,
   hasKeyboardFocus = false,
   value,
-  hasCheckbox = false
+  hasCheckbox = false,
+  ...props
 }) => {
   const optionRef = useRef<HTMLDivElement>(null)
 
@@ -86,7 +87,7 @@ const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
       touch={hasTouch}
       hasCheckbox={hasCheckbox}
       ref={optionRef}
-    >
+      {...props}>
       {hasCheckbox ? optionWithCheckbox : optionContent}
     </Option>
   )
