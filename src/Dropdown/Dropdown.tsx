@@ -48,6 +48,7 @@ export interface DropdownProps
   searchPlaceholder?: string
   tinted?: boolean
   showTooltip?: boolean
+  'data-testid'?: string
 }
 
 interface DropdownSubComponents {
@@ -77,6 +78,7 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
   tinted,
   children,
   showTooltip,
+  'data-testid': dataTestId,
   ...props
 }) => {
   const [isCollapsed, setCollapsed] = useState(true)
@@ -290,7 +292,11 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
   }, [isCollapsed, options, value, multiple])
 
   return (
-    <StyledFlex flexDirection='column' width={1} {...props}>
+    <StyledFlex
+      flexDirection='column'
+      width={1}
+      data-testid={dataTestId}
+      {...props}>
       {label && (
         <Label
           label={label}
@@ -309,8 +315,7 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
         onMouseMove={removeCurrentKeyboardFocus}
         tabIndex={0}
         ref={wrapper}
-        {...props}
-      >
+        {...props}>
         <StyledIndicator
           size='small'
           color='inputIcon'
@@ -328,8 +333,7 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
           aria-controls={`drop-${cId}`}
           error={error}
           tinted={tinted}
-          onClick={toggleDropdown}
-        >
+          onClick={toggleDropdown}>
           {isEmpty ? placeholder : displayValue}
         </Toggler>
         <DropdownList
@@ -340,8 +344,7 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
           onTouchStart={clicked}
           onTouchMove={inhibit}
           onTouchEnd={decide}
-          borderClr={dropdownBorderClr}
-        >
+          borderClr={dropdownBorderClr}>
           {hasSearch ? (
             <SearchInput
               ref={searchField}
