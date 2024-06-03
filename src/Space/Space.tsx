@@ -25,7 +25,7 @@ const StyledChildren: FC<PropsWithChildren<SpaceProps>> = ({
     []
   )
 
-  const spacedChildren = Children.map(children, child =>
+  const spacedChildren = Children.toArray(children).map(child =>
     cloneElement(child as ReactElement, {
       className: classnames(
         getClassName(child as ReactElement),
