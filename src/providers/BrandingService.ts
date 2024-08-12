@@ -57,7 +57,7 @@ export class BrandingService extends EventEmitter {
 
   init() {
     if (this.intercom.isChild()) {
-            this.intercom.request('cssVars')
+      this.intercom.request('cssVars')
     }
 
     if (this.defaults && !this.cssVars) {
