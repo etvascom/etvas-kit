@@ -68,6 +68,10 @@ export class BrandingService extends EventEmitter {
   updateCssVars(updates: any) {
     const newVars = mergeDeep({}, this.cssVars, updates)
 
+    if (isEqual(newVars, this.cssVars)) {
+      return
+    }
+
     const brandColorVariants = updates.brandColor
       ? this.buildColorVariants('brand', updates.brandColor, updates)
       : {}
@@ -81,11 +85,6 @@ export class BrandingService extends EventEmitter {
       ...brandColorVariants,
       ...accentColorVariants
     }
-
-    if (isEqual(newVars, this.cssVars)) {
-      return
-    }
-
     this.emit('change')
 
     if (!this.intercom.isChild()) {
