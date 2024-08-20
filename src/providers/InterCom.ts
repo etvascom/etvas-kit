@@ -15,6 +15,10 @@ export class InterCom extends EventEmitter {
     return window.parent !== window
   }
 
+  isParent() {
+    return !!document.getElementsByTagName('iframe').length
+  }
+
   request(action: string, payload?: any) {
     this.sendMessage(`request.${action}`, payload)
   }
@@ -41,7 +45,13 @@ export class InterCom extends EventEmitter {
 
   sendMessage(event: string, payload: any) {
     const message = { namespace: this.namespace, event, payload }
-    if (this.isChild()) {
+    if (this.isChild() && this.isParent()) {
+      window.parent.postMessage(message, '*')
+      const iframes = document.getElementsByTagName('iframe')
+      Array.from(iframes).forEach(iframe =>
+        iframe.contentWindow?.postMessage(message, '*')
+      )
+    } else if (this.isChild()) {
       window.parent.postMessage(message, '*')
     } else {
       const iframes = document.getElementsByTagName('iframe')
