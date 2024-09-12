@@ -1,8 +1,8 @@
 name: Check Build
 on:
-    push:
-      branches:
-        - master
+  pull_request:
+    branches:
+      - master
 jobs:
   Check-Build:
     runs-on: ubuntu-latest
