@@ -40,7 +40,7 @@ export interface TextAreaProps
   variant?: VariantProp<VariantKey>
   allowResize?: boolean
   noBottomSpace?: boolean
-  cols?: number
+  cols?: bro
   rows?: number
   loading?: boolean
   warning?: Warning
