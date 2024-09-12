@@ -9,5 +9,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - run: |
+      - name: build
+        run: |
+          npm install
           npm run build
