@@ -1,0 +1,13 @@
+name: Check Build
+on:
+    push:
+      branches:
+        - master
+jobs:
+  Check-Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: |
+          npm run build
