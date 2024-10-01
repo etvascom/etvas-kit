@@ -106,7 +106,7 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
 
   const isEmpty = useMemo(
     () =>
-      multiple ? value.length === 0 : typeof value !== 'boolean' && !value,
+      multiple ? value.length === 0 : typeof value !== 'boolean' && value !== 0 && !value,
     [value, multiple]
   )
 
