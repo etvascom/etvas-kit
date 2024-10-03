@@ -79,8 +79,8 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
       : undefined
 
   const error = meta.touched && meta.error
-  const displayedError = submitCount > 0 ? error : field.value && error
-
+  const displayedError =
+    submitCount > 0 ? error : field.value !== 0 && field.value && error
   const mappedOptions = useMemo(
     () =>
       options.reduce(
