@@ -1,4 +1,4 @@
-import { ElementType, FC } from 'react'
+import { ElementType, FC, ReactNode } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -9,7 +9,7 @@ import { Typography } from '../Typography'
 
 interface NavItemProps extends FlexProps {
   icon: string
-  label: string
+  label: ReactNode
   isActive: boolean
   as?: ElementType
   onClick?: () => void
