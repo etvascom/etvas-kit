@@ -1,5 +1,7 @@
+import React from 'react'
+
 import isPropValid from '@emotion/is-prop-valid'
-import React, { Decorator } from '@storybook/react'
+import { Decorator } from '@storybook/react'
 import { StyleSheetManager } from 'styled-components'
 
 import { BrandingProvider, GlobalStyle, ThemeProvider } from '../src'
