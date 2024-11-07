@@ -1,7 +1,16 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  ButtonHTMLAttributes,
+  Children,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Icon } from '../Icon'
@@ -9,15 +18,19 @@ import { NavItem } from './Item'
 
 const GRADIENT_SIZE = 32
 
-export const NavBar = ({ children }) => {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [isScrollable, setIsScrollable] = useState(false)
-  const itemsContainer = useRef(null)
+interface NavBarSubComponents {
+  Item: typeof NavItem
+}
+
+const NavBar: FC<PropsWithChildren> & NavBarSubComponents = ({ children }) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0)
+  const [isScrollable, setIsScrollable] = useState<boolean>(false)
+  const itemsContainer = useRef<HTMLDivElement>(null)
 
   const items = useMemo(
     () =>
       children
-        ? children.map((child, idx) => ({
+        ? Children.toArray(children).map((child, idx) => ({
             key: `nav-item-${idx}`,
             component: child,
             idx
@@ -29,8 +42,10 @@ export const NavBar = ({ children }) => {
   useLayoutEffect(() => {
     const windowResizeHandler = () => {
       const { current } = itemsContainer || {}
-      const hasHorizontalScrollbar = current?.scrollWidth > current?.clientWidth
-      setIsScrollable(hasHorizontalScrollbar)
+      if (current?.scrollWidth && current?.clientWidth) {
+        const hasHorizontalScrollbar = current.scrollWidth > current.clientWidth
+        setIsScrollable(hasHorizontalScrollbar)
+      }
     }
 
     windowResizeHandler()
@@ -38,13 +53,14 @@ export const NavBar = ({ children }) => {
     return () => window.removeEventListener('resize', windowResizeHandler)
   }, [])
 
-  const updateActiveIndex = idx => () => {
-    if (!children || !children.length || idx <= 0) {
+  const updateActiveIndex = (idx: number) => () => {
+    const length = Children.toArray(children).length
+    if (!children || !length || idx <= 0) {
       return setActiveIndex(0)
     }
 
-    if (idx >= children.length - 1) {
-      return setActiveIndex(children.length - 1)
+    if (idx >= length - 1) {
+      return setActiveIndex(length - 1)
     }
     setActiveIndex(idx)
   }
@@ -76,41 +92,11 @@ export const NavBar = ({ children }) => {
   )
 }
 
-const ItemScrollableContainer = ({ isActive, item, onClick, isLastChild }) => {
-  const ref = useRef()
-
-  useLayoutEffect(() => {
-    if (isActive && ref.current) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center'
-      })
-    }
-  }, [isActive])
-
-  return (
-    <ItemContainer
-      id={`nav-bar-item-${item.idx}`}
-      isLastChild={isLastChild}
-      className='nav-bar-item'
-      key={item.key}
-      ref={ref}
-      onClick={onClick}
-    >
-      {item.component}
-    </ItemContainer>
-  )
+interface NavContainerProps {
+  hasPaddingY: boolean
 }
 
-ItemScrollableContainer.propTypes = {
-  isActive: PropTypes.bool,
-  item: PropTypes.object,
-  onClick: PropTypes.func,
-  isLastChild: PropTypes.bool
-}
-
-const NavContainer = styled.div`
+const NavContainer = styled.div<NavContainerProps>`
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -133,10 +119,72 @@ const NavItemsContainer = styled.div(
     },
     '-ms-overflow-style': 'none' /* IE and Edge */,
     'scrollbar-width': 'none' /* Firefox */
-  })
+  } as any)
 )
 
-const Gradient = styled.button(
+interface ItemScrollableContainerProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isActive: boolean
+  item: {
+    key: string
+    component: ReactNode
+    idx: number
+  }
+  isLastChild: boolean
+}
+
+const ItemScrollableContainer: FC<ItemScrollableContainerProps> = ({
+  isActive,
+  item,
+  onClick,
+  isLastChild
+}) => {
+  const ref = useRef<HTMLButtonElement>(null)
+
+  useLayoutEffect(() => {
+    if (isActive && ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
+      })
+    }
+  }, [isActive])
+
+  return (
+    <ItemContainer
+      id={`nav-bar-item-${item.idx}`}
+      isLastChild={isLastChild}
+      className='nav-bar-item'
+      key={item.key}
+      ref={ref}
+      onClick={onClick}>
+      {item.component}
+    </ItemContainer>
+  )
+}
+
+const ItemContainer = styled.button<
+  Pick<ItemScrollableContainerProps, 'isLastChild'>
+>(
+  css({
+    appearance: 'none',
+    margin: 0,
+    border: 'none',
+    background: 'none',
+    outline: 'none'
+  }),
+  ({ isLastChild }) =>
+    css({
+      padding: isLastChild ? 0 : '0 32px 0 0'
+    })
+)
+
+interface GradientProps {
+  from: 'right' | 'left'
+}
+
+const Gradient = styled.button<GradientProps>(
   css({
     display: 'flex',
     justifyContent: 'center',
@@ -159,22 +207,6 @@ const Gradient = styled.button(
         })
 )
 
-const ItemContainer = styled.button(
-  css({
-    appearance: 'none',
-    margin: 0,
-    border: 'none',
-    background: 'none',
-    outline: 'none'
-  }),
-  ({ isLastChild }) =>
-    css({
-      padding: isLastChild ? 0 : '0 32px 0 0'
-    })
-)
-
-NavBar.propTypes = {
-  children: PropTypes.node
-}
-
 NavBar.Item = NavItem
+
+export default NavBar
