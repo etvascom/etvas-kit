@@ -1,9 +1,10 @@
-import React, {
+import {
   ButtonHTMLAttributes,
   Children,
   FC,
   HTMLAttributes,
   PropsWithChildren,
+  ReactNode,
   cloneElement,
   isValidElement,
   useCallback,
@@ -44,7 +45,7 @@ export interface DropdownProps
   valueRender?: ((value: any) => string) | string
   itemSelected?: (value: any, item: any) => boolean
   itemFilter?: (search: string, item: any) => boolean
-  placeholder?: React.ReactNode
+  placeholder?: ReactNode
   searchPlaceholder?: string
   tinted?: boolean
   showTooltip?: boolean

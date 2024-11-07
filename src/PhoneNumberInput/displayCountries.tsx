@@ -1,4 +1,3 @@
-import React from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import 'flag-icon-css/css/flag-icon.css'

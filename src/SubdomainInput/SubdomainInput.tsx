@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'

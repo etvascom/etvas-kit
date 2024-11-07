@@ -1,4 +1,4 @@
-import React, { ElementType, FC } from 'react'
+import { ElementType, FC } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'

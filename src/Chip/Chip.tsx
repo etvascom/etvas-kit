@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, ReactNode } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -9,7 +9,7 @@ import { Typography, TypographyProps } from '../Typography'
 interface Props {
   color?: string
   isRounded?: boolean
-  label?: React.ReactNode
+  label?: ReactNode
   contentColor?: string
   isNeutral?: boolean
   typographyVariant?: TypographyProps['variant']

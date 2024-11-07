@@ -1,4 +1,11 @@
-import React, { FC, createContext, useEffect, useMemo, useState } from 'react'
+import {
+  FC,
+  ReactNode,
+  createContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 
 import {
   BrandingService,
@@ -13,7 +20,7 @@ export const BrandingContext = createContext<BrandingContext | null>(null)
 
 interface Props {
   brandingService?: BrandingService
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export const BrandingProvider: FC<Props> = ({

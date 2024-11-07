@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from 'react'
+import { FC, useCallback, useMemo } from 'react'
 
 import { FieldHookConfig, useField, useFormikContext } from 'formik'
 

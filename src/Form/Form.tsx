@@ -1,4 +1,4 @@
-import React, { FC, FormHTMLAttributes } from 'react'
+import { FC, FormHTMLAttributes } from 'react'
 
 import { Formik, FormikConfig, Form as FormikForm } from 'formik'
 

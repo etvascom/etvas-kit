@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes, useMemo } from 'react'
+import { FC, InputHTMLAttributes, ReactNode, useMemo } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'
@@ -20,7 +20,7 @@ type VariantKey = keyof typeof variants
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   autoFocus?: boolean
   disabled?: boolean
-  label?: React.ReactNode
+  label?: ReactNode
   noBottomSpace?: boolean
   onEdit: () => void
   variant?: VariantProp<VariantKey>
@@ -71,8 +71,7 @@ export const CardDisplayInput: FC<Props> = ({
           <StyledTouchable
             onClick={handleEdit}
             pointerEvents={disabled ? 'none' : 'initial'}
-            effect='highlight'
-          >
+            effect='highlight'>
             <Icon
               mr={5}
               size='small'

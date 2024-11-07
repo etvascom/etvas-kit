@@ -6,7 +6,6 @@ import {
   useMemo,
   useState
 } from 'react'
-import React from 'react'
 
 import type * as CSS from 'csstype'
 import styled, { css } from 'styled-components'

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 import { VariantProp } from '../utils/types'
 import { LoadBar } from './LoadBar'

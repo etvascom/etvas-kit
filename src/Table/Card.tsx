@@ -1,4 +1,11 @@
-import React, { FC, PropsWithChildren, useCallback, useState } from 'react'
+import {
+  FC,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useState
+} from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -10,7 +17,7 @@ import { Typography } from '../Typography'
 import styles from './Card.styles'
 
 interface Props {
-  leader?: React.ReactElement
+  leader?: ReactElement
 }
 
 interface CardSubComponents {
@@ -46,8 +53,8 @@ const StyledContent = styled(Box)(css(styles.content) as any)
 const StyledCardWrapper = styled.td(css(styles.card) as any)
 
 interface CardItemProps {
-  header: React.ReactNode
-  cell: React.ReactNode
+  header: ReactNode
+  cell: ReactNode
   vertical?: boolean
 }
 

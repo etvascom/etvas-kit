@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useMemo } from 'react'
+import { FC, PropsWithChildren, useMemo } from 'react'
 
 import { NotCompatible } from '../ErrorPages'
 

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useMemo, useState } from 'react'
+import { FC, PropsWithChildren, useMemo, useState } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import styled from 'styled-components'

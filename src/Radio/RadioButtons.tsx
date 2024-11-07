@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { Typography } from '..'
 import { Flex } from '../Flex'
@@ -6,7 +6,7 @@ import RadioButton from './RadioButton'
 
 interface Props {
   name: string
-  label?: React.ReactNode
+  label?: ReactNode
   value: any
   options: Option[]
   onChange: (value: any) => void
@@ -17,7 +17,7 @@ interface Option {
   id: string
   name: string
   value: any
-  label: React.ReactNode
+  label: ReactNode
   disabled?: boolean
 }
 
