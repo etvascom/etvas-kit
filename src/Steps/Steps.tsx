@@ -1,25 +1,35 @@
-import { useCallback } from 'react'
+import React, { FC, PropsWithChildren, ReactNode, useCallback } from 'react'
 
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Flex } from '../Flex'
 import { Typography } from '../Typography'
 
-export const Steps = ({ steps, active, isDisabled, onChange }) => {
-  const isActiveItem = i => active === i + 1
+interface StepsProps {
+  steps: ReactNode[]
+  active: number
+  isDisabled?: boolean
+  onChange?: (id: number) => void
+}
+
+export const Steps: FC<StepsProps> = ({
+  steps,
+  active,
+  isDisabled,
+  onChange
+}) => {
+  const isActiveItem = (i: number): boolean => active === i + 1
   return (
     <Flex flexDirection='column'>
       {steps.map((content, i) => (
         <Item
-          // eslint-disable-next-line react/no-array-index-key
           key={i}
           id={i + 1}
           isFirst={i === 0}
           isLast={i === steps.length - 1}
           isActive={isActiveItem(i)}
-          isDisabled={!isActiveItem(i) && isDisabled}
+          isDisabled={!isActiveItem(i) && !!isDisabled}
           onClick={onChange}>
           {content}
         </Item>
@@ -28,14 +38,16 @@ export const Steps = ({ steps, active, isDisabled, onChange }) => {
   )
 }
 
-Steps.propTypes = {
-  steps: PropTypes.arrayOf(PropTypes.node).isRequired,
-  isDisabled: PropTypes.bool,
-  active: PropTypes.number,
-  onChange: PropTypes.func
+interface ItemProps {
+  id: number
+  isActive: boolean
+  isFirst: boolean
+  isLast: boolean
+  isDisabled: boolean
+  onClick?: (id: number) => void
 }
 
-const Item = ({
+const Item: FC<PropsWithChildren<ItemProps>> = ({
   id,
   isActive,
   isFirst,
@@ -52,7 +64,7 @@ const Item = ({
       isDisabled={isDisabled}
       onClick={handleClick}>
       <Vline isFirst={isFirst} isLast={isLast} />
-      <Chip isRounded color={isActive ? 'accent' : 'outline'}>
+      <Chip color={isActive ? 'accent' : 'outline'}>
         <Typography variant='labelButton' color='white'>
           {id}
         </Typography>
@@ -67,26 +79,28 @@ const Item = ({
   )
 }
 
-const ItemContainer = styled(Flex)(({ isDisabled }) =>
-  css({
-    position: 'relative',
-    cursor: isDisabled ? 'not-allowed' : 'pointer',
-    paddingBottom: 6,
-    '&:last-child': {
-      paddingBottom: 0
-    }
-  })
+const ItemContainer = styled(Flex)<Pick<ItemProps, 'isDisabled'>>(
+  ({ isDisabled }) =>
+    css({
+      position: 'relative',
+      cursor: isDisabled ? 'not-allowed' : 'pointer',
+      paddingBottom: 6,
+      '&:last-child': {
+        paddingBottom: 0
+      }
+    })
 )
 
-const Vline = styled.div(({ isFirst, isLast }) =>
-  css({
-    width: '1px',
-    position: 'absolute',
-    left: '12px',
-    bottom: isLast ? '50%' : 0,
-    top: isFirst ? '50%' : 0,
-    backgroundColor: 'outline'
-  })
+const Vline = styled.div<Pick<ItemProps, 'isFirst' | 'isLast'>>(
+  ({ isFirst, isLast }) =>
+    css({
+      width: '1px',
+      position: 'absolute',
+      left: '12px',
+      bottom: isLast ? '50%' : 0,
+      top: isFirst ? '50%' : 0,
+      backgroundColor: 'outline'
+    })
 )
 
 const Chip = styled.div(({ color }) =>
@@ -103,13 +117,3 @@ const Chip = styled.div(({ color }) =>
     position: 'relative'
   })
 )
-
-Item.propTypes = {
-  id: PropTypes.number,
-  isActive: PropTypes.bool,
-  isFirst: PropTypes.bool,
-  isLast: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  children: PropTypes.node,
-  onClick: PropTypes.func
-}
