@@ -5,11 +5,13 @@ import {
   BorderProps,
   ColorProps,
   ColorStyleProps,
+  FlexboxProps,
   LayoutProps,
   PositionProps,
   ShadowProps,
   SpaceProps,
-  TypographyProps
+  TypographyProps,
+  flexbox
 } from 'styled-system'
 import {
   background,
@@ -35,7 +37,8 @@ export interface BoxProps
     LayoutProps,
     PositionProps,
     SpaceProps,
-    TypographyProps {
+    TypographyProps,
+    FlexboxProps {
   pointerEvents?: CSS.Property.PointerEvents
   visibility?: CSS.Property.Visibility
 }
@@ -52,6 +55,7 @@ export const Box = styled.div<BoxProps>`
     shadow,
     space,
     typography,
-    visibility
+    visibility,
+    flexbox
   )};
 `
