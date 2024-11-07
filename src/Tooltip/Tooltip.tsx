@@ -4,6 +4,6 @@ import styled from 'styled-components'
 import { Box } from '../Box'
 import styles from './Tooltip.style'
 
-export const Tooltip = styled(Box)(css(styles))
+export const Tooltip = styled(Box)(css(styles as any))
 
 Tooltip.displayName = 'Tooltip'
