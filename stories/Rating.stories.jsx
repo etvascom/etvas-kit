@@ -7,4 +7,4 @@ export default {
 
 export const SimpleRating = () => <Rating rating={3} />
 export const CustomColor = () => <Rating rating={3} color='brand' />
-export const CustomSize = () => <Rating rating={3} size='150%' />
+export const CustomSize = () => <Rating rating={3} size='large' />
