@@ -1,10 +1,21 @@
-import { useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 
-import PropTypes from 'prop-types'
+import { ColorProps } from 'styled-system'
 
-import { Icon } from '../Icon'
+import { Icon, IconProps } from '../Icon'
 
-export const Rating = ({ rating, max, size, color }) => {
+interface RatingProps extends ColorProps, Pick<IconProps, 'size'> {
+  rating?: number
+  max?: number
+  color: string
+}
+
+export const Rating: FC<RatingProps> = ({
+  rating = 0,
+  max = 5,
+  size = 'small',
+  color = 'accent'
+}) => {
   const icons = useMemo(() => {
     const icons = []
     for (let i = 0; i < max; i++) {
@@ -27,22 +38,4 @@ export const Rating = ({ rating, max, size, color }) => {
       ))}
     </>
   )
-}
-
-Rating.propTypes = {
-  color: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object
-  ]),
-  rating: PropTypes.number,
-  max: PropTypes.number,
-  size: PropTypes.string
-}
-
-Rating.defaultProps = {
-  max: 5,
-  rating: 0,
-  size: 'small',
-  color: 'accent'
 }
