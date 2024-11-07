@@ -1,5 +1,6 @@
-import React, {
+import {
   HTMLAttributes,
+  ReactNode,
   TextareaHTMLAttributes,
   forwardRef,
   useMemo,
@@ -34,8 +35,8 @@ export interface TextAreaProps
     >,
     Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   error?: Error
-  label?: React.ReactNode
-  optionalText?: React.ReactNode
+  label?: ReactNode
+  optionalText?: ReactNode
   valid?: boolean
   variant?: VariantProp<VariantKey>
   allowResize?: boolean
@@ -150,10 +151,8 @@ const StyledTextArea = styled.textarea<StyledTextAreaProps>(
   } as SystemStyleObject) as any,
   variant({ variants }),
   ({ tinted, error, warning, disabled, allowResize }: StyledTextAreaProps) => ({
-    backgroundColor:
-      tinted && !(error || warning || disabled) ? 'white' : '',
-    borderColor:
-      tinted && !(error || warning || disabled) ? 'white' : '',
+    backgroundColor: tinted && !(error || warning || disabled) ? 'white' : '',
+    borderColor: tinted && !(error || warning || disabled) ? 'white' : '',
     resize: allowResize ? 'both' : 'none'
   })
 )

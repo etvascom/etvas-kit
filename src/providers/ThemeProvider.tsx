@@ -1,11 +1,11 @@
-import React, { FC, useMemo } from 'react'
+import { FC, ReactNode, useMemo } from 'react'
 
 import { ThemeProvider as LibThemeProvider } from 'styled-components'
 
 import { etvasTheme, mergeDeep } from '../utils'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
   theme?: object
 }
 

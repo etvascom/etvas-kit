@@ -1,4 +1,5 @@
-import React, {
+import {
+  ReactNode,
   Children,
   FC,
   InputHTMLAttributes,
@@ -29,9 +30,9 @@ export interface AutocompleteProps
       InputHTMLAttributes<HTMLInputElement>,
       'color' | 'height' | 'size' | 'width'
     > {
-  label?: React.ReactNode
+  label?: ReactNode
   error?: Error
-  optionalText?: React.ReactNode
+  optionalText?: ReactNode
   loading?: boolean
   tinted?: boolean
   searchMaxResults?: number
@@ -101,7 +102,7 @@ const Autocomplete: FC<PropsWithChildren<AutocompleteProps>> &
     if (!value) {
       return Children.toArray(children).slice(0, searchMaxResults)
     }
-    const childArray = React.Children.toArray(
+    const childArray = Children.toArray(
       children
     ) as ReactElement<OptionProps>[]
     return childArray

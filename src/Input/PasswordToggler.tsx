@@ -1,4 +1,4 @@
-import React, { DetailsHTMLAttributes, FC, useCallback } from 'react'
+import { DetailsHTMLAttributes, FC, useCallback } from 'react'
 
 import styled from 'styled-components'
 

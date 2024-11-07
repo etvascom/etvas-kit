@@ -1,5 +1,6 @@
-import React, {
+import {
   ReactNode,
+  RefObject,
   useCallback,
   useLayoutEffect,
   useRef,
@@ -22,7 +23,7 @@ const resetIframe = (iframe: any) => {
 }
 
 export const useForeignModalShadow: () => [
-  React.RefObject<HTMLIFrameElement>,
+  RefObject<HTMLIFrameElement>,
   ReactNode
 ] = () => {
   const intercom = useRef(new InterCom('etvas.modal'))

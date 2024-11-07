@@ -1,7 +1,9 @@
-import React, {
+import {
+  Children,
   FC,
   PropsWithChildren,
   ReactElement,
+  ReactNode,
   cloneElement,
   useContext,
   useMemo
@@ -17,8 +19,8 @@ import styles from './Row.styles'
 import { HeaderContext, TableContext } from './base'
 
 interface Row {
-  cell: React.ReactNode
-  header: React.ReactNode
+  cell: ReactNode
+  header: ReactNode
 }
 
 export const Row: FC<PropsWithChildren> = ({ children }) => {
@@ -27,9 +29,7 @@ export const Row: FC<PropsWithChildren> = ({ children }) => {
 
   const type = useMemo(() => (headerCtx ? 'header' : 'body'), [headerCtx])
 
-  const childArray = React.Children.toArray(
-    children
-  ) as ReactElement<CellProps>[]
+  const childArray = Children.toArray(children) as ReactElement<CellProps>[]
 
   if (type === 'body' && mode === 'mobile') {
     let leader

@@ -1,5 +1,6 @@
-import React, {
+import {
   InputHTMLAttributes,
+  ReactNode,
   forwardRef,
   useCallback,
   useMemo,
@@ -33,8 +34,8 @@ export interface InputProps
   icLeft?: string
   icRight?: string
   onIcRightClick?: () => void
-  label?: React.ReactNode
-  optionalText?: React.ReactNode
+  label?: ReactNode
+  optionalText?: ReactNode
   noBottomSpace?: boolean
   passwordView?: 'peek' | 'toggle'
   placeholderTextColor?: string
@@ -45,7 +46,7 @@ export interface InputProps
   tinted?: boolean
   showValidationCheck?: boolean
   onInputClick?: () => void
-  extension?: React.ReactNode
+  extension?: ReactNode
   showTooltip?: boolean
 }
 

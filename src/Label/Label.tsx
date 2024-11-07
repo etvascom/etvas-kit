@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { Flex } from '../Flex'
 import { Icon } from '../Icon'
 import { Typography } from '../Typography'
 
 export interface LabelProps {
-  label: React.ReactNode
+  label: ReactNode
   inputId?: string | number
   showOptionalText?: boolean
-  optionalText?: React.ReactNode
+  optionalText?: ReactNode
   showTooltip?: boolean
 }
 
@@ -27,8 +27,7 @@ export const Label: FC<LabelProps> = ({
         htmlFor={inputId?.toString()}
         variant='base12Bold'
         color='baseMetal'
-        width='fit-content'
-      >
+        width='fit-content'>
         {label}
       </Typography>
       {inputId && showTooltip && (
@@ -49,8 +48,7 @@ export const Label: FC<LabelProps> = ({
           htmlFor={inputId?.toString()}
           variant='base12Bold'
           color='baseGray'
-          width='fit-content'
-        >
+          width='fit-content'>
           - {optionalText}
         </Typography>
       )}

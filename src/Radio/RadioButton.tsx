@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 import styled from 'styled-components'
 
@@ -8,7 +8,7 @@ import styles from './radio.styles'
 export interface RadioButtonProps {
   name: string
   id: string
-  label?: React.ReactNode
+  label?: ReactNode
   value: any
   checked: boolean
   disabled?: boolean

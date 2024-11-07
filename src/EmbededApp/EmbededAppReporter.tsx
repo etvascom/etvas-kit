@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect, useRef } from 'react'
+import { FC, PropsWithChildren, useEffect, useRef } from 'react'
 
 import styled from 'styled-components'
 

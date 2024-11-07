@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, PropsWithChildren } from 'react'
+import { FC, HTMLAttributes, PropsWithChildren } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'

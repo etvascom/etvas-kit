@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'

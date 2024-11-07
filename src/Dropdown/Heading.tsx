@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { PropsWithChildren } from 'react'
 
 import css from '@styled-system/css'
