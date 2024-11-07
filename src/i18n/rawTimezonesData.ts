@@ -1,4 +1,8 @@
-export const rawTimezonesData = {
+export interface RawTimezonesData {
+  [key: string]: string | undefined
+}
+
+export const rawTimezonesData: RawTimezonesData = {
   'Europe/Andorra': 'AD',
   'Asia/Dubai': 'AE',
   'Asia/Kabul': 'AF',

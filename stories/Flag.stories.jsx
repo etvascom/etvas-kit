@@ -8,8 +8,8 @@ export default {
 
 export const AllFlags = () => (
   <>
-    {Object.values(rawCountriesData).map(country => (
-      <Flex>
+    {Object.entries(rawCountriesData).map(([code, country]) => (
+      <Flex key={code}>
         <Flag name={country.currency} mr={2} />
         <Typography>
           {country.full} ({country.currency})

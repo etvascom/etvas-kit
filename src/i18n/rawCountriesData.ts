@@ -1,4 +1,21 @@
-export const rawCountriesData = {
+export interface CountryWithoutCode {
+  full: string
+  short?: string
+  dir?: 'rtl' | 'ltr'
+  currency: string
+  prefix: string
+  isEU?: boolean
+  native?: string
+  translations?: {
+    [key: string]: string
+  }
+}
+
+export interface RawCountriesData {
+  [key: string]: CountryWithoutCode
+}
+
+export const rawCountriesData: RawCountriesData = {
   AD: {
     full: 'Andorra',
     prefix: '+376',
@@ -869,7 +886,7 @@ export const rawCountriesData = {
   MR: {
     full: 'Mauritania',
     native: 'موريتانيا',
-    dir: 'rt',
+    dir: 'rtl',
     prefix: '+222',
     currency: 'MRO'
   },
