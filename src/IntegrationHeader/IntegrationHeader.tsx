@@ -1,11 +1,19 @@
+import React, { FC, ReactNode } from 'react'
+
 import css from '@styled-system/css'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Flex } from '../Flex'
 import { Typography } from '../Typography'
 
-export const IntegrationHeader = ({
+interface IntegrationHeaderProps {
+  title: ReactNode
+  providerPrefix: ReactNode
+  providerName: ReactNode
+  url: string
+}
+
+export const IntegrationHeader: FC<IntegrationHeaderProps> = ({
   title,
   providerPrefix,
   providerName,
@@ -16,8 +24,7 @@ export const IntegrationHeader = ({
     justifyContent='space-between'
     alignItems='flex-start'
     flexDirection={['column', 'row']}
-    mb={[6, 8]}
-  >
+    mb={[6, 8]}>
     <Typography variant='titleLarge'>{title}</Typography>
     <Typography variant='textSmall' color='outline' mt={[4, 0]}>
       {providerPrefix}{' '}
@@ -36,10 +43,3 @@ const StyledA = styled.a(
     font: 'inherit'
   })
 )
-
-IntegrationHeader.propTypes = {
-  title: PropTypes.node,
-  providerPrefix: PropTypes.node,
-  providerName: PropTypes.node,
-  url: PropTypes.string
-}
