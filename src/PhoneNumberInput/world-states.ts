@@ -1,13 +1,4 @@
-import { Countries } from '../i18n'
-
-export interface Country {
-  code: string
-  full: string
-  short: string
-  prefix: string
-  isEU: boolean
-  native?: string
-}
+import { Countries, Country } from '../i18n'
 
 export interface State {
   name: string
