@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const ActivityIndicator: FC<Props> = ({
-  variant,
+  variant ='spinner',
   colors,
   size,
   ...props
@@ -35,6 +35,3 @@ export const ActivityIndicator: FC<Props> = ({
 
 const activityIndicators = ['spinner', 'loadbar', 'runningbar']
 
-ActivityIndicator.defaultProps = {
-  variant: 'spinner'
-}

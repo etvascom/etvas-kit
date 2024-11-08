@@ -1,4 +1,4 @@
-import { LabelHTMLAttributes, PropsWithChildren } from 'react'
+import { FC, LabelHTMLAttributes, PropsWithChildren } from 'react'
 
 import css, { SystemStyleObject } from '@styled-system/css'
 import type * as CSS from 'csstype'
@@ -41,7 +41,21 @@ export interface TypographyProps
   overflowWrap?: CSS.Property.OverflowWrap
 }
 
-const Typography = styled.div<PropsWithChildren<TypographyProps>>(
+const Typography: FC<PropsWithChildren<TypographyProps>> = ({
+  as = 'div',
+  variant = 'default',
+  overflowWrap = 'normal',
+  ...props
+}) => (
+  <TypographyWrapper
+    as={as}
+    variant={variant}
+    overflowWrap={overflowWrap}
+    {...props}
+  />
+)
+
+const TypographyWrapper = styled.div<PropsWithChildren<TypographyProps>>(
   ({ overflowWrap }) =>
     css({
       color: 'text',
@@ -74,12 +88,6 @@ const Typography = styled.div<PropsWithChildren<TypographyProps>>(
           WebkitBoxOrient: 'vertical'
         } as SystemStyleObject) as any)
 )
-
-Typography.defaultProps = {
-  as: 'div',
-  variant: 'default',
-  overflowWrap: 'normal'
-}
 
 Typography.displayName = 'Typography'
 

@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const RunningBar: FC<Props> = ({
-  colors: { background, primary },
+  colors: { background = 'baseWhite', primary = 'brand' },
   ...props
 }) => (
   <Bar
@@ -63,10 +63,3 @@ const Bar = styled(Box)<BarProps>`
     width: 200px;
   }
 `
-
-RunningBar.defaultProps = {
-  colors: {
-    background: 'baseWhite',
-    primary: 'brand'
-  }
-}

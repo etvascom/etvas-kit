@@ -10,18 +10,17 @@ interface Props {
   mode: Styles
 }
 
-export const Body: FC<PropsWithChildren<Props>> = props => {
-  const { mode } = useContext(TableContext)
+export const Body: FC<PropsWithChildren<Props>> = ({
+  mode = 'web',
+  ...props
+}) => {
+  const { mode: contextMode } = useContext(TableContext)
 
-  return <StyledBody {...props} mode={mode as Styles} />
+  return <StyledBody {...props} mode={(contextMode as Styles) || mode} />
 }
 
 const StyledBody = styled.tbody<Props>(
   ({ mode }) => css(styles[mode] as SystemStyleObject) as any
 )
-
-Body.defaultProps = {
-  mode: 'web'
-}
 
 type Styles = keyof typeof styles
