@@ -9,7 +9,7 @@ interface Props {
   theme?: object
 }
 
-export const ThemeProvider: FC<Props> = ({ children, theme ={} }) => {
+export const ThemeProvider: FC<Props> = ({ children, theme = {} }) => {
   const mergedTheme = useMemo(() => mergeDeep({}, etvasTheme, theme), [theme])
   if (process.env.NODE_ENV === 'development') {
     console.info('Current theme:', mergedTheme)

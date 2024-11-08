@@ -55,7 +55,7 @@ const Typography: FC<PropsWithChildren<TypographyProps>> = ({
   />
 )
 
-const TypographyWrapper = styled.div<PropsWithChildren<TypographyProps>>(
+const TypographyWrapper = styled.div<TypographyProps>(
   ({ overflowWrap }) =>
     css({
       color: 'text',
