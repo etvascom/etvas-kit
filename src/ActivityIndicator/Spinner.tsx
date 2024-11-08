@@ -5,19 +5,19 @@ import { Colors } from './ActivityIndicator'
 
 const backgroundColour = (
   () =>
-  ({ colors: { background } }: Props) =>
+  ({ colors: { background = 'baseWhite' } }: Props) =>
     themed(`colors.${background}`, background)
 )()
 
 const primaryColour = (
   () =>
-  ({ colors: { primary } }: Props) =>
+  ({ colors: { primary = 'brand' } }: Props) =>
     themed(`colors.${primary}`, primary)
 )()
 
 const complementaryColour = (
   () =>
-  ({ colors: { background }, ...props }: Props) => {
+  ({ colors: { background = 'baseWhite' }, ...props }: Props) => {
     const hex = themed(`colors.${background}`, background)(props)
     return hex.charAt(0) === '#' ? hex2Rgba(hex, '0') : hex
   }
@@ -31,7 +31,7 @@ interface Props {
 export const Spinner = styled.div<Props>`
   font-size: 10px;
   text-indent: -9999em;
-  ${({ size }: Pick<Props, 'size'>) => {
+  ${({ size = '2rem' }: Pick<Props, 'size'>) => {
     if (typeof size === 'number')
       return css`
         width: ${size}px;
@@ -121,11 +121,3 @@ export const Spinner = styled.div<Props>`
     }
   }
 `
-
-Spinner.defaultProps = {
-  colors: {
-    background: 'baseWhite',
-    primary: 'brand'
-  },
-  size: '2rem'
-}

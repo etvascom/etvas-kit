@@ -1,3 +1,5 @@
+import { FC } from 'react'
+
 import css from '@styled-system/css'
 import styled from 'styled-components'
 import { border, color, compose, shadow, variant } from 'styled-system'
@@ -14,7 +16,12 @@ export interface CardProps extends BoxProps {
   variant?: VariantProp<VariantKey>
 }
 
-export const Card = styled(Box)<CardProps>(
+export const Card: FC<CardProps> = ({
+  variant = 'content',
+  ...props
+}: CardProps) => <CardWrapper variant={variant} {...props} />
+
+const CardWrapper = styled(Box)<CardProps>(
   props =>
     css(mergeDeep({}, styles, compose(color, border, shadow)(props))) as any,
   ({ theme }) =>
@@ -22,9 +29,5 @@ export const Card = styled(Box)<CardProps>(
       variants: mergeDeep({}, variants, theme.cards)
     })
 )
-
-Card.defaultProps = {
-  variant: 'content'
-}
 
 Card.displayName = 'Card'

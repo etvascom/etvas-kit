@@ -8,7 +8,10 @@ interface Props {
   colors: string[]
 }
 
-export const LoadBar: FC<Props> = ({ colors, ...props }) => (
+export const LoadBar: FC<Props> = ({
+  colors = ['statusWarning', 'statusSuccess', 'statusError'],
+  ...props
+}) => (
   <Box bg='brand' height='4px' position='relative' width={1} {...props}>
     {colors.map(color => (
       <Bar bg={color} colorList={colors} key={color} />
@@ -57,7 +60,3 @@ const Bar = styled(Box)<BarProps>`
 
   ${loopColors};
 `
-
-LoadBar.defaultProps = {
-  colors: ['statusWarning', 'statusSuccess', 'statusError']
-}

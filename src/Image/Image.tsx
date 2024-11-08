@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types'
+import { FC } from 'react'
+
 import styled from 'styled-components'
 import {
   BorderProps,
@@ -23,11 +24,12 @@ interface ImageProps
   alt: string
 }
 
-export const Image = styled.img<ImageProps>`
+export const Image: FC<ImageProps> = ({
+  alt = 'image placeholder',
+  ...props
+}: ImageProps) => <ImageWrapper alt={alt} {...props} />
+
+export const ImageWrapper = styled.img<ImageProps>`
   object-fit: ${({ objectFit }) => objectFit};
   ${compose(border, layout, position, space)};
 `
-
-Image.defaultProps = {
-  alt: 'image placeholder'
-}
