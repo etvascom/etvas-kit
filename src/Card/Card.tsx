@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react'
+import { PropsWithChildren, forwardRef } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -16,10 +16,11 @@ export interface CardProps extends BoxProps {
   variant?: VariantProp<VariantKey>
 }
 
-export const Card: FC<PropsWithChildren<CardProps>> = ({
-  variant = 'content',
-  ...props
-}: CardProps) => <CardWrapper variant={variant} {...props} />
+export const Card = forwardRef<HTMLDivElement, PropsWithChildren<CardProps>>(
+  ({ variant = 'content', ...props }: CardProps, ref) => (
+    <CardWrapper variant={variant} {...props} />
+  )
+)
 
 const CardWrapper = styled(Box)<CardProps>(
   props =>
