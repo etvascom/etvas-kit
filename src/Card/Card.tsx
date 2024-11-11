@@ -18,7 +18,7 @@ export interface CardProps extends BoxProps {
 
 export const Card = forwardRef<HTMLDivElement, PropsWithChildren<CardProps>>(
   ({ variant = 'content', ...props }: CardProps, ref) => (
-    <CardWrapper variant={variant} {...props} />
+    <CardWrapper ref={ref} variant={variant} {...props} />
   )
 )
 
