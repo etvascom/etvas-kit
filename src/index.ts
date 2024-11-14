@@ -29,7 +29,7 @@ export * from './IntegrationHeader'
 export * from './Steps'
 export * from './Chip'
 
-export * from './SubdomainInput'
+export * from './PrefixSuffixInput'
 export * from './Autocomplete'
 export * from './PhoneNumberInput'
 
