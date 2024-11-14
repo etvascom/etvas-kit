@@ -9,7 +9,7 @@ interface Props extends PrefixSuffixInputProps {
   validate?: (args: any) => any
 }
 
-export const SubdomainField: FC<Props & FieldHookConfig<string>> = props => {
+export const PrefixSuffixField: FC<Props & FieldHookConfig<string>> = props => {
   const { submitCount } = useFormikContext()
   const [field, meta, helpers] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
