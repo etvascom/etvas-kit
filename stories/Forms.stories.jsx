@@ -12,8 +12,8 @@ import {
   Form,
   Input,
   PhoneNumberInputField,
+  PrefixSuffixField,
   RadioField,
-  SubdomainField,
   TextAreaField,
   TextField,
   Typography
@@ -173,7 +173,7 @@ export const SimpleForm = () => (
       placeholder='Add a comment...'
       rows={10}
     />
-    <SubdomainField
+    <PrefixSuffixField
       name='subdomain'
       id='subdomain'
       label='Subdomain'
@@ -509,7 +509,7 @@ export const SubdomainAutoCompleteForm = () => {
             value={orgName}
             label='Enter Organization name'
           />
-          <SubdomainField
+          <PrefixSuffixField
             name='subdomain'
             id='subdomain'
             prefix='ftp://'

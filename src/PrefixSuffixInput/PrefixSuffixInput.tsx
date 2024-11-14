@@ -12,7 +12,7 @@ import { SubLabel } from '../Input/SubLabel'
 import { Label } from '../Label'
 import { Typography, typography } from '../Typography'
 
-export interface SubdomainInputProps extends InputProps {
+export interface PrefixSuffixInputProps extends InputProps {
   prefix?: string
   suffix?: string
   icRight?: string
@@ -20,7 +20,7 @@ export interface SubdomainInputProps extends InputProps {
   prefixSpace?: number
 }
 
-export const SubdomainInput = forwardRef<HTMLDivElement, SubdomainInputProps>(
+export const PrefixSuffixInput = forwardRef<HTMLDivElement, PrefixSuffixInputProps>(
   (
     {
       prefix = 'https://',
@@ -243,7 +243,7 @@ const Suffix = styled(Typography)`
   white-space: nowrap;
 `
 
-interface WrapperProps extends Pick<SubdomainInputProps, 'variant'> {
+interface WrapperProps extends Pick<PrefixSuffixInputProps, 'variant'> {
   borderColor?: string
   backgroundColor?: string
   color?: string
@@ -299,7 +299,7 @@ const StatusIcon = styled(Flex)(
   }) as any
 )
 
-SubdomainInput.displayName = 'SubdomainInput'
+PrefixSuffixInput.displayName = 'PrefixSuffixInput'
 
 const replaceCaret = (element?: HTMLDivElement | null) => {
   if (!element) {

@@ -1,34 +1,34 @@
 import { useState } from 'react'
 
-import { Box, Card, SubdomainInput } from '../src'
+import { Box, Card, PrefixSuffixInput } from '../src'
 
 export default {
-  title: 'Demo/SubdomainInput',
-  component: SubdomainInput
+  title: 'Demo/PrefixSuffixInput',
+  component: PrefixSuffixInput
 }
 
-const SubdomainInputHelper = props => {
+const PrefixSuffixInputHelper = props => {
   const [value, setValue] = useState('')
 
   const handleChange = e => setValue(e.target.value)
-  return <SubdomainInput value={value} onChange={handleChange} {...props} />
+  return <PrefixSuffixInput value={value} onChange={handleChange} {...props} />
 }
 
 export const Default = () => (
   <Box p={4}>
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Disabled'
       id='default_id'
       suffix='.etvas.com'
       disabled
     />
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Valid'
       id='default_id'
       suffix='.etvas.com'
       valid
     />
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Valid Number'
       id='default_id'
       prefix=''
@@ -37,27 +37,27 @@ export const Default = () => (
       suffixSpace={1}
       valid
     />
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Default status'
       id='default_id'
       suffix='.etvas.com'
     />
 
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Warning status'
       id='warning_id'
       suffix='.etvas.com'
       warning
     />
 
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Error status'
       id='error_id'
       suffix='.etvas.com'
       error
     />
 
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Error with message'
       id='error_message_id'
       suffix='.etvas.com'
@@ -66,7 +66,7 @@ export const Default = () => (
   </Box>
 )
 export const Placeholder = () => (
-  <SubdomainInputHelper
+  <PrefixSuffixInputHelper
     id='default_id'
     suffix='.etvas.com'
     label='Your custom subdomain'
@@ -75,7 +75,7 @@ export const Placeholder = () => (
 )
 
 export const Disabled = () => (
-  <SubdomainInputHelper
+  <PrefixSuffixInputHelper
     id='default_id'
     prefix=''
     suffix='transactions'
@@ -88,7 +88,7 @@ export const Disabled = () => (
 
 export const Tinted = () => (
   <Card m={4} p={4} variant='tinted'>
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       id='default_id'
       suffix='.helloetvas.com'
       label='Please enter slug'
@@ -96,7 +96,7 @@ export const Tinted = () => (
       tinted
     />
 
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Warning status'
       id='warning_id'
       suffix='.etvas.com'
@@ -104,7 +104,7 @@ export const Tinted = () => (
       tinted
     />
 
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Error status'
       id='error_id'
       suffix='.etvas.com'
@@ -112,7 +112,7 @@ export const Tinted = () => (
       tinted
     />
 
-    <SubdomainInputHelper
+    <PrefixSuffixInputHelper
       label='Error with message'
       id='error_message_id'
       suffix='.etvas.com'

@@ -2,14 +2,14 @@ import { FC, useCallback } from 'react'
 
 import { FieldHookConfig, useField, useFormikContext } from 'formik'
 
-import { SubdomainInput, SubdomainInputProps } from '../SubdomainInput'
+import { PrefixSuffixInput, PrefixSuffixInputProps } from '../PrefixSuffixInput'
 import { makeId } from './utils'
 
-interface Props extends SubdomainInputProps {
+interface Props extends PrefixSuffixInputProps {
   validate?: (args: any) => any
 }
 
-export const SubdomainField: FC<Props & FieldHookConfig<string>> = props => {
+export const PrefixSuffixField: FC<Props & FieldHookConfig<string>> = props => {
   const { submitCount } = useFormikContext()
   const [field, meta, helpers] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
@@ -23,7 +23,7 @@ export const SubdomainField: FC<Props & FieldHookConfig<string>> = props => {
   const error = meta.touched && meta.error
   const displayedError = submitCount > 0 ? error : field.value && error
   return (
-    <SubdomainInput
+    <PrefixSuffixInput
       {...field}
       {...(props as any)}
       id={id}
