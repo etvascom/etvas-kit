@@ -3,14 +3,14 @@ const modalStyles = {
     top: '0',
     left: '0',
     width: '100vw',
-    height: '100vh',
+    height: '100%',
     position: 'fixed',
     overflowY: 'auto',
     zIndex: 'modal'
   },
   backdrop: {
     width: '100vw',
-    minHeight: '100vh',
+    minHeight: '100%',
     top: '0',
     left: '0',
     position: 'fixed',
