@@ -37,7 +37,7 @@ export interface TypographyProps
     StyledSystemTypographyProps {
   as?: string
   truncate?: boolean | number | string
-  variant: VariantProp<VariantKey>
+  variant?: VariantProp<VariantKey>
   overflowWrap?: CSS.Property.OverflowWrap
 }
 
