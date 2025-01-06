@@ -7,7 +7,7 @@ import { Icon, IconProps } from '../Icon'
 interface RatingProps extends ColorProps, Pick<IconProps, 'size'> {
   rating?: number
   max?: number
-  color: string
+  color?: string
 }
 
 export const Rating: FC<RatingProps> = ({
