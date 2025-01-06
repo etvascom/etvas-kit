@@ -1,9 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  FC,
-  PropsWithChildren,
-  useMemo
-} from 'react'
+import { ButtonHTMLAttributes, FC, PropsWithChildren, useMemo } from 'react'
 
 import styled from 'styled-components'
 import {
@@ -37,7 +32,7 @@ interface Props
   color?: keyof typeof colors
   icon?: string
   loading?: boolean
-  variant: VariantProp<VariantKey>
+  variant?: VariantProp<VariantKey>
   iconPosition?: 'left' | 'right'
 }
 
@@ -89,8 +84,7 @@ const Button: FC<PropsWithChildren<Props>> = ({
       variant={variant}
       hSpacing={Number(hSpacing) || 0}
       colorVariants={colorVariants}
-      {...rest}
-    >
+      {...rest}>
       {loading ? (
         <Icon size='medium' name='loading' spin color={iconColor} />
       ) : (
@@ -109,8 +103,7 @@ const Button: FC<PropsWithChildren<Props>> = ({
               as='label'
               variant={variant === 'large' ? 'labelLargeButton' : 'labelButton'}
               htmlFor={id}
-              color='inherit'
-            >
+              color='inherit'>
               {children}
             </Typography>
           )}
