@@ -38,7 +38,7 @@ const validate = (name: string) => {
 
   return 'M0 0L24 0L24 24 L0 24Z'
 }
-
+type OrdinalSizes = 'small' | 'medium' | 'large'
 export interface IconProps
   extends Omit<SVGAttributes<SVGElement>, 'opacity' | 'color'>,
     OpacityProps,
@@ -46,7 +46,7 @@ export interface IconProps
     ColorProps,
     SpaceProps {
   name: string
-  size?: 'small' | 'medium' | 'large'
+  size?: OrdinalSizes | string
   spin?: boolean
   rotate?: number
 }
@@ -70,7 +70,7 @@ export const Icon: FC<IconProps> & IconSubComponents = ({
       glyphs[name as keyof typeof glyphs] ||
       validate(name)
     }
-    size={sizes[size] ?? size}
+    size={size in sizes ? sizes[size as OrdinalSizes] : size}
     color={color?.toString()}
     spin={spin}
     rotate={rotate}
