@@ -42,7 +42,7 @@ export interface DropdownProps
   searchMaxResults?: number
   searchThreshold?: number
   onChange?: (value: any) => void
-  valueRender?: ((value: any) => string) | string
+  valueRender?: ((value: any) => ReactNode) | ReactNode
   itemSelected?: (value: any, item: any) => boolean
   itemFilter?: (search: string, item: any) => boolean
   placeholder?: ReactNode
@@ -141,7 +141,7 @@ export const Dropdown: FC<PropsWithChildren<DropdownProps>> &
     if (typeof value !== 'boolean' && value !== 0 && !value) {
       return ''
     }
-    if (typeof valueRender === 'string') {
+    if (typeof valueRender !== 'function') {
       return valueRender
     }
     return valueRender(value)
@@ -573,3 +573,4 @@ const isObject = (item: any) => {
 
 Dropdown.Option = Option
 Dropdown.Heading = Heading
+
