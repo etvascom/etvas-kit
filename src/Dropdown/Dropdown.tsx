@@ -50,6 +50,7 @@ export interface DropdownProps
   tinted?: boolean
   showTooltip?: boolean
   'data-testid'?: string
+  [key: string]: any
 }
 
 interface DropdownSubComponents {
@@ -573,4 +574,3 @@ const isObject = (item: any) => {
 
 Dropdown.Option = Option
 Dropdown.Heading = Heading
-
