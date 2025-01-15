@@ -4,19 +4,14 @@ import { FieldHookConfig, useField, useFormikContext } from 'formik'
 
 import { Autocomplete } from '../Autocomplete'
 import { AutocompleteProps } from '../Autocomplete/Autocomplete'
+import { OptionProps } from '../Dropdown/Option'
 import { makeId } from './utils'
 
 interface Props extends AutocompleteProps {
-  options: any[]
-  optionAttributes?: {
-    key: string
-    value: string
-    id: string
-  }
+  options: OptionProps[]
 }
 
 export const AutocompleteField: FC<Props & FieldHookConfig<any>> = ({
-  optionAttributes = defaultOptionAttributes,
   options,
   ...props
 }) => {
@@ -40,19 +35,10 @@ export const AutocompleteField: FC<Props & FieldHookConfig<any>> = ({
       optionalText={props.optionalText || 'Optional'}
       onSelectItemChange={handleItemChange}>
       {options.map(option => (
-        <Autocomplete.Option
-          id={option[optionAttributes.id]}
-          key={option[optionAttributes.key]}
-          value={option[optionAttributes.value]}>
-          {option[optionAttributes.value]}
+        <Autocomplete.Option key={option.value} {...option}>
+          {option.value}
         </Autocomplete.Option>
       ))}
     </Autocomplete>
   )
-}
-
-const defaultOptionAttributes = {
-  key: 'value',
-  value: 'value',
-  id: 'id'
 }

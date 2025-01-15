@@ -3,21 +3,15 @@ import { FC, useCallback, useMemo } from 'react'
 import { FieldHookConfig, useField, useFormikContext } from 'formik'
 
 import { Dropdown, DropdownProps } from '../Dropdown'
+import { OptionProps } from '../Dropdown/Option'
 
 interface Props extends DropdownProps {
-  options: any[]
-  optionAttributes?: {
-    key: string
-    value: string
-    label: string
-    id: string
-  }
+  options: OptionProps[]
   onFieldValueChange?: (value: string) => void
 }
 
 export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
   options,
-  optionAttributes = defaultOptionAttributes,
   multiple,
   itemFilter,
   valueRender,
@@ -39,13 +33,11 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
   const selectedOption = useMemo(() => {
     if (multiple) {
       const values = field.value ?? []
-      return options.filter(option => values.includes(option.id))
+      return options.find(option => values.includes(option.id))
     }
 
-    return options.find(
-      option => field.value === option[optionAttributes.value]
-    )
-  }, [field, options, optionAttributes, multiple])
+    return options.find(option => field.value === option.value)
+  }, [field, options, multiple])
 
   const renderSelectedLabel = (value: any) => {
     if (multiple) {
@@ -64,7 +56,7 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
     }
 
     if (selectedOption) {
-      return selectedOption[optionAttributes.label]
+      return selectedOption.label
     }
 
     return ''
@@ -75,7 +67,7 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
   const selectedValue = multiple
     ? field.value
     : selectedOption
-      ? selectedOption[optionAttributes.value]
+      ? selectedOption.value
       : undefined
 
   const error = meta.touched && meta.error
@@ -86,18 +78,18 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
       options.reduce(
         (mapped, option) => ({
           ...mapped,
-          [option[optionAttributes.value]]: option[optionAttributes.label]
+          [option.value as string]: option.label
         }),
         []
       ),
-    [options, optionAttributes]
+    [options]
   )
 
   const filterItem =
     itemFilter ||
     ((search, value) =>
       typeof mappedOptions[value] === 'string'
-        ? mappedOptions[value].toLocaleLowerCase().includes(search)
+        ? (mappedOptions[value] as string).toLocaleLowerCase().includes(search)
         : false)
 
   return (
@@ -111,20 +103,10 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
       valueRender={selectedLabel}
       {...props}>
       {options.map(option => (
-        <Dropdown.Option
-          id={option[optionAttributes.id]}
-          key={option[optionAttributes.key]}
-          value={option[optionAttributes.value]}>
-          {option[optionAttributes.label]}
+        <Dropdown.Option key={option.value} {...option}>
+          {option.label}
         </Dropdown.Option>
       ))}
     </Dropdown>
   )
-}
-
-const defaultOptionAttributes = {
-  key: 'value',
-  value: 'value',
-  label: 'label',
-  id: 'id'
 }
