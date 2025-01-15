@@ -23,7 +23,7 @@ import variants from './variants'
 const defaultVariants = variants({ colorVariants: {} })
 type VariantKey = keyof typeof defaultVariants
 
-interface Props
+export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     LayoutProps,
     PositionProps,
@@ -36,7 +36,7 @@ interface Props
   iconPosition?: 'left' | 'right'
 }
 
-const Button: FC<PropsWithChildren<Props>> = ({
+const Button: FC<PropsWithChildren<ButtonProps>> = ({
   iconColor = 'currentColor',
   color,
   children,
@@ -124,7 +124,7 @@ const Button: FC<PropsWithChildren<Props>> = ({
 
 interface StyledButtonProps {
   hSpacing: number
-  variant: Props['variant']
+  variant: ButtonProps['variant']
   colorVariants: object
 }
 
