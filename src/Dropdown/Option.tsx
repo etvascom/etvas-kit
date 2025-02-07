@@ -2,6 +2,7 @@ import {
   FC,
   OptionHTMLAttributes,
   PropsWithChildren,
+  ReactNode,
   useLayoutEffect,
   useMemo,
   useRef
@@ -16,11 +17,13 @@ import { Flex } from '../Flex'
 import { typography } from '../Typography'
 import sizes from '../assets/sizes'
 
-export interface OptionProps extends OptionHTMLAttributes<HTMLDivElement> {
+export interface OptionProps
+  extends Omit<OptionHTMLAttributes<HTMLDivElement>, 'label'> {
   onSelectItem?: (value: any) => void
   hasKeyboardFocus?: boolean
   hasCheckbox?: boolean
   value: any
+  label?: ReactNode
 }
 
 const DropdownItem: FC<PropsWithChildren<OptionProps>> = ({
