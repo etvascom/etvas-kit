@@ -36,8 +36,8 @@ export interface AutocompleteProps
   loading?: boolean
   tinted?: boolean
   searchMaxResults?: number
-  value: any
-  itemSelected: (value: any, item: any) => boolean
+  value?: any
+  itemSelected?: (value: any, item: any) => boolean
   onSelectItemChange?: (item: any) => void
   handleInputChange?: (value: string) => void
 }
