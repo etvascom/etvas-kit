@@ -87,7 +87,7 @@ const offsetOf = (index: number) => {
     return 0
   }
 
-  return Math.log(index + 1) * SCALE_FACTOR
+  return Math.floor(Math.log(index + 1) * SCALE_FACTOR)
 }
 
 const computeDimensions = ({
