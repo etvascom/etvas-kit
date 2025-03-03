@@ -126,7 +126,7 @@ interface BoxImageProps extends BoxProps {
 }
 
 const BoxImage = styled(Box)<BoxImageProps>`
-  background-color: #000;
+  background-color: #fff;
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
