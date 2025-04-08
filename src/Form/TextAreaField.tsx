@@ -7,6 +7,7 @@ import { makeId } from './utils'
 
 interface Props extends TextAreaProps {
   validate?: (args: any) => any
+  showValidationBeforeSubmit?: boolean
 }
 
 export const TextAreaField = forwardRef<
@@ -17,7 +18,10 @@ export const TextAreaField = forwardRef<
   const [field, meta] = useField(props)
   const id = props.id || makeId('field', props.name || 'textarea')
   const error = meta.touched && meta.error
-  const displayedError = submitCount > 0 ? error : field.value && error
+  const displayedError =
+    submitCount > 0 || props.showValidationBeforeSubmit
+      ? error
+      : field.value && error
   return (
     <TextArea
       {...props}

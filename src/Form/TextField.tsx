@@ -9,6 +9,7 @@ interface Props
   extends Omit<InputProps, 'color' | 'height' | 'size' | 'width'>,
     InputHTMLAttributes<HTMLInputElement> {
   validate?: (args: any) => any
+  showValidationBeforeSubmit?: boolean
 }
 export const TextField = forwardRef<
   HTMLInputElement,
@@ -18,7 +19,10 @@ export const TextField = forwardRef<
   const [field, meta] = useField(props)
   const id = props.id || makeId('field', props.name || 'input')
   const error = meta.touched && meta.error
-  const displayedError = submitCount > 0 ? error : field.value && error
+  const displayedError =
+    submitCount > 0 || props.showValidationBeforeSubmit
+      ? error
+      : field.value && error
   return (
     <Input
       {...props}

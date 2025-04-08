@@ -9,10 +9,12 @@ import { makeId } from './utils'
 
 interface Props extends AutocompleteProps {
   options: OptionProps[]
+  showValidationBeforeSubmit?: boolean
 }
 
 export const AutocompleteField: FC<Props & FieldHookConfig<any>> = ({
   options,
+  showValidationBeforeSubmit,
   ...props
 }) => {
   const { submitCount } = useFormikContext()
@@ -23,7 +25,8 @@ export const AutocompleteField: FC<Props & FieldHookConfig<any>> = ({
     [helpers]
   )
   const error = meta.touched && meta.error
-  const displayedError = submitCount > 0 ? error : field.value && error
+  const displayedError =
+    submitCount > 0 || showValidationBeforeSubmit ? error : field.value && error
   return (
     <Autocomplete
       {...props}

@@ -8,6 +8,7 @@ import { OptionProps } from '../Dropdown/Option'
 interface Props extends DropdownProps {
   options: OptionProps[]
   onFieldValueChange?: (value: string) => void
+  showValidationBeforeSubmit?: boolean
 }
 
 export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
@@ -17,6 +18,7 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
   valueRender,
   onFieldValueChange,
   optionalText = 'Optional',
+  showValidationBeforeSubmit,
   ...props
 }) => {
   const { submitCount } = useFormikContext()
@@ -72,7 +74,9 @@ export const DropdownField: FC<Props & FieldHookConfig<any>> = ({
 
   const error = meta.touched && meta.error
   const displayedError =
-    submitCount > 0 ? error : field.value !== 0 && field.value && error
+    submitCount > 0 || showValidationBeforeSubmit
+      ? error
+      : field.value !== 0 && field.value && error
   const mappedOptions = useMemo(
     () =>
       options.reduce(

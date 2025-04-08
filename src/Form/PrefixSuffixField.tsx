@@ -7,6 +7,7 @@ import { makeId } from './utils'
 
 interface Props extends PrefixSuffixInputProps {
   validate?: (args: any) => any
+  showValidationBeforeSubmit?: boolean
 }
 
 export const PrefixSuffixField: FC<Props & FieldHookConfig<string>> = props => {
@@ -21,7 +22,10 @@ export const PrefixSuffixField: FC<Props & FieldHookConfig<string>> = props => {
     [helpers]
   )
   const error = meta.touched && meta.error
-  const displayedError = submitCount > 0 ? error : field.value && error
+  const displayedError =
+    submitCount > 0 || props.showValidationBeforeSubmit
+      ? error
+      : field.value && error
   return (
     <PrefixSuffixInput
       {...field}

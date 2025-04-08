@@ -8,6 +8,7 @@ import { makeId } from './utils'
 
 interface Props extends PhoneNumberInputProps {
   validate?: (args: any) => any
+  showValidationBeforeSubmit?: boolean
 }
 
 export const PhoneNumberInputField: FC<
@@ -24,7 +25,10 @@ export const PhoneNumberInputField: FC<
     [helpers]
   )
   const error = meta.touched && meta.error
-  const displayedError = submitCount > 0 ? error : field.value && error
+  const displayedError =
+    submitCount > 0 || props.showValidationBeforeSubmit
+      ? error
+      : field.value && error
   return (
     <PhoneNumberInput
       {...field}
