@@ -1,8 +1,4 @@
-import {
-  ButtonHTMLAttributes,
-  PropsWithChildren,
-  forwardRef
-} from 'react'
+import { ButtonHTMLAttributes, PropsWithChildren, forwardRef } from 'react'
 
 import css from '@styled-system/css'
 import styled from 'styled-components'
@@ -20,7 +16,11 @@ export const ModalContent = forwardRef<
   PropsWithChildren<ModalContentProps>
 >(({ children, onClose, ...props }, ref) => (
   <StyledModalContent ref={ref} {...props}>
-    {onClose && <CloseIcon onClick={onClose}>&times;</CloseIcon>}
+    {onClose && (
+      <CloseIcon data-testid='close-modal-button' onClick={onClose}>
+        &times;
+      </CloseIcon>
+    )}
     {children}
   </StyledModalContent>
 ))
