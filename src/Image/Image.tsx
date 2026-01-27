@@ -22,6 +22,7 @@ interface ImageProps
   src?: string
   srcSet?: string
   alt: string
+  crossOrigin?: 'anonymous' | 'use-credentials'
 }
 
 export const Image = forwardRef<HTMLImageElement, ImageProps>(
