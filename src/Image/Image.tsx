@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { forwardRef } from 'react'
 
 import styled from 'styled-components'
 import {
@@ -24,10 +24,11 @@ interface ImageProps
   alt: string
 }
 
-export const Image: FC<ImageProps> = ({
-  alt = 'image placeholder',
-  ...props
-}: ImageProps) => <ImageWrapper alt={alt} {...props} />
+export const Image = forwardRef<HTMLImageElement, ImageProps>(
+  ({ alt = 'image placeholder', ...props }, ref) => (
+    <ImageWrapper ref={ref} alt={alt} {...props} />
+  )
+)
 
 export const ImageWrapper = styled.img<ImageProps>`
   object-fit: ${({ objectFit }) => objectFit};
